@@ -1,24 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\ryan_\\source\\repos\\Rewind Game\\RewindGame.csproj": {}
+    "C:\\Users\\Jake Torres\\Documents\\GitHub\\BrackeysGameJamRewind\\RewindGame.csproj": {}
   },
   "projects": {
-    "D:\\Users\\ryan_\\source\\repos\\Rewind Game\\RewindGame.csproj": {
+    "C:\\Users\\Jake Torres\\Documents\\GitHub\\BrackeysGameJamRewind\\RewindGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\ryan_\\source\\repos\\Rewind Game\\RewindGame.csproj",
+        "projectUniqueName": "C:\\Users\\Jake Torres\\Documents\\GitHub\\BrackeysGameJamRewind\\RewindGame.csproj",
         "projectName": "RewindGame",
-        "projectPath": "D:\\Users\\ryan_\\source\\repos\\Rewind Game\\RewindGame.csproj",
-        "packagesPath": "C:\\Users\\ryan_\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\ryan_\\source\\repos\\Rewind Game\\obj\\",
+        "projectPath": "C:\\Users\\Jake Torres\\Documents\\GitHub\\BrackeysGameJamRewind\\RewindGame.csproj",
+        "packagesPath": "C:\\Users\\Jake Torres\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jake Torres\\Documents\\GitHub\\BrackeysGameJamRewind\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\ryan_\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Jake Torres\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"

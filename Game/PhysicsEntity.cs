@@ -11,10 +11,10 @@ namespace RewindGame.Game
         //protected Vector2 velocity;
         // should entity really have a velocity?
 
-        protected Vector2 terminalVelocity = new Vector2(100, 1000);
-        protected Vector2 aerialDrag = new Vector2(50f,50f);
-        protected float groundedXFriction = 200f;
-        protected float gravitationalAcceleration = 200f;
+        protected Vector2 terminalVelocity = new Vector2(3750, 250);
+        protected Vector2 aerialDrag = new Vector2(75f,75f);
+        protected float groundedXFriction = 250f;
+        protected float gravitationalAcceleration = 400f;
 
         public override void Update(GameTime game_time)
         {
@@ -34,7 +34,7 @@ namespace RewindGame.Game
 
             velocity.Y += gravitationalAcceleration* elapsed;
 
-            //velocity = new Vector2(capMagnitude(velocity.X, terminalVelocity.X), capMagnitude(velocity.Y, terminalVelocity.Y));
+            velocity = new Vector2(capMagnitude(velocity.X, terminalVelocity.X), capMagnitude(velocity.Y, terminalVelocity.Y));
 
             moveX(velocity.X * elapsed, SecondaryCollisionType.none);
             moveY(velocity.Y * elapsed, SecondaryCollisionType.none);
@@ -54,7 +54,7 @@ namespace RewindGame.Game
         public static float capMagnitude(float i, float cap)
         {
             if (i > 0) return Math.Min(i, cap);
-            if (i < 0) return Math.Max(i, cap);
+            if (i < 0) return Math.Max(i, -cap);
             return i;
         }
     }

@@ -4,10 +4,10 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Users/ryan_/source/repos/Rewind Game/Content/debug/platform.png</File>
-    <File>D:/Users/ryan_/source/repos/Rewind Game/Content/debug/square.png</File>
-    <File>D:/Users/ryan_/source/repos/Rewind Game/Content/platform.png</File>
-    <File>D:/Users/ryan_/source/repos/Rewind Game/Content/square.png</File>
+    <File>C:/Users/Jake Torres/Documents/GitHub/BrackeysGameJamRewind/Content/debug/platform.png</File>
+    <File>C:/Users/Jake Torres/Documents/GitHub/BrackeysGameJamRewind/Content/debug/square.png</File>
+    <File>C:/Users/Jake Torres/Documents/GitHub/BrackeysGameJamRewind/Content/platform.png</File>
+    <File>C:/Users/Jake Torres/Documents/GitHub/BrackeysGameJamRewind/Content/square.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

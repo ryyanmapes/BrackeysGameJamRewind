@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>D:/Users/ryan_/source/repos/Rewind Game/Content/square.png</SourceFile>
-  <SourceTime>2020-08-02T00:27:23.8913916-06:00</SourceTime>
-  <DestFile>D:/Users/ryan_/source/repos/Rewind Game/Content/bin/DesktopGL/Content/square.xnb</DestFile>
-  <DestTime>2020-08-02T02:02:44.6866398-06:00</DestTime>
+  <SourceFile>C:/Users/Jake Torres/Documents/GitHub/BrackeysGameJamRewind/Content/square.png</SourceFile>
+  <SourceTime>2020-08-02T13:28:53.2825563-06:00</SourceTime>
+  <DestFile>C:/Users/Jake Torres/Documents/GitHub/BrackeysGameJamRewind/Content/bin/DesktopGL/Content/square.xnb</DestFile>
+  <DestTime>2020-08-02T13:32:17.7326794-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-05-27T15:15:40-06:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
