@@ -2,8 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RewindGame.Game;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace RewindGame
 {
@@ -33,12 +35,45 @@ namespace RewindGame
         public float horizontal_axis_value;
     }
 
+    public enum TimeState
+    {
+        forward,
+        backward,
+        still
+    }
+
+    public class TimeData
+    {
+        public TimeData()
+        {
+            time_moment = 0;
+            time_status = TimeState.forward;
+        }
+
+        public int time_moment;
+        public TimeState time_status;
+    }
+
+    public class StateData
+    {
+        public StateData(InputData inputdata, TimeData timedata, GameTime gametime)
+        {
+            input_data = inputdata;
+            time_data = timedata;
+            game_time = gametime;
+        }
+
+        public InputData input_data;
+        public TimeData time_data;
+        public GameTime game_time;
+    }
+
     public class RewindGame : Microsoft.Xna.Framework.Game
     {
         const float MOVE_STICK_SCALE = 1.0f;
         const float MOVE_STICK_MAX = 1.0f;
 
-        private Vector2 baseScreenSize = new Vector2(1600, 960);
+        private Vector2 baseScreenSize = new Vector2(1600, 900);
         int backBufferWidth, backBufferHeight;
         private Matrix globalTransformation;
 
@@ -56,8 +91,13 @@ namespace RewindGame
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            graphics.PreferredBackBufferWidth = 1600;
-            graphics.PreferredBackBufferHeight = 960;
+            IsFixedTimeStep = true;
+            // run at a fixed timestep for 60 fps
+            TargetElapsedTime = TimeSpan.FromMilliseconds(1000.0f / 60);
+
+            graphics.PreferredBackBufferWidth = (int)baseScreenSize.X;
+            graphics.PreferredBackBufferHeight = (int)baseScreenSize.Y;
+
             graphics.ApplyChanges();
 
         }

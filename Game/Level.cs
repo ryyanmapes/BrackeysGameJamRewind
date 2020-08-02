@@ -8,12 +8,19 @@ using System.Text;
 
 namespace RewindGame.Game
 {
-    class Level
+    public class TileSprite
+    {
+        //todo
+    }
+
+    class Level 
     {
         public RewindGame parentGame;
 
         private List<Entity> sceneEntities = new List<Entity>();
         private List<Solid> sceneSolids = new List<Solid>();
+        private List<Solid> sceneTiles = new List<Solid>();
+        private List<Solid> sceneDecoratives = new List<Solid>();
 
         public ContentManager Content;
 
@@ -57,6 +64,22 @@ namespace RewindGame.Game
             }
         }
 
+
+
+        public void PlaceTile(TileType type, int x, int y, TileSprite sprite)
+        {
+            // we'll do this later
+        }
+
+        public void PlaceEntity(EntityType type, Vector2 position)
+        {
+            // we'll do this later
+        }
+
+        public void PlaceDecorative(int x, int y, TileSprite sprite)
+        {
+            // we'll do this later
+        }
 
 
         public CollisionReturn getSolidCollisionAt(Rectangle rect, MoveDirection direction)
