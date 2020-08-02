@@ -59,7 +59,7 @@ namespace RewindGame.Game
 
 
 
-        public CollisionReturn getSolidCollisionAt(Rectangle rect)
+        public CollisionReturn getSolidCollisionAt(Rectangle rect, MoveDirection direction)
         {
             foreach (Solid solid in getAllSolids())
             {

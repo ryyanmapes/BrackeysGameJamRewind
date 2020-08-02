@@ -11,6 +11,10 @@ namespace RewindGame.Game
     {
         protected Vector2 collisionSize;
 
+        // for semisolids: what direction does this exclusively stop?
+        // none makes it a normal platform
+        protected MoveDirection collisionDirection = MoveDirection.none;
+
         public Rectangle getCollisionBox()
         {
             return new Rectangle((int)position.X, (int)position.Y, (int)collisionSize.X, (int)collisionSize.Y);
@@ -29,6 +33,20 @@ namespace RewindGame.Game
         public bool isThisOverlapping(Rectangle rect)
         {
             return GetIntersectionDepth(this.getCollisionBox(), rect) != Vector2.Zero;
+        }
+
+        public bool isThisOverlapping(CollisionObject obj, MoveDirection direction)
+        {
+            if (collisionDirection == MoveDirection.none || direction == collisionDirection)
+                return isThisOverlapping(obj);
+            return false;
+        }
+
+        public bool isThisOverlapping(Rectangle rect, MoveDirection direction)
+        {
+            if (collisionDirection == MoveDirection.none || direction == collisionDirection)
+                return isThisOverlapping(rect);
+            return false;
         }
 
         public Vector2 getOverlap(CollisionObject obj)

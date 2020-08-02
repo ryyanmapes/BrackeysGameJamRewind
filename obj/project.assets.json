@@ -112,11 +112,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\ryan_\\source\\repos\\Rewind Game\\RewindGame.csproj",
+      "projectUniqueName": "D:\\Users\\ryan_\\source\\repos\\Rewind Game\\BrackeysGameJamRewind\\RewindGame.csproj",
       "projectName": "RewindGame",
-      "projectPath": "D:\\Users\\ryan_\\source\\repos\\Rewind Game\\RewindGame.csproj",
+      "projectPath": "D:\\Users\\ryan_\\source\\repos\\Rewind Game\\BrackeysGameJamRewind\\RewindGame.csproj",
       "packagesPath": "C:\\Users\\ryan_\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\ryan_\\source\\repos\\Rewind Game\\obj\\",
+      "outputPath": "D:\\Users\\ryan_\\source\\repos\\Rewind Game\\BrackeysGameJamRewind\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

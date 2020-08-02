@@ -1,0 +1,16 @@
+
+*.cache
+*.cache
+*.dll
+*.pdb
+*.cache
+*.cache
+obj/Debug/netcoreapp3.1/RewindGame.csproj.FileListAbsolute.txt
+.vs/Rewind Game/v16/.suo
+Content/obj/DesktopGL/Content/square.mgcontent
+Content/obj/DesktopGL/Content/platform.mgcontent
+Content/obj/DesktopGL/Content/debug/square.mgcontent
+Content/obj/DesktopGL/Content/debug/platform.mgcontent
+Content/obj/DesktopGL/Content/.mgstats
+Content/obj/DesktopGL/Content/.mgcontent
+bin/Debug/netcoreapp3.1/RewindGame.dll
