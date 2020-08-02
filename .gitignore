@@ -16,3 +16,8 @@ Content/obj/DesktopGL/Content/.mgcontent
 bin/Debug/netcoreapp3.1/RewindGame.dll
 obj/project.assets.json
 obj/project.assets.json
+obj/Debug/netcoreapp3.1/RewindGame.pdb
+obj/Debug/netcoreapp3.1/RewindGame.dll
+bin/Debug/netcoreapp3.1/RewindGame.pdb
+bin/Debug/netcoreapp3.1/RewindGame.dll
+.vs/Rewind Game/v16/.suo
