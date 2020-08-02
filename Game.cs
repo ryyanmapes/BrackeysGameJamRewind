@@ -38,6 +38,10 @@ namespace RewindGame
         const float MOVE_STICK_SCALE = 1.0f;
         const float MOVE_STICK_MAX = 1.0f;
 
+        private Vector2 baseScreenSize = new Vector2(1600, 960);
+        int backBufferWidth, backBufferHeight;
+        private Matrix globalTransformation;
+
         public GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
@@ -51,6 +55,11 @@ namespace RewindGame
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            graphics.PreferredBackBufferWidth = 1600;
+            graphics.PreferredBackBufferHeight = 960;
+            graphics.ApplyChanges();
+
         }
 
         protected override void Initialize()
@@ -60,6 +69,20 @@ namespace RewindGame
             base.Initialize();
         }
 
+        public void ScaleScreen()
+        {
+            backBufferWidth = GraphicsDevice.PresentationParameters.BackBufferWidth;
+            backBufferHeight = GraphicsDevice.PresentationParameters.BackBufferHeight;
+
+            float horScaling = backBufferWidth / baseScreenSize.X;
+            float verScaling = backBufferHeight / baseScreenSize.Y;
+
+            Vector3 screenScalingFactor = new Vector3(horScaling, verScaling, 1);
+            globalTransformation = Matrix.CreateScale(screenScalingFactor);
+
+        }
+
+
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -68,6 +91,7 @@ namespace RewindGame
             textures.Add(Content.Load<Texture2D>("square"));
             textures.Add(Content.Load<Texture2D>("platform"));
 
+            //ScaleScreen();
 
             openLevel = new Level(Services, this);
         }
@@ -128,7 +152,7 @@ namespace RewindGame
         {
             GraphicsDevice.Clear(Color.CadetBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Immediate);
 
             openLevel.Draw(game_time, spriteBatch);
 

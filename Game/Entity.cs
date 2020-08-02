@@ -19,6 +19,15 @@ namespace RewindGame.Game
         squish
     }
 
+    enum MoveDirection
+    {
+        none,
+        up,
+        down,
+        left,
+        right
+    }
+
     class CollisionReturn
     {
         public CollisionReturn(PrimaryCollisionType type_, CollisionObject collisionee_)
@@ -51,12 +60,13 @@ namespace RewindGame.Game
             moveRemainder.X = real_amount - move;
 
             int sign = move > 0 ? 1 : -1;
+            MoveDirection dir = move > 0 ? MoveDirection.right : MoveDirection.left;
 
             while (move != 0)
             {
                 Vector2 new_position = position + new Vector2(sign, 0);
 
-                CollisionReturn collision = localLevel.getSolidCollisionAt(this.getCollisionBoxAt(new_position));
+                CollisionReturn collision = localLevel.getSolidCollisionAt(this.getCollisionBoxAt(new_position), dir);
 
                 switch (collision.type)
                 {
@@ -90,6 +100,7 @@ namespace RewindGame.Game
             moveRemainder.Y = real_amount - move;
 
             int sign = move > 0 ? 1 : -1;
+            MoveDirection dir = move > 0 ? MoveDirection.down : MoveDirection.up;
 
             while (move != 0)
             {
@@ -97,7 +108,7 @@ namespace RewindGame.Game
                 riddenObject = null;
                 Vector2 new_position = position + new Vector2(0, sign);
 
-                CollisionReturn collision = localLevel.getSolidCollisionAt(this.getCollisionBoxAt(new_position));
+                CollisionReturn collision = localLevel.getSolidCollisionAt(this.getCollisionBoxAt(new_position), dir);
 
                 switch ( collision.type )
                 {
