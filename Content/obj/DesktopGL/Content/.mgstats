@@ -1,5 +1,0 @@
-Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Jake Torres/Documents/GitHub/BrackeysGameJamRewind/Content/debug/platform.png","C:/Users/Jake Torres/Documents/GitHub/BrackeysGameJamRewind/Content/bin/DesktopGL/Content/debug/platform.xnb","TextureProcessor","Texture2DContent",153,32085,0.1335124
-"C:/Users/Jake Torres/Documents/GitHub/BrackeysGameJamRewind/Content/debug/square.png","C:/Users/Jake Torres/Documents/GitHub/BrackeysGameJamRewind/Content/bin/DesktopGL/Content/debug/square.xnb","TextureProcessor","Texture2DContent",210,160085,0.0057093
-"C:/Users/Jake Torres/Documents/GitHub/BrackeysGameJamRewind/Content/platform.png","C:/Users/Jake Torres/Documents/GitHub/BrackeysGameJamRewind/Content/bin/DesktopGL/Content/platform.xnb","TextureProcessor","Texture2DContent",153,32085,0.0031091
-"C:/Users/Jake Torres/Documents/GitHub/BrackeysGameJamRewind/Content/square.png","C:/Users/Jake Torres/Documents/GitHub/BrackeysGameJamRewind/Content/bin/DesktopGL/Content/square.xnb","TextureProcessor","Texture2DContent",210,160085,0.0073847

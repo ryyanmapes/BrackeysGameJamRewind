@@ -1,3 +1,0 @@
-Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"D:/Users/ryan_/source/repos/Rewind Game/Content/debug/platform.png","D:/Users/ryan_/source/repos/Rewind Game/Content/bin/DesktopGL/debug/platform.xnb","TextureProcessor","Texture2DContent",153,32085,0.247368
-"D:/Users/ryan_/source/repos/Rewind Game/Content/debug/square.png","D:/Users/ryan_/source/repos/Rewind Game/Content/bin/DesktopGL/debug/square.xnb","TextureProcessor","Texture2DContent",210,160085,0.0229106

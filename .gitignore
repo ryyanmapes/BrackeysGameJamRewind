@@ -21,3 +21,9 @@ obj/Debug/netcoreapp3.1/RewindGame.dll
 bin/Debug/netcoreapp3.1/RewindGame.pdb
 bin/Debug/netcoreapp3.1/RewindGame.dll
 .vs/Rewind Game/v16/.suo
+.vs/*
+obj/*
+.config/*
+Content/obj/*
+Content/bin/*
+bin/*
