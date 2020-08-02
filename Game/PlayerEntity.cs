@@ -9,8 +9,8 @@ namespace RewindGame.Game
     class PlayerEntity : PhysicsEntity
     {
 
-        protected float jumpVelocity = -5000f;
-        protected float moveVelocity = 1750f;
+        protected float jumpVelocity = -175f;
+        protected float moveVelocity = 3750f;
 
         //todo stuff make this correct
         public PlayerEntity(Level level, Vector2 starting_pos)
@@ -33,7 +33,7 @@ namespace RewindGame.Game
                 riddenObject = null;
                 velocity.Y += jumpVelocity;
             }
-
+            //this code is not broken. even if the values are negative you still move right?
             if (Math.Abs(input_data.horizontal_axis_value) > 0.4f)
             {
                 velocity.X = input_data.horizontal_axis_value * moveVelocity * elapsed;

@@ -13,7 +13,7 @@ namespace RewindGame.Game
 
         protected Vector2 terminalVelocity = new Vector2(100, 1000);
         protected Vector2 aerialDrag = new Vector2(50f,50f);
-        protected float groundedXFriction = 100f;
+        protected float groundedXFriction = 200f;
         protected float gravitationalAcceleration = 200f;
 
         public override void Update(GameTime game_time)
@@ -32,9 +32,9 @@ namespace RewindGame.Game
                 velocity.Y = addMagnitude(velocity.Y, -aerialDrag.Y*elapsed);
             }
 
-            velocity.Y += gravitationalAcceleration*elapsed;
+            velocity.Y += gravitationalAcceleration* elapsed;
 
-            velocity = new Vector2(capMagnitude(velocity.X, terminalVelocity.X), capMagnitude(velocity.Y, terminalVelocity.Y));
+            //velocity = new Vector2(capMagnitude(velocity.X, terminalVelocity.X), capMagnitude(velocity.Y, terminalVelocity.Y));
 
             moveX(velocity.X * elapsed, SecondaryCollisionType.none);
             moveY(velocity.Y * elapsed, SecondaryCollisionType.none);
