@@ -9,8 +9,6 @@ namespace RewindGame.Game
     {
         protected Vector2 moveRemainder;
 
-        protected PrimaryCollisionType collisionType = PrimaryCollisionType.normal;
-
         // Code inspired by https://medium.com/@MattThorson/celeste-and-towerfall-physics-d24bd2ae0fc5
         public void Move(Vector2 transform)
         {
@@ -43,11 +41,6 @@ namespace RewindGame.Game
 
         }
     
-        
-        public PrimaryCollisionType getCollisionType()
-        {
-            return collisionType;
-        }
 
         
     }

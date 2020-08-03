@@ -9,7 +9,7 @@ namespace RewindGame.Game
 
     enum PrimaryCollisionType
     {
-        none,
+        harmless,
         normal,
         death
     }
@@ -36,12 +36,12 @@ namespace RewindGame.Game
             collisionee = collisionee_;
         }
 
-        public PrimaryCollisionType type = PrimaryCollisionType.none;
+        public PrimaryCollisionType type = PrimaryCollisionType.harmless;
         public CollisionObject collisionee;
 
         public static CollisionReturn None()
         {
-            return new CollisionReturn(PrimaryCollisionType.none, null);
+            return new CollisionReturn(PrimaryCollisionType.harmless, null);
         }
     }
 
@@ -84,7 +84,7 @@ namespace RewindGame.Game
                     case PrimaryCollisionType.death:
                         // todo die
                         return;
-                    case PrimaryCollisionType.none:
+                    case PrimaryCollisionType.harmless:
                         position = new_position;
                         move -= sign;
                         break;
@@ -126,7 +126,7 @@ namespace RewindGame.Game
                     case PrimaryCollisionType.death:
                         // todo die
                         return;
-                    case PrimaryCollisionType.none:
+                    case PrimaryCollisionType.harmless:
                         position = new_position;
                         move -= sign;
                         break;

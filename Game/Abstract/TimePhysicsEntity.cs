@@ -7,7 +7,7 @@ using System.Text;
 namespace RewindGame.Game
 {
     // mostly just copy pasted from PhysicsEntity
-    class TimePhysicsEntity : TimeEntity
+    abstract class TimePhysicsEntity : TimeEntity
     {
         protected Vector2 terminalVelocity = new Vector2(3750, 250);
         protected Vector2 aerialDrag = new Vector2(75f, 75f);

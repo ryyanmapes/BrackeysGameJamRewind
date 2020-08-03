@@ -11,6 +11,9 @@ namespace RewindGame.Game
     {
         protected Vector2 collisionSize;
 
+        protected PrimaryCollisionType collisionType = PrimaryCollisionType.normal;
+
+
         // for semisolids: what direction does this exclusively stop?
         // none makes it a normal platform
         protected MoveDirection collisionDirection = MoveDirection.none;
@@ -98,6 +101,12 @@ namespace RewindGame.Game
         public new virtual void Draw(StateData state, SpriteBatch sprite_batch)
         {
             sprite_batch.Draw(texture, getCollisionBox(), textureColor );
+        }
+
+
+        public PrimaryCollisionType getCollisionType()
+        {
+            return collisionType;
         }
 
     }

@@ -5,8 +5,6 @@ using RewindGame.Game;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 
 namespace RewindGame
 {
@@ -96,6 +94,9 @@ namespace RewindGame
         public InputData inputData = new InputData();
         public TimeData timeData = new TimeData();
 
+        public Texture2D decorativeSheetTexture;
+        public Texture2D collisionSheetTexture;
+
         public int timeNegBound = -1000000;
         public int timePosBound = 1000000;
 
@@ -144,13 +145,16 @@ namespace RewindGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
-            textures.Add(Content.Load<Texture2D>("square"));
-            textures.Add(Content.Load<Texture2D>("platform"));
+            // this is useless!
+            textures.Add(Content.Load<Texture2D>("debug/square"));
+            textures.Add(Content.Load<Texture2D>("debug/platform"));
 
-            //ScaleScreen();
 
-            openLevel = new Level(Services, this);
+            decorativeSheetTexture = Content.Load<Texture2D>("tilesets/decorative");
+            collisionSheetTexture = Content.Load<Texture2D>("tilesets/collision");
+
+            // the offset here is for when we have many levels
+            openLevel = new Level(Services, Vector2.Zero ,this);
             LevelLoader.LoadLevel("limbospiketest.json", openLevel);
         }
 
@@ -238,9 +242,12 @@ namespace RewindGame
 
         protected override void Draw(GameTime game_time)
         {
-            GraphicsDevice.Clear(Color.CadetBlue);
+            GraphicsDevice.Clear(Color.DarkGray);
 
-            spriteBatch.Begin(SpriteSortMode.Immediate);
+            var matrix = Matrix.Identity;
+            matrix.Translation = new Vector3(-28, 0,0);
+
+            spriteBatch.Begin(SpriteSortMode.Immediate, transformMatrix:matrix);
 
             StateData state = new StateData(inputData, timeData, game_time);
 

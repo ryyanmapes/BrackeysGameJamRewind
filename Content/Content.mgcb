@@ -40,7 +40,7 @@
 #begin levels/limbospiketest.json
 /copy:levels/limbospiketest.json
 
-#begin platform.png
+#begin tilesets/collisionlayer.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -50,9 +50,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:platform.png
+/build:tilesets/collisionlayer.png;tilesets/collision.png
 
-#begin square.png
+#begin tilesets/foreground.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -62,5 +62,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:square.png
+/build:tilesets/foreground.png;tilesets/decorative.png
 

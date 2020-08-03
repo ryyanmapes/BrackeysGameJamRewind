@@ -77,15 +77,7 @@ namespace RewindGame.Game
 
             foreach (RawEntities entity in raw_level.layers[1].entities)
             {
-                switch (entity.name)
-                {
-                    case "Spawnpoint":
-                        level.PlaceEntity(EntityType.Spawnpoint, new Vector2(entity.x, entity.y));
-                        break;
-                    default:
-                        Console.WriteLine("Unable to find entity type of name: {0}", entity.name);
-                        break;
-                }
+                level.PlaceEntity(getEntityTypeFromName(entity.name), entity.x, entity.y);
             }
 
             LoadTileLayer(raw_level.layers[0], level);
@@ -98,40 +90,76 @@ namespace RewindGame.Game
 
         public static void LoadTileLayer(RawLayer tile_layer, Level level)
         {
+            bool is_collision_layer = false;
+            bool is_large_tile = false;
+            TileSheet sheet_type = TileSheet.collision;
+            int sorting_layer = 0;
 
-            bool isCollisionLayer = tile_layer.name == "collisionlayer";
-            bool isForeground = tile_layer.name == "foreground";
+            switch (tile_layer.name)
+            {
+                case "collisionlayer":
+                    is_collision_layer = true;
+                    sorting_layer = 0;
+                    break;
+                case "background":
+                    sorting_layer = -1;
+                    break;
+                case "foreground":
+                    sorting_layer = 1;
+                    is_large_tile = true;
+                    sheet_type = TileSheet.decorative;
+                    break;
+            }
 
             int n = 0;
             int x_pos = 0;
             int y_pos = 0;
             while (n < tile_layer.data.Count)
             {
-                if (tile_layer.data[n] != -1)
+                int tile = tile_layer.data[n];
+
+                if (tile != -1)
                 {
 
-                    if (isCollisionLayer)
+                    if (is_collision_layer)
                     {
-                        switch (tile_layer.data[n])
-                        {
-                            default:
-                                level.PlaceTile(TileType.solid, x_pos, y_pos, new TileSprite());
-                                break;
-                        }
+                        level.PlaceTile(getTileTypeFromID(tile), x_pos, y_pos, new TileSprite(sheet_type, tile, sorting_layer));
                     }
                     else
                     {
-                        level.PlaceDecorative(x_pos, y_pos, new TileSprite());
+                        level.PlaceDecorative(is_large_tile, x_pos, y_pos, new TileSprite(sheet_type, tile, sorting_layer));
                     }
                 }
 
                 n++;
                 x_pos++;
-                if (x_pos > tile_layer.gridCellsX)
+                if (x_pos >= tile_layer.gridCellsX)
                 {
                     x_pos = 0;
                     y_pos++;
                 }
+            }
+        }
+
+        public static TileType getTileTypeFromID(int tile)
+        {
+            switch (tile)
+            {
+                default:
+                    return TileType.solid;
+                    break;
+            }
+        }
+
+        public static EntityType getEntityTypeFromName(string name)
+        {
+            switch (name)
+            {
+                case "Spawnpoint":
+                    return EntityType.Spawnpoint;
+                default:
+                    Console.WriteLine("Unable to find entity type of name: {0}", name);
+                    return EntityType.Spawnpoint;
             }
         }
 
