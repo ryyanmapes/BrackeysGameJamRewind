@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using Newtonsoft.Json;
+using Microsoft.Xna.Framework;
 
 namespace RewindGame.Game
 {
@@ -59,9 +60,13 @@ namespace RewindGame.Game
     class LevelLoader
     {
         // we pass in a level here to populate it with everything
-        public static void LoadLevel(String fileName, Level loadedLevel)
+        public static void LoadLevel(String fileName, Level unloadedLevel)
         {
-            string levelStuff = File.ReadAllText(Directory.GetCurrentDirectory()+"/Content/levels/" +fileName);
+            string levelStuff;
+            using (StreamReader sr = new StreamReader("Content/levels/"+fileName))
+            {
+                 levelStuff = sr.ReadToEnd();
+            }
             var newLevel = JsonConvert.DeserializeObject<RawLevel>(levelStuff);
             // call level.placeTile, level.placeEntity, level.placeDecorative
             //todo

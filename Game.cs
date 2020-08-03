@@ -151,6 +151,7 @@ namespace RewindGame
             //ScaleScreen();
 
             openLevel = new Level(Services, this);
+            LevelLoader.LoadLevel("limbospiketest.json", openLevel);
         }
 
         protected override void Update(GameTime game_time)
