@@ -37,6 +37,9 @@
 /processorParam:TextureFormat=Color
 /build:debug/square.png
 
+#begin levels/limbospiketest.json
+/copy:levels/limbospiketest.json
+
 #begin platform.png
 /importer:TextureImporter
 /processor:TextureProcessor

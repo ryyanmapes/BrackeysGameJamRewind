@@ -10,6 +10,11 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Content\levels\**" />
+    <EmbeddedResource Remove="Content\levels\**" />
+    <None Remove="Content\levels\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>
@@ -30,6 +35,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\debug\" />
-    <Folder Include="Content\levels\" />
   </ItemGroup>
 </Project>
