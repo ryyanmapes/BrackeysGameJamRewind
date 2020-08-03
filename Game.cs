@@ -254,9 +254,9 @@ namespace RewindGame
             return moment % 3 == 0;
         }
 
-        public static String getRootDirectory()
+        /*public static String getRootDirectory()
         {
             Content
-        }
+        }*/
     }
 }
