@@ -96,8 +96,8 @@ namespace RewindGame
         public InputData inputData = new InputData();
         public TimeData timeData = new TimeData();
 
-        public int timeNegBound = -1000;
-        public int timePosBound = 1000;
+        public int timeNegBound = -1000000;
+        public int timePosBound = 1000000;
 
         private Level openLevel;
 
@@ -252,11 +252,6 @@ namespace RewindGame
         public static bool isSavableMoment(int moment)
         {
             return moment % 3 == 0;
-        }
-
-        public static String getRootDirectory()
-        {
-            Content
         }
     }
 }
