@@ -161,11 +161,15 @@ namespace RewindGame
             if (inputData.is_exit_pressed)
                 Exit();
 
+            // still a bit indev-y
             if (inputData.is_jump_held)
             {
                 if (timeData.time_moment > timeNegBound) timeData.time_status = TimeState.backward;
             }
             else
+            {
+                if (timeData.time_moment < timePosBound) timeData.time_status = TimeState.forward;
+            }
 
             switch (timeData.time_status)
             {

@@ -16,26 +16,28 @@ namespace RewindGame.Game
 
         public override void Update(StateData state)
         {
-            float elapsed = (float)state.getSignedDeltaTime();
+            float elapsed_signed = (float)state.getSignedDeltaTime();
+            //float elapsed = (float)state.getDeltaTime();
             // this is the only difference between this and normal physics entity
             // this makes physics go backwards when timestate is backwards
 
+            
             if (isGrounded())
             {
-                velocity.X = PhysicsEntity.addMagnitude(velocity.X, -groundedXFriction * elapsed);
+                velocity.X = PhysicsEntity.addMagnitude(velocity.X, -groundedXFriction * elapsed_signed);
             }
             else
             {
-                velocity.X = PhysicsEntity.addMagnitude(velocity.X, -aerialDrag.X * elapsed);
-                velocity.Y = PhysicsEntity.addMagnitude(velocity.Y, -aerialDrag.Y * elapsed);
+                velocity.X = PhysicsEntity.addMagnitude(velocity.X, -aerialDrag.X * elapsed_signed);
+                velocity.Y = PhysicsEntity.addMagnitude(velocity.Y, -aerialDrag.Y * elapsed_signed);
             }
 
-            velocity.Y += gravitationalAcceleration * elapsed;
+            velocity.Y = Math.Max(velocity.Y + gravitationalAcceleration * elapsed_signed, 0);
 
             velocity = new Vector2(PhysicsEntity.capMagnitude(velocity.X, terminalVelocity.X), PhysicsEntity.capMagnitude(velocity.Y, terminalVelocity.Y));
 
-            moveX(velocity.X * elapsed, SecondaryCollisionType.none);
-            moveY(velocity.Y * elapsed, SecondaryCollisionType.none);
+            moveX(velocity.X * elapsed_signed, SecondaryCollisionType.none);
+            moveY(velocity.Y * elapsed_signed, SecondaryCollisionType.none);
         }
 
         public bool isGrounded()

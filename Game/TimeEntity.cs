@@ -54,7 +54,7 @@ namespace RewindGame.Game
 
         public void SaveState(int time_moment)
         {
-            pastPhysData.Add(time_moment, new PhysData(position, velocity));
+            pastPhysData.TryAdd(time_moment, new PhysData(position, velocity));
         }
 
         public void LoadState(int time_moment)

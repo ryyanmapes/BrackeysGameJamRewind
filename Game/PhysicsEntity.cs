@@ -49,7 +49,7 @@ namespace RewindGame.Game
         {
             if (i > 0) return Math.Max(0, i + addend);
             if (i < 0) return Math.Min(0, i - addend);
-            return i;
+            return 0;
         }
         public static float capMagnitude(float i, float cap)
         {
