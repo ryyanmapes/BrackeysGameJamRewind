@@ -24,12 +24,12 @@ namespace RewindGame.Game
         }
 
 
-        public override void Update(GameTime game_time)
+        public override void Update(StateData state)
         {
-            float elapsed = (float)game_time.ElapsedGameTime.TotalSeconds;
+            float elapsed = (float)state.game_time.ElapsedGameTime.TotalSeconds;
 
             // todo this is a mess
-            InputData input_data = localLevel.parentGame.inputData;
+            InputData input_data = state.input_data;
 
             if (input_data.is_jump_held && isGrounded())
             {
@@ -48,7 +48,7 @@ namespace RewindGame.Game
                 velocity.X += input_data.horizontal_axis_value * moveVelocity * elapsed;
             }
 
-            base.Update(game_time);
+            base.Update(state);
 
         }
 

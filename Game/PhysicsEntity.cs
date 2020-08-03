@@ -16,9 +16,9 @@ namespace RewindGame.Game
         protected float groundedXFriction = 250f;
         protected float gravitationalAcceleration = 400f;
 
-        public override void Update(GameTime game_time)
+        public override void Update(StateData state)
         {
-            float elapsed = (float)game_time.ElapsedGameTime.TotalSeconds;
+            float elapsed = (float)state.getDeltaTime();
             // our main mechanic will have to do something about this
             // will this actually work just as expected if elapsed is negative?!
 

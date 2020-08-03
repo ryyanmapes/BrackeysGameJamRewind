@@ -17,7 +17,8 @@ namespace RewindGame.Game
     {
         public RewindGame parentGame;
 
-        private List<Entity> sceneEntities = new List<Entity>();
+        private PlayerEntity player;
+        private List<TimeEntity> sceneEntities = new List<TimeEntity>();
         private List<Solid> sceneSolids = new List<Solid>();
         private List<Solid> sceneTiles = new List<Solid>();
         private List<Solid> sceneDecoratives = new List<Solid>();
@@ -33,35 +34,40 @@ namespace RewindGame.Game
 
 
             sceneSolids.Add(new DebugPlatform(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2)));
-            sceneEntities.Add(new PlayerEntity(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2 - 300)));
+            sceneEntities.Add(new DebugTimePhysicsEntity(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2 - 200, parentGame.graphics.PreferredBackBufferHeight / 2)));
+            player = new PlayerEntity(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2 - 300));
 
         }
 
 
-        public void Draw(GameTime game_time, SpriteBatch sprite_batch)
+        public void Draw(StateData state, SpriteBatch sprite_batch)
         {
             foreach (Entity entity in sceneEntities)
             {
-                entity.Draw(game_time, sprite_batch);
+                entity.Draw(state, sprite_batch);
             }
 
             foreach (Solid solid in sceneSolids)
             {
-                solid.Draw(game_time, sprite_batch);
+                solid.Draw(state, sprite_batch);
             }
+            player.Draw(state, sprite_batch);
         }
 
-        public void Update(GameTime game_time)
+        public void Update(StateData state)
         {
-            foreach (Entity entity in sceneEntities)
+            foreach (TimeEntity entity in sceneEntities)
             {
-                entity.Update(game_time);
+                entity.TemporalUpdate(state);
             }
 
+            // We don't have any moving platforms yet so we don't have temporal updates here yet
             foreach (Solid solid in sceneSolids)
             {
-                solid.Update(game_time);
+                solid.Update(state);
             }
+
+            player.Update(state);
         }
 
 
@@ -94,7 +100,7 @@ namespace RewindGame.Game
             return CollisionReturn.None();
         }
 
-        public List<Entity> getAllEntities()
+        public List<TimeEntity> getAllEntities()
         {
             return sceneEntities;
         }

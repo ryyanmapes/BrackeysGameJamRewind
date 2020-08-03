@@ -14,6 +14,7 @@ namespace RewindGame.Game
         // for semisolids: what direction does this exclusively stop?
         // none makes it a normal platform
         protected MoveDirection collisionDirection = MoveDirection.none;
+        protected MoveDirection secondaryCollisionDirection = MoveDirection.none;
 
         public Rectangle getCollisionBox()
         {
@@ -37,14 +38,14 @@ namespace RewindGame.Game
 
         public bool isThisOverlapping(CollisionObject obj, MoveDirection direction)
         {
-            if (collisionDirection == MoveDirection.none || direction == collisionDirection)
+            if (collisionDirection == MoveDirection.none || direction == collisionDirection || direction == secondaryCollisionDirection)
                 return isThisOverlapping(obj);
             return false;
         }
 
         public bool isThisOverlapping(Rectangle rect, MoveDirection direction)
         {
-            if (collisionDirection == MoveDirection.none || direction == collisionDirection)
+            if (collisionDirection == MoveDirection.none || direction == collisionDirection || direction == secondaryCollisionDirection )
                 return isThisOverlapping(rect);
             return false;
         }
@@ -94,7 +95,7 @@ namespace RewindGame.Game
             return new Vector2(rect.Left + rect.Width / 2.0f , rect.Bottom);
         }
 
-        public new virtual void Draw(GameTime game_time, SpriteBatch sprite_batch)
+        public new virtual void Draw(StateData state, SpriteBatch sprite_batch)
         {
             sprite_batch.Draw(texture, getCollisionBox(), textureColor );
         }

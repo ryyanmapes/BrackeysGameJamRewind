@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using RewindGame.Game;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
@@ -66,6 +67,16 @@ namespace RewindGame
         public InputData input_data;
         public TimeData time_data;
         public GameTime game_time;
+
+        public double getDeltaTime()
+        {
+            return game_time.ElapsedGameTime.TotalSeconds;
+        }
+
+        public double getSignedDeltaTime()
+        {
+            return getDeltaTime() * (time_data.time_status == TimeState.backward ? -1 : 1);
+        }
     }
 
     public class RewindGame : Microsoft.Xna.Framework.Game
@@ -83,12 +94,18 @@ namespace RewindGame
         public List<Texture2D> textures = new List<Texture2D>();
 
         public InputData inputData = new InputData();
+        public TimeData timeData = new TimeData();
+
+        public int timeNegBound = -1000;
+        public int timePosBound = 1000;
+
         private Level openLevel;
 
         public RewindGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            
             IsMouseVisible = true;
 
             IsFixedTimeStep = true;
@@ -143,7 +160,33 @@ namespace RewindGame
             if (inputData.is_exit_pressed)
                 Exit();
 
-            openLevel.Update(game_time);
+            if (inputData.is_jump_held)
+            {
+                if (timeData.time_moment > timeNegBound) timeData.time_status = TimeState.backward;
+            }
+            else 
+
+            switch (timeData.time_status)
+            {
+                case TimeState.forward:
+                    timeData.time_moment += 1;
+                    break;
+                case TimeState.backward:
+                    timeData.time_moment -= 1;
+                    break;
+                default:
+                    break;
+
+            }
+
+            if (timeData.time_moment <= timeNegBound || timeData.time_moment >= timePosBound)
+            {
+                timeData.time_status = TimeState.still;
+            }
+
+            StateData state = new StateData(inputData, timeData, game_time);
+
+            openLevel.Update(state);
 
             base.Update( game_time);
         }
@@ -194,11 +237,26 @@ namespace RewindGame
 
             spriteBatch.Begin(SpriteSortMode.Immediate);
 
-            openLevel.Draw(game_time, spriteBatch);
+            StateData state = new StateData(inputData, timeData, game_time);
+
+            openLevel.Draw(state, spriteBatch);
 
             spriteBatch.End();
 
             base.Draw(game_time);
+        }
+
+
+        // says if the object can save it's state in this moment-
+        // more often means more memory consumption
+        public static bool isSavableMoment(int moment)
+        {
+            return moment % 3 == 0;
+        }
+
+        public static String getRootDirectory()
+        {
+            Content
         }
     }
 }

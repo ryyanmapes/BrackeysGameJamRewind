@@ -11,12 +11,12 @@ namespace RewindGame.Game.Debug
 
         public DebugPlatform(Level level, Vector2 starting_pos)
         {
-            texturePath = "debug/square";
+            texturePath = "debug/platform";
             collisionSize = new Vector2(200, 20);
             Initialize(level, starting_pos);
         }
 
-        public override void Update(GameTime game_time)
+        public override void Update(StateData state)
         {
 
         }

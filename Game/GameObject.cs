@@ -38,9 +38,9 @@ namespace RewindGame.Game
             texture = localLevel.Content.Load<Texture2D>( texturePath );
         }
 
-        public abstract void Update(GameTime game_time);
+        public abstract void Update(StateData state);
 
-        public virtual void Draw(GameTime game_time, SpriteBatch sprite_batch)
+        public virtual void Draw(StateData state, SpriteBatch sprite_batch)
         {
             sprite_batch.Draw(texture, position, textureColor);
         }

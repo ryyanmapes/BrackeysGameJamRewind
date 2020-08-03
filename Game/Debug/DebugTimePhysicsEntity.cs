@@ -6,19 +6,14 @@ using System.Text;
 
 namespace RewindGame.Game.Debug
 {
-    class DebugEntity : Entity
+    class DebugTimePhysicsEntity : TimePhysicsEntity
     {
 
-        public DebugEntity(Level level, Vector2 starting_pos)
+        public DebugTimePhysicsEntity(Level level, Vector2 starting_pos)
         {
             texturePath = "debug/square";
-            collisionSize = new Vector2(20, 20);
+            collisionSize = new Vector2(40, 40);
             Initialize(level, starting_pos);
-        }
-
-        public override void Update(StateData state)
-        {
-            moveY(1.0f, SecondaryCollisionType.none);
         }
 
     }

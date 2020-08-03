@@ -6,7 +6,7 @@ namespace RewindGame.Game
 {
     interface ITimeTrackable
     {
-        public abstract void TemporalUpdate(StateData data);
+        public abstract void TemporalUpdate(StateData state);
 
         public abstract void SaveState(int time_moment);
 
