@@ -20,6 +20,7 @@ namespace RewindGame.Game
     {
         Spawnpoint
     }
+
     class RawLevel
     {
         public string ogmoVersion;
@@ -27,9 +28,9 @@ namespace RewindGame.Game
         public int height;
         public int offsetX;
         public int offsetY;
-        public List<RawLayers> layers;
+        public List<RawLayer> layers;
     }
-    class RawLayers
+    class RawLayer
     {
         public string name;
         public string _eid;
@@ -64,97 +65,74 @@ namespace RewindGame.Game
         {
             //Maybe use later?
         }
-        public static void LoadLevel(String fileName, Level unloadedLevel)
+        public static void LoadLevel(String fileName, Level level)
         {
-            string levelStuff;
+            string level_json;
             using (StreamReader sr = new StreamReader("Content/levels/"+fileName))
             {
-                 levelStuff = sr.ReadToEnd();
+                 level_json = sr.ReadToEnd();
             }
-            var newLevel = JsonConvert.DeserializeObject<RawLevel>(levelStuff);
-            foreach(RawLayers layer in newLevel.layers)
+            var raw_level = JsonConvert.DeserializeObject<RawLevel>(level_json);
+
+
+            foreach (RawEntities entity in raw_level.layers[1].entities)
             {
-                if(layer.entities!=null)
+                switch (entity.name)
                 {
-                    foreach (RawEntities entity in layer.entities)
+                    case "Spawnpoint":
+                        level.PlaceEntity(EntityType.Spawnpoint, new Vector2(entity.x, entity.y));
+                        break;
+                    default:
+                        Console.WriteLine("Unable to find entity type of name: {0}", entity.name);
+                        break;
+                }
+            }
+
+            LoadTileLayer(raw_level.layers[0], level);
+            LoadTileLayer(raw_level.layers[2], level);
+            LoadTileLayer(raw_level.layers[3], level);
+            // call level.placeTile, level.placeEntity, level.placeDecorative
+            //todo
+        }
+
+
+        public static void LoadTileLayer(RawLayer tile_layer, Level level)
+        {
+
+            bool isCollisionLayer = tile_layer.name == "collisionlayer";
+            bool isForeground = tile_layer.name == "foreground";
+
+            int n = 0;
+            int x_pos = 0;
+            int y_pos = 0;
+            while (n < tile_layer.data.Count)
+            {
+                if (tile_layer.data[n] != -1)
+                {
+
+                    if (isCollisionLayer)
                     {
-                        switch (entity.name)
+                        switch (tile_layer.data[n])
                         {
-                            case "Spawnpoint":
-                                unloadedLevel.PlaceEntity(EntityType.Spawnpoint, new Vector2(entity.x, entity.y));
+                            default:
+                                level.PlaceTile(TileType.solid, x_pos, y_pos, new TileSprite());
                                 break;
                         }
                     }
+                    else
+                    {
+                        level.PlaceDecorative(x_pos, y_pos, new TileSprite());
+                    }
                 }
-            }
-            int dataCounter = 0;
-            int dataXCounter = 0;
-            int dataYCounter = 0;
-            while (dataCounter < newLevel.layers[2].data.Count)
-            {
-                if(newLevel.layers[2].data[dataCounter] > -1)
+
+                n++;
+                x_pos++;
+                if (x_pos > tile_layer.gridCellsX)
                 {
-                    switch (newLevel.layers[2].data[dataCounter]) 
-                    {
-                        default:
-                            unloadedLevel.PlaceTile(TileType.solid, dataXCounter, dataYCounter, new TileSprite());
-                            break;
-                    }
-                    dataCounter++;
-                    dataXCounter++;
-                    if(dataXCounter > newLevel.layers[2].gridCellsX)
-                    {
-                        dataXCounter = 0;
-                        dataYCounter++;
-                    }
+                    x_pos = 0;
+                    y_pos++;
                 }
             }
-            dataCounter = 0;
-            dataXCounter = 0;
-            dataYCounter = 0;
-            while (dataCounter < newLevel.layers[0].data.Count)
-            {
-                if (newLevel.layers[0].data[dataCounter] > -1)
-                {
-                    switch (newLevel.layers[0].data[dataCounter])
-                    {
-                        default:
-                            unloadedLevel.PlaceDecorative(dataXCounter, dataYCounter, new TileSprite());
-                            break;
-                    }
-                    dataCounter++;
-                    dataXCounter++;
-                    if (dataXCounter > newLevel.layers[0].gridCellsX)
-                    {
-                        dataXCounter = 0;
-                        dataYCounter++;
-                    }
-                }
-            }
-            dataCounter = 0;
-            dataXCounter = 0;
-            dataYCounter = 0;
-            while (dataCounter < newLevel.layers[3].data.Count)
-            {
-                if (newLevel.layers[3].data[dataCounter] > -1)
-                {
-                    switch (newLevel.layers[3].data[dataCounter])
-                    {
-                        default:
-                            unloadedLevel.PlaceDecorative(dataXCounter, dataYCounter, new TileSprite());
-                            break;
-                    }
-                    dataCounter++;
-                    dataXCounter++;
-                    if (dataXCounter > newLevel.layers[3].gridCellsX)
-                    {
-                        dataXCounter = 0;
-                        dataYCounter++;
-                    }
-                }
-            }
-            // call level.placeTile, level.placeEntity, level.placeDecorative
-            //todo
         }
 
     }
