@@ -12,17 +12,26 @@ namespace RewindGame.Game.Debug
     {
         public TileSprite tile_sprite { get; set; }
 
-        public DecorativeTile(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
+        public DecorativeTile() { }
+
+        public static DecorativeTile Make(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
+        {
+            var tile = new DecorativeTile();
+            tile.Initialize(level, starting_pos, tile_sprite_);
+            return tile;
+        }
+
+        public void Initialize(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
         {
             tile_sprite = tile_sprite_;
-            Initialize(level, starting_pos);
+            base.Initialize(level, starting_pos);
         }
 
         public override void LoadContent() { }
 
         public override void Update(StateData state) { }
 
-        public virtual void Draw(StateData state, SpriteBatch sprite_batch)
+        public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
             localLevel.DrawTile(tile_sprite, position, sprite_batch);
         }

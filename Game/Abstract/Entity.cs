@@ -7,19 +7,19 @@ using System.Text;
 namespace RewindGame.Game
 {
 
-    enum PrimaryCollisionType
+    public enum PrimaryCollisionType
     {
         harmless,
         normal,
         death
     }
-    enum SecondaryCollisionType
+    public enum SecondaryCollisionType
     {
         none,
         squish
     }
 
-    enum MoveDirection
+    public enum MoveDirection
     {
         none,
         up,
@@ -28,7 +28,7 @@ namespace RewindGame.Game
         right
     }
 
-    class CollisionReturn
+    public class CollisionReturn
     {
         public CollisionReturn(PrimaryCollisionType type_, CollisionObject collisionee_)
         {
@@ -45,7 +45,7 @@ namespace RewindGame.Game
         }
     }
 
-    abstract class Entity : CollisionObject
+    public abstract class Entity : CollisionObject
     {
         protected Vector2 moveRemainder;
 

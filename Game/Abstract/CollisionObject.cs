@@ -7,7 +7,29 @@ using Microsoft.Xna.Framework.Graphics;
 namespace RewindGame.Game
 {
 
-    abstract class CollisionObject : GameObject
+    public class FRectangle
+    {
+        public FRectangle(float x, float y, float w, float h)
+        {
+            X = x;
+            Y = y;
+            Height = h;
+            Width = w;
+        }
+
+        public Rectangle toRectangle()
+        {
+            return new Rectangle((int)X, (int)Y, (int)Height, (int)Width);
+        }
+
+        public float X;
+        public float Y;
+        public float Height;
+        public float Width;
+    }
+
+
+    public abstract class CollisionObject : GameObject
     {
         protected Vector2 collisionSize;
 
@@ -17,38 +39,35 @@ namespace RewindGame.Game
         // for semisolids: what direction does this exclusively stop?
         // none makes it a normal platform
         protected MoveDirection collisionDirection = MoveDirection.none;
-        protected MoveDirection secondaryCollisionDirection = MoveDirection.none;
 
-        public Rectangle getCollisionBox()
+        public FRectangle getCollisionBox()
         {
-            return new Rectangle((int)position.X, (int)position.Y, (int)collisionSize.X, (int)collisionSize.Y);
+            return getCollisionBoxAt(position);
         }
 
-        public Rectangle getCollisionBoxAt(Vector2 new_position)
+        public virtual FRectangle getCollisionBoxAt(Vector2 new_position)
         {
-            return new Rectangle((int)new_position.X, (int)new_position.Y, (int)collisionSize.X, (int)collisionSize.Y);
+            return new FRectangle(new_position.X, new_position.Y, collisionSize.X, collisionSize.Y);
         }
 
         public bool isThisOverlapping(CollisionObject obj)
         {
-            return GetIntersectionDepth(this.getCollisionBox(), obj.getCollisionBox()) == Vector2.Zero;
+            return isThisOverlapping(obj.getCollisionBox());
         }
 
-        public bool isThisOverlapping(Rectangle rect)
+        public virtual bool isThisOverlapping(FRectangle rect)
         {
             return GetIntersectionDepth(this.getCollisionBox(), rect) != Vector2.Zero;
         }
 
         public bool isThisOverlapping(CollisionObject obj, MoveDirection direction)
         {
-            if (collisionDirection == MoveDirection.none || direction == collisionDirection || direction == secondaryCollisionDirection)
-                return isThisOverlapping(obj);
-            return false;
+            return isThisOverlapping(obj.getCollisionBox(), direction);
         }
 
-        public bool isThisOverlapping(Rectangle rect, MoveDirection direction)
+        public virtual bool isThisOverlapping(FRectangle rect, MoveDirection direction)
         {
-            if (collisionDirection == MoveDirection.none || direction == collisionDirection || direction == secondaryCollisionDirection )
+            if (collisionDirection == MoveDirection.none || direction == collisionDirection)
                 return isThisOverlapping(rect);
             return false;
         }
@@ -60,7 +79,7 @@ namespace RewindGame.Game
 
         // Code inspired by https://github.com/MonoGame/MonoGame.Samples/blob/develop/Platformer2D/Game/RectangleExtensions.cs
         // Returns the amount of overlap in each component
-        public static Vector2 GetIntersectionDepth(Rectangle rectA, Rectangle rectB)
+        public static Vector2 GetIntersectionDepth(FRectangle rectA, FRectangle rectB)
         {
             Vector2 center_a = getRectangleCenter(rectA);
             Vector2 center_b = getRectangleCenter(rectB);
@@ -88,19 +107,19 @@ namespace RewindGame.Game
 
         }
 
-        public static Vector2 getRectangleCenter(Rectangle rect)
+        public static Vector2 getRectangleCenter(FRectangle rect)
         {
-            return new Vector2(rect.Left + rect.Width / 2.0f, rect.Top + rect.Height / 2.0f);
+            return new Vector2(rect.X + rect.Width / 2.0f, rect.Y + rect.Height / 2.0f);
         }
 
-        public static Vector2 getRectangleBottomCenter(Rectangle rect)
+        public static Vector2 getRectangleBottomCenter(FRectangle rect)
         {
-            return new Vector2(rect.Left + rect.Width / 2.0f , rect.Bottom);
+            return new Vector2(rect.X + rect.Width / 2.0f , rect.Y + rect.Height);
         }
 
         public new virtual void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            sprite_batch.Draw(texture, getCollisionBox(), textureColor );
+            sprite_batch.Draw(texture, getCollisionBox().toRectangle(), textureColor );
         }
 
 

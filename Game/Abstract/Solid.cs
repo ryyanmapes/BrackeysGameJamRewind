@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RewindGame.Game
 {
-    abstract class Solid : CollisionObject
+    public abstract class Solid : CollisionObject
     {
         protected Vector2 moveRemainder;
 
@@ -20,7 +20,7 @@ namespace RewindGame.Game
             position = position + move_components;
 
             
-            foreach (Entity entity in localLevel.getAllEntities())
+            foreach (Entity entity in localLevel.sceneEntities)
             {
                 if (entity.isRiding(this)) {
                     entity.moveX(move_components.X, SecondaryCollisionType.none);

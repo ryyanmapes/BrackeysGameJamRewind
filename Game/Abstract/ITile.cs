@@ -8,7 +8,7 @@ using System.Text;
 
 namespace RewindGame.Game.Abstract
 {
-    interface ITile
+    public interface ITile
     {
         public TileSprite tile_sprite
         {

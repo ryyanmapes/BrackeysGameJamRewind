@@ -28,7 +28,7 @@ namespace RewindGame.Game
         public int sorting_layer;
     }
 
-    class Level 
+    public class Level : IDisposable
     {
         public const int TILE_WORLD_SIZE = 56;
         public const int LARGE_TILE_WORLD_SIZE = 112;
@@ -42,15 +42,23 @@ namespace RewindGame.Game
         public const int COLLISION_SHEET_TILES_X = 20;
         public const int COLLISION_SHEET_TILES_Y = 20;
 
-        private PlayerEntity player;
-        private List<TimeEntity> sceneEntities = new List<TimeEntity>();
-        private List<Solid> sceneSolids = new List<Solid>();
-        private List<ISolidTile> sceneTiles = new List<ISolidTile>();
-        private List<ITile> sceneDecoratives = new List<ITile>();
+        public const float SEMISOLID_THICKNESS = 1f;
 
-        private Vector2 levelOrgin;
+        public List<TimeEntity> sceneEntities = new List<TimeEntity>();
+        public List<Solid> sceneSolids = new List<Solid>();
+        public List<ISolidTile> sceneSolidTiles = new List<ISolidTile>();
+        public List<ITile> sceneDecorativesBackground = new List<ITile>();
+        public List<ITile> sceneDecorativesForeground = new List<ITile>();
+
+        public Vector2 levelOrgin;
         public ContentManager Content;
         public RewindGame parentGame;
+
+        public bool isActiveScene = false;
+
+        public String name = "";
+
+        public String[] connectedLevelNames = { "", "", "", "" };
 
 
         public Level(IServiceProvider serviceProvider, Vector2 orgin, RewindGame parent)
@@ -64,14 +72,17 @@ namespace RewindGame.Game
 
             //sceneSolids.Add(new DebugPlatform(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2)));
             //sceneEntities.Add(new DebugTimePhysicsEntity(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2 - 200, parentGame.graphics.PreferredBackBufferHeight / 2)));
-            player = new PlayerEntity(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2 - 300));
+            parentGame.player = new PlayerEntity(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2 - 300));
 
         }
 
 
-        public void Draw(StateData state, SpriteBatch sprite_batch)
+        // draw order: background, background tiles, scene entities, scene solids, player, collision tiles, foreground tiles
+        // level DOES NOT draw player
+        public void DrawBackground(StateData state, SpriteBatch sprite_batch)
         {
-            foreach (ITile tile in sceneDecoratives)
+
+            foreach (ITile tile in sceneDecorativesBackground)
             {
                 tile.Draw(state, sprite_batch);
             }
@@ -86,13 +97,22 @@ namespace RewindGame.Game
                 solid.Draw(state, sprite_batch);
             }
 
-            foreach (ITile tile in sceneTiles)
+        }
+
+        public void DrawForeground(StateData state, SpriteBatch sprite_batch) { 
+
+            foreach (ITile tile in sceneSolidTiles)
             {
                 tile.Draw(state, sprite_batch);
             }
 
-            player.Draw(state, sprite_batch);
+            foreach (ITile tile in sceneDecorativesForeground)
+            {
+                tile.Draw(state, sprite_batch);
+            }
+
         }
+
 
         public void DrawTile(TileSprite tile_sprite, Vector2 position, SpriteBatch sprite_batch)
         {
@@ -110,7 +130,7 @@ namespace RewindGame.Game
             int world_size = (tile_sprite.sheet == TileSheet.decorative ? LARGE_TILE_WORLD_SIZE : TILE_WORLD_SIZE);
             Rectangle end_rect = new Rectangle((int)position.X, (int)position.Y, world_size, world_size);
 
-            sprite_batch.Draw(sheet_texture, end_rect, source_rect, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, tile_sprite.sorting_layer);
+            sprite_batch.Draw(sheet_texture, end_rect, source_rect, Color.White);
         }
 
         public void Update(StateData state)
@@ -126,32 +146,35 @@ namespace RewindGame.Game
                 solid.Update(state);
             }
 
-            foreach (ITile tile in sceneTiles)
+            foreach (ITile tile in sceneSolidTiles)
             {
                 tile.Update(state);
             }
 
-            foreach (ITile tile in sceneDecoratives)
+            foreach (ITile tile in sceneDecorativesForeground)
             {
                 tile.Update(state);
             }
 
-            player.Update(state);
+            foreach (ITile tile in sceneDecorativesBackground)
+            {
+                tile.Update(state);
+            }
         }
 
-        public CollisionReturn getSolidCollisionAt(Rectangle rect, MoveDirection direction)
+        public CollisionReturn getSolidCollisionAt(FRectangle rect, MoveDirection direction)
         {
-            foreach (Solid solid in getAllSolids())
+            foreach (Solid solid in sceneSolids)
             {
-                if (solid.isThisOverlapping(rect))
+                if (solid.isThisOverlapping(rect, direction))
                 {
                     return new CollisionReturn(solid.getCollisionType(), solid);
                 }
             }
 
-            foreach (ISolidTile tile in getAllSolidTiles())
+            foreach (ISolidTile tile in sceneSolidTiles)
             {
-                if (tile.isThisOverlapping(rect))
+                if (tile.isThisOverlapping(rect, direction))
                 {
                     return new CollisionReturn(tile.getCollisionType(), (CollisionObject)tile);
                 }
@@ -169,10 +192,10 @@ namespace RewindGame.Game
             switch (type)
             {
                 case TileType.intangible:
-                    sceneDecoratives.Add(new DecorativeTile(this, position, sprite));
+                    sceneDecorativesForeground.Add(DecorativeTile.Make(this, position, sprite));
                     break;
                 case TileType.solid:
-                    sceneTiles.Add(new CollisionTile(this, position, sprite));
+                    sceneSolidTiles.Add(PlatformTile.Make(this, position, sprite));
                     break;
                 default:
                     // todo
@@ -196,7 +219,14 @@ namespace RewindGame.Game
         {
             Vector2 position = is_large ? getLargePositionFromGrid(x, y) : getPositionFromGrid(x, y);
 
-            sceneDecoratives.Add(new DecorativeTile(this, position, sprite));
+            if (sprite.sorting_layer > 0)
+            {
+                sceneDecorativesForeground.Add(DecorativeTile.Make(this, position, sprite));
+            }
+            else
+            {
+                sceneDecorativesBackground.Add(DecorativeTile.Make(this, position, sprite));
+            }
 
         }
 
@@ -214,19 +244,10 @@ namespace RewindGame.Game
 
 
 
-        public List<TimeEntity> getAllEntities()
-        {
-            return sceneEntities;
-        }
 
-        public List<Solid> getAllSolids()
+        public void Dispose()
         {
-            return sceneSolids;
-        }
-
-        public List<ISolidTile> getAllSolidTiles()
-        {
-            return sceneTiles;
+            Content.Unload();
         }
 
     }

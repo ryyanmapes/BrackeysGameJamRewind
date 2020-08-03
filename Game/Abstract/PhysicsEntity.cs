@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RewindGame.Game
 {
-    abstract class PhysicsEntity : Entity
+    public abstract class PhysicsEntity : Entity
     {
         //protected Vector2 velocity;
         // should entity really have a velocity?

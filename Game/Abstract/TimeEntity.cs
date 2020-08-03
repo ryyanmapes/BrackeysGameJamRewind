@@ -20,7 +20,7 @@ namespace RewindGame.Game
         public Vector2 velocity;
     }
 
-    abstract class TimeEntity : Entity, ITimeTrackable 
+    public abstract class TimeEntity : Entity, ITimeTrackable 
     {
 
         protected Dictionary<int, PhysData> pastPhysData = new Dictionary<int, PhysData>();

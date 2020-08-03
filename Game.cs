@@ -82,6 +82,9 @@ namespace RewindGame
         const float MOVE_STICK_SCALE = 1.0f;
         const float MOVE_STICK_MAX = 1.0f;
 
+        const float LEVEL_SIZE_X = Level.TILE_WORLD_SIZE * 29;
+        const float LEVEL_SIZE_Y = Level.TILE_WORLD_SIZE * 17;
+
         private Vector2 baseScreenSize = new Vector2(1600, 900);
         int backBufferWidth, backBufferHeight;
         private Matrix globalTransformation;
@@ -100,7 +103,17 @@ namespace RewindGame
         public int timeNegBound = -1000000;
         public int timePosBound = 1000000;
 
-        private Level openLevel;
+        private Level activeLevel;
+        private Vector2 activeLevelOffset = Vector2.Zero;
+
+        // connected levels are loaded, but not updated actively
+        // 1: right
+        // 2: left
+        // 3: up
+        // 4: down
+        private Level[] connectedLevels = { null, null, null, null };
+
+        public PlayerEntity player;
 
         public RewindGame()
         {
@@ -154,8 +167,9 @@ namespace RewindGame
             collisionSheetTexture = Content.Load<Texture2D>("tilesets/collision");
 
             // the offset here is for when we have many levels
-            openLevel = new Level(Services, Vector2.Zero ,this);
-            LevelLoader.LoadLevel("limbospiketest.json", openLevel);
+            activeLevel = new Level(Services, Vector2.Zero ,this);
+            activeLevel.isActiveScene = true;
+            LevelLoader.LoadLevel("limbospiketest.json", activeLevel);
         }
 
         protected override void Update(GameTime game_time)
@@ -195,7 +209,9 @@ namespace RewindGame
 
             StateData state = new StateData(inputData, timeData, game_time);
 
-            openLevel.Update(state);
+            activeLevel.Update(state);
+
+            player.Update(state);
 
             base.Update( game_time);
         }
@@ -240,6 +256,68 @@ namespace RewindGame
             return input_data;
         }
 
+        public Level getConnectedOrLoadLevel(String name, Vector2 offset)
+        {
+            Level level = null;
+
+            foreach (Level lvl in connectedLevels)
+            {
+                if (lvl != null)
+                {
+                    if (lvl.name == name)
+                    {
+                        level = lvl;
+                    }
+                }
+            }
+
+            if (level == null)
+            {
+                level = new Level(Services, offset, this);
+                LevelLoader.LoadLevel(name + ".json", level);
+            }
+
+            return level;
+        }
+
+        public void loadLevelAndConnections(String name)
+        {
+            Level center_level = getConnectedOrLoadLevel(name, Vector2.Zero);
+            activeLevelOffset = center_level.levelOrgin;
+
+
+            Level[] new_connected_levels = { null, null, null, null };
+            int i = 0;
+            foreach (String level_name in center_level.connectedLevelNames)
+            {
+                if (level_name != "")
+                {
+                    Vector2 offset = offsetLevelOrgin(activeLevelOffset, i);
+                    new_connected_levels[i] = getConnectedOrLoadLevel(level_name, offset);
+                }
+                i += 1;
+            }
+
+
+            foreach (Level lvl in connectedLevels)
+            {
+                if (lvl != null)
+                {
+                    if (lvl.name != center_level.name)
+                    {
+                        lvl.Dispose();
+                    }
+                }
+            }
+
+            connectedLevels = new_connected_levels;
+            activeLevel = center_level;
+            center_level.isActiveScene = true;
+
+        }
+
+
+
         protected override void Draw(GameTime game_time)
         {
             GraphicsDevice.Clear(Color.DarkGray);
@@ -251,19 +329,72 @@ namespace RewindGame
 
             StateData state = new StateData(inputData, timeData, game_time);
 
-            openLevel.Draw(state, spriteBatch);
+            activeLevel.DrawBackground(state, spriteBatch);
+
+            DrawAllConnectedBackgrounds(state, spriteBatch);
+
+            player.Draw(state, spriteBatch);
+
+            activeLevel.DrawForeground(state, spriteBatch);
+
+            DrawAllConnectedForegrounds(state, spriteBatch);
 
             spriteBatch.End();
 
             base.Draw(game_time);
         }
 
+        public void DrawAllConnectedBackgrounds(StateData state, SpriteBatch sprite_batch)
+        {
+            foreach(Level lvl in connectedLevels)
+            {
+                if (lvl != null)
+                {
+                    lvl.DrawBackground(state, sprite_batch);
+                }
+            }
+        }
+
+        public void DrawAllConnectedForegrounds(StateData state, SpriteBatch sprite_batch)
+        {
+            foreach (Level lvl in connectedLevels)
+            {
+                if (lvl != null)
+                {
+                    lvl.DrawForeground(state, sprite_batch);
+                }
+            }
+        }
 
         // says if the object can save it's state in this moment-
         // more often means more memory consumption
         public static bool isSavableMoment(int moment)
         {
             return moment % 3 == 0;
+        }
+
+        // 1: right
+        // 2: left
+        // 3: up
+        // 4: down
+        public static Vector2 offsetLevelOrgin(Vector2 orgin, int index)
+        {
+            switch(index)
+            {
+                case 0:
+                    orgin.X += LEVEL_SIZE_X;
+                    break;
+                case 1:
+                    orgin.X -= LEVEL_SIZE_X;
+                    break;
+                case 2:
+                    orgin.Y -= LEVEL_SIZE_Y;
+                    break;
+                case 3:
+                    orgin.Y += LEVEL_SIZE_Y;
+                    break;
+            }
+            return orgin;
         }
     }
 }

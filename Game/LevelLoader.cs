@@ -80,9 +80,11 @@ namespace RewindGame.Game
                 level.PlaceEntity(getEntityTypeFromName(entity.name), entity.x, entity.y);
             }
 
-            LoadTileLayer(raw_level.layers[0], level);
+            
             LoadTileLayer(raw_level.layers[2], level);
             LoadTileLayer(raw_level.layers[3], level);
+
+            LoadTileLayer(raw_level.layers[0], level);
             // call level.placeTile, level.placeEntity, level.placeDecorative
             //todo
         }
@@ -99,13 +101,13 @@ namespace RewindGame.Game
             {
                 case "collisionlayer":
                     is_collision_layer = true;
-                    sorting_layer = 0;
+                    sorting_layer = 1;
                     break;
                 case "background":
                     sorting_layer = -1;
                     break;
                 case "foreground":
-                    sorting_layer = 1;
+                    sorting_layer = 2;
                     is_large_tile = true;
                     sheet_type = TileSheet.decorative;
                     break;
@@ -147,7 +149,6 @@ namespace RewindGame.Game
             {
                 default:
                     return TileType.solid;
-                    break;
             }
         }
 

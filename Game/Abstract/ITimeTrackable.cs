@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RewindGame.Game
 {
-    interface ITimeTrackable
+    public interface ITimeTrackable
     {
         public abstract void TemporalUpdate(StateData state);
 

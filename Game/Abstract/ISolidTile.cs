@@ -8,15 +8,15 @@ using System.Text;
 
 namespace RewindGame.Game.Abstract
 {
-    interface ISolidTile : ITile 
+    public interface ISolidTile : ITile 
     {
         public abstract bool isThisOverlapping(CollisionObject obj);
 
-        public abstract bool isThisOverlapping(Rectangle rect);
+        public abstract bool isThisOverlapping(FRectangle rect);
 
         public abstract bool isThisOverlapping(CollisionObject obj, MoveDirection direction);
 
-        public abstract bool isThisOverlapping(Rectangle rect, MoveDirection direction);
+        public abstract bool isThisOverlapping(FRectangle rect, MoveDirection direction);
 
         public abstract PrimaryCollisionType getCollisionType();
     }

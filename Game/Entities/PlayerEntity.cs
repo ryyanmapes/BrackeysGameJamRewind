@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RewindGame.Game
 {
-    class PlayerEntity : PhysicsEntity
+    public class PlayerEntity : PhysicsEntity
     {
 
         protected float jumpVelocity = -150f;

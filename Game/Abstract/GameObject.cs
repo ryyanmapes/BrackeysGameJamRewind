@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RewindGame.Game
 {
-    abstract class GameObject
+    public abstract class GameObject
     {
         protected String texturePath = "UNDEFINED";
         protected Color textureColor = Color.White;
@@ -17,14 +17,7 @@ namespace RewindGame.Game
 
         protected Texture2D texture;
 
-        public GameObject()
-        {
-        }
-
-        public GameObject(Level level, Vector2 starting_pos)
-        {
-            Initialize(level, starting_pos);
-        }
+        public GameObject() { }
 
         public virtual void Initialize(Level level, Vector2 starting_pos)
         {

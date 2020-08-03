@@ -12,11 +12,20 @@ namespace RewindGame.Game.Debug
     {
         public TileSprite tile_sprite { get; set; }
 
-        public CollisionTile(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
+        public CollisionTile() { }
+
+        public static CollisionTile Make(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
+        {
+            var tile = new CollisionTile();
+            tile.Initialize(level, starting_pos, tile_sprite_);
+            return tile;
+        }
+
+        public virtual void Initialize(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
         {
             tile_sprite = tile_sprite_;
             collisionSize = new Vector2(Level.TILE_WORLD_SIZE, Level.TILE_WORLD_SIZE);
-            Initialize(level, starting_pos);
+            base.Initialize(level, starting_pos);
         }
 
         public override void LoadContent() { }
