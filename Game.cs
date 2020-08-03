@@ -96,8 +96,8 @@ namespace RewindGame
         public InputData inputData = new InputData();
         public TimeData timeData = new TimeData();
 
-        public int timeNegBound = -1000;
-        public int timePosBound = 1000;
+        public int timeNegBound = -1000000;
+        public int timePosBound = 1000000;
 
         private Level openLevel;
 
@@ -105,7 +105,7 @@ namespace RewindGame
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            
+
             IsMouseVisible = true;
 
             IsFixedTimeStep = true;
@@ -164,7 +164,7 @@ namespace RewindGame
             {
                 if (timeData.time_moment > timeNegBound) timeData.time_status = TimeState.backward;
             }
-            else 
+            else
 
             switch (timeData.time_status)
             {
@@ -253,10 +253,5 @@ namespace RewindGame
         {
             return moment % 3 == 0;
         }
-
-        /*public static String getRootDirectory()
-        {
-            Content
-        }*/
     }
 }

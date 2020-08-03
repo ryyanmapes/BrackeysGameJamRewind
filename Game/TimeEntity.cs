@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -6,10 +7,23 @@ using System.Text;
 
 namespace RewindGame.Game
 {
+
+    public class PhysData
+    {
+        public PhysData(Vector2 pos, Vector2 vel)
+        {
+            position = pos;
+            velocity = vel;
+        }
+
+        public Vector2 position;
+        public Vector2 velocity;
+    }
+
     abstract class TimeEntity : Entity, ITimeTrackable 
     {
 
-        protected Dictionary<int, Vector2> pastPositions = new Dictionary<int, Vector2>();
+        protected Dictionary<int, PhysData> pastPhysData = new Dictionary<int, PhysData>();
 
         public void TemporalUpdate(StateData state)
         {
@@ -40,12 +54,22 @@ namespace RewindGame.Game
 
         public void SaveState(int time_moment)
         {
-            pastPositions.Add(time_moment, position);
+            pastPhysData.Add(time_moment, new PhysData(position, velocity));
         }
 
         public void LoadState(int time_moment)
         {
-            pastPositions.Remove(time_moment, out position);
+            PhysData phys_data;
+            pastPhysData.Remove(time_moment, out phys_data);
+
+            if (phys_data == null)
+            {
+                Console.WriteLine("Unable to find time moment for " + time_moment);
+                return;
+            }
+
+            position = phys_data.position;
+            velocity = phys_data.velocity;
         }
 
     }
