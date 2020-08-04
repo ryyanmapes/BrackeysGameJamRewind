@@ -75,16 +75,17 @@ namespace RewindGame.Game
             var raw_level = JsonConvert.DeserializeObject<RawLevel>(level_json);
 
 
-            foreach (RawEntities entity in raw_level.layers[1].entities)
+            foreach (RawEntities entity in raw_level.layers[0].entities)
             {
                 level.PlaceEntity(getEntityTypeFromName(entity.name), entity.x, entity.y);
             }
 
             
-            LoadTileLayer(raw_level.layers[2], level);
+            LoadTileLayer(raw_level.layers[4], level);
             LoadTileLayer(raw_level.layers[3], level);
+            LoadTileLayer(raw_level.layers[1], level);
 
-            LoadTileLayer(raw_level.layers[0], level);
+            LoadTileLayer(raw_level.layers[2], level);
             // call level.placeTile, level.placeEntity, level.placeDecorative
             //todo
         }
@@ -94,9 +95,10 @@ namespace RewindGame.Game
         {
             bool is_collision_layer = false;
             bool is_large_tile = false;
-            TileSheet sheet_type = TileSheet.collision;
+            TileSheet sheet_type = TileSheet.none;
             int sorting_layer = 0;
 
+            /*
             switch (tile_layer.name)
             {
                 case "collisionlayer":
@@ -111,6 +113,11 @@ namespace RewindGame.Game
                     is_large_tile = true;
                     sheet_type = TileSheet.decorative;
                     break;
+            }*/
+            if (tile_layer.name == "collisionlayer")
+            {
+                sheet_type = TileSheet.collision;
+                is_collision_layer = true;
             }
 
             int n = 0;
@@ -147,6 +154,8 @@ namespace RewindGame.Game
         {
             switch (tile)
             {
+                case 48:
+                    return TileType.platform;
                 default:
                     return TileType.solid;
             }

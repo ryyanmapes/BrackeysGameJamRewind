@@ -12,7 +12,8 @@ namespace RewindGame.Game
     public enum TileSheet
     {
         decorative,
-        collision
+        collision,
+        none
     }
     public class TileSprite
     {
@@ -49,6 +50,7 @@ namespace RewindGame.Game
         public List<ISolidTile> sceneSolidTiles = new List<ISolidTile>();
         public List<ITile> sceneDecorativesBackground = new List<ITile>();
         public List<ITile> sceneDecorativesForeground = new List<ITile>();
+        public Vector2 playerSpawnpoint = Vector2.Zero;
 
         public Vector2 levelOrgin;
         public ContentManager Content;
@@ -70,7 +72,7 @@ namespace RewindGame.Game
             parentGame = parent;
 
 
-            sceneSolids.Add(new DebugPlatform(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2)));
+            //sceneSolids.Add(new DebugPlatform(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2)));
             //sceneEntities.Add(new DebugTimePhysicsEntity(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2 - 200, parentGame.graphics.PreferredBackBufferHeight / 2)));
             parentGame.player = new PlayerEntity(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2 - 300));
 
@@ -97,14 +99,15 @@ namespace RewindGame.Game
                 solid.Draw(state, sprite_batch);
             }
 
-        }
-
-        public void DrawForeground(StateData state, SpriteBatch sprite_batch) { 
-
             foreach (ITile tile in sceneSolidTiles)
             {
                 tile.Draw(state, sprite_batch);
             }
+
+        }
+
+        public void DrawForeground(StateData state, SpriteBatch sprite_batch) { 
+
 
             foreach (ITile tile in sceneDecorativesForeground)
             {
@@ -116,6 +119,8 @@ namespace RewindGame.Game
 
         public void DrawTile(TileSprite tile_sprite, Vector2 position, SpriteBatch sprite_batch)
         {
+            if (tile_sprite.sheet == TileSheet.none) return;
+
             Texture2D sheet_texture = (tile_sprite.sheet == TileSheet.decorative ? parentGame.decorativeSheetTexture : parentGame.collisionSheetTexture);
 
             int sheet_size = (tile_sprite.sheet == TileSheet.decorative ? LARGE_TILE_SHEET_SIZE : TILE_SHEET_SIZE);
@@ -195,6 +200,9 @@ namespace RewindGame.Game
                     sceneDecorativesForeground.Add(DecorativeTile.Make(this, position, sprite));
                     break;
                 case TileType.solid:
+                    sceneSolidTiles.Add(SolidTile.Make(this, position, sprite));
+                    break;
+                case TileType.platform:
                     sceneSolidTiles.Add(PlatformTile.Make(this, position, sprite));
                     break;
                 default:
@@ -209,9 +217,12 @@ namespace RewindGame.Game
 
             switch (type)
             {
+                case EntityType.Spawnpoint:
+                    playerSpawnpoint = position;
+                    return;
                 default:
                     //todo
-                    break;
+                    return;
             }
         }
 

@@ -8,7 +8,7 @@ using System.Text;
 namespace RewindGame.Game.Debug
 {
 
-    class PlatformTile : CollisionTile
+    class PlatformTile : SolidTile
     {
         public new static PlatformTile Make(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
         {

@@ -33,6 +33,7 @@ namespace RewindGame.Game.Debug
 
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
+            if (!hidden) return;
             localLevel.DrawTile(tile_sprite, position, sprite_batch);
         }
 

@@ -8,15 +8,15 @@ using System.Text;
 namespace RewindGame.Game.Debug
 {
 
-    class CollisionTile : CollisionObject, ISolidTile
+    class SolidTile : CollisionObject, ISolidTile
     {
         public TileSprite tile_sprite { get; set; }
 
-        public CollisionTile() { }
+        public SolidTile() { }
 
-        public static CollisionTile Make(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
+        public static SolidTile Make(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
         {
-            var tile = new CollisionTile();
+            var tile = new SolidTile();
             tile.Initialize(level, starting_pos, tile_sprite_);
             return tile;
         }

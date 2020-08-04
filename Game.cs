@@ -77,6 +77,14 @@ namespace RewindGame
         }
     }
 
+    public enum RunState
+    {
+        playing,
+        playerdead,
+        levelswap,
+        paused
+    }
+
     public class RewindGame : Microsoft.Xna.Framework.Game
     {
         const float MOVE_STICK_SCALE = 1.0f;
@@ -102,6 +110,8 @@ namespace RewindGame
 
         public int timeNegBound = -1000000;
         public int timePosBound = 1000000;
+
+        public RunState runState = RunState.playing;
 
         private Level activeLevel;
         private Vector2 activeLevelOffset = Vector2.Zero;
@@ -169,8 +179,11 @@ namespace RewindGame
             // the offset here is for when we have many levels
             activeLevel = new Level(Services, Vector2.Zero ,this);
             activeLevel.isActiveScene = true;
-            LevelLoader.LoadLevel("limbospiketest.json", activeLevel);
+            LevelLoader.LoadLevel("techdemolevel.json", activeLevel);
         }
+
+
+
 
         protected override void Update(GameTime game_time)
         {
@@ -179,39 +192,42 @@ namespace RewindGame
             if (inputData.is_exit_pressed)
                 Exit();
 
-            // still a bit indev-y
-            if (inputData.is_jump_held)
-            {
-                if (timeData.time_moment > timeNegBound) timeData.time_status = TimeState.backward;
+            if (runState == RunState.playing || runState == RunState.playerdead) { 
+
+                // still a bit indev-y
+                if (inputData.is_jump_held)
+                {
+                    if (timeData.time_moment > timeNegBound) timeData.time_status = TimeState.backward;
+                }
+                else
+                {
+                    if (timeData.time_moment < timePosBound) timeData.time_status = TimeState.forward;
+                }
+
+                switch (timeData.time_status)
+                {
+                    case TimeState.forward:
+                        timeData.time_moment += 1;
+                        break;
+                    case TimeState.backward:
+                        timeData.time_moment -= 1;
+                        break;
+                    default:
+                        break;
+
+                }
+
+                if (timeData.time_moment <= timeNegBound || timeData.time_moment >= timePosBound)
+                {
+                    timeData.time_status = TimeState.still;
+                }
+
+                StateData state = new StateData(inputData, timeData, game_time);
+
+                activeLevel.Update(state);
+
+                player.Update(state);
             }
-            else
-            {
-                if (timeData.time_moment < timePosBound) timeData.time_status = TimeState.forward;
-            }
-
-            switch (timeData.time_status)
-            {
-                case TimeState.forward:
-                    timeData.time_moment += 1;
-                    break;
-                case TimeState.backward:
-                    timeData.time_moment -= 1;
-                    break;
-                default:
-                    break;
-
-            }
-
-            if (timeData.time_moment <= timeNegBound || timeData.time_moment >= timePosBound)
-            {
-                timeData.time_status = TimeState.still;
-            }
-
-            StateData state = new StateData(inputData, timeData, game_time);
-
-            activeLevel.Update(state);
-
-            player.Update(state);
 
             base.Update( game_time);
         }
@@ -254,6 +270,11 @@ namespace RewindGame
             // todo interact, restart bindings
 
             return input_data;
+        }
+
+        public void killPlayer()
+        {
+            player.hidden = true;
         }
 
         public Level getConnectedOrLoadLevel(String name, Vector2 offset)

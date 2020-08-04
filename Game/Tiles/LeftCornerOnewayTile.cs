@@ -8,7 +8,7 @@ using System.Text;
 namespace RewindGame.Game.Debug
 {
 
-    class LeftCornerOnewayTile : CollisionTile
+    class LeftCornerOnewayTile : SolidTile
     {
 
         public override bool isThisOverlapping(FRectangle rect, MoveDirection direction)

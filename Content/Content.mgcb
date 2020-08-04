@@ -40,6 +40,9 @@
 #begin levels/limbospiketest.json
 /copy:levels/limbospiketest.json
 
+#begin levels/techdemolevel.json
+/copy:levels/techdemolevel.json
+
 #begin tilesets/collisionlayer.png
 /importer:TextureImporter
 /processor:TextureProcessor

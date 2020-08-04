@@ -10,6 +10,8 @@ namespace RewindGame.Game
     {
         protected String texturePath = "UNDEFINED";
         protected Color textureColor = Color.White;
+
+        public bool hidden = false;
     
 
         protected Level localLevel;
@@ -35,6 +37,7 @@ namespace RewindGame.Game
 
         public virtual void Draw(StateData state, SpriteBatch sprite_batch)
         {
+            if (!hidden) return;
             sprite_batch.Draw(texture, position, textureColor);
         }
 

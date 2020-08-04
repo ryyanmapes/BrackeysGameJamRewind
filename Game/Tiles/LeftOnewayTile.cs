@@ -8,7 +8,7 @@ using System.Text;
 namespace RewindGame.Game.Debug
 {
 
-    class LeftOnewayTile : CollisionTile
+    class LeftOnewayTile : SolidTile
     {
         public new static LeftOnewayTile Make(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
         {
