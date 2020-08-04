@@ -48,7 +48,7 @@ namespace RewindGame.Game
 
             collisionSize = new Vector2(56, 56);
             Initialize(parentGame.activeLevel, starting_pos);
-            maxVelocityMagnitudeX = 200f;
+            maxVelocityMagnitudeX = 300f;
         }
 
 
@@ -63,7 +63,7 @@ namespace RewindGame.Game
             // todo this is a mess
             InputData input_data = state.input_data;
 
-            if (input_data.is_jump_held && isGrounded())
+            if (input_data.is_jump_pressed && isGrounded())
             {
                 riddenObject = null;
                 velocity.Y += jumpInitialVelocity;

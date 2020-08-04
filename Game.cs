@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RewindGame.Game;
+using RewindGame.Game.Effects;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -55,16 +56,20 @@ namespace RewindGame
 
     public class StateData
     {
-        public StateData(InputData inputdata, TimeData timedata, GameTime gametime)
+        public StateData(InputData inputdata, TimeData timedata, GameTime gametime, Vector2 levelcenter, Vector2 cameraoffset)
         {
             input_data = inputdata;
             time_data = timedata;
             game_time = gametime;
+            level_center = levelcenter;
+            camera_position = cameraoffset;
         }
 
         public InputData input_data;
         public TimeData time_data;
         public GameTime game_time;
+        public Vector2 level_center;
+        public Vector2 camera_position;
 
         public double getDeltaTime()
         {
@@ -125,6 +130,9 @@ namespace RewindGame
 
         public Level activeLevel;
         public Vector2 activeLevelOffset = Vector2.Zero;
+        public IEffectManager currentEffects;
+        public Vector2 currentLevelCenter;
+        public Vector2 currentCameraPosition;
 
         public String qued_level_load_name = "";
 
@@ -181,6 +189,8 @@ namespace RewindGame
 
             player = new PlayerEntity(this, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 - 300));
             player.position = activeLevel.playerSpawnpoint;
+
+            currentEffects = new LimboEffects(Content);
         }
 
 
@@ -198,7 +208,7 @@ namespace RewindGame
                 if (level_name != "")
                 {
                     // todo level tag weirdness
-                    Vector2 offset = offsetLevelOrgin(activeLevelOffset, i);
+                    Vector2 offset = offsetLevelOrgin(center_level, activeLevelOffset, i);
                     new_connected_levels[i] = getConnectedOrLoadLevel(level_name, offset);
                 }
                 i += 1;
@@ -257,12 +267,15 @@ namespace RewindGame
 
         protected override void Update(GameTime game_time)
         {
+            currentLevelCenter = getLevelCenter();
+            currentCameraPosition = getCameraPosition();
+
             inputData = ReadInputs(inputData);
 
             if (inputData.is_exit_pressed)
                 Exit();
 
-            if (runState == RunState.playing || runState == RunState.playerdead) { 
+            if (runState == RunState.playing) { 
 
                 // still a bit indev-y
                 if (player.isRewinding)
@@ -292,7 +305,9 @@ namespace RewindGame
                     timeData.time_status = TimeState.still;
                 }
 
-                StateData state = new StateData(inputData, timeData, game_time);
+                StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition);
+
+                currentEffects.Update(state);
 
                 activeLevel.Update(state);
 
@@ -359,28 +374,32 @@ namespace RewindGame
             GraphicsDevice.Clear(Color.DarkGray);
 
             var matrix = Matrix.Identity;
-            matrix.Translation = new Vector3(-10 - activeLevelOffset.X, -activeLevelOffset.Y,0);
+            matrix.Translation = new Vector3(-1 * (currentCameraPosition.X - LEVEL_SIZE_X / 2), -1 * (currentCameraPosition.Y - LEVEL_SIZE_Y / 2), 0);
 
             spriteBatch.Begin(SpriteSortMode.Immediate, transformMatrix:matrix);
 
-            StateData state = new StateData(inputData, timeData, game_time);
+            StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition);
+
+            currentEffects.DrawBackground(state, spriteBatch);
 
             activeLevel.DrawBackground(state, spriteBatch);
 
-            DrawAllConnectedBackgrounds(state, spriteBatch);
+            DrawAllConnectedLevelBackgrounds(state, spriteBatch);
 
             player.Draw(state, spriteBatch);
 
             activeLevel.DrawForeground(state, spriteBatch);
 
-            DrawAllConnectedForegrounds(state, spriteBatch);
+            DrawAllConnectedLevelForegrounds(state, spriteBatch);
+
+            currentEffects.DrawForeground(state, spriteBatch);
 
             spriteBatch.End();
 
             base.Draw(game_time);
         }
 
-        public void DrawAllConnectedBackgrounds(StateData state, SpriteBatch sprite_batch)
+        public void DrawAllConnectedLevelBackgrounds(StateData state, SpriteBatch sprite_batch)
         {
             foreach(Level lvl in connectedLevels)
             {
@@ -391,7 +410,7 @@ namespace RewindGame
             }
         }
 
-        public void DrawAllConnectedForegrounds(StateData state, SpriteBatch sprite_batch)
+        public void DrawAllConnectedLevelForegrounds(StateData state, SpriteBatch sprite_batch)
         {
             foreach (Level lvl in connectedLevels)
             {
@@ -401,6 +420,24 @@ namespace RewindGame
                 }
             }
         }
+
+
+        public Vector2 getLevelCenter()
+        {
+            return new Vector2(12 + activeLevelOffset.X + LEVEL_SIZE_X/2, activeLevelOffset.Y + LEVEL_GRID_SIZE_Y/2);
+        }
+
+        // gets the position of the center of the camera
+        public Vector2 getCameraPosition()
+        {
+            float edge_left = 12 + activeLevelOffset.X + LEVEL_SIZE_X / 2;
+            float edge_right = 12 + activeLevelOffset.X + (LEVEL_SIZE_X * (activeLevel.screensHorizontal - 0.5f));
+            float edge_down = 12 + activeLevelOffset.Y + LEVEL_SIZE_Y / 2;
+            float edge_up = 12 + activeLevelOffset.Y + (LEVEL_SIZE_Y * (activeLevel.screensVertical - 0.5f));
+            return new Vector2(Math.Clamp(player.position.X, edge_left, edge_right), Math.Clamp(player.position.X, edge_down, edge_up));
+        }
+
+
 
         // says if the object can save it's state in this moment-
         // more often means more memory consumption
@@ -413,24 +450,27 @@ namespace RewindGame
         // 2: left
         // 3: up
         // 4: down
-        public static Vector2 offsetLevelOrgin(Vector2 orgin, int index)
+        public static Vector2 offsetLevelOrgin(Level level, Vector2 orgin, int index)
         {
             switch(index)
             {
                 case 0:
-                    orgin.X += LEVEL_SIZE_X;
+                    orgin.X += LEVEL_SIZE_X * level.screensHorizontal;
                     break;
                 case 1:
-                    orgin.X -= LEVEL_SIZE_X;
+                    orgin.X -= LEVEL_SIZE_X * level.screensHorizontal;
                     break;
                 case 2:
-                    orgin.Y -= LEVEL_SIZE_Y;
+                    orgin.Y -= LEVEL_SIZE_Y * level.screensVertical;
                     break;
                 case 3:
-                    orgin.Y += LEVEL_SIZE_Y;
+                    orgin.Y += LEVEL_SIZE_Y * level.screensVertical;
                     break;
             }
             return orgin;
         }
+    
+        
+    
     }
 }
