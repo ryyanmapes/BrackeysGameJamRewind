@@ -190,7 +190,7 @@ namespace RewindGame
             player = new PlayerEntity(this, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 - 300));
             player.position = activeLevel.playerSpawnpoint;
 
-            currentEffects = new LimboEffects(Content);
+            currentEffects = new LimboEffects(this, Content);
         }
 
 

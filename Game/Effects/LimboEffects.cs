@@ -12,10 +12,12 @@ namespace RewindGame.Game.Effects
     public class LimboEffects : IEffectManager
     {
         public ContentManager Content;
+        public RewindGame parentGame;
 
-        public LimboEffects(ContentManager content) 
+        public LimboEffects(RewindGame parent_game, ContentManager content) 
         { 
             Content = content;
+            parentGame = parent_game;
             //setup textures here
             // see GameObject
 
