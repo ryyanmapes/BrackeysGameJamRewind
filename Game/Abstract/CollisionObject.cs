@@ -19,7 +19,7 @@ namespace RewindGame.Game
 
         public Rectangle toRectangle()
         {
-            return new Rectangle((int)X, (int)Y, (int)Height, (int)Width);
+            return new Rectangle((int)X, (int)Y, (int)Width, (int)Height);
         }
 
         public float X;

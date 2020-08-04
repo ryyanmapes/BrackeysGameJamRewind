@@ -20,14 +20,14 @@ namespace RewindGame.Game
             position = position + move_components;
 
             
-            foreach (Entity entity in localLevel.sceneEntities)
+            foreach (Entity entity in localLevel.getAllEntities())
             {
                 if (entity.isRiding(this)) {
                     entity.moveX(move_components.X, SecondaryCollisionType.none);
                     entity.moveY(move_components.Y, SecondaryCollisionType.none);
                 }
                 else {
-                    Vector2 overlap = getOverlap(entity);
+                    Vector2 overlap = entity.getOverlap(this);
 
                     if (overlap != Vector2.Zero)
                     {

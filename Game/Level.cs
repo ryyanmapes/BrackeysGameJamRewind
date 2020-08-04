@@ -70,7 +70,7 @@ namespace RewindGame.Game
             parentGame = parent;
 
 
-            //sceneSolids.Add(new DebugPlatform(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2)));
+            sceneSolids.Add(new DebugPlatform(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2)));
             //sceneEntities.Add(new DebugTimePhysicsEntity(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2 - 200, parentGame.graphics.PreferredBackBufferHeight / 2)));
             parentGame.player = new PlayerEntity(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2 - 300));
 
@@ -242,7 +242,14 @@ namespace RewindGame.Game
         }
 
 
-
+        public IEnumerable<Entity> getAllEntities()
+        {
+            yield return parentGame.player;
+            foreach (Entity entity in sceneEntities)
+            {
+                yield return entity;
+            }
+        }
 
 
         public void Dispose()
