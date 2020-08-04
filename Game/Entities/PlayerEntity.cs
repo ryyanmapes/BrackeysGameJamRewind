@@ -19,6 +19,7 @@ namespace RewindGame.Game
         protected Animation jumpRewindAnim = new Animation("faux/fauxjumprewind", 3, 6, true);
         protected Animation fallRewindAnim = new Animation("faux/fauxfallrewind", 3, 6, true);
 
+        protected RewindGame parentGame;
 
         public bool facingRight = true;
 
@@ -32,25 +33,29 @@ namespace RewindGame.Game
         public bool isRewinding = false;
 
         //todo stuff make this correct
-        public PlayerEntity(Level level, Vector2 starting_pos)
+        public PlayerEntity(RewindGame parent_game, Vector2 starting_pos)
         {
             texturePath = "debug/square";
 
-            animator.addAnimaton(idleAnim, "idle",  level.parentGame.Content);
-            animator.addAnimaton(walkAnim, "walk",  level.parentGame.Content);
-            animator.addAnimaton(fallAnim, "fall", level.parentGame.Content);
-            animator.addAnimaton(jumpRewindAnim, "rewind_jump",  level.parentGame.Content);
-            animator.addAnimaton(fallRewindAnim, "rewind_fall",  level.parentGame.Content);
+            parentGame = parent_game;
+
+            animator.addAnimaton(idleAnim, "idle",  parentGame.Content);
+            animator.addAnimaton(walkAnim, "walk",  parentGame.Content);
+            animator.addAnimaton(fallAnim, "fall", parentGame.Content);
+            animator.addAnimaton(jumpRewindAnim, "rewind_jump",  parentGame.Content);
+            animator.addAnimaton(fallRewindAnim, "rewind_fall",  parentGame.Content);
             animator.changeAnimation("idle");
 
             collisionSize = new Vector2(56, 56);
-            Initialize(level, starting_pos);
+            Initialize(parentGame.activeLevel, starting_pos);
             maxVelocityMagnitudeX = 200f;
         }
 
 
         public override void Update(StateData state)
         {
+            localLevel = parentGame.activeLevel;
+
             UpdateAnimations();
 
             float elapsed = (float)state.getDeltaTime();

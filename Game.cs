@@ -85,6 +85,13 @@ namespace RewindGame
         paused
     }
 
+    public enum AreaState
+    {
+        limbo,
+        cotton,
+        eternal
+    }
+
     public class RewindGame : Microsoft.Xna.Framework.Game
     {
         public const float MOVE_STICK_SCALE = 1.0f;
@@ -116,8 +123,8 @@ namespace RewindGame
 
         public RunState runState = RunState.playing;
 
-        private Level activeLevel;
-        private Vector2 activeLevelOffset = Vector2.Zero;
+        public Level activeLevel;
+        public Vector2 activeLevelOffset = Vector2.Zero;
 
         public String qued_level_load_name = "";
 
@@ -155,20 +162,6 @@ namespace RewindGame
             base.Initialize();
         }
 
-        public void ScaleScreen()
-        {
-            backBufferWidth = GraphicsDevice.PresentationParameters.BackBufferWidth;
-            backBufferHeight = GraphicsDevice.PresentationParameters.BackBufferHeight;
-
-            float horScaling = backBufferWidth / baseScreenSize.X;
-            float verScaling = backBufferHeight / baseScreenSize.Y;
-
-            Vector3 screenScalingFactor = new Vector3(horScaling, verScaling, 1);
-            globalTransformation = Matrix.CreateScale(screenScalingFactor);
-
-        }
-
-
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -181,10 +174,82 @@ namespace RewindGame
             decorativeSheetTexture = Content.Load<Texture2D>("tilesets/decorative");
             collisionSheetTexture = Content.Load<Texture2D>("tilesets/collision");
 
+
+
             // the offset here is for when we have many levels
-            activeLevel = new Level(Services, Vector2.Zero ,this);
-            activeLevel.isActiveScene = true;
-            LevelLoader.LoadLevel("techdemolevel.json", activeLevel);
+            loadLevelAndConnections("techdemolevel");
+
+            player = new PlayerEntity(this, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 - 300));
+            player.position = activeLevel.playerSpawnpoint;
+        }
+
+
+
+        public void loadLevelAndConnections(String name)
+        {
+            Level center_level = getConnectedOrLoadLevel(name, Vector2.Zero);
+            activeLevelOffset = center_level.levelOrgin;
+
+
+            Level[] new_connected_levels = { null, null, null, null };
+            int i = 0;
+            foreach (String level_name in center_level.connectedLevelNames)
+            {
+                if (level_name != "")
+                {
+                    // todo level tag weirdness
+                    Vector2 offset = offsetLevelOrgin(activeLevelOffset, i);
+                    new_connected_levels[i] = getConnectedOrLoadLevel(level_name, offset);
+                }
+                i += 1;
+            }
+
+
+            foreach (Level lvl in connectedLevels)
+            {
+                if (lvl != null)
+                {
+                    if (lvl.name != center_level.name)
+                    {
+                        lvl.Dispose();
+                    }
+                }
+            }
+
+            connectedLevels = new_connected_levels;
+            activeLevel = center_level;
+            center_level.isActiveScene = true;
+
+            if (player != null)
+            {
+                //player.position = center_level.playerSpawnpoint;
+            }
+
+        }
+
+        public Level getConnectedOrLoadLevel(String name, Vector2 offset)
+        {
+            Level level = null;
+
+            foreach (Level lvl in connectedLevels)
+            {
+                if (lvl != null)
+                {
+                    if (lvl.name == name)
+                    {
+                        level = lvl;
+                        break;
+                    }
+                }
+            }
+
+            if (level == null)
+            {
+                level = new Level(Services, offset, this);
+                LevelLoader.LoadLevel(name, level);
+            }
+
+            return level;
         }
 
 
@@ -289,74 +354,12 @@ namespace RewindGame
             //TODO
         }
 
-        public Level getConnectedOrLoadLevel(String name, Vector2 offset)
-        {
-            Level level = null;
-
-            foreach (Level lvl in connectedLevels)
-            {
-                if (lvl != null)
-                {
-                    if (lvl.name == name)
-                    {
-                        level = lvl;
-                    }
-                }
-            }
-
-            if (level == null)
-            {
-                level = new Level(Services, offset, this);
-                LevelLoader.LoadLevel(name + ".json", level);
-            }
-
-            return level;
-        }
-
-        public void loadLevelAndConnections(String name)
-        {
-            Level center_level = getConnectedOrLoadLevel(name, Vector2.Zero);
-            activeLevelOffset = center_level.levelOrgin;
-
-
-            Level[] new_connected_levels = { null, null, null, null };
-            int i = 0;
-            foreach (String level_name in center_level.connectedLevelNames)
-            {
-                if (level_name != "")
-                {
-                    Vector2 offset = offsetLevelOrgin(activeLevelOffset, i);
-                    new_connected_levels[i] = getConnectedOrLoadLevel(level_name, offset);
-                }
-                i += 1;
-            }
-
-
-            foreach (Level lvl in connectedLevels)
-            {
-                if (lvl != null)
-                {
-                    if (lvl.name != center_level.name)
-                    {
-                        lvl.Dispose();
-                    }
-                }
-            }
-
-            connectedLevels = new_connected_levels;
-            activeLevel = center_level;
-            center_level.isActiveScene = true;
-
-        }
-
-
-
         protected override void Draw(GameTime game_time)
         {
             GraphicsDevice.Clear(Color.DarkGray);
 
             var matrix = Matrix.Identity;
-            matrix.Translation = new Vector3(-28, 0,0);
+            matrix.Translation = new Vector3(-10 - activeLevelOffset.X, -activeLevelOffset.Y,0);
 
             spriteBatch.Begin(SpriteSortMode.Immediate, transformMatrix:matrix);
 

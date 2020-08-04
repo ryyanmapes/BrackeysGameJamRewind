@@ -100,6 +100,9 @@
 #begin levels/techdemolevel.json
 /copy:levels/techdemolevel.json
 
+#begin levels/techdemolevel2.json
+/copy:levels/techdemolevel2.json
+
 #begin tilesets/collisionlayer.png
 /importer:TextureImporter
 /processor:TextureProcessor

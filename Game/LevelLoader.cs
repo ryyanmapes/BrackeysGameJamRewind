@@ -81,10 +81,12 @@ namespace RewindGame.Game
         {
             //Maybe use later?
         }
-        public static void LoadLevel(String fileName, Level level)
+        public static void LoadLevel(String level_name, Level level)
         {
+            level.name = level_name;
+
             string level_json;
-            using (StreamReader sr = new StreamReader("Content/levels/"+fileName))
+            using (StreamReader sr = new StreamReader("Content/levels/"+level_name+".json"))
             {
                  level_json = sr.ReadToEnd();
             }

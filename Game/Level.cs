@@ -77,7 +77,7 @@ namespace RewindGame.Game
 
             //sceneSolids.Add(new DebugPlatform(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2)));
             //sceneEntities.Add(new DebugTimePhysicsEntity(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2 - 200, parentGame.graphics.PreferredBackBufferHeight / 2)));
-            parentGame.player = new PlayerEntity(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2 - 300));
+            
 
         }
 
@@ -118,7 +118,6 @@ namespace RewindGame.Game
             }
 
         }
-
 
         public void DrawTile(TileSprite tile_sprite, Vector2 position, SpriteBatch sprite_batch)
         {
@@ -242,7 +241,7 @@ namespace RewindGame.Game
 
         public void PlaceEntity(EntityType type, int x, int y)
         {
-            Vector2 position = getPositionFromGrid(x, y);
+            Vector2 position = new Vector2(x, y) * 4;
 
             switch (type)
             {

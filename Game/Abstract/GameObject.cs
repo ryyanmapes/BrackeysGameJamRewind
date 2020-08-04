@@ -15,7 +15,7 @@ namespace RewindGame.Game
     
 
         protected Level localLevel;
-        protected Vector2 position;
+        public Vector2 position;
 
         protected Texture2D texture;
 
