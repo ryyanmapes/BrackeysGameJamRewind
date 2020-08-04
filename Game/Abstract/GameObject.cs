@@ -37,7 +37,7 @@ namespace RewindGame.Game
 
         public virtual void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            if (!hidden) return;
+            if (hidden) return;
             sprite_batch.Draw(texture, position, textureColor);
         }
 

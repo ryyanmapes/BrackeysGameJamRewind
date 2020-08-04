@@ -195,7 +195,7 @@ namespace RewindGame
             if (runState == RunState.playing || runState == RunState.playerdead) { 
 
                 // still a bit indev-y
-                if (inputData.is_jump_held)
+                if (player.isRewinding)
                 {
                     if (timeData.time_moment > timeNegBound) timeData.time_status = TimeState.backward;
                 }
