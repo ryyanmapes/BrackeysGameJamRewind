@@ -62,8 +62,8 @@ namespace RewindGame.Game
         public String name = "";
 
         public String[] connectedLevelNames = { "", "", "", "" };
-        public int screensHorizontal;
-        public int screensVertical;
+        public float screensHorizontal;
+        public float screensVertical;
 
 
         public Level(IServiceProvider serviceProvider, Vector2 orgin, RewindGame parent)

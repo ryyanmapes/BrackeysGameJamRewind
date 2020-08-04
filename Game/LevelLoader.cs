@@ -92,8 +92,8 @@ namespace RewindGame.Game
             }
             var raw_level = JsonConvert.DeserializeObject<RawLevel>(level_json);
 
-            level.screensHorizontal = raw_level.layers[0].gridCellsX / RewindGame.LEVEL_GRID_SIZE_X;
-            level.screensVertical = raw_level.layers[0].gridCellsY / RewindGame.LEVEL_GRID_SIZE_Y;
+            level.screensHorizontal = (float)raw_level.layers[0].gridCellsX / (float)RewindGame.LEVEL_GRID_SIZE_X;
+            level.screensVertical = (float)raw_level.layers[0].gridCellsY / (float)RewindGame.LEVEL_GRID_SIZE_Y;
 
             // todo tag processing for these
 
