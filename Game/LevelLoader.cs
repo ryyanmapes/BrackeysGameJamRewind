@@ -13,6 +13,10 @@ namespace RewindGame.Game
         solid,
         death,
         platform,
+        left_oneway,
+        right_oneway,
+        topleft_oneway,
+        topright_oneway,
         freezetime
     }
 
@@ -154,8 +158,16 @@ namespace RewindGame.Game
         {
             switch (tile)
             {
+                case 47:
+                    return TileType.topright_oneway;
                 case 48:
                     return TileType.platform;
+                case 49:
+                    return TileType.topleft_oneway;
+                case 50:
+                    return TileType.left_oneway;
+                case 51:
+                    return TileType.right_oneway;
                 default:
                     return TileType.solid;
             }

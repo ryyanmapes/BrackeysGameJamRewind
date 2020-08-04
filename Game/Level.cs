@@ -205,6 +205,18 @@ namespace RewindGame.Game
                 case TileType.platform:
                     sceneSolidTiles.Add(PlatformTile.Make(this, position, sprite));
                     break;
+                case TileType.left_oneway:
+                    sceneSolidTiles.Add(LeftOnewayTile.Make(this, position, sprite));
+                    break;
+                case TileType.right_oneway:
+                    sceneSolidTiles.Add(RightOnewayTile.Make(this, position, sprite));
+                    break;
+                case TileType.topleft_oneway:
+                    sceneSolidTiles.Add(LeftCornerOnewayTile.Make(this, position, sprite));
+                    break;
+                case TileType.topright_oneway:
+                    sceneSolidTiles.Add(RightCornerOnewayTile.Make(this, position, sprite));
+                    break;
                 default:
                     // todo
                     break;
