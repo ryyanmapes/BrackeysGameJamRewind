@@ -87,11 +87,14 @@ namespace RewindGame
 
     public class RewindGame : Microsoft.Xna.Framework.Game
     {
-        const float MOVE_STICK_SCALE = 1.0f;
-        const float MOVE_STICK_MAX = 1.0f;
+        public const float MOVE_STICK_SCALE = 1.0f;
+        public const float MOVE_STICK_MAX = 1.0f;
 
-        const float LEVEL_SIZE_X = Level.TILE_WORLD_SIZE * 29;
-        const float LEVEL_SIZE_Y = Level.TILE_WORLD_SIZE * 17;
+        public const int LEVEL_GRID_SIZE_X = 29;
+        public const int LEVEL_GRID_SIZE_Y = 17;
+
+        const float LEVEL_SIZE_X = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_X;
+        const float LEVEL_SIZE_Y = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_Y;
 
         private Vector2 baseScreenSize = new Vector2(1600, 900);
         int backBufferWidth, backBufferHeight;
@@ -115,6 +118,8 @@ namespace RewindGame
 
         private Level activeLevel;
         private Vector2 activeLevelOffset = Vector2.Zero;
+
+        public String qued_level_load_name = "";
 
         // connected levels are loaded, but not updated actively
         // 1: right
@@ -227,6 +232,12 @@ namespace RewindGame
                 activeLevel.Update(state);
 
                 player.Update(state);
+
+                if (qued_level_load_name != "")
+                {
+                    loadLevelAndConnections(qued_level_load_name);
+                    qued_level_load_name = "";
+                }
             }
 
             base.Update( game_time);
@@ -275,6 +286,7 @@ namespace RewindGame
         public void killPlayer()
         {
             player.hidden = true;
+            //TODO
         }
 
         public Level getConnectedOrLoadLevel(String name, Vector2 offset)

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RewindGame.Game.Debug
+namespace RewindGame.Game.Tiles
 {
 
     class SolidTile : CollisionObject, ISolidTile

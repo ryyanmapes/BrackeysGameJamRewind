@@ -97,9 +97,6 @@
 /processorParam:TextureFormat=Color
 /build:faux/fauxwalk.png
 
-#begin levels/limbospiketest.json
-/copy:levels/limbospiketest.json
-
 #begin levels/techdemolevel.json
 /copy:levels/techdemolevel.json
 

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using RewindGame.Game.Abstract;
 using RewindGame.Game.Debug;
+using RewindGame.Game.Tiles;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -61,6 +62,8 @@ namespace RewindGame.Game
         public String name = "";
 
         public String[] connectedLevelNames = { "", "", "", "" };
+        public int screensHorizontal;
+        public int screensVertical;
 
 
         public Level(IServiceProvider serviceProvider, Vector2 orgin, RewindGame parent)
@@ -106,7 +109,7 @@ namespace RewindGame.Game
 
         }
 
-        public void DrawForeground(StateData state, SpriteBatch sprite_batch) { 
+        public void DrawForeground(StateData state, SpriteBatch sprite_batch) {
 
 
             foreach (ITile tile in sceneDecorativesForeground)
@@ -119,7 +122,7 @@ namespace RewindGame.Game
 
         public void DrawTile(TileSprite tile_sprite, Vector2 position, SpriteBatch sprite_batch)
         {
-            if (tile_sprite.sheet == TileSheet.none) return;
+            if (tile_sprite == null || tile_sprite.sheet == TileSheet.none) return;
 
             Texture2D sheet_texture = (tile_sprite.sheet == TileSheet.decorative ? parentGame.decorativeSheetTexture : parentGame.collisionSheetTexture);
 
@@ -212,10 +215,24 @@ namespace RewindGame.Game
                     sceneSolidTiles.Add(RightOnewayTile.Make(this, position, sprite));
                     break;
                 case TileType.topleft_oneway:
-                    sceneSolidTiles.Add(LeftCornerOnewayTile.Make(this, position, sprite));
+                    sceneSolidTiles.Add(PlatformTile.Make(this, position, sprite));
+                    sceneSolidTiles.Add(LeftOnewayTile.Make(this, position, sprite));
                     break;
                 case TileType.topright_oneway:
-                    sceneSolidTiles.Add(RightCornerOnewayTile.Make(this, position, sprite));
+                    sceneSolidTiles.Add(PlatformTile.Make(this, position, sprite));
+                    sceneSolidTiles.Add(RightOnewayTile.Make(this, position, sprite));
+                    break;
+                case TileType.right_transition:
+                    sceneSolidTiles.Add(TransitionTriggerTile.Make(this, position, sprite, MoveDirection.right));
+                    break;
+                case TileType.left_transition:
+                    sceneSolidTiles.Add(TransitionTriggerTile.Make(this, position, sprite, MoveDirection.left));
+                    break;
+                case TileType.up_transition:
+                    sceneSolidTiles.Add(TransitionTriggerTile.Make(this, position, sprite, MoveDirection.up));
+                    break;
+                case TileType.down_transition:
+                    sceneSolidTiles.Add(TransitionTriggerTile.Make(this, position, sprite, MoveDirection.down));
                     break;
                 default:
                     // todo
@@ -264,7 +281,6 @@ namespace RewindGame.Game
             return new Vector2(levelOrgin.X + x * TILE_WORLD_SIZE, levelOrgin.Y + y * TILE_WORLD_SIZE);
         }
 
-
         public IEnumerable<Entity> getAllEntities()
         {
             yield return parentGame.player;
@@ -274,6 +290,29 @@ namespace RewindGame.Game
             }
         }
 
+
+        public void TransitionTo(MoveDirection direction)
+        {
+            String new_level_name;
+            switch (direction) {
+                case MoveDirection.right:
+                    new_level_name = connectedLevelNames[0];
+                    break;
+                case MoveDirection.left:
+                    new_level_name = connectedLevelNames[1];
+                    break;
+                case MoveDirection.up:
+                    new_level_name = connectedLevelNames[2];
+                    break;
+                case MoveDirection.down:
+                    new_level_name = connectedLevelNames[3];
+                    break;
+                default:
+                    return;
+            }
+
+            parentGame.qued_level_load_name = new_level_name;
+        }
 
         public void Dispose()
         {

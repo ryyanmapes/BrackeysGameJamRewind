@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RewindGame.Game.Debug
+namespace RewindGame.Game.Tiles
 {
 
     class LeftOnewayTile : SolidTile
@@ -19,11 +19,11 @@ namespace RewindGame.Game.Debug
 
         public override void Initialize(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
         {
-            collisionDirection = MoveDirection.left;
-            base.Initialize(level, starting_pos, tile_sprite);
+            collisionDirection = MoveDirection.right;
+            base.Initialize(level, starting_pos, tile_sprite_);
             collisionSize.X = Level.SEMISOLID_THICKNESS;
         }
-
+        
         public override bool isThisOverlapping(FRectangle rect, MoveDirection direction)
         {
             if (rect.X + rect.Width > position.X + Level.SEMISOLID_THICKNESS) return false;

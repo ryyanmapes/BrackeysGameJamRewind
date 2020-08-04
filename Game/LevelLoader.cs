@@ -17,6 +17,10 @@ namespace RewindGame.Game
         right_oneway,
         topleft_oneway,
         topright_oneway,
+        right_transition,
+        left_transition,
+        up_transition,
+        down_transition,
         freezetime
     }
 
@@ -32,6 +36,7 @@ namespace RewindGame.Game
         public int height;
         public int offsetX;
         public int offsetY;
+        public RawLevelInfo values;
         public List<RawLayer> layers;
     }
     class RawLayer
@@ -62,6 +67,13 @@ namespace RewindGame.Game
         public int originY;
         public bool flippedX;
     }
+    class RawLevelInfo
+    {
+        public string exit_right;
+        public string exit_left;
+        public string exit_up;
+        public string exit_down;
+    }
     class LevelLoader
     {
         // we pass in a level here to populate it with everything
@@ -77,6 +89,16 @@ namespace RewindGame.Game
                  level_json = sr.ReadToEnd();
             }
             var raw_level = JsonConvert.DeserializeObject<RawLevel>(level_json);
+
+            level.screensHorizontal = raw_level.layers[0].gridCellsX / RewindGame.LEVEL_GRID_SIZE_X;
+            level.screensVertical = raw_level.layers[0].gridCellsY / RewindGame.LEVEL_GRID_SIZE_Y;
+
+            // todo tag processing for these
+
+            level.connectedLevelNames[0] = raw_level.values.exit_right;
+            level.connectedLevelNames[1] = raw_level.values.exit_left;
+            level.connectedLevelNames[2] = raw_level.values.exit_up;
+            level.connectedLevelNames[3] = raw_level.values.exit_down;
 
 
             foreach (RawLayer layer in raw_level.layers)
@@ -107,14 +129,20 @@ namespace RewindGame.Game
             TileSheet sheet_type = TileSheet.none;
             int sorting_layer = 0;
 
-            /*
+            
             switch (tile_layer.name)
             {
+                case "technical":
+                    is_collision_layer = true;
+                    sheet_type = TileSheet.none;
+                    break;
                 case "collisionlayer":
+                    sheet_type = TileSheet.collision;
                     is_collision_layer = true;
                     sorting_layer = 1;
                     break;
                 case "background":
+                    sheet_type = TileSheet.collision;
                     sorting_layer = -1;
                     break;
                 case "foreground":
@@ -122,14 +150,9 @@ namespace RewindGame.Game
                     is_large_tile = true;
                     sheet_type = TileSheet.decorative;
                     break;
-            }*/
-            if (tile_layer.name == "collisionlayer")
-            {
-                sheet_type = TileSheet.collision;
-                is_collision_layer = true;
             }
 
-            int n = 0;
+                int n = 0;
             int x_pos = 0;
             int y_pos = 0;
             while (n < tile_layer.data.Count)
@@ -163,16 +186,20 @@ namespace RewindGame.Game
         {
             switch (tile)
             {
-                case 47:
+                case 49:
                     return TileType.topright_oneway;
                 case 48:
                     return TileType.platform;
-                case 49:
+                case 47:
                     return TileType.topleft_oneway;
-                case 50:
-                    return TileType.left_oneway;
                 case 51:
+                    return TileType.left_oneway;
+                case 50:
                     return TileType.right_oneway;
+                case 69:
+                    return TileType.right_transition;
+                case 70:
+                    return TileType.left_transition;
                 default:
                     return TileType.solid;
             }

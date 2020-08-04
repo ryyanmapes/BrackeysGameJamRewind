@@ -32,6 +32,7 @@ namespace RewindGame.Game
     public abstract class CollisionObject : GameObject
     {
         protected Vector2 collisionSize;
+        protected Vector2 collisionOffset = Vector2.Zero;
 
         protected PrimaryCollisionType collisionType = PrimaryCollisionType.normal;
 
@@ -47,7 +48,7 @@ namespace RewindGame.Game
 
         public virtual FRectangle getCollisionBoxAt(Vector2 new_position)
         {
-            return new FRectangle(new_position.X, new_position.Y, collisionSize.X, collisionSize.Y);
+            return new FRectangle(new_position.X + collisionOffset.X, new_position.Y + collisionOffset.Y, collisionSize.X, collisionSize.Y);
         }
 
         public bool isThisOverlapping(CollisionObject obj)
