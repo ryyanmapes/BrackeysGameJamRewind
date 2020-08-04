@@ -79,21 +79,26 @@ namespace RewindGame.Game
             var raw_level = JsonConvert.DeserializeObject<RawLevel>(level_json);
 
 
-            foreach (RawEntities entity in raw_level.layers[0].entities)
+            foreach (RawLayer layer in raw_level.layers)
+            {
+                if (layer.name == "entities")
+                {
+                    LoadEntities(layer, level);
+                }
+                else
+                {
+                    LoadTileLayer(layer, level);
+                }
+            }
+        }
+
+        public static void LoadEntities(RawLayer tile_layer, Level level)
+        {
+            foreach (RawEntities entity in tile_layer.entities)
             {
                 level.PlaceEntity(getEntityTypeFromName(entity.name), entity.x, entity.y);
             }
-
-            
-            LoadTileLayer(raw_level.layers[4], level);
-            LoadTileLayer(raw_level.layers[3], level);
-            LoadTileLayer(raw_level.layers[1], level);
-
-            LoadTileLayer(raw_level.layers[2], level);
-            // call level.placeTile, level.placeEntity, level.placeDecorative
-            //todo
         }
-
 
         public static void LoadTileLayer(RawLayer tile_layer, Level level)
         {
