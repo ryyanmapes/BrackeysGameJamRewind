@@ -118,6 +118,9 @@
 #begin levels/techdemolevel3.json
 /copy:levels/techdemolevel3.json
 
+#begin Music/loop1.wav
+/copy:Music/loop1.wav
+
 #begin tilesets/collisionlayer.png
 /importer:TextureImporter
 /processor:TextureProcessor

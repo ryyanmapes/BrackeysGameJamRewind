@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Content;
+using ChaiFoxes.FMODAudio;
+using Microsoft.Xna.Framework;
 
 namespace RewindGame.Game.Sound
 {
@@ -12,9 +14,16 @@ namespace RewindGame.Game.Sound
 
         public SoundManager(RewindGame parent_game, ContentManager content)
         {
-            parentGame = parentGame;
+            parentGame = parent_game;
             Content = content;
             //does anything else need to be passed in initially?
+
+            //Initialization stuff?
+            FMODManager.Init(FMODMode.CoreAndStudio, Content.Load<>);
+
+            var sound = CoreSystem.LoadStreamedSound("loop1.wav");
+            var channel = sound.Play();
+            channel.Looping = true;
         }
 
 
@@ -25,7 +34,7 @@ namespace RewindGame.Game.Sound
 
         public void TriggerPlayerJump()
         {
-
+            
         }
 
         public void TriggerPlayerLand()

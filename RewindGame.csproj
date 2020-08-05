@@ -29,11 +29,21 @@
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="ChaiFoxes.FMODAudio.Desktop" Version="2.0.0" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1375-develop" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1375-develop" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\debug\" />
+    <Folder Include="Content\Music\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Game\x64\fmod.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Game\x86\fmod.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
