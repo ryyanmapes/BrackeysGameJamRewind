@@ -11,12 +11,12 @@ namespace RewindGame.Game
         //protected Vector2 velocity;
         // should entity really have a velocity?
 
-        protected float maxVelocityY = 700f; // downward
+        protected float maxVelocityY = 800f; // downward
         protected float minVelocityY = -2000f; // upward
         protected float maxVelocityMagnitudeX = 4600f;
         protected Vector2 aerialDrag = new Vector2(500f,100f);
         protected float groundedXFriction = 1000f;
-        protected float gravitationalAcceleration = 1200f;
+        protected float gravitationalAcceleration = 1250f;
 
         public override void Update(StateData state)
         {
