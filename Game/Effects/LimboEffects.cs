@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace RewindGame.Game.Effects
 {
-    public class LimboEffects : IEffectManager
+    public class LimboEffects : ILevelEffect
     {
         public ContentManager Content;
         public RewindGame parentGame;

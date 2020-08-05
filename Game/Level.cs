@@ -44,7 +44,9 @@ namespace RewindGame.Game
         public const int COLLISION_SHEET_TILES_X = 20;
         public const int COLLISION_SHEET_TILES_Y = 20;
 
-        public const float SEMISOLID_THICKNESS = 1f;
+        public const float SEMISOLID_THICKNESS = 4f;
+        public const float SEMISOLID_THICKNESS_WINDOW = 20f;
+        public const float WALLSPIKE_THICKNESS = 16f;
 
         public List<TimeEntity> sceneEntities = new List<TimeEntity>();
         public List<Solid> sceneSolids = new List<Solid>();
@@ -171,23 +173,35 @@ namespace RewindGame.Game
 
         public CollisionReturn getSolidCollisionAt(FRectangle rect, MoveDirection direction)
         {
+            var return_collision = CollisionReturn.None();
             foreach (Solid solid in sceneSolids)
             {
-                if (solid.isThisOverlapping(rect, direction))
-                {
-                    return new CollisionReturn(solid.getCollisionType(), solid);
-                }
+                CollisionReturn collision = solid.getCollision(rect, direction);
+                if (collision.priority > return_collision.priority) return_collision = collision;
             }
 
             foreach (ISolidTile tile in sceneSolidTiles)
             {
-                if (tile.isThisOverlapping(rect, direction))
-                {
-                    return new CollisionReturn(tile.getCollisionType(), (CollisionObject)tile);
-                }
+                CollisionReturn collision = ((CollisionObject)tile).getCollision(rect, direction);
+                if (collision.priority > return_collision.priority) return_collision = collision;
             }
 
-            return CollisionReturn.None();
+            return return_collision;
+        }
+
+        public bool getIsInStasis(FRectangle rect)
+        {
+            foreach (Solid solid in sceneSolids)
+            {
+                if (solid.isThisOverlapping(rect)) return true;
+            }
+
+            foreach (ISolidTile tile in sceneSolidTiles)
+            {
+                if (tile.isThisOverlapping(rect)) return true;
+            }
+
+            return false;
         }
 
 
@@ -232,6 +246,21 @@ namespace RewindGame.Game
                     break;
                 case TileType.down_transition:
                     sceneSolidTiles.Add(TransitionTriggerTile.Make(this, position, sprite, MoveDirection.down));
+                    break;
+                case TileType.right_wallspike:
+                    sceneSolidTiles.Add(RightWallspike.Make(this, position, sprite));
+                    break;
+                case TileType.left_wallspike:
+                    sceneSolidTiles.Add(LeftWallspike.Make(this, position, sprite));
+                    break;
+                case TileType.up_wallspike:
+                    sceneSolidTiles.Add(TopWallspike.Make(this, position, sprite));
+                    break;
+                case TileType.down_wallspike:
+                    sceneSolidTiles.Add(BottomWallspike.Make(this, position, sprite));
+                    break;
+                case TileType.centerspike:
+                    sceneSolidTiles.Add(Centerspike.Make(this, position, sprite));
                     break;
                 default:
                     // todo

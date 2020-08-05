@@ -72,14 +72,14 @@ namespace RewindGame
         public Vector2 level_center;
         public Vector2 camera_position;
 
-        public double getDeltaTime()
+        public float getDeltaTime()
         {
-            return game_time.ElapsedGameTime.TotalSeconds;
+            return (float)game_time.ElapsedGameTime.TotalSeconds;
         }
 
-        public double getSignedDeltaTime()
+        public float getSignedDeltaTime()
         {
-            return getDeltaTime() * (time_data.time_status == TimeState.backward ? -1 : 1);
+            return (float) getDeltaTime() * (time_data.time_status == TimeState.backward ? -1 : 1);
         }
     }
 
@@ -145,12 +145,15 @@ namespace RewindGame
         public const int LEVEL_GRID_SIZE_X = 29;
         public const int LEVEL_GRID_SIZE_Y = 17;
 
-        const float LEVEL_SIZE_X = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_X;
-        const float LEVEL_SIZE_Y = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_Y;
+        public const float LEVEL_SIZE_X = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_X;
+        public const float LEVEL_SIZE_Y = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_Y;
+
+        public float playerDeathTime = 0.5f;
+        // will change
+        public int timeNegBound = -1000000;
+        public int timePosBound = 1000000;
 
         private Vector2 baseScreenSize = new Vector2(1600, 900);
-        int backBufferWidth, backBufferHeight;
-        private Matrix globalTransformation;
 
         public GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -163,18 +166,21 @@ namespace RewindGame
         public Texture2D decorativeSheetTexture;
         public Texture2D collisionSheetTexture;
 
-        public int timeNegBound = -1000000;
-        public int timePosBound = 1000000;
-
-        public RunState runState = RunState.playing;
-
         public Level activeLevel;
         public Vector2 activeLevelOffset = Vector2.Zero;
-        public IEffectManager currentEffects;
         public Vector2 currentLevelCenter;
         public Vector2 currentCameraPosition;
 
+        public ILevelEffect areaEffect;
+        public OverlayEffects overlayEffect;
+
         public String qued_level_load_name = "";
+        public bool qued_player_death = false;
+
+        public RunState runState = RunState.playing;
+        public float stateTimer = -1f;
+
+        public int deathsStat = 0;
 
         // connected levels are loaded, but not updated actively
         // 1: right
@@ -230,7 +236,8 @@ namespace RewindGame
             player = new PlayerEntity(this, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 - 300));
             player.position = activeLevel.playerSpawnpoint;
 
-            currentEffects = new LimboEffects(this, Content);
+            areaEffect = new LimboEffects(this, Content);
+            overlayEffect = new OverlayEffects(this, Content);
         }
 
 
@@ -377,52 +384,82 @@ namespace RewindGame
             if (inputData.is_restart_pressed)
                 player.position = activeLevel.playerSpawnpoint;
 
-            if (runState == RunState.playing) { 
+            StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition);
 
-                // still a bit indev-y
-                if (player.isRewinding)
+
+            if (stateTimer != -1)
+            {
+                stateTimer -= (float)state.getDeltaTime();
+                if (stateTimer <= 0)
                 {
-                    if (timeData.time_moment > timeNegBound) timeData.time_status = TimeState.backward;
-                }
-                else
-                {
-                    if (timeData.time_moment < timePosBound) timeData.time_status = TimeState.forward;
-                }
-
-                switch (timeData.time_status)
-                {
-                    case TimeState.forward:
-                        timeData.time_moment += 1;
-                        break;
-                    case TimeState.backward:
-                        timeData.time_moment -= 1;
-                        break;
-                    default:
-                        break;
-
-                }
-
-                if (timeData.time_moment <= timeNegBound || timeData.time_moment >= timePosBound)
-                {
-                    timeData.time_status = TimeState.still;
-                }
-
-                StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition);
-
-                currentEffects.Update(state);
-
-                activeLevel.Update(state);
-
-                player.Update(state);
-
-                if (qued_level_load_name != "")
-                {
-                    loadLevelAndConnections(qued_level_load_name);
-                    qued_level_load_name = "";
+                    if (runState == RunState.playerdead)
+                    {
+                        player.position = activeLevel.playerSpawnpoint;
+                        runState = RunState.playing;
+                    }
                 }
             }
 
+
+            if (runState == RunState.playing) FullUpdate(state);
+
+            overlayEffect.Update(state);
+
             base.Update( game_time);
+        }
+
+        protected void FullUpdate(StateData state)
+        {
+
+            // should this really be checked every frame?
+            if (activeLevel.getIsInStasis(player.getCollisionBox()))
+            {
+                timeData.time_status = TimeState.still;
+                timeData.time_moment = 0;
+                // todo add particles
+            }
+            else if (player.isRewinding)
+            {
+                if (timeData.time_moment > timeNegBound) timeData.time_status = TimeState.backward;
+            }
+            else
+            {
+                if (timeData.time_moment < timePosBound) timeData.time_status = TimeState.forward;
+            }
+
+            switch (timeData.time_status)
+            {
+                case TimeState.forward:
+                    timeData.time_moment += 1;
+                    break;
+                case TimeState.backward:
+                    timeData.time_moment -= 1;
+                    break;
+                default:
+                    break;
+
+            }
+
+            if (timeData.time_moment <= timeNegBound || timeData.time_moment >= timePosBound)
+            {
+                qued_player_death = true;
+            }
+
+            areaEffect.Update(state);
+
+            activeLevel.Update(state);
+
+            player.Update(state);
+
+            if (qued_level_load_name != "")
+            {
+                loadLevelAndConnections(qued_level_load_name);
+                qued_level_load_name = "";
+            }
+            else if (qued_player_death)
+            {
+                KillPlayer();
+            }
         }
 
         private static InputData ReadInputs(InputData previous_input_data)
@@ -465,10 +502,14 @@ namespace RewindGame
             return input_data;
         }
 
-        public void killPlayer()
+        public void KillPlayer()
         {
-            player.hidden = true;
-            //TODO
+            deathsStat += 1;
+            runState = RunState.playerdead;
+            stateTimer = playerDeathTime;
+
+            overlayEffect.TriggerDeath();
+            //TODO?
         }
 
         protected override void Draw(GameTime game_time)
@@ -482,7 +523,7 @@ namespace RewindGame
 
             StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition);
 
-            currentEffects.DrawBackground(state, spriteBatch);
+            areaEffect.DrawBackground(state, spriteBatch);
 
             activeLevel.DrawBackground(state, spriteBatch);
 
@@ -494,7 +535,9 @@ namespace RewindGame
 
             DrawAllConnectedLevelForegrounds(state, spriteBatch);
 
-            currentEffects.DrawForeground(state, spriteBatch);
+            areaEffect.DrawForeground(state, spriteBatch);
+
+            overlayEffect.Draw(state, spriteBatch);
 
             spriteBatch.End();
 

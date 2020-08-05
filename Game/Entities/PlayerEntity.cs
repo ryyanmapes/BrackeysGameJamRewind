@@ -18,8 +18,8 @@ namespace RewindGame.Game
         protected Animation walkAnim = new Animation("faux/fauxwalk", 2, 12, true);
         protected Animation fallAnim = new Animation("faux/fauxfallnormal", 1, 1, true);
         protected Animation wallAnim = new Animation("faux/wall", 1, 1, true);
-        protected Animation jumpRewindAnim = new Animation("faux/fauxjumprewind", 3, 6, true);
-        protected Animation fallRewindAnim = new Animation("faux/fauxfallrewind", 3, 6, true);
+        protected Animation jumpRewindAnim = new Animation("faux/fauxjumprewind", 4, 6, true);
+        protected Animation fallRewindAnim = new Animation("faux/fauxfallrewind", 4, 6, true);
 
         protected RewindGame parentGame;
 
@@ -40,6 +40,7 @@ namespace RewindGame.Game
 
         protected float jumpHeldTime = -1f;
         public bool isRewinding = false;
+        public bool temporaryAllowJump = false;
         //protected float noOppositeTravelTime = -1f;
         protected HangDirection noOppositeTravelDirection = HangDirection.None;
 
@@ -58,7 +59,7 @@ namespace RewindGame.Game
             animator.addAnimaton(fallRewindAnim, "rewind_fall",  parentGame.Content);
             animator.changeAnimation("idle");
 
-            collisionSize = new Vector2(54, 56);
+            collisionSize = new Vector2(56, 56);
             Initialize(parentGame.activeLevel, starting_pos);
         }
 
@@ -71,11 +72,16 @@ namespace RewindGame.Game
 
             // todo this is a mess
             InputData input_data = state.input_data;
+            if (temporaryAllowJump)
+            {
+                temporaryAllowJump = true;
+            }
 
-            if (input_data.is_jump_pressed && isGrounded())
+            if (input_data.is_jump_pressed && (isGrounded() || temporaryAllowJump))
             {
                 riddenObject = null;
                 velocity.Y += jumpLaunchVelocity;
+                velocity.Y = Math.Max(velocity.Y, jumpLaunchVelocity * 1.3f);
                 jumpHeldTime = 0f;
                 isRewinding = true;
             } else if(input_data.is_jump_held && jumpHeldTime != -1 && jumpHeldTime <= maxJumpHoldTime && velocity.Y != 0) {
@@ -152,9 +158,26 @@ namespace RewindGame.Game
 
             UpdateAnimations();
 
+            temporaryAllowJump = false;
+
             base.Update(state);
 
         }
+
+
+
+
+        public override void Die()
+        {
+            parentGame.qued_player_death = true;
+            //todo fancy animation stuff
+        }
+
+        public override void RefreshJump() 
+        {
+            temporaryAllowJump = true;        
+        }
+
 
         public void UpdateAnimations()
         {

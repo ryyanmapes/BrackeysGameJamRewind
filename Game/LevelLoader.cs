@@ -21,7 +21,12 @@ namespace RewindGame.Game
         left_transition,
         up_transition,
         down_transition,
-        freezetime
+        freezetime,
+        right_wallspike,
+        left_wallspike,
+        up_wallspike,
+        down_wallspike,
+        centerspike
     }
 
     public enum EntityType

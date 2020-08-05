@@ -11,7 +11,9 @@ namespace RewindGame.Game
     {
         harmless,
         normal,
-        death
+        death,
+        refresh_jump,
+        timestop
     }
     public enum SecondaryCollisionType
     {
@@ -37,18 +39,20 @@ namespace RewindGame.Game
 
     public class CollisionReturn
     {
-        public CollisionReturn(PrimaryCollisionType type_, CollisionObject collisionee_)
+        public CollisionReturn(PrimaryCollisionType type_, CollisionObject collisionee_, int priority_)
         {
             type = type_;
             collisionee = collisionee_;
+            priority = priority_;
         }
 
         public PrimaryCollisionType type = PrimaryCollisionType.harmless;
         public CollisionObject collisionee;
+        public int priority;
 
         public static CollisionReturn None()
         {
-            return new CollisionReturn(PrimaryCollisionType.harmless, null);
+            return new CollisionReturn(PrimaryCollisionType.harmless, null, 0);
         }
     }
 
@@ -85,7 +89,7 @@ namespace RewindGame.Game
                     case PrimaryCollisionType.normal:
                         if (onSecondCollision == SecondaryCollisionType.squish)
                         {
-                            //todo die
+                            Die();
                         }
                         else
                         {
@@ -95,13 +99,12 @@ namespace RewindGame.Game
                         }
                         return;
                     case PrimaryCollisionType.death:
-                        // todo die
-                        return;
-                    case PrimaryCollisionType.harmless:
-                        position = new_position;
-                        move -= sign;
+                        Die();
                         break;
                 }
+
+                position = new_position;
+                move -= sign;
             }
 
         }
@@ -128,7 +131,7 @@ namespace RewindGame.Game
                     case PrimaryCollisionType.normal:
                         if (onSecondCollision == SecondaryCollisionType.squish)
                         {
-                            //todo die
+                            Die();
                         }
                         else
                         {
@@ -137,16 +140,23 @@ namespace RewindGame.Game
                         }
                         return;
                     case PrimaryCollisionType.death:
-                        // todo die
-                        return;
-                    case PrimaryCollisionType.harmless:
-                        position = new_position;
-                        move -= sign;
+                        Die();
+                        break;
+                    case PrimaryCollisionType.refresh_jump:
+                        RefreshJump();
                         break;
                 }
+
+                position = new_position;
+                move -= sign;
             }
 
         }
+
+
+        public virtual void Die() { }
+
+        public virtual void RefreshJump() { }
 
 
         public bool isRiding(CollisionObject obj)
