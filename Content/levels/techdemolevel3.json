@@ -4,7 +4,7 @@
   "height": 238,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"exit_right": "", "exit_left": "techdemolevel2", "exit_up": "", "exit_down": ""},
+  "values": {"exit_right": "", "exit_left": "techdemolevel2 /B/", "exit_up": "", "exit_down": ""},
   "layers": [
     {
       "name": "collisionlayer",

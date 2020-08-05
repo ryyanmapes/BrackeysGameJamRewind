@@ -6,6 +6,7 @@ using RewindGame.Game.Effects;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace RewindGame
 {
@@ -95,6 +96,45 @@ namespace RewindGame
         limbo,
         cotton,
         eternal
+    }
+
+    public class LevelNameData
+    {
+        public LevelNameData(string fullname)
+        {
+            string[] arr = fullname.Split("/");
+
+            bool is_before_name = true;
+            foreach (string s in arr)
+            {
+                if (s.Length == 0) continue;
+                else if (s.Length > 1)
+                {
+                    name = s.Trim();
+                    is_before_name = false;
+                }
+                else
+                {
+                    if (is_before_name)
+                    {
+                        is_entrance_extreme = s == "R" | s == "B" ? true : false;
+                    }
+                    else
+                    {
+                        is_exit_extreme = s == "R" | s == "B" ? true : false;
+                    }
+                }
+            }
+            
+        }
+
+        public bool isUpward() { return is_entrance_extreme && !is_exit_extreme; }
+
+        public bool isDownward() { return !is_entrance_extreme && is_exit_extreme; }
+
+        public String name;
+        public bool is_entrance_extreme = false;
+        public bool is_exit_extreme = false;
     }
 
     public class RewindGame : Microsoft.Xna.Framework.Game
@@ -197,7 +237,8 @@ namespace RewindGame
 
         public void loadLevelAndConnections(String name)
         {
-            Level center_level = getConnectedOrLoadLevel(name, Vector2.Zero);
+            var name_data = new LevelNameData(name);
+            Level center_level = getConnectedOrLoadLevel(name_data.name, Vector2.Zero);
             activeLevelOffset = center_level.levelOrgin;
 
 
@@ -207,9 +248,10 @@ namespace RewindGame
             {
                 if (level_name != "")
                 {
-                    // todo level tag weirdness
-                    Vector2 offset = offsetLevelOrgin(center_level, activeLevelOffset, i);
-                    new_connected_levels[i] = getConnectedOrLoadLevel(level_name, offset);
+                    var real_name_data = new LevelNameData(level_name);
+                    Vector2 offset = offsetLevelOrgin(center_level, activeLevelOffset, real_name_data, i);
+
+                    new_connected_levels[i] = getConnectedOrLoadLevel(real_name_data.name, offset);
                 }
                 i += 1;
             }
@@ -450,23 +492,24 @@ namespace RewindGame
         // 2: left
         // 3: up
         // 4: down
-        public static Vector2 offsetLevelOrgin(Level level, Vector2 orgin, int index)
+        public static Vector2 offsetLevelOrgin(Level level, Vector2 orgin, LevelNameData name_data, int index)
         {
-            switch(index)
+            bool is_horizontal = index <= 1;
+            bool is_neg = index % 2 == 1;
+
+            if (is_horizontal)
             {
-                case 0:
-                    orgin.X += LEVEL_SIZE_X * level.screensHorizontal;
-                    break;
-                case 1:
-                    orgin.X -= LEVEL_SIZE_X * level.screensHorizontal;
-                    break;
-                case 2:
-                    orgin.Y -= LEVEL_SIZE_Y * level.screensVertical;
-                    break;
-                case 3:
-                    orgin.Y += LEVEL_SIZE_Y * level.screensVertical;
-                    break;
+                orgin.X += LEVEL_SIZE_X * level.screensHorizontal * (is_neg ? -1 : 1);
+                if (name_data.isUpward()) orgin.Y += (LEVEL_SIZE_Y * (level.screensVertical));
+                if (name_data.isDownward()) orgin.Y -= (LEVEL_SIZE_Y * (level.screensVertical-1));
             }
+            else
+            {
+                orgin.Y += LEVEL_SIZE_Y * level.screensVertical * (is_neg ? -1 : 1);
+                if (name_data.isUpward()) orgin.X += (LEVEL_SIZE_X * level.screensHorizontal);
+                if (name_data.isDownward()) orgin.X -= (LEVEL_SIZE_X * (level.screensHorizontal-1));
+            }
+            
             return orgin;
         }
     
