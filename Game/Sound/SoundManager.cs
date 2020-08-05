@@ -19,11 +19,11 @@ namespace RewindGame.Game.Sound
             //does anything else need to be passed in initially?
 
             //Initialization stuff?
-            FMODManager.Init(FMODMode.CoreAndStudio, Content.Load<>);
+            //FMODManager.Init(FMODMode.CoreAndStudio, Content.Load<>);
 
-            var sound = CoreSystem.LoadStreamedSound("loop1.wav");
-            var channel = sound.Play();
-            channel.Looping = true;
+            //var sound = CoreSystem.LoadStreamedSound("loop1.wav");
+            //var channel = sound.Play();
+            //channel.Looping = true;
         }
 
 

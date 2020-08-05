@@ -36,12 +36,12 @@ namespace RewindGame.Game
         protected float wallJumpLaunchVelocityY = -400f;
         protected float wallJumpLaunchVelocityX = 300f;
         protected float wallJumpRemainingHoldTime = 0.05f;
-        //protected float maxNoOppositeTravelTime = 0.4f;
+        protected float maxNoOppositeTravelTime = 0.4f;
 
         protected float jumpHeldTime = -1f;
         public bool isRewinding = false;
         public bool temporaryAllowJump = false;
-        //protected float noOppositeTravelTime = -1f;
+        protected float noOppositeTravelTime = -1f;
         protected HangDirection noOppositeTravelDirection = HangDirection.None;
 
         //todo stuff make this correct
@@ -97,7 +97,8 @@ namespace RewindGame.Game
 
             if (isGrounded())
             {
-                noOppositeTravelDirection = HangDirection.None;
+                //noOppositeTravelDirection = HangDirection.None;
+                noOppositeTravelTime = -1f;
                 isRewinding = false;
             }
 
@@ -122,14 +123,14 @@ namespace RewindGame.Game
                     jumpHeldTime = maxJumpHoldTime - wallJumpRemainingHoldTime;
 
                     noOppositeTravelDirection = hangDirection;
-                    //noOppositeTravelTime = 0;
+                    noOppositeTravelTime = 0;
                 }
 
             }
 
             bool can_move = true;
 
-            /*
+            
             if (noOppositeTravelTime != -1)
             {
                 noOppositeTravelTime += elapsed;
@@ -142,11 +143,11 @@ namespace RewindGame.Game
                 else if (noOppositeTravelTime != -1 && input_data.horizontal_axis_value > 0 &&
                     (noOppositeTravelDirection == HangDirection.Right || noOppositeTravelDirection == HangDirection.None))
                     can_move = false;
-            }*/
+            }
 
-            if ((noOppositeTravelDirection == HangDirection.Left && input_data.horizontal_axis_value < 0)
-                || (noOppositeTravelDirection == HangDirection.Right && input_data.horizontal_axis_value > 0)) 
-                can_move = false;
+            //if ((noOppositeTravelDirection == HangDirection.Left && input_data.horizontal_axis_value < 0)
+            //    || (noOppositeTravelDirection == HangDirection.Right && input_data.horizontal_axis_value > 0)) 
+            //    can_move = false;
 
             if (Math.Abs(input_data.horizontal_axis_value) > 0.4f && Math.Abs(velocity.X) < playerMaxMove && can_move)
             {
