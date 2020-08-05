@@ -7,6 +7,7 @@ using System.Text;
 
 namespace RewindGame.Game
 {
+
     public class PlayerEntity : PhysicsEntity
     {
         public static int playerAnimScale = 1;
@@ -24,10 +25,13 @@ namespace RewindGame.Game
         public bool facingRight = true;
 
         protected float jumpInitialVelocity = -470f;
-        protected float moveVelocity = 2500f;
+        protected float moveVelocity = 2700f;
         protected float heldJumpVelocity = -1500f;
         protected float heldJumpVelocityModifier = 0f;
         protected float maxJumpHoldTime = 0.1f;
+        protected float playerMaxMove = 350f;
+        protected float wallHangMaxY = 300f;
+        protected float wallHangStickX = 5f;
 
         protected float jumpHeldTime = -1f;
         public bool isRewinding = false;
@@ -48,7 +52,6 @@ namespace RewindGame.Game
 
             collisionSize = new Vector2(56, 56);
             Initialize(parentGame.activeLevel, starting_pos);
-            maxVelocityMagnitudeX = 300f;
         }
 
 
@@ -82,13 +85,19 @@ namespace RewindGame.Game
 
             if (isGrounded()) isRewinding = false;
 
-            if (Math.Abs(input_data.horizontal_axis_value) > 0.4f)
+            if (Math.Abs(input_data.horizontal_axis_value) > 0.4f && Math.Abs(velocity.X) < playerMaxMove)
             {
                 velocity.X += input_data.horizontal_axis_value * moveVelocity * elapsed;
             }
 
             if (velocity.X > 0) facingRight = true;
             else if (velocity.X < 0) facingRight = false;
+
+            //if (hangDirection != HangDirection.None)
+            //{
+                //velocity.Y = Math.Min(velocity.Y, minVelocityY);
+                //velocity.X = maxMagnitude(velocity.X, )
+            //}
 
             base.Update(state);
 

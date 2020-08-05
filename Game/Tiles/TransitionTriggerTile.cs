@@ -30,6 +30,12 @@ namespace RewindGame.Game.Tiles
                 case MoveDirection.left:
                     collisionOffset.X -= Level.TILE_WORLD_SIZE;
                     break;
+                case MoveDirection.down:
+                    collisionOffset.Y += Level.TILE_WORLD_SIZE;
+                    break;
+                case MoveDirection.up:
+                    collisionOffset.Y -= Level.TILE_WORLD_SIZE;
+                    break;
             }
 
             collisionType = PrimaryCollisionType.harmless;

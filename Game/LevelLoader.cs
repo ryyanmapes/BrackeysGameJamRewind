@@ -81,16 +81,21 @@ namespace RewindGame.Game
         {
             //Maybe use later?
         }
-        public static void LoadLevel(String level_name, Level level)
-        {
-            level.name = level_name;
 
+        public static RawLevel GetLevelData(String level_name)
+        {
             string level_json;
-            using (StreamReader sr = new StreamReader("Content/levels/"+level_name+".json"))
+            using (StreamReader sr = new StreamReader("Content/levels/" + level_name + ".json"))
             {
-                 level_json = sr.ReadToEnd();
+                level_json = sr.ReadToEnd();
             }
             var raw_level = JsonConvert.DeserializeObject<RawLevel>(level_json);
+            return raw_level;
+        }
+
+        public static void LoadLevel(RawLevel raw_level, String level_name, Level level)
+        {
+            level.name = level_name;
 
             level.screensHorizontal = (float)raw_level.layers[0].gridCellsX / (float)RewindGame.LEVEL_GRID_SIZE_X;
             level.screensVertical = (float)raw_level.layers[0].gridCellsY / (float)RewindGame.LEVEL_GRID_SIZE_Y;
@@ -202,6 +207,10 @@ namespace RewindGame.Game
                     return TileType.right_transition;
                 case 70:
                     return TileType.left_transition;
+                case 71:
+                    return TileType.up_transition;
+                case 72:
+                    return TileType.down_transition;
                 default:
                     return TileType.solid;
             }

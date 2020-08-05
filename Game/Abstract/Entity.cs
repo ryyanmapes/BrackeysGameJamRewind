@@ -28,6 +28,13 @@ namespace RewindGame.Game
         right
     }
 
+    public enum HangDirection
+    {
+        None,
+        Left,
+        Right
+    }
+
     public class CollisionReturn
     {
         public CollisionReturn(PrimaryCollisionType type_, CollisionObject collisionee_)
@@ -51,6 +58,8 @@ namespace RewindGame.Game
 
         protected Vector2 velocity;
         protected CollisionObject riddenObject;
+        protected CollisionObject hungObject;
+        protected HangDirection hangDirection = HangDirection.None;
 
         // Code inspired by https://medium.com/@MattThorson/celeste-and-towerfall-physics-d24bd2ae0fc5
         public void moveX(float amount, SecondaryCollisionType onSecondCollision)
@@ -64,6 +73,9 @@ namespace RewindGame.Game
 
             while (move != 0)
             {
+                hungObject = null;
+                hangDirection = HangDirection.None;
+
                 Vector2 new_position = position + new Vector2(sign, 0);
 
                 CollisionReturn collision = localLevel.getSolidCollisionAt(this.getCollisionBoxAt(new_position), dir);
@@ -78,7 +90,8 @@ namespace RewindGame.Game
                         else
                         {
                             velocity.X = 0;
-                            // do collision- TODO walljumping here
+                            hungObject = collision.collisionee;
+                            hangDirection = sign > 0 ? HangDirection.Right : HangDirection.Left;
                         }
                         return;
                     case PrimaryCollisionType.death:
@@ -104,8 +117,8 @@ namespace RewindGame.Game
 
             while (move != 0)
             {
-
                 riddenObject = null;
+
                 Vector2 new_position = position + new Vector2(0, sign);
 
                 CollisionReturn collision = localLevel.getSolidCollisionAt(this.getCollisionBoxAt(new_position), dir);

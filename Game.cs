@@ -128,9 +128,9 @@ namespace RewindGame
             
         }
 
-        public bool isUpward() { return is_entrance_extreme && !is_exit_extreme; }
+        public bool isUpward() { return !is_entrance_extreme && is_exit_extreme; }
 
-        public bool isDownward() { return !is_entrance_extreme && is_exit_extreme; }
+        public bool isDownward() { return is_entrance_extreme && !is_exit_extreme; }
 
         public String name;
         public bool is_entrance_extreme = false;
@@ -237,8 +237,7 @@ namespace RewindGame
 
         public void loadLevelAndConnections(String name)
         {
-            var name_data = new LevelNameData(name);
-            Level center_level = getConnectedOrLoadLevel(name_data.name, Vector2.Zero);
+            Level center_level = getConnectedOrLoadLevel(name, activeLevel, -1);
             activeLevelOffset = center_level.levelOrgin;
 
 
@@ -248,10 +247,7 @@ namespace RewindGame
             {
                 if (level_name != "")
                 {
-                    var real_name_data = new LevelNameData(level_name);
-                    Vector2 offset = offsetLevelOrgin(center_level, activeLevelOffset, real_name_data, i);
-
-                    new_connected_levels[i] = getConnectedOrLoadLevel(real_name_data.name, offset);
+                    new_connected_levels[i] = getConnectedOrLoadLevel(level_name, center_level, i);
                 }
                 i += 1;
             }
@@ -272,22 +268,19 @@ namespace RewindGame
             activeLevel = center_level;
             center_level.isActiveScene = true;
 
-            if (player != null)
-            {
-                //player.position = center_level.playerSpawnpoint;
-            }
-
         }
 
-        public Level getConnectedOrLoadLevel(String name, Vector2 offset)
+        public Level getConnectedOrLoadLevel(String name, Level current_level, int index)
         {
             Level level = null;
+
+            var name_data = new LevelNameData(name);
 
             foreach (Level lvl in connectedLevels)
             {
                 if (lvl != null)
                 {
-                    if (lvl.name == name)
+                    if (lvl.name == name_data.name)
                     {
                         level = lvl;
                         break;
@@ -295,10 +288,74 @@ namespace RewindGame
                 }
             }
 
+            if (activeLevel != null && activeLevel.name == name_data.name)
+            {
+                level = activeLevel;
+            }
+
+
+
+            // 1: right
+            // 2: left
+            // 3: up
+            // 4: down
             if (level == null)
             {
-                level = new Level(Services, offset, this);
-                LevelLoader.LoadLevel(name, level);
+
+                var raw_level = LevelLoader.GetLevelData(name_data.name);
+
+
+                Vector2 orgin = new Vector2(activeLevelOffset.X, activeLevelOffset.Y);
+
+                if (current_level != null && index != -1)
+                {
+
+                    bool is_horizontal = index <= 1;
+                    bool is_forwards = index == 0 || index == 3;
+
+                    float new_horiz = (float)raw_level.layers[0].gridCellsX / (float)RewindGame.LEVEL_GRID_SIZE_X;
+                    float new_vert = (float)raw_level.layers[0].gridCellsY / (float)RewindGame.LEVEL_GRID_SIZE_Y;
+
+                    if (is_horizontal)
+                    {
+
+                        if (is_forwards) 
+                        {
+                            orgin.X += LEVEL_SIZE_X * current_level.screensHorizontal;
+                        }
+                        else
+                        {
+                            orgin.X -= LEVEL_SIZE_X * new_horiz;
+                        }
+                        
+                        if (name_data.isUpward())
+                        {
+                            orgin.Y -= (LEVEL_SIZE_Y * (new_vert - 1));
+                        }
+                        else if (name_data.isDownward()) orgin.Y += (LEVEL_SIZE_Y * (current_level.screensVertical - 1));
+                    }
+                    else
+                    {
+                        if (is_forwards)
+                        {
+                            orgin.Y += LEVEL_SIZE_Y * current_level.screensVertical;
+                        }
+                        else
+                        {
+                            orgin.Y -= LEVEL_SIZE_Y * new_vert;
+                        }
+
+                        if (name_data.isUpward())
+                        {
+                            orgin.X -= (LEVEL_SIZE_X * (new_horiz - 1));
+                        }
+                        else if (name_data.isDownward()) orgin.X += (LEVEL_SIZE_X * (current_level.screensHorizontal - 1));
+                    }
+
+                }
+
+                level = new Level(Services, orgin, this);
+                LevelLoader.LoadLevel(raw_level, name_data.name, level);
             }
 
             return level;
@@ -316,6 +373,9 @@ namespace RewindGame
 
             if (inputData.is_exit_pressed)
                 Exit();
+
+            if (inputData.is_restart_pressed)
+                player.position = activeLevel.playerSpawnpoint;
 
             if (runState == RunState.playing) { 
 
@@ -488,30 +548,6 @@ namespace RewindGame
             return moment % 3 == 0;
         }
 
-        // 1: right
-        // 2: left
-        // 3: up
-        // 4: down
-        public static Vector2 offsetLevelOrgin(Level level, Vector2 orgin, LevelNameData name_data, int index)
-        {
-            bool is_horizontal = index <= 1;
-            bool is_neg = index % 2 == 1;
-
-            if (is_horizontal)
-            {
-                orgin.X += LEVEL_SIZE_X * level.screensHorizontal * (is_neg ? -1 : 1);
-                if (name_data.isUpward()) orgin.Y += (LEVEL_SIZE_Y * (level.screensVertical));
-                if (name_data.isDownward()) orgin.Y -= (LEVEL_SIZE_Y * (level.screensVertical-1));
-            }
-            else
-            {
-                orgin.Y += LEVEL_SIZE_Y * level.screensVertical * (is_neg ? -1 : 1);
-                if (name_data.isUpward()) orgin.X += (LEVEL_SIZE_X * level.screensHorizontal);
-                if (name_data.isDownward()) orgin.X -= (LEVEL_SIZE_X * (level.screensHorizontal-1));
-            }
-            
-            return orgin;
-        }
     
         
     
