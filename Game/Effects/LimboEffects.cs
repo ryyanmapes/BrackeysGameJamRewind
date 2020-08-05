@@ -33,7 +33,7 @@ namespace RewindGame.Game.Effects
         {
             // remember to use state.levelcenter and state.camera_offset
             // state.levelcenter- the center of the current level, where you should be drawing the background
-            // state.camera_offset- the offset of the camera from the levelcenter (for levels larger than one screen)
+            // state.camera_position- the offset of the camera from the levelcenter (for levels larger than one screen)
             // background
         }
 
