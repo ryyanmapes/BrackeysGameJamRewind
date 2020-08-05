@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RewindGame.Game;
 using RewindGame.Game.Effects;
+using RewindGame.Game.Sound;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -173,6 +174,8 @@ namespace RewindGame
 
         public ILevelEffect areaEffect;
         public OverlayEffects overlayEffect;
+        public SoundManager soundManager;
+        public TimelineBarGUI timelineGUI;
 
         public String qued_level_load_name = "";
         public bool qued_player_death = false;
@@ -238,6 +241,10 @@ namespace RewindGame
 
             areaEffect = new LimboEffects(this, Content);
             overlayEffect = new OverlayEffects(this, Content);
+            soundManager = new SoundManager(this, Content);
+            timelineGUI = new TimelineBarGUI(this, Content);
+
+            soundManager.BeginLimboMusic1();
         }
 
 
@@ -404,6 +411,8 @@ namespace RewindGame
             if (runState == RunState.playing) FullUpdate(state);
 
             overlayEffect.Update(state);
+            soundManager.Update(state);
+            timelineGUI.Update(state);
 
             base.Update( game_time);
         }
@@ -538,6 +547,8 @@ namespace RewindGame
             areaEffect.DrawForeground(state, spriteBatch);
 
             overlayEffect.Draw(state, spriteBatch);
+
+            timelineGUI.Draw(state, spriteBatch);
 
             spriteBatch.End();
 
