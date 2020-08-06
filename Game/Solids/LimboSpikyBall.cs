@@ -48,7 +48,7 @@ namespace RewindGame.Game.Solids
                 current_rotation_degrees += speed * .1f;
                 current_rotation_radians = (float)(((current_rotation_degrees + 90) * Math.PI / 180));
                 // currentPosition += new Vector2((int)(Math.Cos(current_rotation_degrees)), (int)(Math.Sin(current_rotation_degrees)));
-                position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees)));
+                position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees - 90)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees - 90)));
                 //Move(new Vector2((int)(radius * Math.Cos(current_rotation_radians)), (int)(radius * Math.Sin(current_rotation_radians))));
             }
             else if (state.getTimeDependentDeltaTime() < 0)
@@ -56,7 +56,7 @@ namespace RewindGame.Game.Solids
                 current_rotation_degrees -= speed * .1f;
                 current_rotation_radians = (float)(((current_rotation_degrees + 90) * Math.PI / 180));
                 //currentPosition += new Vector2((int)(radius * Math.Cos(current_rotation_degrees)), (int)(radius * Math.Sin(current_rotation_degrees)));
-                position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees)));
+                position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees - 90)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees - 90)));
                 //Move(new Vector2((int)(radius * -Math.Cos(current_rotation_radians)), (int)(radius * -Math.Sin(current_rotation_radians))));
             }
             if (current_rotation_degrees == 0)
@@ -67,9 +67,9 @@ namespace RewindGame.Game.Solids
 
         public override void Reset() 
         {
-            position = startingPosition;
             currentPosition = startingPosition;
             current_rotation_degrees = 0;
+            position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees)));
             base.Reset();
         }
 
