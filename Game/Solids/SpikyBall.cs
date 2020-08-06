@@ -13,6 +13,8 @@ namespace RewindGame.Game.Solids
         public float radius;
         public float speed;
         public int starting_rotation_degrees;
+        private float current_rotation_degrees;
+        private float current_rotation_radians;
         public static SpikyBall Make(Level level, Vector2 starting_pos, float radius, float speed, int starting_rotation)
         {
             var tile = new SpikyBall();
@@ -24,6 +26,7 @@ namespace RewindGame.Game.Solids
         {
             radius = radius_;
             speed = speed_;
+            current_rotation_degrees = startingrotation;
 
             texturePath = "limbo/chainball";
             collisionSize = new Vector2(28, 28);
@@ -31,17 +34,32 @@ namespace RewindGame.Game.Solids
             starting_rotation_degrees = startingrotation;
             base.Initialize(level, starting_pos);
             Reset();
+
         }
 
         public override void Update(StateData state)
         {
-            // change rotation by speed*elapsed and position
-            // position, state.getDeltaTime()
+            if (state.getSignedDeltaTime() > 0)
+            {
+                current_rotation_degrees += speed;
+                current_rotation_radians = (float)((current_rotation_degrees * Math.PI / 180));
+                Move(new Vector2((int)(radius * Math.Cos(current_rotation_radians)), (int)(radius * Math.Sin(current_rotation_radians))));
+            }
+            else if (state.getSignedDeltaTime() < 0)
+            {
+                current_rotation_degrees -= speed;
+                current_rotation_radians = (float)((current_rotation_degrees * Math.PI / 180));
+                Move(new Vector2((int)(radius * -Math.Cos(current_rotation_radians)), (int)(radius * -Math.Sin(current_rotation_radians))));
+            }
+            if (current_rotation_degrees == 0)
+            {
+                current_rotation_degrees = 360;
+            }
         }
 
         public override void Reset() 
-        { 
-            // set to initial rotation
+        {
+          // current_rotation_degrees = starting_rotation_degrees;
         }
 
     }
