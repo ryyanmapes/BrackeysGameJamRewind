@@ -265,6 +265,18 @@
 /processorParam:TextureFormat=Color
 /build:effects/raindrop1.png
 
+#begin faux/death.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:faux/death.png
+
 #begin faux/fauxfallnormal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -337,6 +349,18 @@
 /processorParam:TextureFormat=Color
 /build:faux/wall.png
 
+#begin gui/barindicator.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:gui/barindicator.png
+
 #begin gui/barlimbo0.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -373,14 +397,8 @@
 /processorParam:TextureFormat=Color
 /build:gui/barlimbo2.png
 
-#begin levels/techdemolevel.json
-/copy:levels/techdemolevel.json
-
-#begin levels/techdemolevel2.json
-/copy:levels/techdemolevel2.json
-
-#begin levels/techdemolevel3.json
-/copy:levels/techdemolevel3.json
+#begin levels/test.json
+/copy:levels/test.json
 
 #begin Music/loop1.wav
 /copy:Music/loop1.wav
