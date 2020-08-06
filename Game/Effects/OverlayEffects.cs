@@ -14,6 +14,10 @@ namespace RewindGame.Game.Effects
         public ContentManager Content;
         public RewindGame parentGame;
 
+        private Texture2D deathSquare;
+        private float fadeValue = 0f;
+        private bool showCube = false;
+
         public OverlayEffects(RewindGame parent_game, ContentManager content) 
         { 
             Content = content;
@@ -22,6 +26,7 @@ namespace RewindGame.Game.Effects
             // see GameObject
 
             //texturename = Content.Load<Texture2D>( texturePath );
+            deathSquare = Content.Load<Texture2D>("debug/square");
         }
 
 
@@ -38,12 +43,33 @@ namespace RewindGame.Game.Effects
 
         public void Update(StateData state)
         {
-
+            if (parentGame.runState == RunState.playerdead)
+            {
+                if (parentGame.stateTimer <= 0.25)
+                {
+                    fadeValue += .1f;
+                    showCube = true;
+                }
+            }
+            else if (showCube == true)
+            {
+                if(fadeValue > 0.00f)
+                {
+                    fadeValue -= .1f;
+                }
+                else if(fadeValue == 0.00f)
+                {
+                    showCube = false;
+                }
+            }
         }
 
         public void Draw(StateData state, SpriteBatch sprite_batch)
         {
-
+            if (showCube)
+            {
+                sprite_batch.Draw(deathSquare, Vector2.Zero, new Rectangle(0, 0, (int)RewindGame.LEVEL_SIZE_X, (int)RewindGame.LEVEL_SIZE_Y), new Color(Color.White, fadeValue), 0f, Vector2.Zero, new Vector2(RewindGame.LEVEL_SIZE_X, RewindGame.LEVEL_SIZE_Y), SpriteEffects.None, 0f);
+            }
         }
 
         public void Dispose()
