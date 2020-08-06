@@ -48,7 +48,8 @@ namespace RewindGame.Game.Effects
             rainfall -= (int)(1500 * state.getSignedDeltaTime());
             if (state.time_data.time_moment < parentGame.timeDangerNegBound || state.time_data.time_moment > parentGame.timeDangerPosBound)
             {
-                rainfall -= (int)(500 * state.getSignedDeltaTime());
+                //TODO make the speed up slowley speed up peaking at highway to the dangerzone
+                rainfall -= (int)(1000 * state.getSignedDeltaTime());
             }
                 if (rainfall >= raindrop0.Height)
             {
