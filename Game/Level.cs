@@ -80,8 +80,8 @@ namespace RewindGame.Game
 
             //sceneSolids.Add(new DebugPlatform(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2)));
             //sceneEntities.Add(new DebugTimePhysicsEntity(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2 - 200, parentGame.graphics.PreferredBackBufferHeight / 2)));
-            sceneSolids.Add(SpikyBall.Make(this, new Vector2(RewindGame.LEVEL_SIZE_X/2, RewindGame.LEVEL_SIZE_Y/2), 5, 1, 0, true));
-            sceneSolids.Add(SpikyBall.Make(this, new Vector2(RewindGame.LEVEL_SIZE_X/4, RewindGame.LEVEL_SIZE_Y/4), 5, 1, 0, false));
+            //sceneSolids.Add(SpikyBall.Make(this, new Vector2(RewindGame.LEVEL_SIZE_X/2, RewindGame.LEVEL_SIZE_Y/2), 5, 1, 0, true));
+            //sceneSolids.Add(SpikyBall.Make(this, new Vector2(RewindGame.LEVEL_SIZE_X/4, RewindGame.LEVEL_SIZE_Y/4), 5, 1, 0, false));
 
         }
 
