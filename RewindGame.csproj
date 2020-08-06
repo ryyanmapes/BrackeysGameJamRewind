@@ -36,13 +36,24 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\debug\" />
-    <Folder Include="Content\Music\" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="Game\x64\fmod.dll">
+    <None Update="Content\music\Master Bank.bank">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\music\Master Bank.strings.bank">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="x64\fmod.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Game\x86\fmod.dll">
+    <None Update="x64\fmodstudio.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="x86\fmod.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="x86\fmodstudio.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

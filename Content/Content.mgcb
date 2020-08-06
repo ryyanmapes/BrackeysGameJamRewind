@@ -121,6 +121,12 @@
 #begin Music/loop1.wav
 /copy:Music/loop1.wav
 
+#begin Music/Master Bank.bank
+/copy:Music/Master Bank.bank
+
+#begin Music/Master Bank.strings.bank
+/copy:Music/Master Bank.strings.bank
+
 #begin tilesets/collisionlayer.png
 /importer:TextureImporter
 /processor:TextureProcessor
