@@ -20,6 +20,7 @@ namespace RewindGame.Game.Tiles
         public override void Initialize(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
         {
             collisionType = PrimaryCollisionType.timestop;
+            collisionPriority = 1;
             base.Initialize(level, starting_pos, tile_sprite_);
         }
     }
