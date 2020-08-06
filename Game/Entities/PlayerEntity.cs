@@ -21,6 +21,7 @@ namespace RewindGame.Game
         protected Animation wallAnim = new Animation("faux/wall", 1, 1, true);
         protected Animation jumpRewindAnim = new Animation("faux/fauxjumprewind", 4, 6, true);
         protected Animation fallRewindAnim = new Animation("faux/fauxfallrewind", 4, 6, true);
+        protected Animation deathAnim = new Animation("faux/death", 2, 9, true);
 
         protected RewindGame parentGame;
 
@@ -58,6 +59,7 @@ namespace RewindGame.Game
             animator.addAnimaton(wallAnim, "wallhang", parentGame.Content);
             animator.addAnimaton(jumpRewindAnim, "rewind_jump",  parentGame.Content);
             animator.addAnimaton(fallRewindAnim, "rewind_fall",  parentGame.Content);
+            animator.addAnimaton(fallRewindAnim, "death", parentGame.Content);
             animator.changeAnimation("idle");
 
             collisionSize = new Vector2(56, 56);
@@ -125,6 +127,7 @@ namespace RewindGame.Game
 
                     noOppositeTravelDirection = hangDirection;
                     noOppositeTravelTime = 0;
+                    isRewinding = true;
                 }
 
             }
@@ -172,7 +175,7 @@ namespace RewindGame.Game
         public override void Die()
         {
             parentGame.qued_player_death = true;
-            //todo fancy animation stuff
+            animator.changeAnimation("death");
         }
 
         public override void RefreshJump() 
@@ -183,6 +186,11 @@ namespace RewindGame.Game
 
         public void UpdateAnimations()
         {
+            if (parentGame.qued_player_death) { 
+                animator.changeAnimation("death");
+                return;
+            }
+
             if (isGrounded())
             {
                 if (Math.Abs(velocity.X) > 100)

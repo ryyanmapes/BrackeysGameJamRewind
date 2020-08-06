@@ -54,6 +54,12 @@ namespace RewindGame
 
         public int time_moment;
         public TimeState time_status;
+
+        public void Reset()
+        {
+            time_moment = 0;
+            time_status = TimeState.forward;
+        }
     }
 
     public class StateData
@@ -149,12 +155,12 @@ namespace RewindGame
         public const float LEVEL_SIZE_X = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_X;
         public const float LEVEL_SIZE_Y = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_Y;
 
-        public float playerDeathTime = 0.5f;
+        public const float playerDeathTime = 0.5f;
         // will change
         public int timeNegBound = -1000000;
         public int timePosBound = 1000000;
 
-        private Vector2 baseScreenSize = new Vector2(1600, 900);
+        public Vector2 baseScreenSize = new Vector2(1600, 900);
 
         public GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -232,9 +238,7 @@ namespace RewindGame
             collisionSheetTexture = Content.Load<Texture2D>("tilesets/collision");
 
 
-
-            // the offset here is for when we have many levels
-            loadLevelAndConnections("techdemolevel");
+            loadLevelAndConnections("test");
 
             player = new PlayerEntity(this, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 - 300));
             player.position = activeLevel.playerSpawnpoint;
@@ -244,7 +248,8 @@ namespace RewindGame
             soundManager = new SoundManager(this, Content);
             timelineGUI = new TimelineBarGUI(this, Content);
 
-            soundManager.BeginLimboMusic1();
+            DoTrigger("limbo_begin");
+            //DoTrigger("limbo_fourth");
         }
 
 
@@ -403,6 +408,8 @@ namespace RewindGame
                     {
                         player.position = activeLevel.playerSpawnpoint;
                         runState = RunState.playing;
+                        timeData.Reset();
+                        stateTimer = -1;
                     }
                 }
             }
@@ -468,6 +475,7 @@ namespace RewindGame
             else if (qued_player_death)
             {
                 KillPlayer();
+                qued_player_death = false;
             }
         }
 
@@ -516,6 +524,7 @@ namespace RewindGame
             deathsStat += 1;
             runState = RunState.playerdead;
             stateTimer = playerDeathTime;
+            timeData.time_status = TimeState.still;
 
             overlayEffect.TriggerDeath();
             //TODO?
@@ -594,6 +603,38 @@ namespace RewindGame
             return new Vector2(Math.Clamp(player.position.X, edge_left, edge_right), Math.Clamp(player.position.Y, edge_down, edge_up));
         }
 
+
+        public void DoTrigger(string trigger)
+        {
+            if (trigger == "limbo_begin")
+            {
+                // do title card?
+                soundManager.BeginLimboMusic1();
+            }
+            
+            if (trigger == "limbo_begin" || trigger == "limbo_full")
+            {
+                timelineGUI.SetBar(timelineGUI.limboBar1);
+                timelineGUI.currentBarSize = 105*4;
+                timeNegBound = -300;
+                timePosBound = 300;
+
+            }
+            else if (trigger == "limbo_half")
+            {
+                timelineGUI.SetBar(timelineGUI.limboBarHalf);
+                timelineGUI.currentBarSize = 102 * 2;
+                timeNegBound = -150;
+                timePosBound = 150;
+            }
+            else if (trigger == "limbo_fourth")
+            {
+                timelineGUI.SetBar(timelineGUI.limboBarFourth);
+                timelineGUI.currentBarSize = 100;
+                timeNegBound = -75;
+                timePosBound = 75;
+            }
+        }
 
 
         // says if the object can save it's state in this moment-

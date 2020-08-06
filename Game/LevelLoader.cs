@@ -137,6 +137,7 @@ namespace RewindGame.Game
         public static void LoadTileLayer(RawLayer tile_layer, Level level)
         {
             bool is_collision_layer = false;
+            bool is_technical_layer = false;
             bool is_large_tile = false;
             TileSheet sheet_type = TileSheet.none;
             int sorting_layer = 0;
@@ -145,8 +146,8 @@ namespace RewindGame.Game
             switch (tile_layer.name)
             {
                 case "technical":
-                    is_collision_layer = true;
                     sheet_type = TileSheet.none;
+                    is_technical_layer = true;
                     break;
                 case "collisionlayer":
                     sheet_type = TileSheet.collision;
@@ -176,7 +177,11 @@ namespace RewindGame.Game
 
                     if (is_collision_layer)
                     {
-                        level.PlaceTile(getTileTypeFromID(tile), x_pos, y_pos, new TileSprite(sheet_type, tile, sorting_layer));
+                        level.PlaceTile(getCollisionTileTypeFromID(tile), x_pos, y_pos, new TileSprite(sheet_type, tile, sorting_layer));
+                    }
+                    else if (is_technical_layer)
+                    {
+                        level.PlaceTile(getTechnicalTileTypeFromID(tile), x_pos, y_pos, new TileSprite(sheet_type, tile, sorting_layer));
                     }
                     else
                     {
@@ -194,32 +199,59 @@ namespace RewindGame.Game
             }
         }
 
-        public static TileType getTileTypeFromID(int tile)
+        public static TileType getCollisionTileTypeFromID(int tile)
+        {
+            if (tile >= 60 && tile <= 68) 
+                return TileType.freezetime;
+            switch (tile)
+            {
+                case 40:
+                case 41:
+                    return TileType.centerspike;
+                case 42:
+                    return TileType.down_wallspike;
+                case 43:
+                    return TileType.right_wallspike;
+                case 44:
+                    return TileType.left_wallspike;
+                case 45:
+                    return TileType.up_wallspike;
+                case 50:
+                    return TileType.topleft_oneway;
+                case 51:
+                case 52:
+                case 53:
+                    return TileType.platform;
+                case 54:
+                    return TileType.topright_oneway;
+                case 70:
+                    return TileType.left_oneway;
+                case 74:
+                    return TileType.right_oneway;
+                case 69:
+                    return TileType.solid;
+                default:
+                    return TileType.intangible;
+            }
+        }
+
+        public static TileType getTechnicalTileTypeFromID(int tile)
         {
             switch (tile)
             {
-                case 49:
-                    return TileType.topright_oneway;
-                case 48:
-                    return TileType.platform;
-                case 47:
-                    return TileType.topleft_oneway;
-                case 51:
-                    return TileType.left_oneway;
-                case 50:
-                    return TileType.right_oneway;
-                case 69:
+                case 46:
                     return TileType.right_transition;
-                case 70:
+                case 47:
                     return TileType.left_transition;
-                case 71:
+                case 48:
                     return TileType.up_transition;
-                case 72:
+                case 49:
                     return TileType.down_transition;
                 default:
-                    return TileType.solid;
+                    return TileType.intangible;
             }
         }
+
 
         public static EntityType getEntityTypeFromName(string name)
         {

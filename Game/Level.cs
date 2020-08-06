@@ -193,12 +193,12 @@ namespace RewindGame.Game
         {
             foreach (Solid solid in sceneSolids)
             {
-                if (solid.isThisOverlapping(rect)) return true;
+                if (solid.getCollision(rect, MoveDirection.none).type == PrimaryCollisionType.timestop) return true;
             }
 
             foreach (ISolidTile tile in sceneSolidTiles)
             {
-                if (tile.isThisOverlapping(rect)) return true;
+                if (((CollisionObject)tile).getCollision(rect, MoveDirection.none).type == PrimaryCollisionType.timestop) return true;
             }
 
             return false;
@@ -213,7 +213,8 @@ namespace RewindGame.Game
             switch (type)
             {
                 case TileType.intangible:
-                    sceneDecorativesForeground.Add(DecorativeTile.Make(this, position, sprite));
+                    // I don't think any of these will ever be rendered
+                    //sceneDecorativesForeground.Add(DecorativeTile.Make(this, position, sprite));
                     break;
                 case TileType.solid:
                     sceneSolidTiles.Add(SolidTile.Make(this, position, sprite));
@@ -262,6 +263,9 @@ namespace RewindGame.Game
                 case TileType.centerspike:
                     sceneSolidTiles.Add(Centerspike.Make(this, position, sprite));
                     break;
+                case TileType.freezetime:
+                    sceneSolidTiles.Add(StaticZone.Make(this, position, sprite));
+                    break;
                 default:
                     // todo
                     break;
@@ -275,6 +279,7 @@ namespace RewindGame.Game
             switch (type)
             {
                 case EntityType.Spawnpoint:
+                    position.Y += 14;
                     playerSpawnpoint = position;
                     return;
                 default:

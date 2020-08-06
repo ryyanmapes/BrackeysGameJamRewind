@@ -35,6 +35,7 @@ namespace RewindGame.Game
         protected Vector2 collisionOffset = Vector2.Zero;
 
         protected PrimaryCollisionType collisionType = PrimaryCollisionType.normal;
+        protected int collisionPriority = 5;
 
 
         // for semisolids: what direction does this exclusively stop?
@@ -137,7 +138,7 @@ namespace RewindGame.Game
 
         public virtual CollisionReturn getCollisionReturn()
         {
-            return new CollisionReturn(collisionType, this, 5);
+            return new CollisionReturn(collisionType, this, collisionPriority);
         }
 
     }

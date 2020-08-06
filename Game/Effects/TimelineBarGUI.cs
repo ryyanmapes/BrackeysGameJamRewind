@@ -15,9 +15,16 @@ namespace RewindGame.Game.Effects
         public ContentManager Content;
         public RewindGame parentGame;
 
+        protected Texture2D indicator;
+
         public Texture2D limboBar1;
         public Texture2D limboBarHalf;
         public Texture2D limboBarFourth;
+
+        public float currentBarSize = 105 * 4;
+        public float barDistanceFromTop = 16 * 2;
+
+        protected Texture2D currentBar;
 
         public TimelineBarGUI(RewindGame parent_game, ContentManager content)
         {
@@ -27,6 +34,8 @@ namespace RewindGame.Game.Effects
             limboBarHalf = Content.Load<Texture2D>("gui/barlimbo1");
             limboBarFourth = Content.Load<Texture2D>("gui/barlimbo2");
 
+            indicator = Content.Load<Texture2D>("gui/barindicator");
+
             //texturename = Content.Load<Texture2D>( texturePath );
         }
 
@@ -35,13 +44,19 @@ namespace RewindGame.Game.Effects
             //update indicator on timeline bar
         }
 
+        public void SetBar(Texture2D bar)
+        {
+            currentBar = bar;
+        }
+
         public void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            Texture2D bar_texture = null;
-            bar_texture = limboBar1;
-            if (bar_texture != null)
+            if (currentBar != null)
             {
-                sprite_batch.Draw(bar_texture, Vector2.Zero, Color.White);
+                sprite_batch.Draw(currentBar, state.camera_position + new Vector2(-RewindGame.LEVEL_SIZE_X / 2, -RewindGame.LEVEL_SIZE_Y/2), Color.White);
+                // todo draw indicator
+                float time_progress = (float)(state.time_data.time_moment - parentGame.timeNegBound)/(float)(parentGame.timePosBound - parentGame.timeNegBound);
+                sprite_batch.Draw(indicator, state.camera_position + new Vector2(-currentBarSize - indicator.Width*1.25f + (time_progress * currentBarSize * 2) , -RewindGame.LEVEL_SIZE_Y / 2 + barDistanceFromTop), Color.White);
             }
         }
 
