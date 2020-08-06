@@ -19,15 +19,20 @@ namespace RewindGame.Game.Tiles
 
         public override void Initialize(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
         {
-            collisionDirection = MoveDirection.down;
+            //collisionDirection = MoveDirection.down;
             base.Initialize(level, starting_pos, tile_sprite_);
             collisionSize.Y = Level.SEMISOLID_THICKNESS;
         }
 
-        public override bool isThisOverlapping(FRectangle rect, MoveDirection direction)
+        public override CollisionReturn getCollision(FRectangle rect, MoveDirection direction)
         {
-            if (rect.Y + rect.Height > position.Y + Level.SEMISOLID_THICKNESS) return false;
-            return base.isThisOverlapping(rect, direction);
+            var return_c = base.getCollision(rect, MoveDirection.none);
+            if (return_c.priority == 0) return return_c;
+            if (direction == MoveDirection.up && rect.Y + rect.Height < position.Y + Level.SEMISOLID_THICKNESS_WINDOW)
+                return new CollisionReturn(PrimaryCollisionType.refresh_jump, this, 2);
+            if (direction != MoveDirection.down || rect.Y + rect.Height > position.Y + Level.SEMISOLID_THICKNESS)
+                return CollisionReturn.None();
+            return return_c;
         }
 
     }

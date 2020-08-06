@@ -181,6 +181,54 @@
 /processorParam:TextureFormat=Color
 /build:faux/fauxwalk.png
 
+#begin faux/wall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:faux/wall.png
+
+#begin gui/barlimbo0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:gui/barlimbo0.png
+
+#begin gui/barlimbo1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:gui/barlimbo1.png
+
+#begin gui/barlimbo2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:gui/barlimbo2.png
+
 #begin levels/techdemolevel.json
 /copy:levels/techdemolevel.json
 
@@ -189,6 +237,15 @@
 
 #begin levels/techdemolevel3.json
 /copy:levels/techdemolevel3.json
+
+#begin Music/loop1.wav
+/copy:Music/loop1.wav
+
+#begin Music/Master Bank.bank
+/copy:Music/Master Bank.bank
+
+#begin Music/Master Bank.strings.bank
+/copy:Music/Master Bank.strings.bank
 
 #begin tilesets/collisionlayer.png
 /importer:TextureImporter

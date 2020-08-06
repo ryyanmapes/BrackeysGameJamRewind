@@ -34,7 +34,7 @@ namespace RewindGame.Game
 
             velocity.Y = Math.Max(velocity.Y + gravitationalAcceleration * elapsed_signed, 0);
 
-            velocity = new Vector2(PhysicsEntity.capMagnitude(velocity.X, terminalVelocity.X), PhysicsEntity.capMagnitude(velocity.Y, terminalVelocity.Y));
+            velocity = new Vector2(PhysicsEntity.minMagnitude(velocity.X, terminalVelocity.X), PhysicsEntity.minMagnitude(velocity.Y, terminalVelocity.Y));
 
             moveX(velocity.X * elapsed_signed, SecondaryCollisionType.none);
             moveY(velocity.Y * elapsed_signed, SecondaryCollisionType.none);

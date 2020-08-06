@@ -11,16 +11,22 @@ namespace RewindGame.Game
         //protected Vector2 velocity;
         // should entity really have a velocity?
 
-        protected float maxVelocityY = 700f; // downward
+        protected float maxVelocityY = 800f; // downward
         protected float minVelocityY = -2000f; // upward
         protected float maxVelocityMagnitudeX = 4600f;
-        protected Vector2 aerialDrag = new Vector2(500f,25f);
-        protected float groundedXFriction = 600f;
-        protected float gravitationalAcceleration = 1200f;
+        protected Vector2 aerialDrag = new Vector2(500f,100f);
+        protected float groundedXFriction = 1000f;
+        protected float gravitationalAcceleration = 1250f;
 
         public override void Update(StateData state)
         {
+
+
             float elapsed = (float)state.getDeltaTime();
+
+            moveX(velocity.X * elapsed, SecondaryCollisionType.none);
+            moveY(velocity.Y * elapsed, SecondaryCollisionType.none);
+
             // our main mechanic will have to do something about this
             // will this actually work just as expected if elapsed is negative?!
 
@@ -36,10 +42,7 @@ namespace RewindGame.Game
 
             velocity.Y += gravitationalAcceleration* elapsed;
 
-            velocity = new Vector2(capMagnitude(velocity.X, maxVelocityMagnitudeX), Math.Clamp(velocity.Y, minVelocityY, maxVelocityY));
-
-            moveX(velocity.X * elapsed, SecondaryCollisionType.none);
-            moveY(velocity.Y * elapsed, SecondaryCollisionType.none);
+            velocity = new Vector2(minMagnitude(velocity.X, maxVelocityMagnitudeX), Math.Clamp(velocity.Y, minVelocityY, maxVelocityY));
         }
 
         public bool isGrounded()
@@ -53,10 +56,17 @@ namespace RewindGame.Game
             if (i < 0) return Math.Min(0, i - addend);
             return 0;
         }
-        public static float capMagnitude(float i, float cap)
+        public static float minMagnitude(float i, float cap)
         {
             if (i > 0) return Math.Min(i, cap);
             if (i < 0) return Math.Max(i, -cap);
+            return i;
+        }
+
+        public static float maxMagnitude(float i, float cap)
+        {
+            if (i > 0) return Math.Max(i, cap);
+            if (i < 0) return Math.Min(i, -cap);
             return i;
         }
     }

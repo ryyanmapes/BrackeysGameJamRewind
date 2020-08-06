@@ -1,12 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RewindGame.Game.Graphics;
+using RewindGame.Game.Sound;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace RewindGame.Game
 {
+
     public class PlayerEntity : PhysicsEntity
     {
         public static int playerAnimScale = 1;
@@ -14,23 +16,34 @@ namespace RewindGame.Game
 
         protected AnimationChooser animator = new AnimationChooser(playerAnimScale, playerAnimationOffset);
         protected Animation idleAnim = new Animation("faux/fauxidle", 6, 8, true);
-        protected Animation walkAnim = new Animation("faux/fauxwalk", 4, 12, true);
+        protected Animation walkAnim = new Animation("faux/fauxwalk", 2, 12, true);
         protected Animation fallAnim = new Animation("faux/fauxfallnormal", 1, 1, true);
-        protected Animation jumpRewindAnim = new Animation("faux/fauxjumprewind", 3, 6, true);
-        protected Animation fallRewindAnim = new Animation("faux/fauxfallrewind", 3, 6, true);
+        protected Animation wallAnim = new Animation("faux/wall", 1, 1, true);
+        protected Animation jumpRewindAnim = new Animation("faux/fauxjumprewind", 4, 6, true);
+        protected Animation fallRewindAnim = new Animation("faux/fauxfallrewind", 4, 6, true);
 
         protected RewindGame parentGame;
 
         public bool facingRight = true;
 
-        protected float jumpInitialVelocity = -470f;
-        protected float moveVelocity = 2500f;
+        protected float jumpLaunchVelocity = -470f;
+        protected float moveVelocity = 2700f;
         protected float heldJumpVelocity = -1500f;
         protected float heldJumpVelocityModifier = 0f;
         protected float maxJumpHoldTime = 0.1f;
+        protected float playerMaxMove = 350f;
+        protected float wallHangMaxY = 175f;
+        protected float wallHangStickX = 4f;
+        protected float wallJumpLaunchVelocityY = -400f;
+        protected float wallJumpLaunchVelocityX = 300f;
+        protected float wallJumpRemainingHoldTime = 0.05f;
+        protected float maxNoOppositeTravelTime = 0.4f;
 
         protected float jumpHeldTime = -1f;
         public bool isRewinding = false;
+        public bool temporaryAllowJump = false;
+        protected float noOppositeTravelTime = -1f;
+        protected HangDirection noOppositeTravelDirection = HangDirection.None;
 
         //todo stuff make this correct
         public PlayerEntity(RewindGame parent_game, Vector2 starting_pos)
@@ -42,13 +55,13 @@ namespace RewindGame.Game
             animator.addAnimaton(idleAnim, "idle",  parentGame.Content);
             animator.addAnimaton(walkAnim, "walk",  parentGame.Content);
             animator.addAnimaton(fallAnim, "fall", parentGame.Content);
+            animator.addAnimaton(wallAnim, "wallhang", parentGame.Content);
             animator.addAnimaton(jumpRewindAnim, "rewind_jump",  parentGame.Content);
             animator.addAnimaton(fallRewindAnim, "rewind_fall",  parentGame.Content);
             animator.changeAnimation("idle");
 
             collisionSize = new Vector2(56, 56);
             Initialize(parentGame.activeLevel, starting_pos);
-            maxVelocityMagnitudeX = 300f;
         }
 
 
@@ -56,17 +69,20 @@ namespace RewindGame.Game
         {
             localLevel = parentGame.activeLevel;
 
-            UpdateAnimations();
-
             float elapsed = (float)state.getDeltaTime();
 
             // todo this is a mess
             InputData input_data = state.input_data;
+            if (temporaryAllowJump)
+            {
+                temporaryAllowJump = true;
+            }
 
-            if (input_data.is_jump_pressed && isGrounded())
+            if (input_data.is_jump_pressed && (isGrounded() || temporaryAllowJump))
             {
                 riddenObject = null;
-                velocity.Y += jumpInitialVelocity;
+                velocity.Y += jumpLaunchVelocity;
+                velocity.Y = Math.Max(velocity.Y, jumpLaunchVelocity * 1.3f);
                 jumpHeldTime = 0f;
                 isRewinding = true;
             } else if(input_data.is_jump_held && jumpHeldTime != -1 && jumpHeldTime <= maxJumpHoldTime && velocity.Y != 0) {
@@ -80,9 +96,61 @@ namespace RewindGame.Game
                 jumpHeldTime = -1f;
             }
 
-            if (isGrounded()) isRewinding = false;
+            if (isGrounded())
+            {
+                //noOppositeTravelDirection = HangDirection.None;
+                noOppositeTravelTime = -1f;
+                isRewinding = false;
+            }
 
-            if (Math.Abs(input_data.horizontal_axis_value) > 0.4f)
+            if (hangDirection != HangDirection.None)
+            {
+                noOppositeTravelDirection = HangDirection.None;
+                velocity.Y = Math.Min(velocity.Y, wallHangMaxY);
+                isRewinding = false;
+                if (hangDirection == HangDirection.Right)
+                {
+                    velocity.X = Math.Max(velocity.X, wallHangStickX);
+                }
+                else
+                {
+                    velocity.X = Math.Min(velocity.X, -wallHangStickX);
+                }
+
+                if (input_data.is_jump_pressed)
+                {
+                    velocity.Y = wallJumpLaunchVelocityY;
+                    velocity.X = wallJumpLaunchVelocityX * (hangDirection == HangDirection.Right ? -1 : 1);
+                    jumpHeldTime = maxJumpHoldTime - wallJumpRemainingHoldTime;
+
+                    noOppositeTravelDirection = hangDirection;
+                    noOppositeTravelTime = 0;
+                }
+
+            }
+
+            bool can_move = true;
+
+            
+            if (noOppositeTravelTime != -1)
+            {
+                noOppositeTravelTime += elapsed;
+
+                if (noOppositeTravelTime > maxNoOppositeTravelTime) noOppositeTravelTime = -1;
+
+                if (noOppositeTravelTime != -1 && input_data.horizontal_axis_value < 0 &&
+                (noOppositeTravelDirection == HangDirection.Left || noOppositeTravelDirection == HangDirection.None))
+                    can_move = false;
+                else if (noOppositeTravelTime != -1 && input_data.horizontal_axis_value > 0 &&
+                    (noOppositeTravelDirection == HangDirection.Right || noOppositeTravelDirection == HangDirection.None))
+                    can_move = false;
+            }
+
+            //if ((noOppositeTravelDirection == HangDirection.Left && input_data.horizontal_axis_value < 0)
+            //    || (noOppositeTravelDirection == HangDirection.Right && input_data.horizontal_axis_value > 0)) 
+            //    can_move = false;
+
+            if (Math.Abs(input_data.horizontal_axis_value) > 0.4f && Math.Abs(velocity.X) < playerMaxMove && can_move)
             {
                 velocity.X += input_data.horizontal_axis_value * moveVelocity * elapsed;
             }
@@ -90,9 +158,28 @@ namespace RewindGame.Game
             if (velocity.X > 0) facingRight = true;
             else if (velocity.X < 0) facingRight = false;
 
+            UpdateAnimations();
+
+            temporaryAllowJump = false;
+
             base.Update(state);
 
         }
+
+
+
+
+        public override void Die()
+        {
+            parentGame.qued_player_death = true;
+            //todo fancy animation stuff
+        }
+
+        public override void RefreshJump() 
+        {
+            temporaryAllowJump = true;        
+        }
+
 
         public void UpdateAnimations()
         {
@@ -115,7 +202,11 @@ namespace RewindGame.Game
                 }
                 else
                 {
-                    if (isRewinding)
+                    if (hangDirection != HangDirection.None)
+                    {
+                        animator.changeAnimation("wallhang");
+                    }
+                    else if (isRewinding)
                     {
                         animator.changeAnimation("rewind_fall");
                     }

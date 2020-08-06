@@ -51,6 +51,12 @@ namespace RewindGame.Game
             return new FRectangle(new_position.X + collisionOffset.X, new_position.Y + collisionOffset.Y, collisionSize.X, collisionSize.Y);
         }
 
+        public virtual CollisionReturn getCollision(FRectangle rect, MoveDirection direction)
+        {
+            if (isThisOverlapping(rect, direction)) return getCollisionReturn();
+            return CollisionReturn.None();
+        }
+
         public bool isThisOverlapping(CollisionObject obj)
         {
             return isThisOverlapping(obj.getCollisionBox());
@@ -124,9 +130,14 @@ namespace RewindGame.Game
         }
 
 
-        public PrimaryCollisionType getCollisionType()
+        public virtual PrimaryCollisionType getCollisionType()
         {
             return collisionType;
+        }
+
+        public virtual CollisionReturn getCollisionReturn()
+        {
+            return new CollisionReturn(collisionType, this, 5);
         }
 
     }

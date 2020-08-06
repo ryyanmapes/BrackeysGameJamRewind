@@ -8,7 +8,7 @@ using System.IO;
 
 namespace RewindGame.Game.Effects
 {
-    public interface IEffectManager : IDisposable
+    public interface ILevelEffect : IDisposable
     {
         public void Update(StateData state);
 
