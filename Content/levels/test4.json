@@ -4,7 +4,7 @@
   "height": 238,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"exit_right": "", "exit_left": "", "exit_up": "", "exit_down": "test1", "triggers": "limbo_fourth"},
+  "values": {"exit_right": "", "exit_left": "", "exit_up": "", "exit_down": "test1", "triggers": "limbo_full"},
   "layers": [
     {
       "name": "collisionlayer",
@@ -30,7 +30,67 @@
       "gridCellsX": 29,
       "gridCellsY": 17,
       "entities": [
-        {"name": "playerspawn", "id": 0, "_eid": "67213102", "x": 196, "y": 140, "originX": -3, "originY": -7}
+        {"name": "playerspawn", "id": 0, "_eid": "67213102", "x": 196, "y": 140, "originX": -3, "originY": -7},
+        {
+          "name": "limboplatform",
+          "id": 5,
+          "_eid": "69830920",
+          "x": 378,
+          "y": 140,
+          "originX": 0,
+          "originY": 0,
+          "values": {"velocity_x": -360, "velocity_y": 0}
+        },
+        {
+          "name": "limboplatform",
+          "id": 6,
+          "_eid": "69830920",
+          "x": 378,
+          "y": 112,
+          "originX": 0,
+          "originY": 0,
+          "values": {"velocity_x": -180, "velocity_y": 0}
+        },
+        {
+          "name": "limboplatform",
+          "id": 7,
+          "_eid": "69830920",
+          "x": 0,
+          "y": 84,
+          "originX": 0,
+          "originY": 0,
+          "values": {"velocity_x": 90, "velocity_y": 0}
+        },
+        {
+          "name": "limboplatform",
+          "id": 8,
+          "_eid": "69830920",
+          "x": 0,
+          "y": 56,
+          "originX": 0,
+          "originY": 0,
+          "values": {"velocity_x": 45, "velocity_y": 0}
+        },
+        {
+          "name": "limboplatform",
+          "id": 9,
+          "_eid": "69830920",
+          "x": 378,
+          "y": 28,
+          "originX": 0,
+          "originY": 0,
+          "values": {"velocity_x": -20, "velocity_y": 0}
+        },
+        {
+          "name": "limboplatform",
+          "id": 10,
+          "_eid": "69830920",
+          "x": 378,
+          "y": 0,
+          "originX": 0,
+          "originY": 0,
+          "values": {"velocity_x": -10, "velocity_y": 0}
+        }
       ]
     },
     {
