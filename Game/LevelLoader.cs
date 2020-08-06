@@ -257,7 +257,7 @@ namespace RewindGame.Game
         {
             switch (name)
             {
-                case "Spawnpoint":
+                case "playerspawn":
                     return EntityType.Spawnpoint;
                 default:
                     Console.WriteLine("Unable to find entity type of name: {0}", name);

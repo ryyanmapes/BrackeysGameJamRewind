@@ -16,6 +16,9 @@ namespace RewindGame.Game.Sound
         public ContentManager Content;
         public ChaiFoxes.FMODAudio.Studio.EventInstance loop1;
         public ChaiFoxes.FMODAudio.Studio.EventInstance loop2;
+        public ChaiFoxes.FMODAudio.Sound playerJumpSound;
+        public ChaiFoxes.FMODAudio.Sound playerLandSound;
+        public ChaiFoxes.FMODAudio.Sound playerDieSound;
         public float fadeIntoLoop2;
         public bool pianoFadeoutInc = false;
         public float fadeIntoPiano;
@@ -29,7 +32,12 @@ namespace RewindGame.Game.Sound
             Content = content;
             //does anything else need to be passed in initially?
 
-            //Initialization stuff?
+            //Initialization stuff
+
+            //playerJumpSound = CoreSystem.LoadSound("Content/sfx/jump.wav");
+            //playerLandSound = CoreSystem.LoadSound("Content/sfx/wood.wav"); // needs variants?
+            //playerDieSound = CoreSystem.LoadSound("Content/sfx/death.wav"); for simple sounds we should just be using the builtin Content.Load
+
             fadeIntoLoop2 = -1f;
             fadeIntoPiano = -1f;
             menuChange = -1f;
@@ -92,16 +100,10 @@ namespace RewindGame.Game.Sound
 
         }
 
-        public void TriggerPlayerJump()
-        {
-            var jump = CoreSystem.LoadStreamedSound("jump.wav");
-            var channel = jump.Play();
+        public void TriggerPlayerJump(){//playerJumpSound.Play();
         }
 
-        public void TriggerPlayerLand()
-        {
-            var land = CoreSystem.LoadStreamedSound("land.wav");
-            var channel = land.Play();
+        public void TriggerPlayerLand() { //playerLandSound.Play();
         }
 
         public void BeginPlayerWallslide()
@@ -114,6 +116,12 @@ namespace RewindGame.Game.Sound
 
         }
 
+        // 0 = light rain, 1 = bad storm
+        public void ModifyOverrain(float intensity) { }
+        public void EndOverrain() { }
+
+        public void TriggerLightining() { }
+
         public void TriggerPlayerWalljump()
         {
 
@@ -121,8 +129,7 @@ namespace RewindGame.Game.Sound
 
         public void TriggerPlayerDie()
         {
-            var death = CoreSystem.LoadStreamedSound("death.wav");
-            var channel = death.Play();
+            //playerDieSound.Play();
         }
 
         public void TriggerTimeFreeze()
@@ -156,10 +163,6 @@ namespace RewindGame.Game.Sound
         {
             menuChange = 1f;
             menuInc = false;
-        }
-        public void BeginLimboMusic3()
-        {
-
         }
     }
 }

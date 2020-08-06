@@ -397,8 +397,29 @@
 /processorParam:TextureFormat=Color
 /build:gui/barlimbo2.png
 
-#begin levels/test.json
-/copy:levels/test.json
+#begin levels/test1.json
+/copy:levels/test1.json
+
+#begin levels/test2.json
+/copy:levels/test2.json
+
+#begin levels/test3.json
+/copy:levels/test3.json
+
+#begin levels/test4.json
+/copy:levels/test4.json
+
+#begin limbo/chainball.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:limbo/chainball.png
 
 #begin Music/loop1.wav
 /copy:Music/loop1.wav
@@ -408,6 +429,15 @@
 
 #begin Music/Master Bank.strings.bank
 /copy:Music/Master Bank.strings.bank
+
+#begin sfx/death.wav
+/copy:sfx/death.wav
+
+#begin sfx/jump.wav
+/copy:sfx/jump.wav
+
+#begin sfx/wood.wav
+/copy:sfx/wood.wav
 
 #begin tilesets/collisionlayer.png
 /importer:TextureImporter

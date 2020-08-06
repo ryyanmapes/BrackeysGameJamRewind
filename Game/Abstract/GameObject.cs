@@ -41,6 +41,8 @@ namespace RewindGame.Game
             sprite_batch.Draw(texture, position, textureColor);
         }
 
+        public virtual void Reset() { }
+
         
 
 

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using RewindGame.Game.Abstract;
 using RewindGame.Game.Debug;
 using RewindGame.Game.Tiles;
+using RewindGame.Game.Solids;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -49,7 +50,7 @@ namespace RewindGame.Game
         public const float WALLSPIKE_THICKNESS = 16f;
 
         public List<TimeEntity> sceneEntities = new List<TimeEntity>();
-        public List<Solid> sceneSolids = new List<Solid>();
+        public List<CollisionObject> sceneSolids = new List<CollisionObject>();
         public List<ISolidTile> sceneSolidTiles = new List<ISolidTile>();
         public List<ITile> sceneDecorativesBackground = new List<ITile>();
         public List<ITile> sceneDecorativesForeground = new List<ITile>();
@@ -79,7 +80,7 @@ namespace RewindGame.Game
 
             //sceneSolids.Add(new DebugPlatform(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2, parentGame.graphics.PreferredBackBufferHeight / 2)));
             //sceneEntities.Add(new DebugTimePhysicsEntity(this, new Vector2(parentGame.graphics.PreferredBackBufferWidth / 2 - 200, parentGame.graphics.PreferredBackBufferHeight / 2)));
-            
+            sceneSolids.Add(SpikyBall.Make(this, levelOrgin, 56, 500, 0));
 
         }
 
@@ -279,7 +280,7 @@ namespace RewindGame.Game
             switch (type)
             {
                 case EntityType.Spawnpoint:
-                    position.Y += 14;
+                    position.Y += 55;
                     playerSpawnpoint = position;
                     return;
                 default:

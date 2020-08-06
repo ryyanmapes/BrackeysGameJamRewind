@@ -45,6 +45,7 @@ namespace RewindGame.Game
         public bool temporaryAllowJump = false;
         protected float noOppositeTravelTime = -1f;
         protected HangDirection noOppositeTravelDirection = HangDirection.None;
+        public bool wasGroundedLastFrame = true;
 
         //todo stuff make this correct
         public PlayerEntity(RewindGame parent_game, Vector2 starting_pos)
@@ -86,6 +87,8 @@ namespace RewindGame.Game
                 velocity.Y += jumpLaunchVelocity;
                 velocity.Y = Math.Max(velocity.Y, jumpLaunchVelocity * 1.3f);
                 jumpHeldTime = 0f;
+
+                parentGame.soundManager.TriggerPlayerJump();
                 isRewinding = true;
             } else if(input_data.is_jump_held && jumpHeldTime != -1 && jumpHeldTime <= maxJumpHoldTime && velocity.Y != 0) {
                 velocity.Y += (heldJumpVelocity  - jumpHeldTime*heldJumpVelocityModifier  ) * elapsed;
@@ -103,6 +106,13 @@ namespace RewindGame.Game
                 //noOppositeTravelDirection = HangDirection.None;
                 noOppositeTravelTime = -1f;
                 isRewinding = false;
+
+                if (!wasGroundedLastFrame)
+                {
+                    parentGame.soundManager.TriggerPlayerLand();
+                }
+
+                wasGroundedLastFrame = true;
             }
 
             if (hangDirection != HangDirection.None)

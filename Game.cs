@@ -238,7 +238,7 @@ namespace RewindGame
             collisionSheetTexture = Content.Load<Texture2D>("tilesets/collision");
 
 
-            loadLevelAndConnections("test");
+            loadLevelAndConnections("test1");
 
             player = new PlayerEntity(this, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 - 300));
             player.position = activeLevel.playerSpawnpoint;
@@ -394,7 +394,7 @@ namespace RewindGame
                 Exit();
 
             if (inputData.is_restart_pressed)
-                player.position = activeLevel.playerSpawnpoint;
+                qued_player_death = true;
 
             StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition);
 
@@ -410,6 +410,7 @@ namespace RewindGame
                         runState = RunState.playing;
                         timeData.Reset();
                         stateTimer = -1;
+                        qued_player_death = false;
                     }
                 }
             }
@@ -514,6 +515,9 @@ namespace RewindGame
             if (gamepad_state.Buttons.Back == ButtonState.Pressed || keyboard_state.IsKeyDown(Keys.Escape))
                 input_data.is_exit_pressed = true;
 
+            if (gamepad_state.Buttons.Y == ButtonState.Pressed || keyboard_state.IsKeyDown(Keys.R))
+                input_data.is_restart_pressed = true;
+
             // todo interact, restart bindings
 
             return input_data;
@@ -527,7 +531,8 @@ namespace RewindGame
             timeData.time_status = TimeState.still;
 
             overlayEffect.TriggerDeath();
-            //TODO?
+
+            soundManager.TriggerPlayerDie();
         }
 
         protected override void Draw(GameTime game_time)
