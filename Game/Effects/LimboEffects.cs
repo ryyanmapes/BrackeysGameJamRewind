@@ -69,15 +69,16 @@ namespace RewindGame.Game.Effects
             //sprite_batch.Draw(limboStatic, CameraPosReal, Color.White);
             if (parentGame.activeLevel.screensHorizontal > parentGame.activeLevel.screensVertical)
             {
-                sprite_batch.Draw(limboHorizontal0, new Vector2(CameraPosReal.X, state.camera_position.Y - RewindGame.LEVEL_SIZE_Y / 2), new Rectangle((int)(CameraPosReal.X * 0.5f), (int)(CameraPosReal.Y * 0.0f), limboHorizontal0.Width, limboHorizontal0.Height), Color.White);
-                sprite_batch.Draw(limboHorizontal1, new Vector2(CameraPosReal.X, state.camera_position.Y - RewindGame.LEVEL_SIZE_Y / 2), new Rectangle((int)(CameraPosReal.X * 0.8f), (int)(CameraPosReal.Y * 0.0f), limboHorizontal1.Width, limboHorizontal1.Height), Color.White);
                 sprite_batch.Draw(limboHorizontal2, new Vector2(CameraPosReal.X, state.camera_position.Y - RewindGame.LEVEL_SIZE_Y / 2), new Rectangle((int)(CameraPosReal.X * 0.0f), (int)(CameraPosReal.Y * 0.0f), limboHorizontal2.Width, limboHorizontal2.Height), Color.White);
+                sprite_batch.Draw(limboHorizontal1, new Vector2(CameraPosReal.X, state.camera_position.Y - RewindGame.LEVEL_SIZE_Y / 2), new Rectangle((int)(CameraPosReal.X * 0.8f), (int)(CameraPosReal.Y * 0.0f), limboHorizontal1.Width, limboHorizontal1.Height), Color.White);
+                sprite_batch.Draw(limboHorizontal0, new Vector2(CameraPosReal.X, state.camera_position.Y - RewindGame.LEVEL_SIZE_Y / 2), new Rectangle((int)(CameraPosReal.X * 0.5f), (int)(CameraPosReal.Y * 0.0f), limboHorizontal0.Width, limboHorizontal0.Height), Color.White);
+
             }
             else if (parentGame.activeLevel.screensVertical > parentGame.activeLevel.screensHorizontal)
             {
-                sprite_batch.Draw(limboVertical0, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 0.5f), (int)(CameraPosReal.Y * 0.5f), limboVertical0.Width, limboVertical0.Height), Color.White);
-                sprite_batch.Draw(limboVertical1, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 0.8f), (int)(CameraPosReal.Y * 0.8f), limboVertical1.Width, limboVertical1.Height), Color.White);
-                sprite_batch.Draw(limboVertical2, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 0.0f), (int)(CameraPosReal.Y * 0.0f), limboVertical2.Width, limboVertical2.Height), Color.White);
+                sprite_batch.Draw(limboVertical2, new Vector2(state.camera_position.X - RewindGame.LEVEL_SIZE_X / 2, CameraPosReal.Y), new Rectangle((int)(CameraPosReal.X * 0.0f), (int)(CameraPosReal.Y * 0.0f), limboVertical2.Width, limboVertical2.Height), Color.White);
+                sprite_batch.Draw(limboVertical1, new Vector2(state.camera_position.X - RewindGame.LEVEL_SIZE_X / 2, CameraPosReal.Y), new Rectangle((int)(CameraPosReal.X * 0.0f), (int)(CameraPosReal.Y * 0.8f), limboVertical1.Width, limboVertical1.Height), Color.White);
+                sprite_batch.Draw(limboVertical0, new Vector2(state.camera_position.X - RewindGame.LEVEL_SIZE_X / 2, CameraPosReal.Y), new Rectangle((int)(CameraPosReal.X * 0.0f), (int)(CameraPosReal.Y * 0.5f), limboVertical0.Width, limboVertical0.Height), Color.White);
             }
             else if (parentGame.activeLevel.screensHorizontal == parentGame.activeLevel.screensVertical)
             {
