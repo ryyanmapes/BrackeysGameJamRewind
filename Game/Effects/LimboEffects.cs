@@ -45,7 +45,7 @@ namespace RewindGame.Game.Effects
             rainfall -= (int)(1500 * state.getTimeDependentDeltaTime());
                 //TODO make the speed up slowley speed up peaking at highway to the dangerzone
             rainfall -= (int)((Math.Abs(state.time_data.time_moment)* 2) * state.getTimeDependentDeltaTime())/3;
-         //   fade = (float)(Math.Abs(state.time_data.time_moment)/parentGame.timeDangerPosBound);
+            fade = (int)(Math.Abs(state.time_data.time_moment) * 2 / parentGame.timeDangerPosBound);
             if (rainfall >= raindrop0.Height)
             {
                 rainfall = 0;
@@ -85,15 +85,10 @@ namespace RewindGame.Game.Effects
                 sprite_batch.Draw(limboStatic, CameraPosReal, Color.White);
             }
             sprite_batch.Draw(raindrop1, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 0.5f) - rainfall / 3, (int)(CameraPosReal.Y * 0.5f) + rainfall, raindrop1.Width, raindrop1.Height), Color.White);
-            if(state.time_data.time_moment > parentGame.timeDangerPosBound)
+            if (fade > 0.0f)
             {
                 //sprite_batch.Draw(raindrop1, (CameraPosReal - new Vector2(CameraPosReal.X, 0)), new Rectangle((int)((CameraPosReal.X) * 0.8f) - (rainfall * 2) / 3, (int)((CameraPosReal.Y) * 0.8f) + rainfall * 2, raindrop1.Width, raindrop1.Height), new Color(Color.White, fade));
                 sprite_batch.Draw(raindrop1, CameraPosReal, new Rectangle((int)((CameraPosReal.X + CameraPosReal.X / 2) * .75f) - (rainfall * 2) / 3, (int)(CameraPosReal.Y * .75f) + rainfall * 2, raindrop1.Width, raindrop1.Height), new Color(Color.White, fade));
-            }
-            if(state.time_data.time_moment < parentGame.timeDangerNegBound)
-            {
-                //sprite_batch.Draw(raindrop1, (CameraPosReal - new Vector2(CameraPosReal.X, 0)), new Rectangle((int)((CameraPosReal.X) * 0.8f) - (rainfall * 2) / 3, (int)((CameraPosReal.Y) * 0.8f) + rainfall * 2, raindrop1.Width, raindrop1.Height), new Color(Color.White, fade));
-                sprite_batch.Draw(raindrop1, CameraPosReal, new Rectangle((int)((CameraPosReal.X - CameraPosReal.X / 2)* .75f) - (rainfall * 2) / 3, (int)(CameraPosReal.Y * .75f) + rainfall * 2, raindrop1.Width, raindrop1.Height), new Color(Color.White, fade));
             }
 
 
@@ -103,14 +98,9 @@ namespace RewindGame.Game.Effects
         {
             Vector2 CameraPosReal = state.camera_position - new Vector2(RewindGame.LEVEL_SIZE_X / 2, RewindGame.LEVEL_SIZE_Y / 2);
             sprite_batch.Draw(raindrop0, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 1.0f) - rainfall/3, (int)(CameraPosReal.Y * 1.0f) + rainfall, raindrop0.Width, raindrop0.Height), Color.White);
-            if (state.time_data.time_moment > parentGame.timeDangerPosBound || true)
+            if (fade > 0.0f)
             {
                 sprite_batch.Draw(raindrop0, CameraPosReal, new Rectangle((int)((CameraPosReal.X + CameraPosReal.X/2) * .8f) - (rainfall * 2) / 3, (int)(CameraPosReal.Y * .8f) + rainfall * 2, raindrop0.Width, raindrop0.Height), new Color(Color.White, fade));
-                //sprite_batch.Draw(raindrop0, (CameraPosReal + new Vector2(CameraPosReal.X, 0)), new Rectangle((int)((CameraPosReal.X) * 0.75f) - rainfall * 2 / 3, (int)((CameraPosReal.Y) * 0.75f) + rainfall, raindrop0.Width, raindrop0.Height), new Color(Color.White, fade));
-            }
-            if (state.time_data.time_moment < parentGame.timeDangerNegBound)
-            {
-                sprite_batch.Draw(raindrop0, CameraPosReal, new Rectangle((int)((CameraPosReal.X - CameraPosReal.Y/2) * .8f) - (rainfall * 2) / 3, (int)(CameraPosReal.Y * 0.8f) + rainfall * 2, raindrop0.Width, raindrop0.Height), new Color(Color.White, fade));
                 //sprite_batch.Draw(raindrop0, (CameraPosReal + new Vector2(CameraPosReal.X, 0)), new Rectangle((int)((CameraPosReal.X) * 0.75f) - rainfall * 2 / 3, (int)((CameraPosReal.Y) * 0.75f) + rainfall, raindrop0.Width, raindrop0.Height), new Color(Color.White, fade));
             }
         }

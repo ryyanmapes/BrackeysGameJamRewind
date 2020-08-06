@@ -488,6 +488,7 @@ namespace RewindGame
             {
                 loadLevelAndConnections(qued_level_load_name);
                 qued_level_load_name = "";
+                timeData.Reset();
             }
             else if (qued_player_death && runState != RunState.playerdead)
             {
