@@ -20,30 +20,84 @@ namespace RewindGame.Game
             Vector2 move_components = new Vector2((int)Math.Floor(full_transform.X), (int)Math.Floor(full_transform.Y));
             moveRemainder = full_transform - move_components;
 
-            position = position + move_components;
+            var riding_entities = localLevel.getAllRidingEntities(this);
 
+            do_collide = false;
             
-            foreach (Entity entity in localLevel.getAllEntities())
-            {
-                if (entity.isRiding(this)) {
-                    if (doWallCarry) entity.moveX(move_components.X, null);
-                    if (doTopCarry) 
-                        entity.moveY(move_components.Y, null);
-                }
-                else {
-                    Vector2 overlap = getEntityOverlap(entity) * -1;
+            if (move_components.X != 0) {
+                position.X += move_components.X;
 
-                    if (overlap != Vector2.Zero)
+                if (move_components.X > 0)
+                {
+                    foreach (Entity entity in localLevel.getAllEntities())
                     {
-                        Vector2 move_direction_sign_components = new Vector2( move_components.X > 0 ? 1 : -1, move_components.Y > 0 ? 1 : -1);
-                        if (doWallCarry) 
-                            entity.moveX(overlap.X * move_direction_sign_components.X, this);
-                        if (doTopCarry) 
-                            entity.moveY(overlap.Y * move_direction_sign_components.Y, this);
+                        Vector2 overlap = getEntityOverlap(entity) * -1;
+                        if (overlap.X != 0)
+                        {
+                            entity.moveX(this.getCollisionBox().getRight() - entity.getCollisionBox().getLeft(), this);
+                        }
+                        else if (riding_entities.Contains(entity))
+                        {
+                            entity.moveX(move_components.X, null);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (Entity entity in localLevel.getAllEntities())
+                    {
+                        Vector2 overlap = getEntityOverlap(entity) * -1;
+                        if (overlap.X != 0)
+                        {
+                            entity.moveX(this.getCollisionBox().getLeft() - entity.getCollisionBox().getRight(), this);
+                        }
+                        else if (riding_entities.Contains(entity))
+                        {
+                            entity.moveX(move_components.X, null);
+                        }
                     }
                 }
             }
-            
+
+
+            if (move_components.Y != 0)
+            {
+                position.Y += move_components.Y;
+
+                if (move_components.Y > 0)
+                {
+                    foreach (Entity entity in localLevel.getAllEntities())
+                    {
+                        Vector2 overlap = getEntityOverlap(entity) * -1;
+                        if (overlap.Y != 0)
+                        {
+                            entity.moveY(this.getCollisionBox().getBottom() - entity.getCollisionBox().getTop(), this);
+                        }
+                        else if (riding_entities.Contains(entity))
+                        {
+                            entity.moveY(move_components.X, null);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (Entity entity in localLevel.getAllEntities())
+                    {
+                        Vector2 overlap = getEntityOverlap(entity) * -1;
+                        if (overlap.Y != 0)
+                        {
+                            entity.moveY(this.getCollisionBox().getTop() - entity.getCollisionBox().getBottom(), this);
+                        }
+                        else if (riding_entities.Contains(entity))
+                        {
+                            entity.moveY(move_components.Y, null);
+                        }
+                    }
+                }
+            }
+
+            do_collide = true;
+
 
         }
     

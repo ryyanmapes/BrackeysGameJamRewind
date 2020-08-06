@@ -22,6 +22,11 @@ namespace RewindGame.Game
             return new Rectangle((int)X, (int)Y, (int)Width, (int)Height);
         }
 
+        public float getLeft() { return X; }
+        public float getRight() { return X + Width; }
+        public float getTop() { return Y; }
+        public float getBottom() { return Y + Height; }
+
         public float X;
         public float Y;
         public float Height;
@@ -33,6 +38,7 @@ namespace RewindGame.Game
     {
         protected Vector2 collisionSize;
         protected Vector2 collisionOffset = Vector2.Zero;
+        protected bool do_collide = true;
 
         protected CollisionType collisionType = CollisionType.normal;
         protected int collisionPriority = 5;
@@ -75,6 +81,7 @@ namespace RewindGame.Game
 
         public virtual bool isThisOverlapping(FRectangle rect, MoveDirection direction)
         {
+            if (!do_collide) return false;
             if (collisionDirection == MoveDirection.none || direction == collisionDirection)
                 return isThisOverlapping(rect);
             return false;

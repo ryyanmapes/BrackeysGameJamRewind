@@ -164,6 +164,8 @@ namespace RewindGame
         // will change
         public int timeNegBound = -1000000;
         public int timePosBound = 1000000;
+        public int timeDangerNegBound = -1000000;
+        public int timeDangerPosBound = 1000000;
 
         public Vector2 baseScreenSize = new Vector2(1600, 900);
 
@@ -631,6 +633,8 @@ namespace RewindGame
                 timelineGUI.currentBarSize = 105*4;
                 timeNegBound = -300;
                 timePosBound = 300;
+                timeDangerNegBound = -250;
+                timeDangerPosBound = 250;
 
             }
             else if (trigger == "limbo_half")
@@ -639,6 +643,8 @@ namespace RewindGame
                 timelineGUI.currentBarSize = 102 * 2;
                 timeNegBound = -150;
                 timePosBound = 150;
+                timeDangerNegBound = -110;
+                timeDangerPosBound = 110;
             }
             else if (trigger == "limbo_fourth")
             {
@@ -646,6 +652,8 @@ namespace RewindGame
                 timelineGUI.currentBarSize = 100;
                 timeNegBound = -75;
                 timePosBound = 75;
+                timeDangerNegBound = -25;
+                timeDangerPosBound = 25;
             }
         }
 

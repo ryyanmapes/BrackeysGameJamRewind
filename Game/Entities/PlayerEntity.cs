@@ -81,9 +81,23 @@ namespace RewindGame.Game
                 temporaryAllowJump = true;
             }
 
-            if (input_data.is_jump_pressed && (isGrounded() || temporaryAllowJump))
+            if (is_grounded)
             {
-                riddenObject = null;
+                //noOppositeTravelDirection = HangDirection.None;
+                noOppositeTravelTime = -1f;
+                isRewinding = false;
+
+                if (!wasGroundedLastFrame)
+                {
+                    parentGame.soundManager.TriggerPlayerLand();
+                }
+
+                wasGroundedLastFrame = true;
+            }
+
+            if (input_data.is_jump_pressed && (is_grounded || temporaryAllowJump))
+            {
+                is_grounded = false;
                 velocity.Y += jumpLaunchVelocity;
                 velocity.Y = Math.Max(velocity.Y, jumpLaunchVelocity * 1.3f);
                 jumpHeldTime = 0f;
@@ -99,20 +113,6 @@ namespace RewindGame.Game
             }
             else if (jumpHeldTime != -1) {
                 jumpHeldTime = -1f;
-            }
-
-            if (isGrounded())
-            {
-                //noOppositeTravelDirection = HangDirection.None;
-                noOppositeTravelTime = -1f;
-                isRewinding = false;
-
-                if (!wasGroundedLastFrame)
-                {
-                    parentGame.soundManager.TriggerPlayerLand();
-                }
-
-                wasGroundedLastFrame = true;
             }
 
             if (hangDirection != HangDirection.None)

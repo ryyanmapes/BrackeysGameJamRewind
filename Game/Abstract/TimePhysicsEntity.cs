@@ -14,6 +14,8 @@ namespace RewindGame.Game
         protected float groundedXFriction = 250f;
         protected float gravitationalAcceleration = 400f;
 
+        protected bool is_grounded = false;
+
         public override void Update(StateData state)
         {
             float elapsed_signed = (float)state.getSignedDeltaTime();
@@ -22,7 +24,7 @@ namespace RewindGame.Game
             // this makes physics go backwards when timestate is backwards
 
             
-            if (isGrounded())
+            if (is_grounded)
             {
                 velocity.X = PhysicsEntity.addMagnitude(velocity.X, -groundedXFriction * elapsed_signed);
             }
@@ -38,11 +40,19 @@ namespace RewindGame.Game
 
             moveX(velocity.X * elapsed_signed);
             moveY(velocity.Y * elapsed_signed);
+
+            is_grounded = isGrounded();
         }
 
         public bool isGrounded()
         {
-            return riddenObject != null;
+            var box = getCollisionBox();
+            box.Y += 1;
+            if (localLevel.getSolidCollisionAt(box, MoveDirection.down).type == CollisionType.normal)
+            {
+                return true;
+            }
+            return false;
         }
 
 

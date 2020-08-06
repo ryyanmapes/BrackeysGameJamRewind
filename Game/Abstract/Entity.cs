@@ -56,7 +56,6 @@ namespace RewindGame.Game
         protected Vector2 moveRemainder;
 
         protected Vector2 velocity;
-        public CollisionObject riddenObject;
         protected CollisionObject hungObject;
         protected HangDirection hangDirection = HangDirection.None;
 
@@ -85,6 +84,7 @@ namespace RewindGame.Game
                     case CollisionType.normal:
                         if (pusher != null)
                         {
+                            collision.collisionee = null;
                             Die();
                         }
                         else
@@ -118,8 +118,6 @@ namespace RewindGame.Game
 
             while (move != 0)
             {
-                
-                riddenObject = null;
 
                 Vector2 new_position = position + new Vector2(0, sign);
 
@@ -135,7 +133,6 @@ namespace RewindGame.Game
                         else
                         {
                             velocity.Y = 0;
-                            riddenObject = collision.collisionee;
                         }
                         return;
                     case CollisionType.death:
@@ -145,8 +142,6 @@ namespace RewindGame.Game
                         RefreshJump();
                         break;
                 }
-
-                if (move > 0 && pusher != null) riddenObject = pusher;
 
                 position = new_position;
                 move -= sign;
@@ -160,9 +155,15 @@ namespace RewindGame.Game
         public virtual void RefreshJump() { }
 
 
-        public bool isRiding(CollisionObject obj)
+        public bool isRiding(Solid solid)
         {
-            return obj == riddenObject;
+            var box = getCollisionBox();
+            box.Y += 1;
+            if (solid.getCollision(box, MoveDirection.down).type == CollisionType.normal)
+            {
+                return true;
+            }
+            return false;
         }
 
 

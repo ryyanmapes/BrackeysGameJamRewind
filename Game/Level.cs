@@ -221,6 +221,16 @@ namespace RewindGame.Game
             return return_collision;
         }
 
+        public List<Entity> getAllRidingEntities(Solid solid)
+        {
+            List<Entity> returns = new List<Entity>();
+            foreach (Entity entity in getAllEntities())
+            {
+                if (entity.isRiding(solid)) returns.Add(entity);
+            }
+            return returns;
+        }
+
         public bool getIsInStasis(FRectangle rect)
         {
             foreach (Solid solid in sceneSolids)
