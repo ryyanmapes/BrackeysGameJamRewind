@@ -37,7 +37,7 @@
 /processorParam:TextureFormat=Color
 /build:debug/square.png
 
-#begin faux/death.png
+#begin effects/backgrounds/cottonwood/cottonwood0.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -47,7 +47,223 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:faux/death.png
+/build:effects/backgrounds/cottonwood/cottonwood0.png
+
+#begin effects/backgrounds/cottonwood/cottonwood2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/cottonwood/cottonwood2.png
+
+#begin effects/backgrounds/cottonwood/cottonwoodhorizontal2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/cottonwood/cottonwoodhorizontal2.png
+
+#begin effects/backgrounds/cottonwood/cottonwoodhorizontalwater0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/cottonwood/cottonwoodhorizontalwater0.png
+
+#begin effects/backgrounds/cottonwood/cottonwoodhorizontalwater1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/cottonwood/cottonwoodhorizontalwater1.png
+
+#begin effects/backgrounds/cottonwood/cottonwoodhorizontalwater2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/cottonwood/cottonwoodhorizontalwater2.png
+
+#begin effects/backgrounds/cottonwood/cottonwoodvertical2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/cottonwood/cottonwoodvertical2.png
+
+#begin effects/backgrounds/cottonwood/cottonwoodwater0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/cottonwood/cottonwoodwater0.png
+
+#begin effects/backgrounds/cottonwood/cottonwoodwater1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/cottonwood/cottonwoodwater1.png
+
+#begin effects/backgrounds/cottonwood/cottonwoodwater2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/cottonwood/cottonwoodwater2.png
+
+#begin effects/backgrounds/limbo/limbohorizontal0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/limbo/limbohorizontal0.png
+
+#begin effects/backgrounds/limbo/limbohorizontal1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/limbo/limbohorizontal1.png
+
+#begin effects/backgrounds/limbo/limbohorizontal2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/limbo/limbohorizontal2.png
+
+#begin effects/backgrounds/limbo/limbostatic.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/limbo/limbostatic.png
+
+#begin effects/backgrounds/limbo/limbovertical0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/limbo/limbovertical0.png
+
+#begin effects/backgrounds/limbo/limbovertical1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/limbo/limbovertical1.png
+
+#begin effects/backgrounds/limbo/limbovertical2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/limbo/limbovertical2.png
+
+#begin effects/raindrop0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/raindrop0.png
+
+#begin effects/raindrop1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/raindrop1.png
 
 #begin faux/fauxfallnormal.png
 /importer:TextureImporter
@@ -121,18 +337,6 @@
 /processorParam:TextureFormat=Color
 /build:faux/wall.png
 
-#begin gui/barindicator.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:gui/barindicator.png
-
 #begin gui/barlimbo0.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -169,11 +373,23 @@
 /processorParam:TextureFormat=Color
 /build:gui/barlimbo2.png
 
-#begin levels/test.json
-/copy:levels/test.json
+#begin levels/techdemolevel.json
+/copy:levels/techdemolevel.json
+
+#begin levels/techdemolevel2.json
+/copy:levels/techdemolevel2.json
+
+#begin levels/techdemolevel3.json
+/copy:levels/techdemolevel3.json
 
 #begin Music/loop1.wav
 /copy:Music/loop1.wav
+
+#begin Music/Master Bank.bank
+/copy:Music/Master Bank.bank
+
+#begin Music/Master Bank.strings.bank
+/copy:Music/Master Bank.strings.bank
 
 #begin tilesets/collisionlayer.png
 /importer:TextureImporter

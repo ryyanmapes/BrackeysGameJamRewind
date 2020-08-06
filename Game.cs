@@ -537,7 +537,8 @@ namespace RewindGame
             var matrix = Matrix.Identity;
             matrix.Translation = new Vector3(-1 * (currentCameraPosition.X - LEVEL_SIZE_X / 2), -1 * (currentCameraPosition.Y - LEVEL_SIZE_Y / 2), 0);
 
-            spriteBatch.Begin(SpriteSortMode.Immediate, transformMatrix:matrix);
+            //spriteBatch.Begin(SpriteSortMode.Immediate, transformMatrix:matrix);
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointWrap, null, transformMatrix: matrix);
 
             StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition);
 

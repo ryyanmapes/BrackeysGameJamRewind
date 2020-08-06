@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RewindGame.Game.Graphics;
+using RewindGame.Game.Sound;
 using System;
 using System.Collections.Generic;
 using System.Text;
