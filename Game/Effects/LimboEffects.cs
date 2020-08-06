@@ -46,7 +46,11 @@ namespace RewindGame.Game.Effects
         {
             // use this only for time-changing stuff, like falling the rain
             rainfall -= (int)(1500 * state.getSignedDeltaTime());
-            if(rainfall >= raindrop0.Height)
+            if (state.time_data.time_moment < parentGame.timeDangerNegBound || state.time_data.time_moment > parentGame.timeDangerPosBound)
+            {
+                rainfall -= (int)(1500 * state.getSignedDeltaTime());
+            }
+                if (rainfall >= raindrop0.Height)
             {
                 rainfall = 0;
             }
@@ -60,11 +64,10 @@ namespace RewindGame.Game.Effects
             // state.levelcenter- the center of the current level, where you should be drawing the background
             // state.camera_position- the offset of the camera from the levelcenter (for levels larger than one screen)
             // background
-
             //check if level higher than long
             //vice versa
             //
-
+            
             //sprite_batch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null);
             //sprite_batch.Draw(limboStatic, CameraPosReal, Color.White);
             if (parentGame.activeLevel.screensHorizontal > parentGame.activeLevel.screensVertical)
@@ -85,6 +88,16 @@ namespace RewindGame.Game.Effects
                 sprite_batch.Draw(limboStatic, CameraPosReal, Color.White);
             }
             sprite_batch.Draw(raindrop1, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 0.5f) - rainfall / 3, (int)(CameraPosReal.Y * 0.5f) + rainfall, raindrop1.Width, raindrop1.Height), Color.White);
+            if(state.time_data.time_moment > parentGame.timeDangerPosBound)
+            {
+                sprite_batch.Draw(raindrop1, (CameraPosReal - state.camera_position), new Rectangle((int)((CameraPosReal.X - state.camera_position.X) * 0.8f) - rainfall / 3, (int)((CameraPosReal.Y - state.camera_position.Y) * 0.8f) + rainfall, raindrop1.Width, raindrop1.Height), Color.White);
+                sprite_batch.Draw(raindrop1, (CameraPosReal - state.camera_position * 2), new Rectangle((int)((CameraPosReal.X - state.camera_position.X * 2) * 0.75f) - rainfall / 3, (int)((CameraPosReal.Y - state.camera_position.Y * 2) * 0.75f) + rainfall, raindrop1.Width, raindrop1.Height), Color.White);
+            }
+            if(state.time_data.time_moment < parentGame.timeDangerNegBound)
+            {
+                sprite_batch.Draw(raindrop1, (CameraPosReal - state.camera_position), new Rectangle((int)((CameraPosReal.X - state.camera_position.X) * 0.8f) - rainfall / 3, (int)((CameraPosReal.Y - state.camera_position.Y) * 0.8f) + rainfall, raindrop1.Width, raindrop1.Height), Color.White);
+                sprite_batch.Draw(raindrop1, (CameraPosReal - state.camera_position * 2), new Rectangle((int)((CameraPosReal.X - state.camera_position.X * 2) * 0.75f) - rainfall / 3, (int)((CameraPosReal.Y - state.camera_position.Y * 2) * 0.75f) + rainfall, raindrop1.Width, raindrop1.Height), Color.White);
+            }
 
 
         }
@@ -93,6 +106,16 @@ namespace RewindGame.Game.Effects
         {
             Vector2 CameraPosReal = state.camera_position - new Vector2(RewindGame.LEVEL_SIZE_X / 2, RewindGame.LEVEL_SIZE_Y / 2);
             sprite_batch.Draw(raindrop0, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 1.0f) - rainfall/3, (int)(CameraPosReal.Y * 1.0f) + rainfall, raindrop0.Width, raindrop0.Height), Color.White);
+            if (state.time_data.time_moment > parentGame.timeDangerPosBound)
+            {
+                sprite_batch.Draw(raindrop0, (CameraPosReal - state.camera_position), new Rectangle((int)((CameraPosReal.X - state.camera_position.X) * 0.8f) - rainfall / 3, (int)((CameraPosReal.Y - state.camera_position.Y) * 0.8f) + rainfall, raindrop0.Width, raindrop0.Height), Color.White);
+                sprite_batch.Draw(raindrop0, (CameraPosReal - state.camera_position * 2), new Rectangle((int)((CameraPosReal.X - state.camera_position.X * 2) * 0.75f) - rainfall / 3, (int)((CameraPosReal.Y - state.camera_position.Y * 2) * 0.75f) + rainfall, raindrop0.Width, raindrop0.Height), Color.White);
+            }
+            if (state.time_data.time_moment < parentGame.timeDangerNegBound)
+            {
+                sprite_batch.Draw(raindrop0, (CameraPosReal - state.camera_position), new Rectangle((int)((CameraPosReal.X - state.camera_position.X) * 0.8f) - rainfall / 3, (int)((CameraPosReal.Y - state.camera_position.Y) * 0.8f) + rainfall, raindrop0.Width, raindrop0.Height), Color.White);
+                sprite_batch.Draw(raindrop0, (CameraPosReal - state.camera_position * 2), new Rectangle((int)((CameraPosReal.X - state.camera_position.X * 2) * 0.75f) - rainfall / 3, (int)((CameraPosReal.Y - state.camera_position.Y * 2) * 0.75f) + rainfall, raindrop0.Width, raindrop0.Height), Color.White);
+            }
         }
 
         public void Dispose()
