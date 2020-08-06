@@ -21,7 +21,7 @@
   "compactExport": false,
   "externalScript": "",
   "playCommand": "",
-  "entityTags": ["playerspawn", "platforms"],
+  "entityTags": ["playerspawn", "limbo", "platforms", "danger"],
   "layers": [
     {
       "definition": "tile",
@@ -111,7 +111,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["platforms"],
+      "tags": ["limbo", "platforms"],
       "values": [
         {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000},
         {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000}
@@ -156,6 +156,130 @@
       "values": [],
       "texture": "C:/Users/ryan_/Desktop/jammm/fauxidle0.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAGrSURBVDhPjZS/LwRBFMdnNbpLiFCoCCdI7lBeKySitBcaCqK4hlaIXxGiVSkkFKK43ClFoVFdIyF3BbEFUSj8SCT+geW9ne/e29m9vf0kl3lvf3zm7byZs1zXVZZlKUB5V++AS3HHWEZ1T6fVzeJB/YEE+FIaiWE77wX/kBDkjo51pNRu9Sd2El86cbruy96vHPV9X+MY1S45F5wTT9e/sWKWTp5tsFDKPl6e+aWdkXa+V1ktJBaH1lSynW3zqycGp1Isw5hICgleioOemTt8SyalhzP5Zc5NaqUTHXmfD8yKQ58f9ckgajJMJJcjsvyhGdtFw0xoN2z133FsLlFTqQ595J4FtFseL8shR+hClLBR1dlNO1LcoseGQHhbXuARUF7dK+vM6wX6EZB29qR5LSGSFcrOEzKn92RDG1ZKQmoKWCm26siDcrovJwYB6eerE1pjKZZIYSH1xSNo2n3ZdWoKgWtoEg4NTljTRoH53Kha25/VWRASyj2bWHpeeeCfuYbmCSRipfLTqVL6SeR9ef5D0qjNT6BSk1LfuI7qxFaKxgDk5vXgf4BSf3VX6GsyOeMmAAAAAElFTkSuQmCC"
+    },
+    {
+      "exportID": "73855664",
+      "name": "limbospikeplatform",
+      "limit": -1,
+      "size": {"x": 28, "y": 14},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["limbo", "danger"],
+      "values": [
+        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
+        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
+      ],
+      "texture": "C:/Users/ryan_/Desktop/jammm/2spikeplatform.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAOCAYAAAA8E3wEAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAFISURBVDhPjZSxbgIxEETv7qdoKFIhqNKRj0gVmiDRgkQKSJWPSJkKKRUFTb7K8CzmmFvsiJFWXo93d3atOzcppYGt97vLcttPp/O8dx5OpjP5WmvWNQXMZi/p6g4AH882n/t0+v1rDofvlv14Msp8rUaLqoNAklREBQUVBM4TG3PhxQH4O0HgIiogP8JFPRa4kBpouXMFelesYPn1ntft60dfYPz8lNfTzzHn1XhBdUHHRkkIuZgjFgXu10AeN4ZRu7/SKCQBnwBfEwtM45M5SlN2CKGuoiWQqGSuVigJuIjgV5on9OkQLiVFPjZYygEuBvJ/GElHbXIXkO+x+BjD+ED9j48oAUr2JvDhORevWBd2rN4WfY6E4e9eGgqqqIs6vDF8ITbFijAmbiBY6lYcCfh8YF5AYB+5IvhoHrX4MPujLfv/8U7NGaX1mdcmsSSoAAAAAElFTkSuQmCC"
+    },
+    {
+      "exportID": "73863928",
+      "name": "limbospikeplatformlarge",
+      "limit": -1,
+      "size": {"x": 56, "y": 14},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["limbo", "danger"],
+      "values": [
+        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
+        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
+      ],
+      "texture": "C:/Users/ryan_/Desktop/jammm/4spikeplatform.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAOCAYAAAB6pd+uAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAJUSURBVEhLhZYxbhUxFEVn/qZoUqSKkipdWAQVSREkKIlECkKVRUBHlShVkGhoWAJbGThmztedN56fI1ljP3vue9f2/GR4iWmaho93n6fT04tpDi1gngasyXGSc9mEHL2445p/q57Kbn6uSIH3by/Ho5NXXdGzs9f7GGvEoiww5/Id54H4OI6tb0x8v6d3iE2DVeDn068Wo+g06rpqnmKrhsYeHr6ON1/uJsc8U58YYMQ1wBwbUGOa7rVmkOvRVheqIEWIwsA8xeV8kgWJhnpzxIy7GWqT11z0mW8TM9SbbUeRXEG/M8Y8LSB5d3/dWlJNWZhFOK56FJbvont0frzSh14tCTnYBBq1z+HG3n3ujOR4Zez78/9nKRI+vbndv2th9tlMxrkRGKugAZ6Q6yupD6sT1RhksWAcahHVYN0AC9zSBucOGRT1ydvTyo3InGN+R60TsNDkCGeflzNpLdJTBNZWo4ferdTckkbVB+OY3vkxMrC12X+kADRjkSBZJJ77FNXanJx+PWmomr0cxGhqSjuE2Dza4+O3kUZscV8hv0WfoAj0YmAc2Kgff363W2FhSb3ClVyfho3XKwzk5LCSlUF+TdNAFi3sjr9WFljN1Su/9Y0mvU2EXg6wvrx1otHFH3rMfbi8asfryx51xThraBaRybLgNESfdbUwtdRznrFYG7jOzyybLAxibu4uSNE0bJ85Nwbx/CVLuGqYSw1N9NajtbURrEeHvFv/qMDmv2qIZCEIIVr/kGpuHjaI5a5DaiVuhvlovfc1BazJ+a2DGYZh+Ave4Fdnt2ee/gAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "74328081",
+      "name": "limbospikyball",
+      "limit": -1,
+      "size": {"x": 14, "y": 14},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["limbo", "danger"],
+      "values": [
+        {"name": "radius", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000},
+        {"name": "speed", "definition": "Float", "defaults": 0, "bounded": false, "min": -1000, "max": 1000},
+        {"name": "starting_rotation_degrees", "definition": "Integer", "defaults": 0, "bounded": false, "min": 0, "max": 360}
+      ],
+      "texture": "C:/Users/ryan_/Desktop/jammm/chainball.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeEAAAnhAepRYnIAAAEkSURBVDhPvZQ9DsIwDIUDV+EIDCwdOqFubFyCDQYYOAAcgEuwsVVMHbowcATOUvQiO9hWkkZI8ElVEjd+9Z/qfsGE1izd6znQ1tWz+ajPlNYoTbMe8NAxwPbYO6C+aiOCU7VckOVDf3/49XDZ+xXIDJKi/a2jnXPVqqZd2i5FQ/oyFemYI3VP1fS0ORcLMrhvmxcOHGmshmNwjdv26vVCpDB8Iwisn1fmBiEV2xREIbuMEkHE3uMzSpGdU06L6xxWsqfIikpYsATVKFmbsWiAvH/c7oKWirREKAb85Jyr7vNIWHxj6ClBRYop4C5aAdltwO9hl9MBoo2ywuGcsAOZpUpX/lAwjyCWMmoIEftXo60WZWTRrTN/LFV/kHwhSUX0R5x7A7SimGq/4hWDAAAAAElFTkSuQmCC"
     }
   ],
   "tilesets": [

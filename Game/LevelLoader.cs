@@ -33,8 +33,10 @@ namespace RewindGame.Game
     {
         Spawnpoint,
         LimboPlatform,
-        LimboLargePlatform,
-        SpikeyBall
+        LargeLimboPlatform,
+        LimboSpikePlatform,
+        LargeLimboSpikePlatform,
+        LimboSpikyBall
     }
 
     class RawLevel
@@ -82,6 +84,7 @@ namespace RewindGame.Game
         public string exit_left;
         public string exit_up;
         public string exit_down;
+        public string triggers;
     }
     
     public class EntityInfo
@@ -90,6 +93,7 @@ namespace RewindGame.Game
         public float velocity_y = 0;
         public float radius = 0;
         public float speed = 0;
+        public int starting_rotation_degrees;
     }
     
     class LevelLoader
@@ -124,6 +128,8 @@ namespace RewindGame.Game
             level.connectedLevelNames[1] = raw_level.values.exit_left;
             level.connectedLevelNames[2] = raw_level.values.exit_up;
             level.connectedLevelNames[3] = raw_level.values.exit_down;
+
+            level.startTriggers = raw_level.values.triggers;
 
 
             foreach (RawLayer layer in raw_level.layers)
@@ -274,6 +280,14 @@ namespace RewindGame.Game
                     return EntityType.Spawnpoint;
                 case "limboplatform":
                     return EntityType.LimboPlatform;
+                case "limboplatformlarge":
+                    return EntityType.LargeLimboPlatform;
+                case "limbospikeplatform":
+                    return EntityType.LimboSpikePlatform;
+                case "limbospikeplatformlarge":
+                    return EntityType.LargeLimboSpikePlatform;
+                case "limbospikyball":
+                    return EntityType.LimboSpikyBall;
                 default:
                     Console.WriteLine("Unable to find entity type of name: {0}", name);
                     return EntityType.Spawnpoint;

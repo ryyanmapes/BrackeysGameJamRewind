@@ -43,8 +43,15 @@ namespace RewindGame.Game
 
         public virtual void Reset() { }
 
-        
+        public virtual void SetInactive() 
+        {
+            hidden = true;
+        }
 
+        public virtual void SetActive()
+        {
+            hidden = false;
+        }
 
     }
 }

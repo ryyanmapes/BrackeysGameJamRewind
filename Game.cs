@@ -89,9 +89,9 @@ namespace RewindGame
             return (float)game_time.ElapsedGameTime.TotalSeconds;
         }
 
-        public float getSignedDeltaTime()
+        public float getTimeDependentDeltaTime()
         {
-            return (float) getDeltaTime() * (time_data.time_status == TimeState.backward ? -1 : 1);
+            return (float) getDeltaTime() * getTimeN();
         }
     }
 
@@ -274,6 +274,7 @@ namespace RewindGame
                 if (level_name != "")
                 {
                     new_connected_levels[i] = getConnectedOrLoadLevel(level_name, center_level, i);
+                    new_connected_levels[i].SetInactive();
                 }
                 i += 1;
             }
@@ -290,9 +291,12 @@ namespace RewindGame
                 }
             }
 
+            if (activeLevel != null) { center_level.RunStartTriggers(); }
+
             connectedLevels = new_connected_levels;
             activeLevel = center_level;
             center_level.isActiveScene = true;
+            center_level.SetActive();
 
         }
 
@@ -443,6 +447,7 @@ namespace RewindGame
             {
                 timeData.time_status = TimeState.still;
                 timeData.time_moment = 0;
+                activeLevel.Reset();
                 // todo add particles
             }
             else if (player.isRewinding)
@@ -467,7 +472,8 @@ namespace RewindGame
 
             }
 
-            if (timeData.time_moment <= timeNegBound || timeData.time_moment >= timePosBound)
+            if (timeData.time_moment <= timeNegBound || timeData.time_moment >= timePosBound
+                || player.position.Y > activeLevelOffset.Y + LEVEL_SIZE_Y * activeLevel.screensVertical + Level.LARGE_TILE_WORLD_SIZE)
             {
                 qued_player_death = true;
             }
@@ -482,8 +488,9 @@ namespace RewindGame
             {
                 loadLevelAndConnections(qued_level_load_name);
                 qued_level_load_name = "";
+                timeData.Reset();
             }
-            else if (qued_player_death)
+            else if (qued_player_death && runState != RunState.playerdead)
             {
                 KillPlayer();
                 qued_player_death = false;
