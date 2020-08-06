@@ -13,7 +13,7 @@ namespace RewindGame.Game.Sound
     {
         public RewindGame parentGame;
         public ContentManager Content;
-        
+
         public SoundManager(RewindGame parent_game, ContentManager content)
         {
             parentGame = parent_game;
@@ -21,7 +21,7 @@ namespace RewindGame.Game.Sound
             //does anything else need to be passed in initially?
 
             //Initialization stuff?
-            
+
             FMODManager.Init(FMODMode.CoreAndStudio, "Content/music");
 
             StudioSystem.LoadBank("Master Bank.bank").LoadSampleData();
@@ -37,12 +37,12 @@ namespace RewindGame.Game.Sound
         public void Update(StateData state)
         {
             // you can use state to get deltatime, whether time is backwards or forwards, etc
-            
+
         }
 
         public void TriggerPlayerJump()
         {
-            
+
         }
 
         public void TriggerPlayerLand()
