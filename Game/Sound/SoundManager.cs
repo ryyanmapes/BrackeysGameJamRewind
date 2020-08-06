@@ -21,7 +21,7 @@ namespace RewindGame.Game.Sound
         public float fadeIntoPiano;
         public float menuChange;
         public bool menuInc;
-        
+
 
         public SoundManager(RewindGame parent_game, ContentManager content)
         {
@@ -41,10 +41,10 @@ namespace RewindGame.Game.Sound
             this.loop1 = StudioSystem.GetEvent("Event:/Music/Limbo/Loop1").CreateInstance();
             this.loop2 = StudioSystem.GetEvent("Event:/Music/Limbo/Loop2").CreateInstance();
 
-            
-            
-            
-            
+
+
+
+
         }
 
 
@@ -81,7 +81,7 @@ namespace RewindGame.Game.Sound
                 {
                     menuChange -= elapsed;
                 }
-                
+
                 loop1.SetParameterValue("menu open", menuChange);
                 loop2.SetParameterValue("menu open", menuChange);
                 if(menuChange > 1 || menuChange < 0)
@@ -89,7 +89,7 @@ namespace RewindGame.Game.Sound
                     menuChange = -1;
                 }
             }
-            
+
         }
 
         public void TriggerPlayerJump()
