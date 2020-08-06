@@ -22,12 +22,12 @@ namespace RewindGame.Game.Sound
 
             //Initialization stuff?
 
-            FMODManager.Init(FMODMode.CoreAndStudio, "Content/music");
+      //      FMODManager.Init(FMODMode.CoreAndStudio, "Content/music");
 
-            StudioSystem.LoadBank("Master Bank.bank").LoadSampleData();
-            StudioSystem.LoadBank("Master Bank.strings.bank").LoadSampleData();
-            var event1 = StudioSystem.GetEvent("Loop1");
-            event1.LoadSampleData();
+     //       StudioSystem.LoadBank("Master Bank.bank").LoadSampleData();
+      //      StudioSystem.LoadBank("Master Bank.strings.bank").LoadSampleData();
+      //      var event1 = StudioSystem.GetEvent("Loop1");
+       //     event1.LoadSampleData();
 
             //var loop1  = CoreSystem.LoadStreamedSound("loop1.wav");
             //var channel = loop1.Play();
