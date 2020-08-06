@@ -18,7 +18,7 @@ namespace RewindGame.Game.Debug
 
         public override void Update(StateData state)
         {
-            moveY(1.0f, SecondaryCollisionType.none);
+            moveY(1.0f);
         }
 
     }

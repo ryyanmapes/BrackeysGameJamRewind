@@ -20,7 +20,7 @@ namespace RewindGame.Game.Tiles
         public override void Initialize(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
         {
             // todo should this hitbox be smaller?
-            collisionType = PrimaryCollisionType.death;
+            collisionType = CollisionType.death;
             base.Initialize(level, starting_pos, tile_sprite_);
         }
     }

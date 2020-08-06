@@ -45,7 +45,7 @@ namespace RewindGame.Game.Graphics
             texture_width = (int)texture.Width / animation.frame_count;
         }
 
-        public void Draw(StateData state, SpriteBatch sprite_batch, Vector2 position, SpriteEffects effect)
+        public void Draw(StateData state, SpriteBatch sprite_batch, Vector2 position, SpriteEffects effect, int timeN)
         {
             int frame = (int) Math.Floor((double)callCount / animation.change_frame_every) % animation.frame_count;
             Rectangle source_rect = new Rectangle(texture_width * frame, 0, texture_width, texture.Height);
@@ -53,7 +53,7 @@ namespace RewindGame.Game.Graphics
 
             sprite_batch.Draw(texture, destination_rect, source_rect, Color.White, 0.0f, Vector2.Zero, effect, 0);
             
-            callCount += 1;
+            callCount += timeN;
         }
 
         public void Reset()

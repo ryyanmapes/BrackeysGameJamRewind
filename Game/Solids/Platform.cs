@@ -5,18 +5,22 @@ using System.Collections.Generic;
 using System.Text;
 using RewindGame.Game.Abstract;
 
-namespace RewindGame.Game.Debug
+namespace RewindGame.Game.Solids
 {
     public abstract class Platform : Solid
     {
 
         public Vector2 velocity;
+        public Vector2 startingPosition;
 
-        public void Initialize(Level level, Vector2 starting_pos, Vector2 velocity_, int tilelen)
+        public virtual void Initialize(Level level, Vector2 starting_pos, Vector2 velocity_, int tilelen)
         {
             velocity = velocity_;
 
+            doWallCarry = false;
+
             collisionSize = new Vector2(tilelen * Level.TILE_WORLD_SIZE, Level.SEMISOLID_THICKNESS);
+            startingPosition = starting_pos;
             base.Initialize(level, starting_pos);
         }
 
@@ -25,5 +29,12 @@ namespace RewindGame.Game.Debug
             Move(new Vector2(velocity.X * state.getSignedDeltaTime(), velocity.Y * state.getSignedDeltaTime()));
         }
 
+        public override void LoadContent(){ }
+
+        public override void Reset()
+        {
+            position = startingPosition;
+            base.Reset();
+        }
     }
 }

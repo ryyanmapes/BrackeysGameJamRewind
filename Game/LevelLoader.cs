@@ -31,7 +31,10 @@ namespace RewindGame.Game
 
     public enum EntityType
     {
-        Spawnpoint
+        Spawnpoint,
+        LimboPlatform,
+        LimboLargePlatform,
+        SpikeyBall
     }
 
     class RawLevel
@@ -44,7 +47,7 @@ namespace RewindGame.Game
         public RawLevelInfo values;
         public List<RawLayer> layers;
     }
-    class RawLayer
+    public class RawLayer
     {
         public string name;
         public string _eid;
@@ -61,7 +64,7 @@ namespace RewindGame.Game
         public List<RawEntities> entities;
 
     }
-    class RawEntities
+    public class RawEntities
     {
         public string name;
         public int id;
@@ -71,14 +74,24 @@ namespace RewindGame.Game
         public int originX;
         public int originY;
         public bool flippedX;
+        public EntityInfo values;
     }
-    class RawLevelInfo
+    public class RawLevelInfo
     {
         public string exit_right;
         public string exit_left;
         public string exit_up;
         public string exit_down;
     }
+    
+    public class EntityInfo
+    {
+        public float velocity_x = 0;
+        public float velocity_y = 0;
+        public float radius = 0;
+        public float speed = 0;
+    }
+    
     class LevelLoader
     {
         // we pass in a level here to populate it with everything
@@ -130,7 +143,7 @@ namespace RewindGame.Game
         {
             foreach (RawEntities entity in tile_layer.entities)
             {
-                level.PlaceEntity(getEntityTypeFromName(entity.name), entity.x, entity.y);
+                level.PlaceEntity(getEntityTypeFromName(entity.name), entity.x, entity.y, entity.values);
             }
         }
 
@@ -259,6 +272,8 @@ namespace RewindGame.Game
             {
                 case "playerspawn":
                     return EntityType.Spawnpoint;
+                case "limboplatform":
+                    return EntityType.LimboPlatform;
                 default:
                     Console.WriteLine("Unable to find entity type of name: {0}", name);
                     return EntityType.Spawnpoint;

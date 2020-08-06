@@ -25,5 +25,7 @@ namespace RewindGame.Game.Abstract
 
         public abstract void Draw(StateData state, SpriteBatch sprite_batch);
 
+        public abstract void Reset();
+
     }
 }

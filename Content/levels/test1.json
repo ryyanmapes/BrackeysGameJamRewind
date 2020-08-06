@@ -30,7 +30,17 @@
       "gridCellsX": 29,
       "gridCellsY": 17,
       "entities": [
-        {"name": "playerspawn", "id": 0, "_eid": "67213102", "x": 56, "y": 126, "originX": -3, "originY": -7}
+        {"name": "playerspawn", "id": 0, "_eid": "67213102", "x": 56, "y": 126, "originX": -3, "originY": -7},
+        {
+          "name": "limboplatform",
+          "id": 1,
+          "_eid": "69830920",
+          "x": 98,
+          "y": 126,
+          "originX": 0,
+          "originY": 0,
+          "values": {"velocity_x": 100, "velocity_y": 0}
+        }
       ]
     },
     {

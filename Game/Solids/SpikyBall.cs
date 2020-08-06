@@ -27,7 +27,7 @@ namespace RewindGame.Game.Solids
 
             texturePath = "limbo/chainball";
             collisionSize = new Vector2(28, 28);
-            collisionType = PrimaryCollisionType.death;
+            collisionType = CollisionType.death;
             starting_rotation_degrees = startingrotation;
             base.Initialize(level, starting_pos);
             Reset();
@@ -39,7 +39,7 @@ namespace RewindGame.Game.Solids
             // position, state.getDeltaTime()
         }
 
-        public virtual void Reset() 
+        public override void Reset() 
         { 
             // set to initial rotation
         }

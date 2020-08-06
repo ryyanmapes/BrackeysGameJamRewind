@@ -34,7 +34,7 @@ namespace RewindGame.Game
         protected Vector2 collisionSize;
         protected Vector2 collisionOffset = Vector2.Zero;
 
-        protected PrimaryCollisionType collisionType = PrimaryCollisionType.normal;
+        protected CollisionType collisionType = CollisionType.normal;
         protected int collisionPriority = 5;
 
 
@@ -131,7 +131,7 @@ namespace RewindGame.Game
         }
 
 
-        public virtual PrimaryCollisionType getCollisionType()
+        public virtual CollisionType getCollisionType()
         {
             return collisionType;
         }

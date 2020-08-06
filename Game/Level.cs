@@ -172,11 +172,42 @@ namespace RewindGame.Game
             }
         }
 
-        public CollisionReturn getSolidCollisionAt(FRectangle rect, MoveDirection direction)
+        public void Reset()
+        {
+            foreach (TimeEntity entity in sceneEntities)
+            {
+                entity.Reset();
+            }
+
+            foreach (Solid solid in sceneSolids)
+            {
+                solid.Reset();
+            }
+
+            foreach (ITile tile in sceneSolidTiles)
+            {
+                tile.Reset();
+            }
+
+            foreach (ITile tile in sceneDecorativesForeground)
+            {
+                tile.Reset();
+            }
+
+            foreach (ITile tile in sceneDecorativesBackground)
+            {
+                tile.Reset();
+            }
+        }
+
+        public CollisionReturn getSolidCollisionAt(FRectangle rect, MoveDirection direction) { return getSolidCollisionAt(rect, direction, null); }
+
+        public CollisionReturn getSolidCollisionAt(FRectangle rect, MoveDirection direction, Solid pusher)
         {
             var return_collision = CollisionReturn.None();
             foreach (Solid solid in sceneSolids)
             {
+                if (solid == pusher) continue;
                 CollisionReturn collision = solid.getCollision(rect, direction);
                 if (collision.priority > return_collision.priority) return_collision = collision;
             }
@@ -194,12 +225,12 @@ namespace RewindGame.Game
         {
             foreach (Solid solid in sceneSolids)
             {
-                if (solid.getCollision(rect, MoveDirection.none).type == PrimaryCollisionType.timestop) return true;
+                if (solid.getCollision(rect, MoveDirection.none).type == CollisionType.timestop) return true;
             }
 
             foreach (ISolidTile tile in sceneSolidTiles)
             {
-                if (((CollisionObject)tile).getCollision(rect, MoveDirection.none).type == PrimaryCollisionType.timestop) return true;
+                if (((CollisionObject)tile).getCollision(rect, MoveDirection.none).type == CollisionType.timestop) return true;
             }
 
             return false;
@@ -273,7 +304,7 @@ namespace RewindGame.Game
             }
         }
 
-        public void PlaceEntity(EntityType type, int x, int y)
+        public void PlaceEntity(EntityType type, int x, int y, EntityInfo info)
         {
             Vector2 position = new Vector2(x, y) * 4;
 
@@ -282,6 +313,12 @@ namespace RewindGame.Game
                 case EntityType.Spawnpoint:
                     position.Y += 55;
                     playerSpawnpoint = position;
+                    return;
+                case EntityType.LimboPlatform:
+                    sceneSolids.Add(LimboPlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    return;
+                case EntityType.LimboLargePlatform:
+                    sceneSolids.Add(LimboPlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), true));
                     return;
                 default:
                     //todo

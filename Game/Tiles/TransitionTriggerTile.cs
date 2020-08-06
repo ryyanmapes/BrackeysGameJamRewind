@@ -38,7 +38,7 @@ namespace RewindGame.Game.Tiles
                     break;
             }
 
-            collisionType = PrimaryCollisionType.harmless;
+            collisionType = CollisionType.harmless;
             base.Initialize(level, starting_pos, tile_sprite_);
         }
 

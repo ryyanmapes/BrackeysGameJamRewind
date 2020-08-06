@@ -60,7 +60,12 @@ namespace RewindGame.Game.Graphics
 
         public void Draw(StateData state, SpriteBatch sprite_batch, Vector2 position, SpriteEffects effect)
         {
-            currentAnimation.Draw(state, sprite_batch, position, effect);
+            currentAnimation.Draw(state, sprite_batch, position, effect, 1);
+        }
+
+        public void Draw(StateData state, SpriteBatch sprite_batch, Vector2 position, SpriteEffects effect, int timeN)
+        {
+            currentAnimation.Draw(state, sprite_batch, position, effect, timeN);
         }
     }
 }

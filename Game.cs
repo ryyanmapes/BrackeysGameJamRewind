@@ -73,6 +73,11 @@ namespace RewindGame
             camera_position = cameraoffset;
         }
 
+        public int getTimeN()
+        {
+            return time_data.time_status == TimeState.backward ? -1 : time_data.time_status == TimeState.still ? 0 : 1;
+        }
+
         public InputData input_data;
         public TimeData time_data;
         public GameTime game_time;
@@ -408,7 +413,10 @@ namespace RewindGame
                     {
                         player.position = activeLevel.playerSpawnpoint;
                         runState = RunState.playing;
+
                         timeData.Reset();
+                        activeLevel.Reset();
+
                         stateTimer = -1;
                         qued_player_death = false;
                     }

@@ -18,6 +18,6 @@ namespace RewindGame.Game.Abstract
 
         public abstract bool isThisOverlapping(FRectangle rect, MoveDirection direction);
 
-        public abstract PrimaryCollisionType getCollisionType();
+        public abstract CollisionType getCollisionType();
     }
 }

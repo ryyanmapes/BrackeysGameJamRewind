@@ -36,8 +36,8 @@ namespace RewindGame.Game
 
             velocity = new Vector2(PhysicsEntity.minMagnitude(velocity.X, terminalVelocity.X), PhysicsEntity.minMagnitude(velocity.Y, terminalVelocity.Y));
 
-            moveX(velocity.X * elapsed_signed, SecondaryCollisionType.none);
-            moveY(velocity.Y * elapsed_signed, SecondaryCollisionType.none);
+            moveX(velocity.X * elapsed_signed);
+            moveY(velocity.Y * elapsed_signed);
         }
 
         public bool isGrounded()

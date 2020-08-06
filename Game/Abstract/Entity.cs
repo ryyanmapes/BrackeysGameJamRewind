@@ -7,18 +7,13 @@ using System.Text;
 namespace RewindGame.Game
 {
 
-    public enum PrimaryCollisionType
+    public enum CollisionType
     {
         harmless,
         normal,
         death,
         refresh_jump,
         timestop
-    }
-    public enum SecondaryCollisionType
-    {
-        none,
-        squish
     }
 
     public enum MoveDirection
@@ -39,20 +34,20 @@ namespace RewindGame.Game
 
     public class CollisionReturn
     {
-        public CollisionReturn(PrimaryCollisionType type_, CollisionObject collisionee_, int priority_)
+        public CollisionReturn(CollisionType type_, CollisionObject collisionee_, int priority_)
         {
             type = type_;
             collisionee = collisionee_;
             priority = priority_;
         }
 
-        public PrimaryCollisionType type = PrimaryCollisionType.harmless;
+        public CollisionType type = CollisionType.harmless;
         public CollisionObject collisionee;
         public int priority;
 
         public static CollisionReturn None()
         {
-            return new CollisionReturn(PrimaryCollisionType.harmless, null, 0);
+            return new CollisionReturn(CollisionType.harmless, null, 0);
         }
     }
 
@@ -61,12 +56,13 @@ namespace RewindGame.Game
         protected Vector2 moveRemainder;
 
         protected Vector2 velocity;
-        protected CollisionObject riddenObject;
+        public CollisionObject riddenObject;
         protected CollisionObject hungObject;
         protected HangDirection hangDirection = HangDirection.None;
 
         // Code inspired by https://medium.com/@MattThorson/celeste-and-towerfall-physics-d24bd2ae0fc5
-        public void moveX(float amount, SecondaryCollisionType onSecondCollision)
+        public void moveX(float amount) { moveX(amount, null); }
+        public void moveX(float amount, Solid pusher)
         {
             float real_amount = amount + moveRemainder.X;
             int move = (int)Math.Floor(real_amount);
@@ -86,8 +82,8 @@ namespace RewindGame.Game
 
                 switch (collision.type)
                 {
-                    case PrimaryCollisionType.normal:
-                        if (onSecondCollision == SecondaryCollisionType.squish)
+                    case CollisionType.normal:
+                        if (pusher != null)
                         {
                             Die();
                         }
@@ -98,7 +94,7 @@ namespace RewindGame.Game
                             hangDirection = sign > 0 ? HangDirection.Right : HangDirection.Left;
                         }
                         return;
-                    case PrimaryCollisionType.death:
+                    case CollisionType.death:
                         Die();
                         break;
                 }
@@ -109,7 +105,9 @@ namespace RewindGame.Game
 
         }
 
-        public void moveY(float amount, SecondaryCollisionType onSecondCollision)
+        public void moveY(float amount) { moveY(amount, null); }
+
+        public void moveY(float amount, Solid pusher )
         {
             float real_amount = amount + moveRemainder.Y;
             int move = (int)Math.Floor(real_amount);
@@ -120,16 +118,17 @@ namespace RewindGame.Game
 
             while (move != 0)
             {
+                
                 riddenObject = null;
 
                 Vector2 new_position = position + new Vector2(0, sign);
 
-                CollisionReturn collision = localLevel.getSolidCollisionAt(this.getCollisionBoxAt(new_position), dir);
+                CollisionReturn collision = localLevel.getSolidCollisionAt(this.getCollisionBoxAt(new_position), dir, pusher);
 
                 switch ( collision.type )
                 {
-                    case PrimaryCollisionType.normal:
-                        if (onSecondCollision == SecondaryCollisionType.squish)
+                    case CollisionType.normal:
+                        if (pusher != null)
                         {
                             Die();
                         }
@@ -139,13 +138,15 @@ namespace RewindGame.Game
                             riddenObject = collision.collisionee;
                         }
                         return;
-                    case PrimaryCollisionType.death:
+                    case CollisionType.death:
                         Die();
                         break;
-                    case PrimaryCollisionType.refresh_jump:
+                    case CollisionType.refresh_jump:
                         RefreshJump();
                         break;
                 }
+
+                if (move > 0 && pusher != null) riddenObject = pusher;
 
                 position = new_position;
                 move -= sign;

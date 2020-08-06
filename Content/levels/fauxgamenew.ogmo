@@ -21,7 +21,7 @@
   "compactExport": false,
   "externalScript": "",
   "playCommand": "",
-  "entityTags": ["playerspawn"],
+  "entityTags": ["playerspawn", "platforms"],
   "layers": [
     {
       "definition": "tile",
@@ -37,7 +37,7 @@
       "name": "entities",
       "gridSize": {"x": 14, "y": 14},
       "exportID": "50574192",
-      "requiredTags": ["playerspawn"],
+      "requiredTags": [],
       "excludedTags": []
     },
     {
@@ -78,6 +78,47 @@
     }
   ],
   "entities": [
+    {
+      "exportID": "69830920",
+      "name": "limboplatform",
+      "limit": -1,
+      "size": {"x": 28, "y": 14},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["platforms"],
+      "values": [
+        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000},
+        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000}
+      ],
+      "texture": "C:/Users/ryan_/Desktop/jammm/limboplatformup0.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAFMSURBVEhLxZS7bsIwFIadPAqPwNIlUpkqmLq1zwFrVxgLz8HYCalTB5Y+VeC3ciLH9rk4JO0nJTIJ8ZdzS7Vev7XOSPPy5JrXVffLzvXrx12/f/262h8/7cIRMoKkNU5k18BDYyFH7c93rOIx0vCZXkhYxKXScL9ECC6Xc/Wx3fmju5Rglcb/S4SQdUsVizTO1kAYyw6no9rBkhT34j17YUlkMZyUShLuXbUtH8Rm895i2DmQrvB+OKd4iVwPsELI4qhxrVsmkJikz4tlNmPZLs3JgJZ2P1L3yKS6ZoWPoI1TVohIcunjUop0IjotA0BsGmksrIIYNqVzyMDkNdRIhKgTDqnwqBlXT41BDbEJl6opGgb0EUoywN2DrCTi/6shIpDecqqUJnNIqf3TsZhLBgZCrXGmgP20zRWl+C0NyTVNacMA01hI3VuGczeWz+wDOfU+pQAAAABJRU5ErkJggg=="
+    },
     {
       "exportID": "67213102",
       "name": "playerspawn",

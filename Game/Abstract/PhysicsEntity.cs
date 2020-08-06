@@ -24,8 +24,8 @@ namespace RewindGame.Game
 
             float elapsed = (float)state.getDeltaTime();
 
-            moveX(velocity.X * elapsed, SecondaryCollisionType.none);
-            moveY(velocity.Y * elapsed, SecondaryCollisionType.none);
+            moveX(velocity.X * elapsed);
+            moveY(velocity.Y * elapsed);
 
             // our main mechanic will have to do something about this
             // will this actually work just as expected if elapsed is negative?!
