@@ -15,18 +15,22 @@ namespace RewindGame.Game.Solids
         public int starting_rotation_degrees;
         private float current_rotation_degrees;
         private float current_rotation_radians;
-        public static SpikyBall Make(Level level, Vector2 starting_pos, float radius, float speed, int starting_rotation)
+        private Vector2 startingPosition;
+        public bool clockwize;
+        public static SpikyBall Make(Level level, Vector2 starting_pos, float radius, float speed, int starting_rotation, bool clockwize)
         {
             var tile = new SpikyBall();
-            tile.Initialize(level, starting_pos, radius, speed, starting_rotation);
+            tile.Initialize(level, starting_pos, radius, speed, starting_rotation, clockwize);
             return tile;
         }
 
-        public void Initialize(Level level, Vector2 starting_pos, float radius_, float speed_, int startingrotation)
+        public void Initialize(Level level, Vector2 starting_pos, float radius_, float speed_, int startingrotation, bool clockwize_)
         {
             radius = radius_;
             speed = speed_;
             current_rotation_degrees = startingrotation;
+            startingPosition = starting_pos;
+            clockwize = clockwize_;
 
             texturePath = "limbo/chainball";
             collisionSize = new Vector2(28, 28);
@@ -39,17 +43,29 @@ namespace RewindGame.Game.Solids
 
         public override void Update(StateData state)
         {
-            if (state.getSignedDeltaTime() > 0)
+            if (state.getSignedDeltaTime() > 0 && clockwize)
             {
                 current_rotation_degrees += speed;
-                current_rotation_radians = (float)((current_rotation_degrees * Math.PI / 180));
+                current_rotation_radians = (float)(((current_rotation_degrees + 90) * Math.PI / 180));
                 Move(new Vector2((int)(radius * Math.Cos(current_rotation_radians)), (int)(radius * Math.Sin(current_rotation_radians))));
             }
-            else if (state.getSignedDeltaTime() < 0)
+            else if (state.getSignedDeltaTime() < 0 && clockwize)
             {
                 current_rotation_degrees -= speed;
-                current_rotation_radians = (float)((current_rotation_degrees * Math.PI / 180));
+                current_rotation_radians = (float)(((current_rotation_degrees + 90) * Math.PI / 180));
                 Move(new Vector2((int)(radius * -Math.Cos(current_rotation_radians)), (int)(radius * -Math.Sin(current_rotation_radians))));
+            }
+            else if (state.getSignedDeltaTime() > 0 && !clockwize)
+            {
+                current_rotation_degrees -= speed;
+                current_rotation_radians = (float)(((current_rotation_degrees + 90) * Math.PI / 180));
+                Move(new Vector2((int)(radius * -Math.Cos(current_rotation_radians)), (int)(radius * -Math.Sin(current_rotation_radians))));
+            }
+            else if (state.getSignedDeltaTime() < 0 && !clockwize)
+            {
+                current_rotation_degrees += speed;
+                current_rotation_radians = (float)(((current_rotation_degrees + 90) * Math.PI / 180));
+                Move(new Vector2((int)(radius * Math.Cos(current_rotation_radians)), (int)(radius * Math.Sin(current_rotation_radians))));
             }
             if (current_rotation_degrees == 0)
             {
@@ -59,7 +75,9 @@ namespace RewindGame.Game.Solids
 
         public override void Reset() 
         {
-          // current_rotation_degrees = starting_rotation_degrees;
+            position = startingPosition;
+            current_rotation_degrees = 0;
+            base.Reset();
         }
 
     }
