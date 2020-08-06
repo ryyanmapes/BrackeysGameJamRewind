@@ -18,6 +18,8 @@ namespace RewindGame.Game.Effects
         private float fadeValue = 0f;
         private bool showCube = false;
         private Color cubeColor = Color.Black;
+        private float stall = 1.50f;
+        private bool fadeOut = false;
 
         public OverlayEffects(RewindGame parent_game, ContentManager content) 
         { 
@@ -54,13 +56,24 @@ namespace RewindGame.Game.Effects
             }
             else if (showCube == true)
             {
-                if(fadeValue > 0.01f)
+                if (fadeValue < stall && fadeOut == false)
                 {
-                    fadeValue -= .1f;
+                    fadeValue += .1f;
                 }
-                else if(fadeValue <= 0.01f)
+                else if (fadeValue >= stall && fadeOut == false)
+                {
+                    fadeValue -= .05f;
+                    fadeOut = true;
+                }
+                else if (fadeOut == true)
+                {
+                    fadeValue -= .05f;
+                }
+                if(fadeValue <= 0.01f)
                 {
                     showCube = false;
+                    fadeValue = 0.00f;
+                    fadeOut = false;
                 }
             }
         }
