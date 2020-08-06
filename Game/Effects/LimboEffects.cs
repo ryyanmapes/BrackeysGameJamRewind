@@ -79,7 +79,7 @@ namespace RewindGame.Game.Effects
             }
             if(speedUp == true)
             {
-                if (speedFactor != 4)
+                if (speedFactor <= 2)
                 {
                     speedFactor += .0225f;
                 }
