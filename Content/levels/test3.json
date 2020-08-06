@@ -30,7 +30,27 @@
       "gridCellsX": 52,
       "gridCellsY": 17,
       "entities": [
-        {"name": "playerspawn", "id": 0, "_eid": "67213102", "x": 154, "y": 126, "originX": -3, "originY": -7}
+        {"name": "playerspawn", "id": 0, "_eid": "67213102", "x": 154, "y": 126, "originX": -3, "originY": -7},
+        {
+          "name": "limbospikyball",
+          "id": 1,
+          "_eid": "74328081",
+          "x": 126,
+          "y": 98,
+          "originX": 0,
+          "originY": 0,
+          "values": {"radius": 120, "speed": 1, "starting_rotation_degrees": 0}
+        },
+        {
+          "name": "limbospikyball",
+          "id": 2,
+          "_eid": "74328081",
+          "x": 294,
+          "y": 98,
+          "originX": 0,
+          "originY": 0,
+          "values": {"radius": 200, "speed": -0.5, "starting_rotation_degrees": 180}
+        }
       ]
     },
     {

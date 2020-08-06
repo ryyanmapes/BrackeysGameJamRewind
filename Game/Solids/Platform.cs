@@ -26,7 +26,7 @@ namespace RewindGame.Game.Solids
 
         public override void Update(StateData state)
         {
-            Move(new Vector2(velocity.X * state.getSignedDeltaTime(), velocity.Y * state.getSignedDeltaTime()));
+            Move(new Vector2(velocity.X * state.getTimeDependentDeltaTime(), velocity.Y * state.getTimeDependentDeltaTime()));
         }
 
         public override void LoadContent(){ }

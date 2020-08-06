@@ -18,7 +18,7 @@ namespace RewindGame.Game
 
         public override void Update(StateData state)
         {
-            float elapsed_signed = (float)state.getSignedDeltaTime();
+            float elapsed_signed = (float)state.getTimeDependentDeltaTime();
             //float elapsed = (float)state.getDeltaTime();
             // this is the only difference between this and normal physics entity
             // this makes physics go backwards when timestate is backwards

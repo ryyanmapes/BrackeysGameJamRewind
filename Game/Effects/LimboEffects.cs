@@ -45,7 +45,7 @@ namespace RewindGame.Game.Effects
         public void Update(StateData state)
         {
             // use this only for time-changing stuff, like falling the rain
-            rainfall -= (int)(1500 * state.getSignedDeltaTime());
+            rainfall -= (int)(1500 * state.getTimeDependentDeltaTime());
             if(rainfall >= raindrop0.Height)
             {
                 rainfall = 0;

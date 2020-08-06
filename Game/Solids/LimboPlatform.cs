@@ -49,6 +49,10 @@ namespace RewindGame.Game.Solids
 
             anims = new AnimationPlayer(anim, 1, Vector2.Zero, level.Content);
 
+            doLeftCollision = false;
+            doRightCollision = false;
+            doDownCollision = false;
+
             base.Initialize(level, starting_pos, velocity_, is_long? 4 : 2);
         }
 
@@ -59,7 +63,7 @@ namespace RewindGame.Game.Solids
             anims.Draw(state, sprite_batch, position, velocity.X > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, state.getTimeN());
         }
 
-        /*
+        
         public override CollisionReturn getCollision(FRectangle rect, MoveDirection direction)
         {
             var return_c = base.getCollision(rect, MoveDirection.none);
@@ -70,15 +74,15 @@ namespace RewindGame.Game.Solids
                 return CollisionReturn.None();
             return return_c;
         }
-
-        public virtual Vector2 getEntityOverlap(Entity entity)
+        
+        public override Vector2 getEntityOverlap(Entity entity)
         {
             var rect = entity.getCollisionBox();
             if (rect.Y + rect.Height > position.Y + Level.SEMISOLID_THICKNESS)
                 return Vector2.Zero;
             var overlap = entity.getOverlap(this);
             return entity.getOverlap(this);
-        }*/
+        }
 
     }
 }

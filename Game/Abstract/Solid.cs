@@ -12,6 +12,11 @@ namespace RewindGame.Game
         protected bool doWallCarry = true;
         protected bool doTopCarry = true;
 
+        public bool doRightCollision = true;
+        public bool doLeftCollision = true;
+        public bool doUpCollision = true;
+        public bool doDownCollision = true;
+
         // Code inspired by https://medium.com/@MattThorson/celeste-and-towerfall-physics-d24bd2ae0fc5
         public void Move(Vector2 transform)
         {
@@ -34,7 +39,8 @@ namespace RewindGame.Game
                         Vector2 overlap = getEntityOverlap(entity) * -1;
                         if (overlap.X != 0)
                         {
-                            entity.moveX(this.getCollisionBox().getRight() - entity.getCollisionBox().getLeft(), this);
+                            if (doRightCollision)
+                                entity.moveX(this.getCollisionBox().getRight() - entity.getCollisionBox().getLeft(), this);
                         }
                         else if (riding_entities.Contains(entity))
                         {
@@ -49,7 +55,8 @@ namespace RewindGame.Game
                         Vector2 overlap = getEntityOverlap(entity) * -1;
                         if (overlap.X != 0)
                         {
-                            entity.moveX(this.getCollisionBox().getLeft() - entity.getCollisionBox().getRight(), this);
+                            if (doLeftCollision)
+                                entity.moveX(this.getCollisionBox().getLeft() - entity.getCollisionBox().getRight(), this);
                         }
                         else if (riding_entities.Contains(entity))
                         {
@@ -71,7 +78,8 @@ namespace RewindGame.Game
                         Vector2 overlap = getEntityOverlap(entity) * -1;
                         if (overlap.Y != 0)
                         {
-                            entity.moveY(this.getCollisionBox().getBottom() - entity.getCollisionBox().getTop(), this);
+                            if (doDownCollision)
+                                entity.moveY(this.getCollisionBox().getBottom() - entity.getCollisionBox().getTop(), this);
                         }
                         else if (riding_entities.Contains(entity))
                         {
@@ -86,7 +94,8 @@ namespace RewindGame.Game
                         Vector2 overlap = getEntityOverlap(entity) * -1;
                         if (overlap.Y != 0)
                         {
-                            entity.moveY(this.getCollisionBox().getTop() - entity.getCollisionBox().getBottom(), this);
+                            if (doUpCollision)
+                                entity.moveY(this.getCollisionBox().getTop() - entity.getCollisionBox().getBottom(), this);
                         }
                         else if (riding_entities.Contains(entity))
                         {

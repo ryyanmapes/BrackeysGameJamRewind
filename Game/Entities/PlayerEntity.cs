@@ -81,7 +81,7 @@ namespace RewindGame.Game
                 temporaryAllowJump = true;
             }
 
-            if (is_grounded)
+            if (is_grounded && velocity.Y >= 0)
             {
                 //noOppositeTravelDirection = HangDirection.None;
                 noOppositeTravelTime = -1f;

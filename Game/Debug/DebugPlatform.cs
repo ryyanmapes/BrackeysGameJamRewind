@@ -18,7 +18,7 @@ namespace RewindGame.Game.Debug
 
         public override void Update(StateData state)
         {
-            Move(new Vector2((float)(25.0 *state.getSignedDeltaTime()), 0));
+            Move(new Vector2((float)(25.0 *state.getTimeDependentDeltaTime()), 0));
         }
 
 

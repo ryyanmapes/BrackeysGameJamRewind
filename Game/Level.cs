@@ -67,6 +67,7 @@ namespace RewindGame.Game
         public String[] connectedLevelNames = { "", "", "", "" };
         public float screensHorizontal;
         public float screensVertical;
+        public string startTriggers = "";
 
 
         public Level(IServiceProvider serviceProvider, Vector2 orgin, RewindGame parent)
@@ -201,6 +202,62 @@ namespace RewindGame.Game
             }
         }
 
+        public void SetInactive()
+        {
+            foreach (TimeEntity entity in sceneEntities)
+            {
+                entity.SetInactive();
+            }
+
+            foreach (Solid solid in sceneSolids)
+            {
+                solid.SetInactive();
+            }
+
+            foreach (ITile tile in sceneSolidTiles)
+            {
+                tile.SetInactive();
+            }
+
+            foreach (ITile tile in sceneDecorativesForeground)
+            {
+                tile.SetInactive();
+            }
+
+            foreach (ITile tile in sceneDecorativesBackground)
+            {
+                tile.SetInactive();
+            }
+        }
+
+        public void SetActive()
+        {
+            foreach (TimeEntity entity in sceneEntities)
+            {
+                entity.SetActive();
+            }
+
+            foreach (Solid solid in sceneSolids)
+            {
+                solid.SetActive();
+            }
+
+            foreach (ITile tile in sceneSolidTiles)
+            {
+                tile.SetActive();
+            }
+
+            foreach (ITile tile in sceneDecorativesForeground)
+            {
+                tile.SetActive();
+            }
+
+            foreach (ITile tile in sceneDecorativesBackground)
+            {
+                tile.SetActive();
+            }
+        }
+
         public CollisionReturn getSolidCollisionAt(FRectangle rect, MoveDirection direction) { return getSolidCollisionAt(rect, direction, null); }
 
         public CollisionReturn getSolidCollisionAt(FRectangle rect, MoveDirection direction, Solid pusher)
@@ -317,7 +374,7 @@ namespace RewindGame.Game
 
         public void PlaceEntity(EntityType type, int x, int y, EntityInfo info)
         {
-            Vector2 position = new Vector2(x, y) * 4;
+            Vector2 position = new Vector2(x, y) * 4 + levelOrgin;
 
             switch (type)
             {
@@ -328,8 +385,17 @@ namespace RewindGame.Game
                 case EntityType.LimboPlatform:
                     sceneSolids.Add(LimboPlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), false));
                     return;
-                case EntityType.LimboLargePlatform:
+                case EntityType.LargeLimboPlatform:
                     sceneSolids.Add(LimboPlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), true));
+                    return;
+                case EntityType.LimboSpikePlatform:
+                    sceneSolids.Add(LimboSpikePlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    return;
+                case EntityType.LargeLimboSpikePlatform:
+                    sceneSolids.Add(LimboSpikePlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), true));
+                    return;
+                case EntityType.LimboSpikyBall:
+                    sceneSolids.Add(LimboSpikyBall.Make(this, position, info.radius, info.speed, info.starting_rotation_degrees));
                     return;
                 default:
                     //todo
@@ -372,6 +438,14 @@ namespace RewindGame.Game
             }
         }
 
+
+        public void RunStartTriggers()
+        {
+            foreach(string s in startTriggers.Split(","))
+            {
+                parentGame.DoTrigger(s);
+            }
+        }
 
         public void TransitionTo(MoveDirection direction)
         {

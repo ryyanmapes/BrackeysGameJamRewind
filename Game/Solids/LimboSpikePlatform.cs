@@ -27,15 +27,18 @@ namespace RewindGame.Game.Solids
             if (is_long)
             {
 
-                anim = new Animation("limbo/spikeplatform4", 3, 4, true);
+                anim = new Animation("limbo/4spikeplatform", 1, 1, true);
 
             }
             else
             {
-                anim = new Animation("limbo/spikeplatform2", 3, 4, true);
+                anim = new Animation("limbo/2spikeplatform", 1, 1, true);
             }
 
             anims = new AnimationPlayer(anim, 1, Vector2.Zero, level.Content);
+
+            starting_pos -= new Vector2(0, 0.5f*Level.TILE_WORLD_SIZE);
+            collisionOffset = new Vector2(0, 0.5f * Level.TILE_WORLD_SIZE);
 
             base.Initialize(level, starting_pos, velocity_, is_long? 4 : 2);
         }

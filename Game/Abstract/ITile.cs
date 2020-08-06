@@ -27,5 +27,9 @@ namespace RewindGame.Game.Abstract
 
         public abstract void Reset();
 
+        public abstract void SetInactive();
+
+        public abstract void SetActive();
+
     }
 }
