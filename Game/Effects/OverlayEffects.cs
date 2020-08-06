@@ -17,6 +17,7 @@ namespace RewindGame.Game.Effects
         private Texture2D deathSquare;
         private float fadeValue = 0f;
         private bool showCube = false;
+        private Color cubeColor = Color.Black;
 
         public OverlayEffects(RewindGame parent_game, ContentManager content) 
         { 
@@ -53,11 +54,11 @@ namespace RewindGame.Game.Effects
             }
             else if (showCube == true)
             {
-                if(fadeValue > 0.00f)
+                if(fadeValue > 0.01f)
                 {
                     fadeValue -= .1f;
                 }
-                else if(fadeValue == 0.00f)
+                else if(fadeValue <= 0.01f)
                 {
                     showCube = false;
                 }
@@ -68,7 +69,7 @@ namespace RewindGame.Game.Effects
         {
             if (showCube)
             {
-                sprite_batch.Draw(deathSquare, Vector2.Zero, new Rectangle(0, 0, (int)RewindGame.LEVEL_SIZE_X, (int)RewindGame.LEVEL_SIZE_Y), new Color(Color.White, fadeValue), 0f, Vector2.Zero, new Vector2(RewindGame.LEVEL_SIZE_X, RewindGame.LEVEL_SIZE_Y), SpriteEffects.None, 0f);
+                sprite_batch.Draw(deathSquare, Vector2.Zero, new Rectangle(0, 0, (int)RewindGame.LEVEL_SIZE_X, (int)RewindGame.LEVEL_SIZE_Y), new Color(cubeColor, fadeValue), 0f, Vector2.Zero, new Vector2(RewindGame.LEVEL_SIZE_X, RewindGame.LEVEL_SIZE_Y), SpriteEffects.None, 0f);
             }
         }
 
