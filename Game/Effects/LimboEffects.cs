@@ -42,9 +42,9 @@ namespace RewindGame.Game.Effects
         public void Update(StateData state)
         {
             // use this only for time-changing stuff, like falling the rain
-            rainfall -= (int)(1500 * state.getSignedDeltaTime());
+            rainfall -= (int)(1500 * state.getTimeDependentDeltaTime());
                 //TODO make the speed up slowley speed up peaking at highway to the dangerzone
-            rainfall -= (int)((Math.Abs(state.time_data.time_moment)* 2) * state.getSignedDeltaTime())/3;
+            rainfall -= (int)((Math.Abs(state.time_data.time_moment)* 2) * state.getTimeDependentDeltaTime())/3;
          //   fade = (float)(Math.Abs(state.time_data.time_moment)/parentGame.timeDangerPosBound);
             if (rainfall >= raindrop0.Height)
             {
