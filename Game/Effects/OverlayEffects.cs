@@ -93,10 +93,12 @@ namespace RewindGame.Game.Effects
                     fadeOut = false;
                 }
             }
-            
-            foreach (EffectParticle particle in starParticles)
+
+            for (int i = starParticles.Count - 1; i >= 0; i--)
             {
+                var particle = starParticles[i];
                 particle.Update(state);
+                if (particle.isDead) starParticles.RemoveAt(i);
             }
 
         }
@@ -104,19 +106,17 @@ namespace RewindGame.Game.Effects
         public void Draw(StateData state, SpriteBatch sprite_batch)
         {
             Vector2 CameraPosReal = state.camera_position - new Vector2(RewindGame.LEVEL_SIZE_X / 2, RewindGame.LEVEL_SIZE_Y / 2);
+
+            foreach (EffectParticle particle in starParticles)
+            {
+                particle.Draw(state, sprite_batch);
+            }
+
             if (showCube)
             {
                 sprite_batch.Draw(deathSquare, CameraPosReal, new Rectangle((int)CameraPosReal.X, (int)CameraPosReal.Y, (int)RewindGame.LEVEL_SIZE_X, (int)RewindGame.LEVEL_SIZE_Y), new Color(cubeColor, fadeValue), 0f, Vector2.Zero, new Vector2(RewindGame.LEVEL_SIZE_X, RewindGame.LEVEL_SIZE_Y), SpriteEffects.None, 0f);
             }
-            if (true)
-            {
-                for (int i=starParticles.Count-1; i >= 0; i--)
-                {
-                    var particle = starParticles[i];
-                    particle.Draw(state, sprite_batch);
-                    if (particle.isDead) starParticles.RemoveAt(i);
-                }
-            }
+            
         }
         public void MakeStasisParticles(StateData state)
         {
