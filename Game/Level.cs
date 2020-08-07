@@ -56,11 +56,12 @@ namespace RewindGame.Game
         public List<ITile> sceneDecorativesBackground = new List<ITile>();
         public List<ITile> sceneDecorativesForeground = new List<ITile>();
         public Vector2 playerSpawnpoint = Vector2.Zero;
-        public SpecialObject specialObject;
 
         public Vector2 levelOrgin;
         public ContentManager Content;
         public RewindGame parentGame;
+        public SpecialObject specialObject;
+        public Warp warp;
 
         public bool isActiveScene = false;
 
@@ -319,6 +320,16 @@ namespace RewindGame.Game
             return false;
         }
 
+        public bool getIsInWarp(FRectangle rect)
+        {
+            if (warp != null)
+            {
+                return warp.isThisOverlapping(rect);
+            }
+
+            return false;
+        }
+
 
 
         public void PlaceTile(TileType type, int x, int y, TileSprite sprite)
@@ -400,6 +411,9 @@ namespace RewindGame.Game
                     position.Y += 55;
                     position.X += 24;
                     playerSpawnpoint = position;
+                    return;
+                case EntityType.Warp:
+                    warp = Warp.Make(this, position);
                     return;
                 case EntityType.LimboPlatform:
                     sceneSolids.Add(LimboPlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), false));

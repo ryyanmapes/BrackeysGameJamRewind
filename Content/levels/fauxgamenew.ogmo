@@ -21,7 +21,7 @@
   "compactExport": false,
   "externalScript": "",
   "playCommand": "",
-  "entityTags": ["playerspawn", "limbo", "danger", "special", "cottonwood"],
+  "entityTags": ["functioning", "limbo", "danger", "special", "cottonwood"],
   "layers": [
     {
       "definition": "tile",
@@ -161,7 +161,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["playerspawn"],
+      "tags": ["functioning"],
       "values": [],
       "texture": "C:/Users/ryan_/Desktop/jammm/fauxidle0.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAGrSURBVDhPjZS/LwRBFMdnNbpLiFCoCCdI7lBeKySitBcaCqK4hlaIXxGiVSkkFKK43ClFoVFdIyF3BbEFUSj8SCT+geW9ne/e29m9vf0kl3lvf3zm7byZs1zXVZZlKUB5V++AS3HHWEZ1T6fVzeJB/YEE+FIaiWE77wX/kBDkjo51pNRu9Sd2El86cbruy96vHPV9X+MY1S45F5wTT9e/sWKWTp5tsFDKPl6e+aWdkXa+V1ktJBaH1lSynW3zqycGp1Isw5hICgleioOemTt8SyalhzP5Zc5NaqUTHXmfD8yKQ58f9ckgajJMJJcjsvyhGdtFw0xoN2z133FsLlFTqQ595J4FtFseL8shR+hClLBR1dlNO1LcoseGQHhbXuARUF7dK+vM6wX6EZB29qR5LSGSFcrOEzKn92RDG1ZKQmoKWCm26siDcrovJwYB6eerE1pjKZZIYSH1xSNo2n3ZdWoKgWtoEg4NTljTRoH53Kha25/VWRASyj2bWHpeeeCfuYbmCSRipfLTqVL6SeR9ef5D0qjNT6BSk1LfuI7qxFaKxgDk5vXgf4BSf3VX6GsyOeMmAAAAAElFTkSuQmCC"
@@ -690,6 +690,44 @@
       ],
       "texture": "C:/Users/ryan_/Desktop/jammm/limboplatformlongup0.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAcCAYAAAA0u3w+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAGmSURBVFhH5ZaxTsMwEIaTPgqPwMJSCSbUTmzwHLB2LSPlORiZKjExdOGpgv4qf3Sx70wcu60TPilqE8f2fTr7nHq1emwqwfL+plo+3LV3p+fw+V0dvn7au7j53b4a9Xb31hc8oxxBoCR2ftkXuMILPJAP3Q5TQsvmov09NvKFS0mmZE+TA50goSg6n0OUc6TIbZ5f6vavh1dkwH7/0XV4fd8d20+1NxFoLrn1+slz8TIo5SQYVA6cg5xyQIu9J+i+wOxJcovGjBWSI65DJ2hlziJVVPYdMs4QOSJd6qbxktSBNY2D1wLFiO1jlxqDxWqxxoiRczEFIedmVdvEJEYUAWuBapIpckAV1OSIJQnBoRm9vbo2A5WSqXLAq6KpIBBcCE4GSLRnEq3vWDmQZYkye1rW5TmKoIcGy34pciBYZDiJhiVkkSvgWEzBnHKXJPseLA1PEPsMV2gpYc9Z+7E0ektUKyxkTIEpgS6DITlgtfHsKzWj/2cPIkOhLEx1iXrHBJfqrI+JuciBnuBfhWaKzP5LJvgtKtGKTOkFBgw6JkLVtWyq6heXVFhzm5lTFwAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "83602113",
+      "name": "warp",
+      "limit": -1,
+      "size": {"x": 28, "y": 28},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["functioning"],
+      "values": [],
+      "texture": "C:/Users/ryan_/Desktop/jammm/timeriploop.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAcCAYAAACQ0cTtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAFLSURBVEhL3ZQxbgIxEEUXrpIDUFDQbCQqKiRqzkCXgJIiJQUIko4zUEdKlQop21BQcICcBfTR2DvAjPcvdLzGs961n8ceb/awNKSl2fzvDhJm3ad2rfFNaW9CixnukoE6wlrbkJqY2VI6My2ajeYSlTAZUpl5ovfVm0QlqQwrZVo0zPsSlayLH4lKPCG9jcX3RqJzrAV4W1qZ2fTrMw4sfrcSnbPf/1EZJmWeCJODVuv51AJGGAM98cfLa0M/rxbLOHEQBS77U0LzzC5FAZ2RJ09di2SBeGeUIu913GKKMmydhBEM1OhsdJaB0WQskV3+Vx16CwP6zIAl0guzFg7MTkaogSgfdE+xd6GB+8ITWugKvEkGGCErAsmXwBKGKtU/4ioRqPwAWMJwRoARAeoj4AlZEaD/+lY5e5fXg5YB7/6w1JKBe4WPSJYdAcERpoeHwcOJAAAAAElFTkSuQmCC"
     }
   ],
   "tilesets": [

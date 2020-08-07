@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RewindGame.Game;
 using RewindGame.Game.Effects;
+using RewindGame.Game.Solids;
 using RewindGame.Game.Sound;
 using System;
 using System.Collections.Generic;
@@ -72,9 +73,9 @@ namespace RewindGame
             time_status = TimeState.forward;
         }
 
-        public int getFloaty(float xpos)
+        public int getFloaty(float xpos, bool use_still)
         {
-            if (time_status == TimeState.still) return 0;
+            if (use_still && time_status == TimeState.still) return 0;
 
             int real_xpos = (int)xpos / Level.TILE_WORLD_SIZE;
             int real_mod = (time_moment + real_xpos)/10;
@@ -133,12 +134,14 @@ namespace RewindGame
     {
         playing,
         playerdead,
-        levelswap,
-        paused
+        areaswap_1,
+        areaswap_2,
+        areaswap_3,
     }
 
     public enum AreaState
     {
+        none,
         limbo,
         cotton,
         eternal
@@ -227,8 +230,12 @@ namespace RewindGame
         public String qued_level_load_name = "";
         public bool qued_player_death = false;
 
+        public AreaState area = AreaState.none;
         public RunState runState = RunState.playing;
         public float stateTimer = -1f;
+        public float playerHoverTime = 3;
+        public float warpTime = 5;
+        public float areaSwapTime = 5;
 
         public int deathsStat = 0;
 
@@ -284,16 +291,57 @@ namespace RewindGame
             player = new PlayerEntity(this, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 - 300));
             player.position = activeLevel.playerSpawnpoint;
 
-            areaEffect = new LimboEffects(this, Content);
             overlayEffect = new OverlayEffects(this, Content);
             soundManager = new SoundManager(this, Content);
             timelineGUI = new TimelineBarGUI(this, Content);
 
-            DoTrigger("limbo_begin");
+            LoadNextArea();
             //DoTrigger("limbo_fourth");
         }
 
+        public void LoadNextArea()
+        {
+            switch (area)
+            {
+                case AreaState.limbo:
+                    LoadArea(AreaState.cotton);
+                    break;
+                case AreaState.cotton:
+                    LoadArea(AreaState.eternal);
+                    break;
 
+            }
+        }
+
+        public void LoadArea(AreaState area)
+        {
+            areaEffect.Dispose();
+            switch (area)
+            {
+                case AreaState.limbo:
+                    area = AreaState.cotton;
+                    soundManager.BeginLimboMusic1();
+                    areaEffect = new LimboEffects(this, Services);
+                    timeData.time_kind = TimeKind.limbo;
+                    loadLevelAndConnections("limbo1");
+
+                    timelineGUI.SetBar(timelineGUI.limboBar1);
+                    timelineGUI.currentBarSize = 105 * 4;
+                    timeNegBound = -300;
+                    timePosBound = 300;
+                    timeDangerNegBound = -250;
+                    timeDangerPosBound = 250;
+                    break;
+                case AreaState.cotton:
+                    area = AreaState.cotton;
+                    soundManager.BeginCottonwoodMusic1();
+                    areaEffect = new CottonwoodEffects(this, Services);
+                    timeData.time_kind = TimeKind.cottonwood;
+                    loadLevelAndConnections("cotton1");
+                    break;
+
+            }
+        }
 
         public void loadLevelAndConnections(String name)
         {
@@ -456,6 +504,52 @@ namespace RewindGame
                 stateTimer -= (float)state.getDeltaTime();
                 if (stateTimer <= 0)
                 {
+                    switch (runState)
+                    {
+                        case RunState.playerdead:
+                            player.position = activeLevel.playerSpawnpoint;
+                            runState = RunState.playing;
+
+                            timeData.Reset();
+                            activeLevel.Reset();
+
+                            stateTimer = -1;
+                            qued_player_death = false;
+                            break;
+
+                        case RunState.areaswap_1:
+                            activeLevel.warp.TriggerActivation();
+                            overlayEffect.StartWarpPlayer(player.position, state);
+                            overlayEffect.StartWarpArtifact(activeLevel.specialObject.position, state);
+
+
+                            stateTimer = warpTime;
+                            runState = RunState.areaswap_2;
+                            break;
+
+                        case RunState.areaswap_2:
+                            player.hidden = true;
+                            activeLevel.specialObject.hidden = true;
+                            activeLevel.warp.hidden = true;
+
+                            overlayEffect.StartAreaFadeout();
+
+                            stateTimer = warpTime;
+                            runState = RunState.areaswap_3;
+                            break;
+
+                        case RunState.areaswap_3:
+                            LoadNextArea();
+
+                            player.position = activeLevel.playerSpawnpoint;
+
+                            timeData.Reset();
+
+                            stateTimer = -1;
+                            runState = RunState.playing;
+                            break;
+
+                    }
                     if (runState == RunState.playerdead)
                     {
                         player.position = activeLevel.playerSpawnpoint;
@@ -471,7 +565,16 @@ namespace RewindGame
             }
 
 
-            if (runState == RunState.playing) FullUpdate(state);
+
+            switch (runState)
+            {
+                case RunState.playing:
+                    FullUpdate(state);
+                    break;
+                case RunState.areaswap_1:
+                    player.position.Y -= 10*state.getDeltaTime();
+                    break;
+            }
 
             overlayEffect.Update(state);
             soundManager.Update(state);
@@ -482,7 +585,7 @@ namespace RewindGame
 
         protected void FullUpdate(StateData state)
         {
-
+            // special text collision check
             if (activeLevel.getIsInSpecial(player.getCollisionBox()))
             {
                 if (activeLevel.specialObject.charState == -1) activeLevel.specialObject.charState = 0;
@@ -490,6 +593,15 @@ namespace RewindGame
             else if (activeLevel.specialObject != null)
             {
                 activeLevel.specialObject.Reset();
+            }
+
+            //warp collision check
+            if (activeLevel.getIsInWarp(player.getCollisionBox()))
+            {
+                // begin warp!
+                runState = RunState.areaswap_1;
+                stateTimer = playerHoverTime;
+                return;
             }
 
             if (activeLevel.getIsInStasis(player.getCollisionBox()))
@@ -680,6 +792,8 @@ namespace RewindGame
             base.Draw(game_time);
         }
 
+        
+
         public void DrawAllConnectedLevelBackgrounds(StateData state, SpriteBatch sprite_batch)
         {
             foreach(Level lvl in connectedLevels)
@@ -721,25 +835,12 @@ namespace RewindGame
 
         public void DoTrigger(string trigger)
         {
-            if (trigger == "limbo_begin")
-            {
-                // do title card?
-                soundManager.BeginLimboMusic1();
-                timeData.time_kind = TimeKind.limbo;
-            }
-            else if (trigger == "limbo_pickup")
-            {
-                soundManager.BeginLimboMusic2();
-            }
-            else if (trigger == "pianostart")
-            {
-                soundManager.BeginPiano();
-            }
-            else if (trigger == "pianoend")
-            {
-                soundManager.EndPiano();
-            }
-
+            if (trigger == "limbo_pickup")soundManager.BeginLimboMusic2();
+            else if (trigger == "cotton_pickup") soundManager.BeginCottonwoodMusic2();
+            else if (trigger == "limbo_pickup") soundManager.BeginLimboMusic2();
+            else if (trigger == "pianostart")soundManager.BeginPiano();
+            else if (trigger == "pianoend")soundManager.EndPiano();
+           
             if (trigger == "still")
             {
                 timeData.time_kind = TimeKind.none;
