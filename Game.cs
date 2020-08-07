@@ -500,6 +500,7 @@ namespace RewindGame
                 {
                     case TimeKind.limbo:
                         qued_player_death = true;
+                        soundManager.TriggerLightining();
                         break;
                     case TimeKind.cottonwood:
                         timeData.time_status = TimeState.still;
@@ -515,6 +516,7 @@ namespace RewindGame
                 {
                     case TimeKind.limbo:
                         qued_player_death = true;
+                        soundManager.TriggerLightining();
                         break;
                     case TimeKind.cottonwood:
                         timeData.time_status = TimeState.still;

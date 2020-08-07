@@ -100,16 +100,6 @@ namespace RewindGame.Game.Effects
                 particle.Update(state);
                 if (particle.isDead) starParticles.RemoveAt(i);
             }
-            if (parentGame.activeLevel.name.Contains("limbo"))
-            {
-                if (parentGame.runState == RunState.playerdead)
-                {
-                    if((state.time_data.time_moment > parentGame.timeDangerPosBound || state.time_data.time_moment < parentGame.timeDangerNegBound) && parentGame.stateTimer  == 0.5f)
-                    {
-                        parentGame.soundManager.TriggerLightining();
-                    }
-                }
-            }
 
         }
 
