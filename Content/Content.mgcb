@@ -520,8 +520,14 @@
 #begin levels/limbo/limbo9.json
 /copy:levels/limbo/limbo9.json
 
+#begin levels/limbo/limbofinal.json
+/copy:levels/limbo/limbofinal.json
+
 #begin levels/limbo/limboS1.json
 /copy:levels/limbo/limboS1.json
+
+#begin levels/limbo/limbosecretfinal.json
+/copy:levels/limbo/limbosecretfinal.json
 
 #begin levels/test1.json
 /copy:levels/test1.json

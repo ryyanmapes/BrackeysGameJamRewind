@@ -5,6 +5,7 @@ using RewindGame.Game.Abstract;
 using RewindGame.Game.Debug;
 using RewindGame.Game.Tiles;
 using RewindGame.Game.Solids;
+using RewindGame.Game.Special;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -309,7 +310,7 @@ namespace RewindGame.Game
         {
             if (specialObject != null)
             {
-                return false;
+                return specialObject.isThisOverlapping(rect);
             }
 
             return false;
@@ -408,6 +409,11 @@ namespace RewindGame.Game
                     return;
                 case EntityType.LimboSpikyBall:
                     sceneSolids.Add(LimboSpikyBall.Make(this, position, info.radius, info.speed, info.starting_rotation_degrees));
+                    return;
+                case EntityType.lunarshrine:
+                case EntityType.obelisk:
+                case EntityType.treesear:
+                    specialObject = SpecialObject.Make(this, position, type);
                     return;
                 default:
                     //todo

@@ -45,6 +45,14 @@ namespace RewindGame
         still
     }
 
+    public enum TimeKind
+    {
+        none,
+        limbo,
+        cottonwood,
+        eternal
+    }
+
     public class TimeData
     {
         public TimeData()
@@ -410,6 +418,10 @@ namespace RewindGame
             
             if (Keyboard.GetState().IsKeyDown(Keys.K))
                 loadLevelAndConnections("limbo11");
+            if (Keyboard.GetState().IsKeyDown(Keys.L))
+                loadLevelAndConnections("limbo18");
+            if (Keyboard.GetState().IsKeyDown(Keys.J))
+                loadLevelAndConnections("limbosecretfinal");
 
             StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition);
 
@@ -445,6 +457,15 @@ namespace RewindGame
 
         protected void FullUpdate(StateData state)
         {
+
+            if (activeLevel.getIsInSpecial(player.getCollisionBox()))
+            {
+                if (activeLevel.specialObject.charState == -1) activeLevel.specialObject.charState = 0;
+            }
+            else if (activeLevel.specialObject != null)
+            {
+                activeLevel.specialObject.Reset();
+            }
 
             // should this really be checked every frame?
             if (activeLevel.getIsInStasis(player.getCollisionBox()))
