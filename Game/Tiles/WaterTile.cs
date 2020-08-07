@@ -27,7 +27,7 @@ namespace RewindGame.Game.Tiles
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
             if (hidden) return;
-            localLevel.DrawTile(tile_sprite, position + new Vector2(0, state.time_data.getFloaty(position.X)), sprite_batch);
+            localLevel.DrawTile(tile_sprite, position + new Vector2(0, state.time_data.getFloaty(position.X, true)), sprite_batch);
         }
 
         public override void Update(StateData state)
