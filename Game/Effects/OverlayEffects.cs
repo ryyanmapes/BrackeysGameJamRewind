@@ -60,6 +60,14 @@ namespace RewindGame.Game.Effects
             //render a big black squear on entire screen (content/debug) if turned to white can be any color with draw function
             //fade into black starting at about halfway through platyerdeath time (when playerdeath time hits 50% fade to black fade out to black when it is no longer runstate.playerdead
         }
+        public void StartWarpPlayer(Vector2 position, StateData state)
+        {
+
+        }
+        public void StartWarpArtifact(Vector2 vector2, StateData sate)
+        {
+
+        }
 
         public void Update(StateData state)
         {

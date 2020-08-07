@@ -46,7 +46,6 @@ namespace RewindGame.Game.Effects
         {
             // use this only for time-changing stuff, like falling the rain
             rainfall -= (int)(1500 * state.getTimeDependentDeltaTime() * speedFactor);
-                        parentGame.soundManager.ModifyOverrain(100);
             //
             if (state.time_data.time_moment > parentGame.timeDangerPosBound * 1.11 || state.time_data.time_moment < parentGame.timeDangerNegBound * 1.11) // Black area
             {
@@ -58,13 +57,16 @@ namespace RewindGame.Game.Effects
             {
                 speedUp = true;
                 whiteOut = false;
+//                parentGame.soundManager.EndOverrain();
+//                parentGame.soundManager.ModifyOverrain(10);
             }
+
             else
             {
                 whiteOut = false;
                 speedUp = false;
                 speedFactor = 1f;
-                //parentGame.soundManager.EndOverrain();
+                
 
 
             }
