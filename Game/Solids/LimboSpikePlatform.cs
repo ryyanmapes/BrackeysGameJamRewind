@@ -14,6 +14,7 @@ namespace RewindGame.Game.Solids
 
         protected AnimationPlayer anims;
         protected Vector2 velocity;
+        protected Vector2 startingPos;
 
         public static LimboSpikePlatform Make(Level level, Vector2 starting_pos, Vector2 velocity_, bool isLong)
         {
@@ -41,6 +42,7 @@ namespace RewindGame.Game.Solids
             collisionOffset = new Vector2(0, 0.25f * Level.TILE_WORLD_SIZE);
             collisionSize = new Vector2(Level.TILE_WORLD_SIZE * (is_long ? 4 : 2), Level.TILE_WORLD_SIZE);
             velocity = velocity_;
+            startingPos = starting_pos;
 
             base.Initialize(level, starting_pos);
 
@@ -59,6 +61,12 @@ namespace RewindGame.Game.Solids
             if (hidden) return;
             //base.Draw(state, sprite_batch);
             anims.Draw(state, sprite_batch, position, velocity.X > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, state.getTimeN());
+        }
+
+        public override void Reset()
+        {
+            position = startingPos;
+            base.Reset();
         }
 
     }
