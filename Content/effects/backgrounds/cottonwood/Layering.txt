@@ -1,0 +1,6 @@
+cottonwood0 -- Still Background
+cottonwoodHorizontalwater (ocean) 0-2 -- Paralax verticaly together, horizontally move (all levels)
+cottonwood2 -- Still background
+virtical (vertical boi)
+horizontal (horizontal boi)
+
