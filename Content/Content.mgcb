@@ -668,6 +668,9 @@
 #begin Music/peltingrain.wav
 /copy:Music/peltingrain.wav
 
+#begin Music/slide.wav
+/copy:Music/slide.wav
+
 #begin sfx/death.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
