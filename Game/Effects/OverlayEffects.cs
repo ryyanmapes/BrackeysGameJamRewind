@@ -58,7 +58,7 @@ namespace RewindGame.Game.Effects
             //rewindgame.playerdeathtime is max death time (ticks down to 0(when player respawns))
             //
             //render a big black squear on entire screen (content/debug) if turned to white can be any color with draw function
-            //fade into black starting at about halfway through platyerdeath time (when playerdeath time hits 50% fade to black) fade out to black when it is no longer runstate.playerdead
+            //fade into black starting at about halfway through platyerdeath time (when playerdeath time hits 50% fade to black fade out to black when it is no longer runstate.playerdead
         }
 
         public void Update(StateData state)
@@ -99,6 +99,16 @@ namespace RewindGame.Game.Effects
                 var particle = starParticles[i];
                 particle.Update(state);
                 if (particle.isDead) starParticles.RemoveAt(i);
+            }
+            if (parentGame.activeLevel.name.Contains("limbo"))
+            {
+                if (parentGame.runState == RunState.playerdead)
+                {
+                    if((state.time_data.time_moment > parentGame.timeDangerPosBound || state.time_data.time_moment < parentGame.timeDangerNegBound) && parentGame.stateTimer  == 0.5f)
+                    {
+                        parentGame.soundManager.TriggerLightining();
+                    }
+                }
             }
 
         }

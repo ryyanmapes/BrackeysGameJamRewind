@@ -46,7 +46,7 @@ namespace RewindGame.Game.Effects
         {
             // use this only for time-changing stuff, like falling the rain
             rainfall -= (int)(1500 * state.getTimeDependentDeltaTime() * speedFactor);
-            parentGame.soundManager.ModifyOverrain(100);
+                        parentGame.soundManager.ModifyOverrain(100);
             //
             if (state.time_data.time_moment > parentGame.timeDangerPosBound * 1.11 || state.time_data.time_moment < parentGame.timeDangerNegBound * 1.11) // Black area
             {
@@ -94,7 +94,9 @@ namespace RewindGame.Game.Effects
                     whiteOutFade -= .1f;
                 }
             }
-
+            if(parentGame.runState == RunState.playerdead){
+                System.Diagnostics.Debugger.Break();
+            }
         }
 
         public void DrawBackground(StateData state, SpriteBatch sprite_batch)
