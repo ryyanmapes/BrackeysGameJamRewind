@@ -32,7 +32,6 @@ namespace RewindGame.Game.Effects
             // see GameObject
 
             //texturename = Content.Load<Texture2D>( texturePath );
-            vingette = Content.Load<Texture2D>("effects/MOISTENING");
             limboStatic = Content.Load<Texture2D>("effects/backgrounds/limbo/limbostatic");
             limboHorizontal0 = Content.Load<Texture2D>("effects/backgrounds/limbo/limbohorizontal0");
             limboHorizontal1 = Content.Load<Texture2D>("effects/backgrounds/limbo/limbohorizontal1");
@@ -145,10 +144,6 @@ namespace RewindGame.Game.Effects
                 sprite_batch.Draw(raindrop0, CameraPosReal, new Rectangle((int)((CameraPosReal.X + CameraPosReal.X/2) * .8f) - (rainfall * 2) / 3, (int)(CameraPosReal.Y * .8f) + rainfall * 2, raindrop0.Width, raindrop0.Height), Color.White * whiteOutFade);
                 sprite_batch.Draw(raindrop0, CameraPosReal, new Rectangle((int)((CameraPosReal.X + CameraPosReal.X / 2) * .9f) - (rainfall * 3) / 3, (int)(CameraPosReal.Y * .9f) + rainfall * 3, raindrop0.Width, raindrop0.Height), Color.White * whiteOutFade);
                 //sprite_batch.Draw(raindrop0, (CameraPosReal + new Vector2(CameraPosReal.X, 0)), new Rectangle((int)((CameraPosReal.X) * 0.75f) - rainfall * 2 / 3, (int)((CameraPosReal.Y) * 0.75f) + rainfall, raindrop0.Width, raindrop0.Height), new Color(Color.White, fade));
-            }
-            if(whiteOut == true || true)
-            {
-                //sprite_batch.Draw(vingette, CameraPosReal, Color.White * .65f);
             }
         }
 
