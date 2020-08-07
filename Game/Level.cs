@@ -418,7 +418,10 @@ namespace RewindGame.Game
                     sceneSolids.Add(LimboPlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), false));
                     return;
                 case EntityType.FloofForwards:
-                    sceneSolids.Add(LimboSpikyBall.Make(this, position, info.radius, info.speed, info.starting_rotation_degrees));
+                    sceneSolids.Add(Floof.Make(this, position, Vector2.Zero, true));
+                    return;
+                case EntityType.FloofBackwards:
+                    sceneSolids.Add(Floof.Make(this, position, Vector2.Zero, false));
                     return;
                 case EntityType.lunarshrine:
                 case EntityType.obelisk:

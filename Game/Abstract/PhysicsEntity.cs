@@ -46,10 +46,10 @@ namespace RewindGame.Game
 
             velocity = new Vector2(minMagnitude(velocity.X, maxVelocityMagnitudeX), Math.Clamp(velocity.Y, minVelocityY, maxVelocityY));
 
-            grounded = getGrounded();
+            grounded = getGrounded(state);
         }
 
-        public virtual GroundedReturn getGrounded()
+        public virtual GroundedReturn getGrounded(StateData state)
         {
             var box = getCollisionBox();
             box.Y += 1;

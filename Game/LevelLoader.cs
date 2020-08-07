@@ -26,7 +26,8 @@ namespace RewindGame.Game
         left_wallspike,
         up_wallspike,
         down_wallspike,
-        centerspike
+        centerspike,
+        unknown
     }
 
     public enum EntityType
@@ -42,7 +43,8 @@ namespace RewindGame.Game
         FloofBackwards,
         obelisk,
         lunarshrine,
-        treesear
+        treesear,
+        unknown
     }
 
     class RawLevel
@@ -298,7 +300,7 @@ namespace RewindGame.Game
                     return EntityType.CottonwoodPlatform;
                 case "floof_forward":
                     return EntityType.FloofForwards;
-                case "floof_backward":
+                case "floof_backwards":
                     return EntityType.FloofBackwards;
                 case "lunarshrine":
                     return EntityType.lunarshrine;
@@ -308,7 +310,7 @@ namespace RewindGame.Game
                     return EntityType.treesear;
                 default:
                     Console.WriteLine("Unable to find entity type of name: {0}", name);
-                    return EntityType.Spawnpoint;
+                    return EntityType.unknown;
             }
         }
 

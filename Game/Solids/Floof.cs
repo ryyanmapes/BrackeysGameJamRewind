@@ -13,6 +13,8 @@ namespace RewindGame.Game.Solids
         public bool isForwards;
         public Vector2 velocity;
         public Vector2 startingPos;
+        public int timeMomentConsumedOn = -1;
+        public bool isActive = false;
 
         public static Floof Make(Level level, Vector2 starting_pos, Vector2 velocity_, bool isForwards)
         {
@@ -24,6 +26,7 @@ namespace RewindGame.Game.Solids
 
         public virtual void Initialize(Level level, Vector2 starting_pos, Vector2 velocity_, bool is_forwards)
         {
+            collisionSize.X = Level.LARGE_TILE_WORLD_SIZE;
             collisionSize.Y = Level.SEMISOLID_THICKNESS_WINDOW;
             isForwards = is_forwards;
             velocity = velocity_;
@@ -34,6 +37,11 @@ namespace RewindGame.Game.Solids
         public override void Update(StateData state)
         {
             position += new Vector2(velocity.X * state.getTimeDependentDeltaTime(), velocity.Y * state.getTimeDependentDeltaTime());
+
+            if (timeMomentConsumedOn != -1 && state.time_data.time_moment < timeMomentConsumedOn)
+            {
+                isActive = true;
+            }
         }
 
         public override void LoadContent()
@@ -49,15 +57,32 @@ namespace RewindGame.Game.Solids
             base.LoadContent();
         }
 
+        public override void Draw(StateData state, SpriteBatch sprite_batch)
+        {
+            if (isActive)
+                sprite_batch.Draw(this.texture, position, Color.White);
+        }
+
         public override void Reset()
         {
             position = startingPos;
+            isActive = true;
             base.Reset();
+        }
+
+        public void Consume(StateData state)
+        {
+            timeMomentConsumedOn = state.time_data.time_moment - 1;
+            isActive = false;
         }
 
         public override CollisionReturn getCollisionReturn()
         {
-            return new CollisionReturn(isForwards ? CollisionType.forward_floof : CollisionType.backward_floof, this, 3);
+            if (isActive)
+            {
+                return new CollisionReturn(isForwards ? CollisionType.forward_floof : CollisionType.backward_floof, this, 3);
+            }
+            return CollisionReturn.None();
         }
     }
 }
