@@ -731,6 +731,12 @@
 /processorParam:Quality=Best
 /build:sfx/jump.wav
 
+#begin sfx/jump1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/jump1.wav
+
 #begin sfx/land1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
