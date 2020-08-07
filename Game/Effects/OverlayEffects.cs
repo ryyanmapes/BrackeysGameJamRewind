@@ -20,9 +20,6 @@ namespace RewindGame.Game.Effects
         private Color cubeColor = Color.Black;
         private float stall = 1.75f;
         private bool fadeOut = false;
-        private float starFade = 0f;
-        private float starAlpha = 0f;
-        private bool showStars = true;
         private Random rnd = new Random();
         private List<Texture2D> starTextures = new List<Texture2D>();
         private List<EffectParticle> starParticles = new List<EffectParticle>();
@@ -32,8 +29,27 @@ namespace RewindGame.Game.Effects
         private const float starLifetime = 2f;
         private const float starFadeOut = 1f;
 
-        public OverlayEffects(RewindGame parent_game, ContentManager content) 
-        { 
+        private bool forceFadeout;
+
+        private bool showPlayerWarp = false;
+        private bool showArtifactWarp = false;
+        private bool stallPlayer = false;
+        private bool stallArtifact = false;
+        private float growTimePlayer = 0f;
+        private float growTimeArtifact = 0f;
+        private float currentBeamWidthPlayer = 0f;
+        private float currentBeamWidthArtifact = 0f;
+
+        private const float stallTimeGlobal = 1f;
+        private float stallTimePlayer = stallTimeGlobal;
+        private float stallTimeArtifact = stallTimeGlobal;
+        private float maxGrowTime = RewindGame.LEVEL_SIZE_X /2 ;
+
+        private Vector2 playerWarpPos;
+        private Vector2 artifactWarpPos;
+
+        public OverlayEffects(RewindGame parent_game, ContentManager content)
+        {
             Content = content;
             parentGame = parent_game;
             //setup textures here
@@ -62,21 +78,54 @@ namespace RewindGame.Game.Effects
         }
         public void StartWarpPlayer(Vector2 position, StateData state)
         {
-
+            playerWarpPos = position;
+            showPlayerWarp = true;
         }
-        public void StartWarpArtifact(Vector2 vector2, StateData sate)
+        public void StartWarpArtifact(Vector2 position, StateData sate)
         {
-
+            artifactWarpPos = position;
+            showArtifactWarp = true;
+        }
+        public void StartAreaFadeout()
+        {
+            forceFadeout = true;
         }
 
         public void Update(StateData state)
         {
-            if (parentGame.runState == RunState.playerdead)
+           // StartWarpPlayer(parentGame.player.position, state);
+            if (showPlayerWarp == true && currentBeamWidthPlayer < maxGrowTime)
+            {
+                growTimePlayer += .1f;
+                currentBeamWidthPlayer = growTimePlayer*growTimePlayer;
+            }
+            else if(showPlayerWarp == true && currentBeamWidthPlayer >= maxGrowTime && stallPlayer == false)
+            {
+                StartAreaFadeout();
+                stallPlayer = true;
+            }
+            else if(stallPlayer == true && stallTimePlayer > 0)
+            {
+                stallTimePlayer -= 0.1f;
+            }
+            else if(stallPlayer == true && stallTimePlayer <= 0)
+            {
+                showPlayerWarp = false;
+                stallPlayer = false;
+                stallTimePlayer = stallTimeGlobal;
+            }
+            if (showArtifactWarp == true && growTimeArtifact < maxGrowTime)
+            {
+                growTimeArtifact += 1f;
+                currentBeamWidthArtifact = growTimeArtifact;
+            }
+            if (parentGame.runState == RunState.playerdead || forceFadeout)
             {
                 if (parentGame.stateTimer <= 0.25)
                 {
                     fadeValue += .1f;
                     showCube = true;
+                    forceFadeout = false;
                 }
             }
             else if (showCube == true)
@@ -94,13 +143,15 @@ namespace RewindGame.Game.Effects
                 {
                     fadeValue -= .05f;
                 }
-                if(fadeValue <= 0.01f)
+                if (fadeValue <= 0.01f)
                 {
                     showCube = false;
                     fadeValue = 0.00f;
                     fadeOut = false;
                 }
             }
+
+
 
             for (int i = starParticles.Count - 1; i >= 0; i--)
             {
@@ -114,12 +165,23 @@ namespace RewindGame.Game.Effects
         public void Draw(StateData state, SpriteBatch sprite_batch)
         {
             Vector2 CameraPosReal = state.camera_position - new Vector2(RewindGame.LEVEL_SIZE_X / 2, RewindGame.LEVEL_SIZE_Y / 2);
+            Vector2 playerWarpBeamPos = new Vector2(playerWarpPos.X, state.camera_position.Y - RewindGame.LEVEL_SIZE_Y/2);
+            Vector2 playweWarpBeamRealPos = new Vector2(playerWarpBeamPos.X - currentBeamWidthPlayer, playerWarpBeamPos.Y);
+            Vector2 artifactWarpBeamPos = new Vector2(artifactWarpPos.X, state.camera_position.Y - RewindGame.LEVEL_SIZE_Y / 2);
+            Vector2 artifactWarpBeamRealPos = new Vector2(artifactWarpBeamPos.X - currentBeamWidthArtifact, artifactWarpBeamPos.Y);
 
             foreach (EffectParticle particle in starParticles)
             {
                 particle.Draw(state, sprite_batch);
             }
-
+            if (showPlayerWarp == true)
+            {
+                sprite_batch.Draw(deathSquare, playweWarpBeamRealPos, new Rectangle((int)playweWarpBeamRealPos.X, (int)playweWarpBeamRealPos.Y, (int)currentBeamWidthPlayer * 2, (int)RewindGame.LEVEL_SIZE_Y), Color.White);
+            }
+            if (showArtifactWarp == true)
+            {
+                sprite_batch.Draw(deathSquare, artifactWarpBeamRealPos, new Rectangle((int)artifactWarpBeamRealPos.X, (int)artifactWarpBeamRealPos.Y, (int)currentBeamWidthArtifact * 2, (int)RewindGame.LEVEL_SIZE_Y), Color.White);
+            }
             if (showCube)
             {
                 sprite_batch.Draw(deathSquare, CameraPosReal, new Rectangle((int)CameraPosReal.X, (int)CameraPosReal.Y, (int)RewindGame.LEVEL_SIZE_X, (int)RewindGame.LEVEL_SIZE_Y), new Color(cubeColor, fadeValue), 0f, Vector2.Zero, new Vector2(RewindGame.LEVEL_SIZE_X, RewindGame.LEVEL_SIZE_Y), SpriteEffects.None, 0f);
