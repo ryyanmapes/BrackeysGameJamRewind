@@ -27,6 +27,7 @@ namespace RewindGame.Game
         up_wallspike,
         down_wallspike,
         centerspike,
+        water,
         unknown
     }
 
@@ -230,6 +231,8 @@ namespace RewindGame.Game
         {
             if (tile >= 60 && tile <= 68) 
                 return TileType.freezetime;
+            if (tile >= 105 && tile <= 119)
+                return TileType.water;
             switch (tile)
             {
                 case 40:

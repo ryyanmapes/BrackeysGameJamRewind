@@ -381,6 +381,9 @@ namespace RewindGame.Game
                 case TileType.freezetime:
                     sceneSolidTiles.Add(StaticZone.Make(this, position, sprite));
                     break;
+                case TileType.water:
+                    sceneSolidTiles.Add(WaterTile.Make(this, position, sprite));
+                    break;
                 default:
                     // todo
                     break;

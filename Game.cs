@@ -79,7 +79,7 @@ namespace RewindGame
             int real_xpos = (int)xpos / Level.TILE_WORLD_SIZE;
             int real_mod = (time_moment + real_xpos)/10;
             int mult = 2;
-            switch (real_mod % 9)
+            switch (real_mod % 10)
             {
                 case 5:
                 case 0: return 0;
