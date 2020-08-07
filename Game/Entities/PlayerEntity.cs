@@ -194,7 +194,7 @@ namespace RewindGame.Game
 
         public override void RefreshJump() 
         {
-            temporaryAllowJump = true;        
+            temporaryAllowJump = true;
         }
 
 

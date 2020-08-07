@@ -20,6 +20,7 @@ namespace RewindGame.Game.Sound
         public ChaiFoxes.FMODAudio.Sound playerJumpSound;
         public ChaiFoxes.FMODAudio.Sound playerLandSound;
         public ChaiFoxes.FMODAudio.Sound playerDieSound;
+        public ChaiFoxes.FMODAudio.Sound peltingRain;
         public float fadeIntoLoop2;
         public bool pianoFadeoutInc = false;
         public float fadeIntoPiano;
@@ -49,8 +50,9 @@ namespace RewindGame.Game.Sound
 
             this.loop1 = StudioSystem.GetEvent("Event:/Music/Limbo/Loop1").CreateInstance();
             this.loop2 = StudioSystem.GetEvent("Event:/Music/Limbo/Loop2").CreateInstance();
-
-
+            this.peltingRain = CoreSystem.LoadStreamedSound("peltingrain.wav");
+            peltingRain.Volume = 0;
+            peltingRain.Play();
 
 
 
@@ -107,7 +109,7 @@ namespace RewindGame.Game.Sound
         }
 
         public void TriggerPlayerLand() { //playerLandSound.Play();
-            SoundEffect playerLandSound = Content.Load<SoundEffect>("sfx/land");
+            SoundEffect playerLandSound = Content.Load<SoundEffect>("sfx/land1");
             playerLandSound.Play();
         }
 
@@ -122,12 +124,20 @@ namespace RewindGame.Game.Sound
         }
 
         // 0 = light rain, 1 = bad storm
-        // set the rain effect equal to zero by default and after endrain is called
-        // increase volume of pelting rain as intensity increases
-        public void ModifyOverrain(float intensity) { }
-        public void EndOverrain() { }
+        public void ModifyOverrain(float intensity) { 
+            if(intensity > 0)
+            {
+                peltingRain.Volume = intensity;
+            }
+        }
+        public void EndOverrain() {
+            peltingRain.Volume = 0;
+        }
 
-        public void TriggerLightining() { }
+        public void TriggerLightining() {
+            SoundEffect lightningEffect = Content.Load<SoundEffect>("sfx/thunderstrike");
+            lightningEffect.Play();
+        }
 
         public void TriggerPlayerWalljump()
         {

@@ -535,20 +535,32 @@
 #begin Music/Master Bank.strings.bank
 /copy:Music/Master Bank.strings.bank
 
+#begin Music/peltingrain.wav
+/copy:Music/peltingrain.wav
+
 #begin sfx/death.wav
-/importer:
-/processor:
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
 /build:sfx/death.wav
 
 #begin sfx/jump.wav
-/importer:
-/processor:
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
 /build:sfx/jump.wav
 
-#begin sfx/wood.wav
-/importer:
-/processor:
-/build:sfx/wood.wav;sfx/land.wav
+#begin sfx/land1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/land1.wav
+
+#begin sfx/thunderstrike.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/thunderstrike.wav
 
 #begin tilesets/collisionlayer.png
 /importer:TextureImporter
