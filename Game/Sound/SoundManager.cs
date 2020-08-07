@@ -130,7 +130,7 @@ namespace RewindGame.Game.Sound
         // 0 = light rain, 1 = bad storm
         public void ModifyOverrain(float intensity) {
             peltingRain.Volume = intensity;
-            
+            peltingRain.Play();
         }
         public void EndOverrain() {
             peltingRain.Volume = 0;
@@ -190,6 +190,20 @@ namespace RewindGame.Game.Sound
         {
             menuChange = 1f;
             menuInc = false;
+        }
+        public void stopAllMusic()
+        {
+            loop1.Stop();
+            loop2.Stop();
+            EndPiano();
+        }
+        public void BeginCottonwoodMusic1()
+        {
+
+        }
+        public void BeginCottonwoodMusic2()
+        {
+
         }
     }
 }
