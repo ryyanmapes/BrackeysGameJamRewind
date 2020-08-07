@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using ChaiFoxes.FMODAudio;
 using ChaiFoxes.FMODAudio.Studio;
+using Microsoft.Xna.Framework.Audio;
 using FMOD.Studio;
 using FMOD;
 
@@ -101,9 +102,13 @@ namespace RewindGame.Game.Sound
         }
 
         public void TriggerPlayerJump(){//playerJumpSound.Play();
+            SoundEffect playerJumpSound = Content.Load<SoundEffect>("sfx/jump");
+            playerJumpSound.Play();
         }
 
         public void TriggerPlayerLand() { //playerLandSound.Play();
+            SoundEffect playerLandSound = Content.Load<SoundEffect>("sfx/land");
+            playerLandSound.Play();
         }
 
         public void BeginPlayerWallslide()
@@ -129,7 +134,8 @@ namespace RewindGame.Game.Sound
 
         public void TriggerPlayerDie()
         {
-            //playerDieSound.Play();
+            SoundEffect playerDieSound = Content.Load<SoundEffect>("sfx/death");
+            playerDieSound.Play();
         }
 
         public void TriggerTimeFreeze()

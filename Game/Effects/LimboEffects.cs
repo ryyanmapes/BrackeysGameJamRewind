@@ -18,8 +18,12 @@ namespace RewindGame.Game.Effects
         private Texture2D limboVertical2;
         private Texture2D raindrop0;
         private Texture2D raindrop1;
+        private Texture2D debugSquare;
         private int rainfall;
-        private float fade = 1f; 
+        private bool speedUp;
+        private bool whiteOut;
+        private float whiteoutFade = 0.00f;
+        private float speedFactor = 1f;
         public LimboEffects(RewindGame parent_game, ContentManager content) 
         { 
             Content = content;
@@ -28,6 +32,7 @@ namespace RewindGame.Game.Effects
             // see GameObject
 
             //texturename = Content.Load<Texture2D>( texturePath );
+            debugSquare = Content.Load<Texture2D>("debug/square");
             limboStatic = Content.Load<Texture2D>("effects/backgrounds/limbo/limbostatic");
             limboHorizontal0 = Content.Load<Texture2D>("effects/backgrounds/limbo/limbohorizontal0");
             limboHorizontal1 = Content.Load<Texture2D>("effects/backgrounds/limbo/limbohorizontal1");
@@ -42,15 +47,43 @@ namespace RewindGame.Game.Effects
         public void Update(StateData state)
         {
             // use this only for time-changing stuff, like falling the rain
-            rainfall -= (int)(1500 * state.getTimeDependentDeltaTime());
-                //TODO make the speed up slowley speed up peaking at highway to the dangerzone
-            rainfall -= (int)((Math.Abs(state.time_data.time_moment)* 2) * state.getTimeDependentDeltaTime())/3;
-         //   fade = (float)(Math.Abs(state.time_data.time_moment)/parentGame.timeDangerPosBound);
+            rainfall -= (int)(1500 * state.getTimeDependentDeltaTime() * speedFactor);
+                //
+            if (state.time_data.time_moment > parentGame.timeDangerPosBound * 1.11 || state.time_data.time_moment < parentGame.timeDangerNegBound * 1.11) // Black area
+            {
+                speedUp = true;
+                whiteOut = true;
+                if (whiteoutFade <= .5f)
+                {
+                   // whiteoutFade += 0.05f;
+                }
+            }
+            else if (state.time_data.time_moment > parentGame.timeDangerPosBound / 1.25 || state.time_data.time_moment < parentGame.timeDangerNegBound / 1.25) // Purple area
+            {
+                speedUp = true;
+                whiteOut = false;
+                whiteoutFade = 0f;
+            }
+            else
+            {
+                whiteOut = false;
+                speedUp = false;
+                whiteoutFade = 0f;
+                speedFactor = 1f;
+
+            }
+            //   fade += (Math.Abs(state.time_data.time_moment) / parentGame.timeDangerPosBound) * 2;
             if (rainfall >= raindrop0.Height)
             {
                 rainfall = 0;
             }
-         //   fade += (Math.Abs(state.time_data.time_moment) / parentGame.timeDangerPosBound) * 2;
+            if(speedUp == true)
+            {
+                if (speedFactor <= 2)
+                {
+                    speedFactor += .0225f;
+                }
+            }
 
         }
 
@@ -85,15 +118,10 @@ namespace RewindGame.Game.Effects
                 sprite_batch.Draw(limboStatic, CameraPosReal, Color.White);
             }
             sprite_batch.Draw(raindrop1, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 0.5f) - rainfall / 3, (int)(CameraPosReal.Y * 0.5f) + rainfall, raindrop1.Width, raindrop1.Height), Color.White);
-            if(state.time_data.time_moment > parentGame.timeDangerPosBound)
+            if (1 < 0.0f)
             {
                 //sprite_batch.Draw(raindrop1, (CameraPosReal - new Vector2(CameraPosReal.X, 0)), new Rectangle((int)((CameraPosReal.X) * 0.8f) - (rainfall * 2) / 3, (int)((CameraPosReal.Y) * 0.8f) + rainfall * 2, raindrop1.Width, raindrop1.Height), new Color(Color.White, fade));
-                sprite_batch.Draw(raindrop1, CameraPosReal, new Rectangle((int)((CameraPosReal.X + CameraPosReal.X / 2) * .75f) - (rainfall * 2) / 3, (int)(CameraPosReal.Y * .75f) + rainfall * 2, raindrop1.Width, raindrop1.Height), new Color(Color.White, fade));
-            }
-            if(state.time_data.time_moment < parentGame.timeDangerNegBound)
-            {
-                //sprite_batch.Draw(raindrop1, (CameraPosReal - new Vector2(CameraPosReal.X, 0)), new Rectangle((int)((CameraPosReal.X) * 0.8f) - (rainfall * 2) / 3, (int)((CameraPosReal.Y) * 0.8f) + rainfall * 2, raindrop1.Width, raindrop1.Height), new Color(Color.White, fade));
-                sprite_batch.Draw(raindrop1, CameraPosReal, new Rectangle((int)((CameraPosReal.X - CameraPosReal.X / 2)* .75f) - (rainfall * 2) / 3, (int)(CameraPosReal.Y * .75f) + rainfall * 2, raindrop1.Width, raindrop1.Height), new Color(Color.White, fade));
+                sprite_batch.Draw(raindrop1, CameraPosReal, new Rectangle((int)((CameraPosReal.X + CameraPosReal.X / 2) * .75f) - (rainfall * 2) / 3, (int)(CameraPosReal.Y * .75f) + rainfall * 2, raindrop1.Width, raindrop1.Height), new Color(Color.White, 1));
             }
 
 
@@ -103,15 +131,14 @@ namespace RewindGame.Game.Effects
         {
             Vector2 CameraPosReal = state.camera_position - new Vector2(RewindGame.LEVEL_SIZE_X / 2, RewindGame.LEVEL_SIZE_Y / 2);
             sprite_batch.Draw(raindrop0, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 1.0f) - rainfall/3, (int)(CameraPosReal.Y * 1.0f) + rainfall, raindrop0.Width, raindrop0.Height), Color.White);
-            if (state.time_data.time_moment > parentGame.timeDangerPosBound || true)
+            if (1 < 0.0f)
             {
-                sprite_batch.Draw(raindrop0, CameraPosReal, new Rectangle((int)((CameraPosReal.X + CameraPosReal.X/2) * .8f) - (rainfall * 2) / 3, (int)(CameraPosReal.Y * .8f) + rainfall * 2, raindrop0.Width, raindrop0.Height), new Color(Color.White, fade));
+                sprite_batch.Draw(raindrop0, CameraPosReal, new Rectangle((int)((CameraPosReal.X + CameraPosReal.X/2) * .8f) - (rainfall * 2) / 3, (int)(CameraPosReal.Y * .8f) + rainfall * 2, raindrop0.Width, raindrop0.Height), new Color(Color.White, 1));
                 //sprite_batch.Draw(raindrop0, (CameraPosReal + new Vector2(CameraPosReal.X, 0)), new Rectangle((int)((CameraPosReal.X) * 0.75f) - rainfall * 2 / 3, (int)((CameraPosReal.Y) * 0.75f) + rainfall, raindrop0.Width, raindrop0.Height), new Color(Color.White, fade));
             }
-            if (state.time_data.time_moment < parentGame.timeDangerNegBound)
+            if(whiteOut == true)
             {
-                sprite_batch.Draw(raindrop0, CameraPosReal, new Rectangle((int)((CameraPosReal.X - CameraPosReal.Y/2) * .8f) - (rainfall * 2) / 3, (int)(CameraPosReal.Y * 0.8f) + rainfall * 2, raindrop0.Width, raindrop0.Height), new Color(Color.White, fade));
-                //sprite_batch.Draw(raindrop0, (CameraPosReal + new Vector2(CameraPosReal.X, 0)), new Rectangle((int)((CameraPosReal.X) * 0.75f) - rainfall * 2 / 3, (int)((CameraPosReal.Y) * 0.75f) + rainfall, raindrop0.Width, raindrop0.Height), new Color(Color.White, fade));
+               // sprite_batch.Draw(debugSquare, CameraPosReal, new Rectangle((int)CameraPosReal.X, (int)CameraPosReal.Y, (int)RewindGame.LEVEL_SIZE_X, (int)RewindGame.LEVEL_SIZE_Y), new Color(Color.DarkGray, whiteoutFade), 0f, Vector2.Zero, new Vector2(RewindGame.LEVEL_SIZE_X, RewindGame.LEVEL_SIZE_Y), SpriteEffects.None, 0f);
             }
         }
 
