@@ -10,6 +10,7 @@ namespace RewindGame.Game.Tiles
 
     class SolidTile : CollisionObject, ISolidTile
     {
+
         public TileSprite tile_sprite { get; set; }
 
         public SolidTile() { }
