@@ -107,7 +107,7 @@ namespace RewindGame.Game.Sound
         }
 
         public void TriggerPlayerJump(){//playerJumpSound.Play();
-            SoundEffect playerJumpSound = Content.Load<SoundEffect>("sfx/jump");
+            SoundEffect playerJumpSound = Content.Load<SoundEffect>("sfx/jump1");
             playerJumpSound.Play();
         }
 
@@ -143,7 +143,8 @@ namespace RewindGame.Game.Sound
 
         public void TriggerPlayerWalljump()
         {
-
+            SoundEffect playerWallJumpSound = Content.Load<SoundEffect>("sfx/jump1");
+            playerWallJumpSound.Play();
         }
 
         public void TriggerPlayerDie()
@@ -154,7 +155,8 @@ namespace RewindGame.Game.Sound
 
         public void TriggerTimeFreeze()
         {
-
+            SoundEffect playerTimeSound = Content.Load<SoundEffect>("sfx/jump");
+            playerTimeSound.Play();
         }
 
         public void BeginLimboMusic1()
