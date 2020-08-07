@@ -36,7 +36,10 @@ namespace RewindGame.Game
         LargeLimboPlatform,
         LimboSpikePlatform,
         LargeLimboSpikePlatform,
-        LimboSpikyBall
+        LimboSpikyBall,
+        obelisk,
+        lunarshrine,
+        treesear
     }
 
     class RawLevel
@@ -288,6 +291,12 @@ namespace RewindGame.Game
                     return EntityType.LargeLimboSpikePlatform;
                 case "limbospikyball":
                     return EntityType.LimboSpikyBall;
+                case "lunarshrine":
+                    return EntityType.lunarshrine;
+                case "obelisk":
+                    return EntityType.obelisk;
+                case "treesear":
+                    return EntityType.treesear;
                 default:
                     Console.WriteLine("Unable to find entity type of name: {0}", name);
                     return EntityType.Spawnpoint;

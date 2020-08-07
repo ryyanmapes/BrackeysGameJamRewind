@@ -55,6 +55,7 @@ namespace RewindGame.Game
         public List<ITile> sceneDecorativesBackground = new List<ITile>();
         public List<ITile> sceneDecorativesForeground = new List<ITile>();
         public Vector2 playerSpawnpoint = Vector2.Zero;
+        public SpecialObject specialObject;
 
         public Vector2 levelOrgin;
         public ContentManager Content;
@@ -299,6 +300,16 @@ namespace RewindGame.Game
             foreach (ISolidTile tile in sceneSolidTiles)
             {
                 if (((CollisionObject)tile).getCollision(rect, MoveDirection.none).type == CollisionType.timestop) return true;
+            }
+
+            return false;
+        }
+
+        public bool getIsInSpecial(FRectangle rect)
+        {
+            if (specialObject != null)
+            {
+                return false;
             }
 
             return false;
