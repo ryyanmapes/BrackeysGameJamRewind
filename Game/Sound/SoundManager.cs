@@ -107,7 +107,7 @@ namespace RewindGame.Game.Sound
         }
 
         public void TriggerPlayerLand() { //playerLandSound.Play();
-            SoundEffect playerLandSound = Content.Load<SoundEffect>("sfx/land");
+            SoundEffect playerLandSound = Content.Load<SoundEffect>("sfx/land1");
             playerLandSound.Play();
         }
 
