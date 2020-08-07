@@ -52,15 +52,11 @@ namespace RewindGame.Game.Sound
             this.loop1 = StudioSystem.GetEvent("Event:/Music/Limbo/Loop1").CreateInstance();
             this.loop2 = StudioSystem.GetEvent("Event:/Music/Limbo/Loop2").CreateInstance();
             this.peltingRain = CoreSystem.LoadStreamedSound("peltingrain.wav");
-            peltingRain.Volume = 0;
-            peltingRain.Play();
-            this.peltingRain = CoreSystem.LoadStreamedSound("peltingrain.wav");
-            peltingRain.Volume = 0;
+            peltingRain.Volume = 1;
             this.sliding = CoreSystem.LoadStreamedSound("slide.wav");
             sliding.Volume = 0;
             sliding.Looping = true;
-            sliding.Play();
-            
+            peltingRain.Play();
 
         }
 
@@ -123,6 +119,7 @@ namespace RewindGame.Game.Sound
         public void BeginPlayerWallslide()
         {
             sliding.Volume = 30;
+            sliding.Play();
         }
 
         public void EndPlayerWallslide()
@@ -133,7 +130,7 @@ namespace RewindGame.Game.Sound
         // 0 = light rain, 1 = bad storm
         public void ModifyOverrain(float intensity) {
             peltingRain.Volume = intensity;
-            peltingRain.Play();
+            
         }
         public void EndOverrain() {
             peltingRain.Volume = 0;
