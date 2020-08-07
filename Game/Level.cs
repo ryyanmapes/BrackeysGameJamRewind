@@ -431,8 +431,10 @@ namespace RewindGame.Game
                     sceneSolids.Add(LimboSpikyBall.Make(this, position, info.radius, info.speed, info.starting_rotation_degrees));
                     return;
                 case EntityType.CottonwoodPlatform:
-                    // TODO
-                    sceneSolids.Add(LimboPlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    sceneSolids.Add(CottonwoodPlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    return;
+                case EntityType.CottonwoodPlatformLarge:
+                    sceneSolids.Add(CottonwoodPlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), true));
                     return;
                 case EntityType.FloofForwards:
                     sceneSolids.Add(Floof.Make(this, position, Vector2.Zero, true));

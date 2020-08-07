@@ -41,6 +41,7 @@ namespace RewindGame.Game
         LargeLimboSpikePlatform,
         LimboSpikyBall,
         CottonwoodPlatform,
+        CottonwoodPlatformLarge,
         FloofForwards,
         FloofBackwards,
         obelisk,
@@ -114,10 +115,27 @@ namespace RewindGame.Game
             //Maybe use later?
         }
 
-        public static RawLevel GetLevelData(String level_name)
+        public static RawLevel GetLevelData(String level_name, AreaState area)
         {
+            string prefix;
+            switch (area)
+            {
+                case AreaState.limbo:
+                    prefix = "Content/levels/limbo/";
+                    break;
+                case AreaState.cotton:
+                    prefix = "Content/levels/cotton/";
+                    break;
+                case AreaState.eternal:
+                    prefix = "Content/levels/eternal/";
+                    break;
+                default:
+                    prefix = "Content/levels/";
+                    break;
+            }
+
             string level_json;
-            using (StreamReader sr = new StreamReader("Content/levels/limbo/" + level_name + ".json"))
+            using (StreamReader sr = new StreamReader(prefix + level_name + ".json"))
             {
                 level_json = sr.ReadToEnd();
             }
@@ -304,6 +322,8 @@ namespace RewindGame.Game
                     return EntityType.LimboSpikyBall;
                 case "cottonwoodplatform":
                     return EntityType.CottonwoodPlatform;
+                case "cottonwoodplatformlarge":
+                    return EntityType.CottonwoodPlatformLarge;
                 case "floof_forward":
                     return EntityType.FloofForwards;
                 case "floof_backwards":

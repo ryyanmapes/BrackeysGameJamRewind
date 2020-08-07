@@ -291,88 +291,6 @@
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeEAAAnhAepRYnIAAAEkSURBVDhPvZQ9DsIwDIUDV+EIDCwdOqFubFyCDQYYOAAcgEuwsVVMHbowcATOUvQiO9hWkkZI8ElVEjd+9Z/qfsGE1izd6znQ1tWz+ajPlNYoTbMe8NAxwPbYO6C+aiOCU7VckOVDf3/49XDZ+xXIDJKi/a2jnXPVqqZd2i5FQ/oyFemYI3VP1fS0ORcLMrhvmxcOHGmshmNwjdv26vVCpDB8Iwisn1fmBiEV2xREIbuMEkHE3uMzSpGdU06L6xxWsqfIikpYsATVKFmbsWiAvH/c7oKWirREKAb85Jyr7vNIWHxj6ClBRYop4C5aAdltwO9hl9MBoo2ywuGcsAOZpUpX/lAwjyCWMmoIEftXo60WZWTRrTN/LFV/kHwhSUX0R5x7A7SimGq/4hWDAAAAAElFTkSuQmCC"
     },
     {
-      "exportID": "75124288",
-      "name": "limbospikeplatformR",
-      "limit": -1,
-      "size": {"x": 14, "y": 28},
-      "origin": {"x": 0, "y": 0},
-      "originAnchored": true,
-      "shape": {
-        "label": "Rectangle",
-        "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
-        ]
-      },
-      "color": "#ff0000ff",
-      "tileX": false,
-      "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
-      "resizeableX": false,
-      "resizeableY": false,
-      "rotatable": false,
-      "rotationDegrees": 360,
-      "canFlipX": false,
-      "canFlipY": false,
-      "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
-      "nodeDisplay": 0,
-      "nodeGhost": true,
-      "tags": ["limbo", "danger"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
-      ],
-      "texture": "C:/Users/ryan_/Desktop/jammm/2spikeplatformR.png",
-      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAcCAYAAABRVo5BAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAFGSURBVDhPfZU9TkNBDITfy6VoUlChpKKDQ1BBA1JakKAgVByCkioSFUUaTrXkW3aW2b830mYt2+PxOo4yhRC6Z7O5Ol2trbOaOthur8P64qyxHQ2RxGRm0vHrJ3n+MSPrVXtJh8PHnMyMSBRGBUT0eENMZgMvSKGCCEQetS71YjhLisDf2gwHuMrD+328j5/ff3eKDVsFFFtfnkf7+eYl3lLNxN7beu+Ub2ad3FEPQ36gGKorPgjubu9mTowk8D61CrxIbvXpbR9cTUMR6uHkrwOHKnrlEebH/Wuh5CS1WauBOBwlu6rgyYA4s8gLkPwRBJfUiMc3+iqBWkUgj0O8WABvGdTK+CXSvNHhRFbO84pdrffUoaJSLH5WOHsEJ6n48PfoBKCCXUWCJCsIvAMvXBAdTsamoBcpiLXayI5gqkun/1cQpl/xiU4tJCoojAAAAABJRU5ErkJggg=="
-    },
-    {
-      "exportID": "75133991",
-      "name": "limbospikeplatformlargeR",
-      "limit": -1,
-      "size": {"x": 14, "y": 56},
-      "origin": {"x": 0, "y": 0},
-      "originAnchored": true,
-      "shape": {
-        "label": "Rectangle",
-        "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
-        ]
-      },
-      "color": "#ff0000ff",
-      "tileX": false,
-      "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
-      "resizeableX": false,
-      "resizeableY": false,
-      "rotatable": false,
-      "rotationDegrees": 360,
-      "canFlipX": false,
-      "canFlipY": false,
-      "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
-      "nodeDisplay": 0,
-      "nodeGhost": true,
-      "tags": ["limbo", "danger"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
-      ],
-      "texture": "C:/Users/ryan_/Desktop/jammm/4spikeplatformR.png",
-      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAA4CAYAAADNa8lhAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAKRSURBVEhLjZY7bhRBEIZnlhUxB7BIOASJAyLkjcjgEEQ2AUgQOAAJAkzkQ0BGZMuRAycEHIEAEXKIYb/a/pt/qnvW/qRWP+vRVdWzOywxTdNwdPR80jizKn2Xw6ePy2gY3p99nknfK/0MLGw2L6aHjw6G++OD099//5y+O3k1lu2gWswa4ebqR1ilz8y0IMyhi4uvIxbLcsy3lNmO2YxgLFm4vPw2OzvqMPQEhJ9BSWhR2H1TYyGBMm1dpX9z/jrmN9+vZwKez3Xpq1AP2wsFH76cTTFQNMFdPHz2JPqPLz9FD+xzduVCjoRArksI11d+h9vws42Ap6fnalcwB0gKdBX3rA4kxGFZIh3w9vhkZ8XKbuxFdCmawNmoXSYS1qaQQoFAGf53NQu7VbfWBMcDo7wJuewKasnlN5hxN4fj7RcAF2VNm4omYG0mVKjvUYHIlt09YJ+0RDpiZQub+UmJHKCwGCsFFxQcdnex2HxXw1KyBjlwoUVWs7Weq8B6vaO/P5DVXnDo6x2Xkt5LBayIEM0L2seZele+XGpYp13/+hlNc+1xLZ29068VVhh7sOKOXi0ePdEEhjxyMOcIiLKa8HNNrTLOqYH8tNblYS66KbSHAVzeGxwHAZq+APEeY8fwAgcvBlIBa7S4G15BS4VAVOOO2xZJ3Vy10QUvO4RgpUropQRciDM6Xz9WgMv5foAAezPLymNGueSeoTDFYq1F0VOifXqlo5oGrO/7CiDE/SKqLOSyE5qbFwRwZ7EnpINZka9XV5esOrof1Fp1IWkGxqSBhvKyvBOkXvlb6XlyVBy+H4L5vyjIEl64B6J5Vjp8G42gihhwUYp8vYHkCgKhz6Hw8cziXq13Ac00rPYtDsM/U5wwDweZoQYAAAAASUVORK5CYII="
-    },
-    {
       "exportID": "75412653",
       "name": "limboplatformlarge",
       "limit": -1,
@@ -688,8 +606,8 @@
         {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
         {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
       ],
-      "texture": "C:/Users/ryan_/Desktop/jammm/limboplatformlongup0.png",
-      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAcCAYAAAA0u3w+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAGmSURBVFhH5ZaxTsMwEIaTPgqPwMJSCSbUTmzwHLB2LSPlORiZKjExdOGpgv4qf3Sx70wcu60TPilqE8f2fTr7nHq1emwqwfL+plo+3LV3p+fw+V0dvn7au7j53b4a9Xb31hc8oxxBoCR2ftkXuMILPJAP3Q5TQsvmov09NvKFS0mmZE+TA50goSg6n0OUc6TIbZ5f6vavh1dkwH7/0XV4fd8d20+1NxFoLrn1+slz8TIo5SQYVA6cg5xyQIu9J+i+wOxJcovGjBWSI65DJ2hlziJVVPYdMs4QOSJd6qbxktSBNY2D1wLFiO1jlxqDxWqxxoiRczEFIedmVdvEJEYUAWuBapIpckAV1OSIJQnBoRm9vbo2A5WSqXLAq6KpIBBcCE4GSLRnEq3vWDmQZYkye1rW5TmKoIcGy34pciBYZDiJhiVkkSvgWEzBnHKXJPseLA1PEPsMV2gpYc9Z+7E0ektUKyxkTIEpgS6DITlgtfHsKzWj/2cPIkOhLEx1iXrHBJfqrI+JuciBnuBfhWaKzP5LJvgtKtGKTOkFBgw6JkLVtWyq6heXVFhzm5lTFwAAAABJRU5ErkJggg=="
+      "texture": "../../../../../../../../ryan_/Stuff/Misc/Downloads/cottonwoodplatformuplong.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAcCAMAAAADZYwMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURQAAALHTbnybWElJKQAAAC0f9uEAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAJ4gAACeIBR+hDHwAAANJJREFUOE/tkVkOwjAMRBPj+5+Z2WKBKirx3ymKsTMvdtrVvavwq00hKsHCZ1KKu/bs6l7ghETeSk1uh2FS7GXLC2J0Npo0R6m9C0srsC/k7GpNxMJ4pnFHYqwcXt0pp9L0YijcEYDH1MCyVnisSv0/IO5Xmy+nycWoq2bVw2L8dcbAK4UAggzHliWOMU5UeQJSdKLEGTyH2S+yCmVXORKL5S/nhgJh0VgyiFBAXVVdBqLzYAGpYE5OjFFDDGINCA131XXnE/xLD3ijB7zRA/5U9xvVoBOUqVvKnwAAAABJRU5ErkJggg=="
     },
     {
       "exportID": "83602113",

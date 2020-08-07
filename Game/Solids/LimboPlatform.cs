@@ -20,7 +20,7 @@ namespace RewindGame.Game.Solids
             return tile;
         }
 
-        public void Initialize(Level level, Vector2 starting_pos, Vector2 velocity_, bool is_long)
+        public virtual void Initialize(Level level, Vector2 starting_pos, Vector2 velocity_, bool is_long)
         {
             Animation anim;
             if (is_long)
