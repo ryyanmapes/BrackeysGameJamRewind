@@ -40,10 +40,10 @@ namespace RewindGame.Game.Effects
         private float currentBeamWidthPlayer = 0f;
         private float currentBeamWidthArtifact = 0f;
 
-        private const float stallTimeGlobal = 1f;
+        private const float stallTimeGlobal = 2f;
         private float stallTimePlayer = stallTimeGlobal;
         private float stallTimeArtifact = stallTimeGlobal;
-        private float maxGrowTime = RewindGame.LEVEL_SIZE_X /2 ;
+        private float maxGrowTime = RewindGame.LEVEL_SIZE_X * 2;
 
         private Vector2 playerWarpPos;
         private Vector2 artifactWarpPos;
@@ -78,46 +78,65 @@ namespace RewindGame.Game.Effects
         }
         public void StartWarpPlayer(Vector2 position, StateData state)
         {
-            playerWarpPos = position;
+            playerWarpPos = new Vector2(position.X + 42, position.Y);
             showPlayerWarp = true;
         }
         public void StartWarpArtifact(Vector2 position, StateData sate)
         {
-            artifactWarpPos = position;
+            artifactWarpPos = new Vector2(position.X + 42, position.Y);
             showArtifactWarp = true;
         }
         public void StartAreaFadeout()
         {
             forceFadeout = true;
+            showPlayerWarp = false;
+            showArtifactWarp = false;
+            growTimeArtifact = 0f;
+            growTimePlayer = 0f;
+            currentBeamWidthArtifact = 0f;
+            currentBeamWidthPlayer = 0f;
         }
 
         public void Update(StateData state)
         {
-           // StartWarpPlayer(parentGame.player.position, state);
+            //StartWarpPlayer(parentGame.player.position, state);
             if (showPlayerWarp == true && currentBeamWidthPlayer < maxGrowTime)
             {
-                growTimePlayer += .1f;
-                currentBeamWidthPlayer = growTimePlayer*growTimePlayer;
+                growTimePlayer += .15f;
+                currentBeamWidthPlayer = growTimePlayer * growTimePlayer;
             }
             else if(showPlayerWarp == true && currentBeamWidthPlayer >= maxGrowTime && stallPlayer == false)
             {
-                StartAreaFadeout();
                 stallPlayer = true;
             }
-            else if(stallPlayer == true && stallTimePlayer > 0)
+            else if(stallPlayer == true && stallTimePlayer > 0f)
             {
-                stallTimePlayer -= 0.1f;
+                stallTimePlayer -= 0.01f;
             }
-            else if(stallPlayer == true && stallTimePlayer <= 0)
+            else if(stallPlayer == true && stallTimePlayer <= 0f)
             {
                 showPlayerWarp = false;
                 stallPlayer = false;
                 stallTimePlayer = stallTimeGlobal;
             }
-            if (showArtifactWarp == true && growTimeArtifact < maxGrowTime)
+            if (showArtifactWarp == true && currentBeamWidthArtifact < maxGrowTime)
             {
-                growTimeArtifact += 1f;
-                currentBeamWidthArtifact = growTimeArtifact;
+                growTimeArtifact += .15f;
+                currentBeamWidthArtifact = growTimeArtifact * growTimeArtifact;
+            }
+            else if (showArtifactWarp == true && currentBeamWidthArtifact >= maxGrowTime && stallArtifact == false)
+            {
+                stallArtifact = true;
+            }
+            else if (stallArtifact == true && stallTimeArtifact > 0f)
+            {
+                stallTimeArtifact -= 0.01f;
+            }
+            else if (stallArtifact == true && stallTimeArtifact <= 0f)
+            {
+                showArtifactWarp = false;
+                stallArtifact = false;
+                stallTimeArtifact = stallTimeGlobal;
             }
             if (parentGame.runState == RunState.playerdead || forceFadeout)
             {
@@ -176,11 +195,11 @@ namespace RewindGame.Game.Effects
             }
             if (showPlayerWarp == true)
             {
-                sprite_batch.Draw(deathSquare, playweWarpBeamRealPos, new Rectangle((int)playweWarpBeamRealPos.X, (int)playweWarpBeamRealPos.Y, (int)currentBeamWidthPlayer * 2, (int)RewindGame.LEVEL_SIZE_Y), Color.White);
+                sprite_batch.Draw(deathSquare, playweWarpBeamRealPos, new Rectangle((int)playweWarpBeamRealPos.X, (int)playweWarpBeamRealPos.Y, (int)currentBeamWidthPlayer * 2, (int)RewindGame.LEVEL_SIZE_Y), Color.White * (stallTimePlayer/2));
             }
             if (showArtifactWarp == true)
             {
-                sprite_batch.Draw(deathSquare, artifactWarpBeamRealPos, new Rectangle((int)artifactWarpBeamRealPos.X, (int)artifactWarpBeamRealPos.Y, (int)currentBeamWidthArtifact * 2, (int)RewindGame.LEVEL_SIZE_Y), Color.White);
+                sprite_batch.Draw(deathSquare, artifactWarpBeamRealPos, new Rectangle((int)artifactWarpBeamRealPos.X, (int)artifactWarpBeamRealPos.Y, (int)currentBeamWidthArtifact * 2, (int)RewindGame.LEVEL_SIZE_Y), Color.White * (stallTimeArtifact/2));
             }
             if (showCube)
             {
