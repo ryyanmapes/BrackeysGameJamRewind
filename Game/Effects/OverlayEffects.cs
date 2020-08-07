@@ -18,7 +18,7 @@ namespace RewindGame.Game.Effects
         private float fadeValue = 0f;
         private bool showCube = false;
         private Color cubeColor = Color.Black;
-        private float stall = 1s.75f;
+        private float stall = 1.75f;
         private bool fadeOut = false;
 
         public OverlayEffects(RewindGame parent_game, ContentManager content) 
