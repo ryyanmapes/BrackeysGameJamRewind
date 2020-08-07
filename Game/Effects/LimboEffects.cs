@@ -51,6 +51,7 @@ namespace RewindGame.Game.Effects
             {
                 speedUp = true;
                 whiteOut = true;
+                parentGame.soundManager.ModifyOverrain(speedFactor);
             }
             else if (state.time_data.time_moment > parentGame.timeDangerPosBound / 1.25 || state.time_data.time_moment < parentGame.timeDangerNegBound / 1.25) // Purple area
             {
@@ -62,6 +63,7 @@ namespace RewindGame.Game.Effects
                 whiteOut = false;
                 speedUp = false;
                 speedFactor = 1f;
+                parentGame.soundManager.EndOverrain();
 
             }
             //   fade += (Math.Abs(state.time_data.time_moment) / parentGame.timeDangerPosBound) * 2;

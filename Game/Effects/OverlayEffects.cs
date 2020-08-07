@@ -15,20 +15,19 @@ namespace RewindGame.Game.Effects
         public RewindGame parentGame;
 
         private Texture2D deathSquare;
-        private Texture2D star0;
-        private Texture2D star1;
-        private Texture2D star2;
-        private Texture2D star3;
-        private Texture2D star4;
-        private Texture2D star5;
         private float fadeValue = 0f;
         private bool showCube = false;
         private Color cubeColor = Color.Black;
         private float stall = 1.75f;
         private bool fadeOut = false;
         private float starFade = 0f;
+        private float starAlpha = 0f;
         private bool showStars = false;
         private Random rnd = new Random();
+        private Vector2 starPos0, starPos1, starPos2, starPos3, starPos4, starPos5, starPos6, starPos7, starPos8, starPos9;
+        private Texture2D starType0, starType1, starType2, starType3, starType4, starType5, starType6, starType7, starType8, starType9;
+        private float fadeRate0, fadeRate1, fadeRate2, fadeRate3, fadeRate4, fadeRate5, fadeRate6, fadeRate7, fadeRate8, fadeRate9;
+
 
         public OverlayEffects(RewindGame parent_game, ContentManager content) 
         { 
@@ -39,12 +38,12 @@ namespace RewindGame.Game.Effects
 
             //texturename = Content.Load<Texture2D>( texturePath );
             deathSquare = Content.Load<Texture2D>("debug/square");
-            star0 = Content.Load<Texture2D>("effects/star0");
-            star1 = Content.Load<Texture2D>("effects/star1");
-            star2 = Content.Load<Texture2D>("effects/star2");
-            star3 = Content.Load<Texture2D>("effects/star3");
-            star4 = Content.Load<Texture2D>("effects/star4");
-            star5 = Content.Load<Texture2D>("effects/star5");
+            //star0 = Content.Load<Texture2D>("effects/star0");
+            //star1 = Content.Load<Texture2D>("effects/star1");
+            //star2 = Content.Load<Texture2D>("effects/star2");
+            //star3 = Content.Load<Texture2D>("effects/star3");
+            //star4 = Content.Load<Texture2D>("effects/star4");
+            //star5 = Content.Load<Texture2D>("effects/star5");
         }
 
 
@@ -91,10 +90,25 @@ namespace RewindGame.Game.Effects
                     fadeOut = false;
                 }
             }
-            if (showStars == false && state.getTimeDependentDeltaTime() == 0)
-            {
-
-            }
+                if (showStars == false && state.getTimeDependentDeltaTime() == 0 && parentGame.runState != RunState.playerdead && !showCube)
+                {
+                    showStars = true;
+                    starFade = 1f;
+                    starAlpha = 1f;
+                    MakeStasisParticles(state);
+                }
+                else if (showStars == true && state.getTimeDependentDeltaTime() == 0 && starAlpha >= 0.0 && parentGame.runState != RunState.playerdead && !showCube)
+                {
+                     starAlpha -= .01f;
+                }
+                else if (showStars == true && state.getTimeDependentDeltaTime() == 0 && starAlpha <= 0 && parentGame.runState != RunState.playerdead && !showCube)
+                 {
+                starFade -= 1f;
+                   }
+                else if (showStars == true && state.getTimeDependentDeltaTime() != 0 && parentGame.runState != RunState.playerdead && !showCube)
+                {
+                    showStars = false;
+                 }
         }
 
         public void Draw(StateData state, SpriteBatch sprite_batch)
@@ -106,11 +120,51 @@ namespace RewindGame.Game.Effects
             }
             if (showStars == true)
             {
-                sprite_batch.Draw(star0, state.camera_position, Color.White);
+                sprite_batch.Draw(starType0, starPos0, Color.White * (starFade * fadeRate0));
+                sprite_batch.Draw(starType1, starPos1, Color.White * (starFade * fadeRate1));
+                sprite_batch.Draw(starType2, starPos2, Color.White * (starFade * fadeRate2));
+                sprite_batch.Draw(starType3, starPos3, Color.White * (starFade * fadeRate3));
+                sprite_batch.Draw(starType4, starPos4, Color.White * (starFade * fadeRate4));
+                sprite_batch.Draw(starType5, starPos5, Color.White * (starFade * fadeRate5));
+                sprite_batch.Draw(starType6, starPos6, Color.White * (starFade * fadeRate6));
+                sprite_batch.Draw(starType7, starPos7, Color.White * (starFade * fadeRate7));
+                sprite_batch.Draw(starType8, starPos8, Color.White * (starFade * fadeRate8));
+                sprite_batch.Draw(starType9, starPos9, Color.White * (starFade * fadeRate9));
             }
         }
         public void MakeStasisParticles(StateData state)
         {
+            starPos0 = new Vector2(rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X)), rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X))) + state.camera_position;
+            starPos1 = new Vector2(rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X)), rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X))) + state.camera_position;
+            starPos2 = new Vector2(rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X)), rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X))) + state.camera_position;
+            starPos3 = new Vector2(rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X)), rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X))) + state.camera_position;
+            starPos4 = new Vector2(rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X)), rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X))) + state.camera_position;
+            starPos5 = new Vector2(rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X)), rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X))) + state.camera_position;
+            starPos6 = new Vector2(rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X)), rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X))) + state.camera_position;
+            starPos7 = new Vector2(rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X)), rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X))) + state.camera_position;
+            starPos8 = new Vector2(rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X)), rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X))) + state.camera_position;
+            starPos9 = new Vector2(rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X)), rnd.Next((int)-Math.Abs(state.camera_position.X), (int)Math.Abs(state.camera_position.X))) + state.camera_position;
+            starType0 = Content.Load<Texture2D>("effects/star" + rnd.Next(0,6));
+            starType1 = Content.Load<Texture2D>("effects/star" + rnd.Next(0, 6));
+            starType2 = Content.Load<Texture2D>("effects/star" + rnd.Next(0, 6));
+            starType3 = Content.Load<Texture2D>("effects/star" + rnd.Next(0, 6));
+            starType4 = Content.Load<Texture2D>("effects/star" + rnd.Next(0, 6));
+            starType5 = Content.Load<Texture2D>("effects/star" + rnd.Next(0, 6));
+            starType6 = Content.Load<Texture2D>("effects/star" + rnd.Next(0, 6));
+            starType7 = Content.Load<Texture2D>("effects/star" + rnd.Next(0, 6));
+            starType8 = Content.Load<Texture2D>("effects/star" + rnd.Next(0, 6));
+            starType9 = Content.Load<Texture2D>("effects/star" + rnd.Next(0, 6));
+            fadeRate0 = rnd.Next(1, 10);
+            fadeRate1 = rnd.Next(1, 10);
+            fadeRate2 = rnd.Next(1, 10);
+            fadeRate3 = rnd.Next(1, 10);
+            fadeRate4 = rnd.Next(1, 10);
+            fadeRate5 = rnd.Next(1, 10);
+            fadeRate6 = rnd.Next(1, 10);
+            fadeRate7 = rnd.Next(1, 10);
+            fadeRate8 = rnd.Next(1, 10);
+            fadeRate9 = rnd.Next(1, 10);
+
 
         }
         public void Dispose()
