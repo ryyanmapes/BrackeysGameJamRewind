@@ -7,7 +7,7 @@ using RewindGame.Game.Abstract;
 
 namespace RewindGame.Game.Solids
 {
-    class LimboSpikyBall : Solid
+    class LimboSpikyBall : CollisionObject
     {
 
         public float radius;
@@ -29,14 +29,14 @@ namespace RewindGame.Game.Solids
             radius = radius_;
             speed = speed_;
             current_rotation_degrees = startingrotation;
-            startingPosition = starting_pos;
+            startingPosition = starting_pos - new Vector2(Level.TILE_WORLD_SIZE/2, Level.TILE_WORLD_SIZE/2);
             currentPosition = startingPosition;
 
             texturePath = "limbo/chainball";
             collisionSize = new Vector2(84, 84);
             collisionType = CollisionType.death;
             starting_rotation_degrees = startingrotation;
-            base.Initialize(level, starting_pos);
+            base.Initialize(level, startingPosition);
             Reset();
 
         }

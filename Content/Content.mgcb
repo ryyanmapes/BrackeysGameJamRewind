@@ -403,6 +403,27 @@
 #begin levels/limbo/limbo10.json
 /copy:levels/limbo/limbo10.json
 
+#begin levels/limbo/limbo11.json
+/copy:levels/limbo/limbo11.json
+
+#begin levels/limbo/limbo12.json
+/copy:levels/limbo/limbo12.json
+
+#begin levels/limbo/limbo13.json
+/copy:levels/limbo/limbo13.json
+
+#begin levels/limbo/limbo14.json
+/copy:levels/limbo/limbo14.json
+
+#begin levels/limbo/limbo15.json
+/copy:levels/limbo/limbo15.json
+
+#begin levels/limbo/limbo16.json
+/copy:levels/limbo/limbo16.json
+
+#begin levels/limbo/limbo18.json
+/copy:levels/limbo/limbo18.json
+
 #begin levels/limbo/limbo2.json
 /copy:levels/limbo/limbo2.json
 

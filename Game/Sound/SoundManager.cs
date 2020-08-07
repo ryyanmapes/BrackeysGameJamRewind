@@ -171,6 +171,13 @@ namespace RewindGame.Game.Sound
         public void BeginPiano()
         {
             fadeIntoPiano = 1f;
+            pianoFadeoutInc = false;
+        }
+
+        public void EndPiano()
+        {
+            fadeIntoPiano = 0f;
+            pianoFadeoutInc = true;
         }
         public void OpenMenu()
         {

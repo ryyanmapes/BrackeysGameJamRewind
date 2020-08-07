@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using ChaiFoxes.FMODAudio;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RewindGame.Game;
@@ -406,6 +407,9 @@ namespace RewindGame
 
             if (inputData.is_restart_pressed)
                 qued_player_death = true;
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.K))
+                loadLevelAndConnections("limbo11");
 
             StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition);
 
@@ -633,7 +637,19 @@ namespace RewindGame
                 // do title card?
                 soundManager.BeginLimboMusic1();
             }
-            
+            else if (trigger == "limbo_pickup")
+            {
+                soundManager.BeginLimboMusic2();
+            }
+            else if (trigger == "limbo_pianostart")
+            {
+                soundManager.BeginPiano();
+            }
+            else if (trigger == "limbo_pianoend")
+            {
+                soundManager.EndPiano();
+            }
+
             if (trigger == "limbo_begin" || trigger == "limbo_full")
             {
                 timelineGUI.SetBar(timelineGUI.limboBar1);

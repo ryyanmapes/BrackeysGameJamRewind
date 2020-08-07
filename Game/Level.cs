@@ -107,7 +107,7 @@ namespace RewindGame.Game
                 entity.Draw(state, sprite_batch);
             }
 
-            foreach (Solid solid in sceneSolids)
+            foreach (CollisionObject solid in sceneSolids)
             {
                 solid.Draw(state, sprite_batch);
             }
@@ -153,7 +153,7 @@ namespace RewindGame.Game
             }
 
             // We don't have any moving platforms yet so we don't have temporal updates here yet
-            foreach (Solid solid in sceneSolids)
+            foreach (CollisionObject solid in sceneSolids)
             {
                 solid.Update(state);
             }
@@ -181,7 +181,7 @@ namespace RewindGame.Game
                 entity.Reset();
             }
 
-            foreach (Solid solid in sceneSolids)
+            foreach (CollisionObject solid in sceneSolids)
             {
                 solid.Reset();
             }
@@ -209,7 +209,7 @@ namespace RewindGame.Game
                 entity.SetInactive();
             }
 
-            foreach (Solid solid in sceneSolids)
+            foreach (CollisionObject solid in sceneSolids)
             {
                 solid.SetInactive();
             }
@@ -237,7 +237,7 @@ namespace RewindGame.Game
                 entity.SetActive();
             }
 
-            foreach (Solid solid in sceneSolids)
+            foreach (CollisionObject solid in sceneSolids)
             {
                 solid.SetActive();
             }
@@ -263,7 +263,7 @@ namespace RewindGame.Game
         public CollisionReturn getSolidCollisionAt(FRectangle rect, MoveDirection direction, Solid pusher)
         {
             var return_collision = CollisionReturn.None();
-            foreach (Solid solid in sceneSolids)
+            foreach (CollisionObject solid in sceneSolids)
             {
                 if (solid == pusher) continue;
                 CollisionReturn collision = solid.getCollision(rect, direction);
@@ -291,7 +291,7 @@ namespace RewindGame.Game
 
         public bool getIsInStasis(FRectangle rect)
         {
-            foreach (Solid solid in sceneSolids)
+            foreach (CollisionObject solid in sceneSolids)
             {
                 if (solid.getCollision(rect, MoveDirection.none).type == CollisionType.timestop) return true;
             }
