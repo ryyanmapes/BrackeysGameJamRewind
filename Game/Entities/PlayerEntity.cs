@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using RewindGame.Game.Graphics;
 using RewindGame.Game.Sound;
 using System;
+using RewindGame.Game.Solids;
 using System.Collections.Generic;
 using System.Text;
 
@@ -105,14 +106,8 @@ namespace RewindGame.Game
             }
             else wasGroundedLastFrame = false;
 
-            if (grounded == GroundedReturn.floof_forwards)
-            {
-                if (velocity.Y <= 0) Jump(false, true);
-            }
-            else if (grounded == GroundedReturn.floof_backwards)
-            {
-                if (velocity.Y <= 0) Jump(true, true);
-            }
+            if (grounded == GroundedReturn.floof_forwards) Jump(false, true);
+            else if (grounded == GroundedReturn.floof_backwards) Jump(true, true);
             if (input_data.is_jump_pressed && (grounded == GroundedReturn.grounded || temporaryAllowJump))
             {
                 Jump(true);
@@ -193,6 +188,7 @@ namespace RewindGame.Game
 
         public void Jump(bool is_forwards, bool isFloof = false)
         {
+            velocity.Y = Math.Min(velocity.Y, 0);
             grounded = GroundedReturn.no;
             velocity.Y += jumpLaunchVelocity;
             velocity.Y = Math.Max(velocity.Y, jumpLaunchVelocity * 1.3f);
@@ -216,18 +212,29 @@ namespace RewindGame.Game
             temporaryAllowJump = true;
         }
 
-        public override GroundedReturn getGrounded()
+        public override GroundedReturn getGrounded(StateData state)
         {
             var box = getCollisionBox();
             box.Y += 1;
-            switch (localLevel.getSolidCollisionAt(box, MoveDirection.down).type)
+            var collision = localLevel.getSolidCollisionAt(box, MoveDirection.down);
+            switch (collision.type)
             {
                 case CollisionType.normal:
                     return GroundedReturn.grounded;
                 case CollisionType.forward_floof:
-                    return GroundedReturn.floof_forwards;
+                    if (velocity.Y >= 0)
+                    {
+                        ((Floof)collision.collisionee).Consume(state);
+                        return GroundedReturn.floof_forwards;
+                    }
+                    else return GroundedReturn.no;
                 case CollisionType.backward_floof:
-                    return GroundedReturn.floof_backwards;
+                    if (velocity.Y >= 0)
+                    {
+                        ((Floof)collision.collisionee).Consume(state);
+                        return GroundedReturn.floof_backwards;
+                    }
+                    else return GroundedReturn.no;
                 default:
                     return GroundedReturn.no;
             }
@@ -241,7 +248,7 @@ namespace RewindGame.Game
                 return;
             }
 
-            if (getGrounded() == GroundedReturn.grounded)
+            if (grounded == GroundedReturn.grounded)
             {
                 if (Math.Abs(velocity.X) > 100)
                 {

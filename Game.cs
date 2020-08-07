@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace RewindGame
 {
@@ -69,6 +70,29 @@ namespace RewindGame
         {
             time_moment = 0;
             time_status = TimeState.forward;
+        }
+
+        public int getFloaty(float xpos)
+        {
+            if (time_status == TimeState.still) return 0;
+
+            int real_xpos = (int)xpos / Level.TILE_WORLD_SIZE;
+            int real_mod = (time_moment + real_xpos)/10;
+            int mult = 2;
+            switch (real_mod % 9)
+            {
+                case 5:
+                case 0: return 0;
+                case 4:
+                case 1: return mult;
+                case 2:
+                case 3: return 2 * mult;
+                case 9:
+                case 6: return -mult;
+                case 8:
+                case 7: return -2 * mult;
+            }
+            return 0;
         }
     }
 
