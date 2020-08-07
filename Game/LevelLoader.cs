@@ -34,6 +34,7 @@ namespace RewindGame.Game
     public enum EntityType
     {
         Spawnpoint,
+        Warp,
         LimboPlatform,
         LargeLimboPlatform,
         LimboSpikePlatform,
@@ -289,6 +290,8 @@ namespace RewindGame.Game
             {
                 case "playerspawn":
                     return EntityType.Spawnpoint;
+                case "warp":
+                    return EntityType.Warp;
                 case "limboplatform":
                     return EntityType.LimboPlatform;
                 case "limboplatformlarge":

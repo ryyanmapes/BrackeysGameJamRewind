@@ -60,7 +60,7 @@ namespace RewindGame.Game.Solids
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
             if (isActive)
-                sprite_batch.Draw(this.texture, position + new Vector2(0,state.time_data.getFloaty(position.X)), Color.White);
+                sprite_batch.Draw(this.texture, position + new Vector2(0,state.time_data.getFloaty(position.X, true)), Color.White);
         }
 
         public override void Reset()

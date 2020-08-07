@@ -15,7 +15,8 @@ namespace RewindGame.Game
         refresh_jump,
         timestop,
         forward_floof,
-        backward_floof
+        backward_floof,
+        warp_trigger
     }
 
     public enum MoveDirection

@@ -23,9 +23,9 @@ namespace RewindGame.Game.Effects
         private bool whiteOut;
         private float speedFactor = 1f;
         private float whiteOutFade = 0f;
-        public LimboEffects(RewindGame parent_game, ContentManager content) 
-        { 
-            Content = content;
+        public LimboEffects(RewindGame parent_game, IServiceProvider serviceProvider) 
+        {
+            Content = new ContentManager(serviceProvider, "Content");
             parentGame = parent_game;
             //setup textures here
             // see GameObject
