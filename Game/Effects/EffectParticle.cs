@@ -12,9 +12,12 @@ namespace RewindGame.Game.Effects
         protected float initLifeTime;
         protected float initFadeoutTime;
 
-        protected float fadeinTime;
+        protected float fadeinTime = 0f;
         protected float fadeoutTime;
         protected float lifeTime;
+        private bool isFadeIn = true;
+        private bool isLifetime = false;
+        private bool isFadeOut = false;
 
         public bool isDead = false;
 
@@ -27,7 +30,7 @@ namespace RewindGame.Game.Effects
 
         public void Initialize(Level level, Vector2 starting_pos, float fadein_time, float life_time, float fadeout_time, Texture2D tex)
         {
-            fadeinTime = fadein_time;
+            //fadeinTime = fadein_time;
             lifeTime = life_time;
             fadeoutTime = fadeout_time;
             initFadeinTime = fadein_time;
@@ -42,23 +45,39 @@ namespace RewindGame.Game.Effects
 
         public override void Update(StateData state)
         {
-            if (fadeinTime > 0)
+            if (fadeinTime < initFadeinTime && isFadeIn)
             {
-                var fade = (byte)(255f * 1/(fadeinTime / initFadeinTime));
-                textureColor = new Color(fade, fade, fade, fade);
-                fadeinTime -= state.getDeltaTime();
+                //var fade = (byte)(255f * 1/(fadeinTime / initFadeinTime));
+                textureColor = Color.White * (fadeinTime / initFadeinTime);
+                fadeinTime += state.getDeltaTime();
             }
-            else if (lifeTime > 0)
+            else if (fadeinTime >= initFadeinTime && isFadeIn)
+            {
+                isFadeIn = false;
+                isLifetime = true;
+                fadeinTime = 0f;
+                //System.Diagnostics.Debugger.Break();
+            }
+            else if (lifeTime > 0 && isLifetime)
             {
                 textureColor = Color.White;
                 lifeTime -= state.getDeltaTime();
             }
-            if (fadeoutTime > 0)
+            else if (lifeTime <= 0 && isLifetime)
+            {
+                isFadeOut = true;
+                isLifetime = false;
+                lifeTime = initLifeTime;
+                //System.Diagnostics.Debugger.Break();
+            }
+            else if (fadeoutTime > 0 && isFadeOut)
             {
                 //var fade = (byte)(255f * (initFadeoutTime / fadeoutTime));
                 //textureColor = new Color(fade, fade, fade, fade);
+                textureColor = Color.White * (fadeoutTime / initFadeoutTime);
                 fadeoutTime -= state.getDeltaTime();
             }
+
             else
             {
                 isDead = true;

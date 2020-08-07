@@ -21,6 +21,7 @@ namespace RewindGame.Game.Sound
         public ChaiFoxes.FMODAudio.Sound playerLandSound;
         public ChaiFoxes.FMODAudio.Sound playerDieSound;
         public ChaiFoxes.FMODAudio.Sound peltingRain;
+        public ChaiFoxes.FMODAudio.Sound sliding;
         public float fadeIntoLoop2;
         public bool pianoFadeoutInc = false;
         public float fadeIntoPiano;
@@ -51,10 +52,11 @@ namespace RewindGame.Game.Sound
             this.loop1 = StudioSystem.GetEvent("Event:/Music/Limbo/Loop1").CreateInstance();
             this.loop2 = StudioSystem.GetEvent("Event:/Music/Limbo/Loop2").CreateInstance();
             this.peltingRain = CoreSystem.LoadStreamedSound("peltingrain.wav");
-            peltingRain.Volume = 0;
+            peltingRain.Volume = 1;
+            this.sliding = CoreSystem.LoadStreamedSound("slide.wav");
+            sliding.Volume = 0;
+            sliding.Looping = true;
             peltingRain.Play();
-
-
 
         }
 
@@ -66,12 +68,13 @@ namespace RewindGame.Game.Sound
             // you can use state to get deltatime, whether time is backwards or forwards, etc
             if(fadeIntoLoop2 != -1)
             {
-                loop1.SetParameterValue("loop1 to loop2", 1-fadeIntoLoop2);
-                loop2.SetParameterValue("loop1 to loop2", fadeIntoLoop2);
+                loop1.SetParameterValue("loop1 to loop2", fadeIntoLoop2);
+                loop2.SetParameterValue("loop1 to loop2", 1-fadeIntoLoop2);
                 fadeIntoLoop2 -= elapsed;
-                if(fadeIntoLoop2 == 0)
+                if(fadeIntoLoop2 <= 0)
                 {
                     fadeIntoLoop2 = -1;
+                    loop1.Stop();
                 }
             }
             if(fadeIntoPiano != -1)
@@ -115,20 +118,19 @@ namespace RewindGame.Game.Sound
 
         public void BeginPlayerWallslide()
         {
-
+            sliding.Volume = 30;
+            sliding.Play();
         }
 
         public void EndPlayerWallslide()
         {
-
+            sliding.Volume = 0;
         }
 
         // 0 = light rain, 1 = bad storm
-        public void ModifyOverrain(float intensity) { 
-            if(intensity > 0)
-            {
-                peltingRain.Volume = intensity;
-            }
+        public void ModifyOverrain(float intensity) {
+            peltingRain.Volume = intensity;
+            peltingRain.Play();
         }
         public void EndOverrain() {
             peltingRain.Volume = 0;
@@ -188,6 +190,20 @@ namespace RewindGame.Game.Sound
         {
             menuChange = 1f;
             menuInc = false;
+        }
+        public void stopAllMusic()
+        {
+            loop1.Stop();
+            loop2.Stop();
+            EndPiano();
+        }
+        public void BeginCottonwoodMusic1()
+        {
+
+        }
+        public void BeginCottonwoodMusic2()
+        {
+
         }
     }
 }
