@@ -25,6 +25,18 @@
 /processorParam:TextureFormat=Color
 /build:cottonwood/cottonwoodplatformdown.png
 
+#begin cottonwood/cottonwoodplatformdownlong.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cottonwood/cottonwoodplatformdownlong.png
+
 #begin cottonwood/cottonwoodplatformup.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -36,6 +48,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:cottonwood/cottonwoodplatformup.png
+
+#begin cottonwood/cottonwoodplatformuplong.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cottonwood/cottonwoodplatformuplong.png
 
 #begin cottonwood/jumppoofgreen.png
 /importer:TextureImporter
@@ -547,6 +571,9 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:gui/barlimbo2.png
+
+#begin levels/cotton/cotton1.json
+/copy:levels/cotton/cotton1.json
 
 #begin levels/limbo/limbo1.json
 /copy:levels/limbo/limbo1.json

@@ -233,7 +233,7 @@ namespace RewindGame
         public AreaState area = AreaState.none;
         public RunState runState = RunState.playing;
         public float stateTimer = -1f;
-        public float playerHoverTime = 3;
+        public float playerHoverTime = 2;
         public float warpTime = 5;
         public float areaSwapTime = 5;
 
@@ -294,8 +294,6 @@ namespace RewindGame
 
             player = new PlayerEntity(this, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 - 300));
             player.position = activeLevel.playerSpawnpoint;
-
-            LoadNextArea();
             //DoTrigger("limbo_fourth");
         }
 
@@ -313,13 +311,13 @@ namespace RewindGame
             }
         }
 
-        public void LoadArea(AreaState area)
+        public void LoadArea(AreaState new_area)
         {
             if (areaEffect != null) areaEffect.Dispose();
-            switch (area)
+            switch (new_area)
             {
                 case AreaState.limbo:
-                    area = AreaState.cotton;
+                    this.area = AreaState.limbo;
                     soundManager.BeginLimboMusic1();
                     areaEffect = new LimboEffects(this, Services);
                     timeData.time_kind = TimeKind.limbo;
@@ -333,7 +331,7 @@ namespace RewindGame
                     timeDangerPosBound = 250;
                     break;
                 case AreaState.cotton:
-                    area = AreaState.cotton;
+                    this.area= AreaState.cotton;
                     soundManager.BeginCottonwoodMusic1();
                     areaEffect = new CottonwoodEffects(this, Services);
                     timeData.time_kind = TimeKind.cottonwood;
@@ -414,7 +412,7 @@ namespace RewindGame
             if (level == null)
             {
 
-                var raw_level = LevelLoader.GetLevelData(name_data.name);
+                var raw_level = LevelLoader.GetLevelData(name_data.name, this.area);
 
 
                 Vector2 orgin = new Vector2(activeLevelOffset.X, activeLevelOffset.Y);
