@@ -547,11 +547,11 @@
 /processorParam:Quality=Best
 /build:sfx/jump.wav
 
-#begin sfx/wood.wav
+#begin sfx/land1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sfx/wood.wav;sfx/land.wav
+/build:sfx/land1.wav
 
 #begin tilesets/collisionlayer.png
 /importer:TextureImporter
