@@ -86,7 +86,10 @@ namespace RewindGame.Game.Effects
                 sprite_batch.Draw(deathSquare, CameraPosReal, new Rectangle((int)CameraPosReal.X, (int)CameraPosReal.Y, (int)RewindGame.LEVEL_SIZE_X, (int)RewindGame.LEVEL_SIZE_Y), new Color(cubeColor, fadeValue), 0f, Vector2.Zero, new Vector2(RewindGame.LEVEL_SIZE_X, RewindGame.LEVEL_SIZE_Y), SpriteEffects.None, 0f);
             }
         }
+        public void MakeStasisParticles(StateData state)
+        {
 
+        }
         public void Dispose()
         {
             Content.Dispose();
