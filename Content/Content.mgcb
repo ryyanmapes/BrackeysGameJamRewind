@@ -535,6 +535,9 @@
 #begin Music/Master Bank.strings.bank
 /copy:Music/Master Bank.strings.bank
 
+#begin Music/peltingrain.wav
+/copy:Music/peltingrain.wav
+
 #begin sfx/death.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -552,6 +555,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx/land1.wav
+
+#begin sfx/thunderstrike.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/thunderstrike.wav
 
 #begin tilesets/collisionlayer.png
 /importer:TextureImporter
