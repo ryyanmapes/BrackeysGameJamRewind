@@ -37,14 +37,14 @@ namespace RewindGame.Game.Solids
                 anim = new Animation("limbo/2spikeplatform", 1, 1, true);
             }
 
-            anims = new AnimationPlayer(anim, 1, Vector2.Zero, level.Content);
-
             starting_pos -= new Vector2(0, 0.5f*Level.TILE_WORLD_SIZE);
             collisionOffset = new Vector2(0, 0.25f * Level.TILE_WORLD_SIZE);
             collisionSize = new Vector2(Level.TILE_WORLD_SIZE * (is_long ? 4 : 2), Level.TILE_WORLD_SIZE);
             velocity = velocity_;
 
             base.Initialize(level, starting_pos);
+
+            anims = new AnimationPlayer(anim, 1, Vector2.Zero, localLevel.parentGame.Content);
         }
 
         public override void Update(StateData state)

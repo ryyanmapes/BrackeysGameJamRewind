@@ -12,6 +12,8 @@ namespace RewindGame.Game.Effects
     {
         public void Update(StateData state);
 
+        public void Reset();
+
         public void DrawBackground(StateData state, SpriteBatch sprite_batch);
 
         public void DrawForeground(StateData state, SpriteBatch sprite_batch);

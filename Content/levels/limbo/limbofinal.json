@@ -4,7 +4,7 @@
   "height": 238,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"exit_right": "", "exit_left": "limbo18", "exit_up": "", "exit_down": "", "triggers": ""},
+  "values": {"exit_right": "", "exit_left": "limbo18", "exit_up": "", "exit_down": "", "triggers": "still,pianostart"},
   "layers": [
     {
       "name": "collisionlayer",
@@ -31,7 +31,7 @@
       "gridCellsY": 17,
       "entities": [
         {"name": "playerspawn", "id": 0, "_eid": "67213102", "x": 0, "y": 168, "originX": -3, "originY": -7},
-        {"name": "obelisk", "id": 1, "_eid": "77375529", "x": 252, "y": 154, "originX": 0, "originY": 0}
+        {"name": "obelisk", "id": 1, "_eid": "77375529", "x": 224, "y": 154, "originX": 0, "originY": 0}
       ]
     },
     {

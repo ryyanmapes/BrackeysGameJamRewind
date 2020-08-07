@@ -63,6 +63,7 @@ namespace RewindGame
 
         public int time_moment;
         public TimeState time_status;
+        public TimeKind time_kind;
 
         public void Reset()
         {
@@ -246,8 +247,8 @@ namespace RewindGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // this is useless!
-            textures.Add(Content.Load<Texture2D>("debug/square"));
-            textures.Add(Content.Load<Texture2D>("debug/platform"));
+            //textures.Add(Content.Load<Texture2D>("debug/square"));
+            //textures.Add(Content.Load<Texture2D>("debug/platform"));
 
 
             decorativeSheetTexture = Content.Load<Texture2D>("tilesets/decorative");
@@ -467,24 +468,71 @@ namespace RewindGame
                 activeLevel.specialObject.Reset();
             }
 
-            // should this really be checked every frame?
             if (activeLevel.getIsInStasis(player.getCollisionBox()))
+            {
+                if (timeData.time_status != TimeState.still)
+                {
+                    timeData.time_status = TimeState.still;
+                    timeData.time_moment = 0;
+                    activeLevel.Reset();
+                    areaEffect.Reset();
+                    overlayEffect.MakeStasisParticles(state);
+                }
+            }
+            else if (timeData.time_kind == TimeKind.none)
             {
                 timeData.time_status = TimeState.still;
                 timeData.time_moment = 0;
-                activeLevel.Reset();
-                //overlayEffect.MakeStasisParticles(state);
-                // todo add particles
             }
             else if (player.isRewinding)
             {
-                if (timeData.time_moment > timeNegBound) timeData.time_status = TimeState.backward;
+                timeData.time_status = TimeState.backward;
             }
             else
             {
-                if (timeData.time_moment < timePosBound) timeData.time_status = TimeState.forward;
+                timeData.time_status = TimeState.forward;
             }
 
+            // what to do at the bounds of time
+            if (timeData.time_moment <= timeNegBound)
+            {
+                switch (timeData.time_kind)
+                {
+                    case TimeKind.limbo:
+                        qued_player_death = true;
+                        break;
+                    case TimeKind.cottonwood:
+                        timeData.time_status = TimeState.still;
+                        break;
+                    case TimeKind.eternal:
+                        timeData.time_moment = timePosBound - 1;
+                        break;
+                }
+            }
+            else if (timeData.time_moment >= timePosBound)
+            {
+                switch (timeData.time_kind)
+                {
+                    case TimeKind.limbo:
+                        qued_player_death = true;
+                        break;
+                    case TimeKind.cottonwood:
+                        timeData.time_status = TimeState.still;
+                        break;
+                    case TimeKind.eternal:
+                        timeData.time_moment = timeNegBound + 1;
+                        break;
+                }
+            }
+
+            // what happens if the player goes out of bounds
+            if (player.position.Y > activeLevelOffset.Y + LEVEL_SIZE_Y * activeLevel.screensVertical + Level.TILE_WORLD_SIZE * 2
+                || player.position.Y < activeLevelOffset.Y - Level.TILE_WORLD_SIZE)
+            {
+                qued_player_death = true;
+            }
+
+            // time state incrementing
             switch (timeData.time_status)
             {
                 case TimeState.forward:
@@ -495,13 +543,6 @@ namespace RewindGame
                     break;
                 default:
                     break;
-
-            }
-
-            if (timeData.time_moment <= timeNegBound || timeData.time_moment >= timePosBound
-                || player.position.Y > activeLevelOffset.Y + LEVEL_SIZE_Y * activeLevel.screensVertical + Level.LARGE_TILE_WORLD_SIZE)
-            {
-                qued_player_death = true;
             }
 
             areaEffect.Update(state);
@@ -658,22 +699,29 @@ namespace RewindGame
             {
                 // do title card?
                 soundManager.BeginLimboMusic1();
+                timeData.time_kind = TimeKind.limbo;
             }
             else if (trigger == "limbo_pickup")
             {
                 soundManager.BeginLimboMusic2();
             }
-            else if (trigger == "limbo_pianostart")
+            else if (trigger == "pianostart")
             {
                 soundManager.BeginPiano();
             }
-            else if (trigger == "limbo_pianoend")
+            else if (trigger == "pianoend")
             {
                 soundManager.EndPiano();
             }
 
-            if (trigger == "limbo_begin" || trigger == "limbo_full")
+            if (trigger == "still")
             {
+                timeData.time_kind = TimeKind.none;
+                timelineGUI.SetBar(null);
+            }
+            else if (trigger == "limbo_begin" || trigger == "limbo_full")
+            {
+                timeData.time_kind = TimeKind.limbo;
                 timelineGUI.SetBar(timelineGUI.limboBar1);
                 timelineGUI.currentBarSize = 105*4;
                 timeNegBound = -300;
@@ -684,6 +732,7 @@ namespace RewindGame
             }
             else if (trigger == "limbo_half")
             {
+                timeData.time_kind = TimeKind.limbo;
                 timelineGUI.SetBar(timelineGUI.limboBarHalf);
                 timelineGUI.currentBarSize = 102 * 2;
                 timeNegBound = -150;
@@ -693,6 +742,7 @@ namespace RewindGame
             }
             else if (trigger == "limbo_fourth")
             {
+                timeData.time_kind = TimeKind.limbo;
                 timelineGUI.SetBar(timelineGUI.limboBarFourth);
                 timelineGUI.currentBarSize = 100;
                 timeNegBound = -75;

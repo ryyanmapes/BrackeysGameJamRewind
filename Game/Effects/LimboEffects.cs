@@ -148,6 +148,11 @@ namespace RewindGame.Game.Effects
             }
         }
 
+        public void Reset()
+        {
+            rainfall = 0;
+        }
+
         public void Dispose()
         {
             Content.Dispose();

@@ -104,6 +104,7 @@ namespace RewindGame.Game
                 tile.Draw(state, sprite_batch);
             }
 
+            if (specialObject != null) specialObject.Draw(state, sprite_batch);
             foreach (Entity entity in sceneEntities)
             {
                 entity.Draw(state, sprite_batch);
@@ -174,6 +175,8 @@ namespace RewindGame.Game
             {
                 tile.Update(state);
             }
+
+            if (specialObject != null) specialObject.Update(state);
         }
 
         public void Reset()

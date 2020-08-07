@@ -93,6 +93,11 @@ namespace RewindGame.Game.Effects
             
         }
 
+        public void Reset()
+        {
+            waterflow = 0;
+        }
+
 
         public void Dispose()
         {
