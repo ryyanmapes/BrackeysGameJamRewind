@@ -37,6 +37,9 @@ namespace RewindGame.Game
         LimboSpikePlatform,
         LargeLimboSpikePlatform,
         LimboSpikyBall,
+        CottonwoodPlatform,
+        FloofForwards,
+        FloofBackwards,
         obelisk,
         lunarshrine,
         treesear
@@ -291,6 +294,12 @@ namespace RewindGame.Game
                     return EntityType.LargeLimboSpikePlatform;
                 case "limbospikyball":
                     return EntityType.LimboSpikyBall;
+                case "cottonwoodplatform":
+                    return EntityType.CottonwoodPlatform;
+                case "floof_forward":
+                    return EntityType.FloofForwards;
+                case "floof_backward":
+                    return EntityType.FloofBackwards;
                 case "lunarshrine":
                     return EntityType.lunarshrine;
                 case "obelisk":

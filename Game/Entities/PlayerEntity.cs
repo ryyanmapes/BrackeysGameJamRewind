@@ -8,6 +8,13 @@ using System.Text;
 
 namespace RewindGame.Game
 {
+    public enum GroundedReturn
+    {
+        no,
+        grounded,
+        floof_forwards,
+        floof_backwards
+    }
 
     public class PlayerEntity : PhysicsEntity
     {
@@ -83,7 +90,7 @@ namespace RewindGame.Game
                 temporaryAllowJump = true;
             }
 
-            if (is_grounded && velocity.Y >= 0)
+            if (grounded == GroundedReturn.grounded && velocity.Y >= 0)
             {
                 //noOppositeTravelDirection = HangDirection.None;
                 noOppositeTravelTime = -1f;
@@ -98,15 +105,17 @@ namespace RewindGame.Game
             }
             else wasGroundedLastFrame = false;
 
-            if (input_data.is_jump_pressed && (is_grounded || temporaryAllowJump))
+            if (grounded == GroundedReturn.floof_forwards)
             {
-                is_grounded = false;
-                velocity.Y += jumpLaunchVelocity;
-                velocity.Y = Math.Max(velocity.Y, jumpLaunchVelocity * 1.3f);
-                jumpHeldTime = 0f;
-
-                parentGame.soundManager.TriggerPlayerJump();
-                isRewinding = true;
+                if (velocity.Y <= 0) Jump(false, true);
+            }
+            else if (grounded == GroundedReturn.floof_backwards)
+            {
+                if (velocity.Y <= 0) Jump(true, true);
+            }
+            if (input_data.is_jump_pressed && (grounded == GroundedReturn.grounded || temporaryAllowJump))
+            {
+                Jump(true);
             } else if(input_data.is_jump_held && jumpHeldTime != -1 && jumpHeldTime <= maxJumpHoldTime && velocity.Y != 0) {
                 velocity.Y += (heldJumpVelocity  - jumpHeldTime*heldJumpVelocityModifier  ) * elapsed;
                 jumpHeldTime += elapsed;
@@ -182,8 +191,18 @@ namespace RewindGame.Game
 
         }
 
+        public void Jump(bool is_forwards, bool isFloof = false)
+        {
+            grounded = GroundedReturn.no;
+            velocity.Y += jumpLaunchVelocity;
+            velocity.Y = Math.Max(velocity.Y, jumpLaunchVelocity * 1.3f);
+            jumpHeldTime = 0f;
 
-
+            //todo poof sfx
+            if (isFloof) parentGame.soundManager.TriggerPlayerJump();
+            else parentGame.soundManager.TriggerPlayerJump();
+            isRewinding = is_forwards;
+        }
 
         public override void Die()
         {
@@ -197,6 +216,23 @@ namespace RewindGame.Game
             temporaryAllowJump = true;
         }
 
+        public override GroundedReturn getGrounded()
+        {
+            var box = getCollisionBox();
+            box.Y += 1;
+            switch (localLevel.getSolidCollisionAt(box, MoveDirection.down).type)
+            {
+                case CollisionType.normal:
+                    return GroundedReturn.grounded;
+                case CollisionType.forward_floof:
+                    return GroundedReturn.floof_forwards;
+                case CollisionType.backward_floof:
+                    return GroundedReturn.floof_backwards;
+                default:
+                    return GroundedReturn.no;
+            }
+        }
+
 
         public void UpdateAnimations()
         {
@@ -205,7 +241,7 @@ namespace RewindGame.Game
                 return;
             }
 
-            if (isGrounded())
+            if (getGrounded() == GroundedReturn.grounded)
             {
                 if (Math.Abs(velocity.X) > 100)
                 {

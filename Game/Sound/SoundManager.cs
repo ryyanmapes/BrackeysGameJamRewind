@@ -107,7 +107,7 @@ namespace RewindGame.Game.Sound
         }
 
         public void TriggerPlayerJump(){//playerJumpSound.Play();
-            SoundEffect playerJumpSound = Content.Load<SoundEffect>("sfx/jump");
+            SoundEffect playerJumpSound = Content.Load<SoundEffect>("sfx/jump1");
             playerJumpSound.Play();
         }
 
@@ -130,7 +130,7 @@ namespace RewindGame.Game.Sound
         // 0 = light rain, 1 = bad storm
         public void ModifyOverrain(float intensity) {
             peltingRain.Volume = intensity;
-            
+            peltingRain.Play();
         }
         public void EndOverrain() {
             peltingRain.Volume = 0;
@@ -143,7 +143,8 @@ namespace RewindGame.Game.Sound
 
         public void TriggerPlayerWalljump()
         {
-
+            SoundEffect playerWallJumpSound = Content.Load<SoundEffect>("sfx/jump1");
+            playerWallJumpSound.Play();
         }
 
         public void TriggerPlayerDie()
@@ -154,7 +155,8 @@ namespace RewindGame.Game.Sound
 
         public void TriggerTimeFreeze()
         {
-
+            SoundEffect playerTimeSound = Content.Load<SoundEffect>("sfx/jump");
+            playerTimeSound.Play();
         }
 
         public void BeginLimboMusic1()
@@ -190,6 +192,20 @@ namespace RewindGame.Game.Sound
         {
             menuChange = 1f;
             menuInc = false;
+        }
+        public void stopAllMusic()
+        {
+            loop1.Stop();
+            loop2.Stop();
+            EndPiano();
+        }
+        public void BeginCottonwoodMusic1()
+        {
+
+        }
+        public void BeginCottonwoodMusic2()
+        {
+
         }
     }
 }

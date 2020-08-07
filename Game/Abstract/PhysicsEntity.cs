@@ -18,7 +18,7 @@ namespace RewindGame.Game
         protected float groundedXFriction = 1000f;
         protected float gravitationalAcceleration = 1250f;
 
-        protected bool is_grounded = false;
+        protected GroundedReturn grounded = GroundedReturn.no;
 
         public override void Update(StateData state)
         {
@@ -32,7 +32,7 @@ namespace RewindGame.Game
             // our main mechanic will have to do something about this
             // will this actually work just as expected if elapsed is negative?!
 
-            if (is_grounded)
+            if (grounded == GroundedReturn.grounded)
             {
                 velocity.X = addMagnitude(velocity.X, -groundedXFriction*elapsed);
             }
@@ -46,18 +46,19 @@ namespace RewindGame.Game
 
             velocity = new Vector2(minMagnitude(velocity.X, maxVelocityMagnitudeX), Math.Clamp(velocity.Y, minVelocityY, maxVelocityY));
 
-            is_grounded = isGrounded();
+            grounded = getGrounded();
         }
 
-        public bool isGrounded()
+        public virtual GroundedReturn getGrounded()
         {
             var box = getCollisionBox();
             box.Y += 1;
+
             if (localLevel.getSolidCollisionAt(box, MoveDirection.down).type == CollisionType.normal)
             {
-                return true;
+                return GroundedReturn.grounded;
             }
-            return false;
+            return GroundedReturn.no;
         }
 
         public static float addMagnitude(float i, float addend)
