@@ -52,6 +52,8 @@ namespace RewindGame.Game.Solids
             position += new Vector2(velocity.X * state.getTimeDependentDeltaTime(), velocity.Y * state.getTimeDependentDeltaTime());
         }
 
+        public override void LoadContent() { }
+
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
             if (hidden) return;
