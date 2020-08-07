@@ -18,20 +18,11 @@ namespace RewindGame.Game.Effects
         private Texture2D limboVertical2;
         private Texture2D raindrop0;
         private Texture2D raindrop1;
-        private Texture2D star0;
-        private Texture2D star1;
-        private Texture2D star2;
-        private Texture2D star3;
-        private Texture2D star4;
-        private Texture2D star5;
         private int rainfall;
         private bool speedUp;
         private bool whiteOut;
         private float speedFactor = 1f;
         private float whiteOutFade = 0f;
-        private float starFade = 0f;
-        private bool showStars = false;
-        private Random rnd = new Random();
         public LimboEffects(RewindGame parent_game, ContentManager content) 
         { 
             Content = content;
@@ -49,12 +40,6 @@ namespace RewindGame.Game.Effects
             limboVertical2 = Content.Load<Texture2D>("effects/backgrounds/limbo/limbovertical2");
             raindrop0 = Content.Load<Texture2D>("effects/raindrop0");
             raindrop1 = Content.Load<Texture2D>("effects/raindrop1");
-            star0 = Content.Load<Texture2D>("effects/star0");
-            star1 = Content.Load<Texture2D>("effects/star1");
-            star2 = Content.Load<Texture2D>("effects/star2");
-            star3 = Content.Load<Texture2D>("effects/star3");
-            star4 = Content.Load<Texture2D>("effects/star4");
-            star5 = Content.Load<Texture2D>("effects/star5");
         }
 
         public void Update(StateData state)
@@ -104,10 +89,6 @@ namespace RewindGame.Game.Effects
                 {
                     whiteOutFade -= .1f;
                 }
-            }
-            if (showStars == false && state.getTimeDependentDeltaTime() == 0)
-            {
-
             }
 
         }
@@ -162,10 +143,6 @@ namespace RewindGame.Game.Effects
                 sprite_batch.Draw(raindrop0, CameraPosReal, new Rectangle((int)((CameraPosReal.X + CameraPosReal.X / 2) * .8f) - (rainfall * 2) / 3, (int)(CameraPosReal.Y * .8f) + rainfall * 2, raindrop0.Width, raindrop0.Height), Color.White * whiteOutFade);
                 sprite_batch.Draw(raindrop0, CameraPosReal, new Rectangle((int)((CameraPosReal.X + CameraPosReal.X / 2) * .9f) - (rainfall * 3) / 3, (int)(CameraPosReal.Y * .9f) + rainfall * 3, raindrop0.Width, raindrop0.Height), Color.White * whiteOutFade);
                 //sprite_batch.Draw(raindrop0, (CameraPosReal + new Vector2(CameraPosReal.X, 0)), new Rectangle((int)((CameraPosReal.X) * 0.75f) - rainfall * 2 / 3, (int)((CameraPosReal.Y) * 0.75f) + rainfall, raindrop0.Width, raindrop0.Height), new Color(Color.White, fade));
-            }
-            if (showStars == true)
-            {
-                sprite_batch.Draw(star0, state.camera_position, Color.White);
             }
         }
 

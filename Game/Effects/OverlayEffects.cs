@@ -15,11 +15,20 @@ namespace RewindGame.Game.Effects
         public RewindGame parentGame;
 
         private Texture2D deathSquare;
+        private Texture2D star0;
+        private Texture2D star1;
+        private Texture2D star2;
+        private Texture2D star3;
+        private Texture2D star4;
+        private Texture2D star5;
         private float fadeValue = 0f;
         private bool showCube = false;
         private Color cubeColor = Color.Black;
         private float stall = 1.75f;
         private bool fadeOut = false;
+        private float starFade = 0f;
+        private bool showStars = false;
+        private Random rnd = new Random();
 
         public OverlayEffects(RewindGame parent_game, ContentManager content) 
         { 
@@ -30,6 +39,12 @@ namespace RewindGame.Game.Effects
 
             //texturename = Content.Load<Texture2D>( texturePath );
             deathSquare = Content.Load<Texture2D>("debug/square");
+            star0 = Content.Load<Texture2D>("effects/star0");
+            star1 = Content.Load<Texture2D>("effects/star1");
+            star2 = Content.Load<Texture2D>("effects/star2");
+            star3 = Content.Load<Texture2D>("effects/star3");
+            star4 = Content.Load<Texture2D>("effects/star4");
+            star5 = Content.Load<Texture2D>("effects/star5");
         }
 
 
@@ -76,6 +91,10 @@ namespace RewindGame.Game.Effects
                     fadeOut = false;
                 }
             }
+            if (showStars == false && state.getTimeDependentDeltaTime() == 0)
+            {
+
+            }
         }
 
         public void Draw(StateData state, SpriteBatch sprite_batch)
@@ -84,6 +103,10 @@ namespace RewindGame.Game.Effects
             if (showCube)
             {
                 sprite_batch.Draw(deathSquare, CameraPosReal, new Rectangle((int)CameraPosReal.X, (int)CameraPosReal.Y, (int)RewindGame.LEVEL_SIZE_X, (int)RewindGame.LEVEL_SIZE_Y), new Color(cubeColor, fadeValue), 0f, Vector2.Zero, new Vector2(RewindGame.LEVEL_SIZE_X, RewindGame.LEVEL_SIZE_Y), SpriteEffects.None, 0f);
+            }
+            if (showStars == true)
+            {
+                sprite_batch.Draw(star0, state.camera_position, Color.White);
             }
         }
         public void MakeStasisParticles(StateData state)
