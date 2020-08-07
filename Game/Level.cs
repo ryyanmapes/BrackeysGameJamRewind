@@ -97,6 +97,11 @@ namespace RewindGame.Game
                 tile.Draw(state, sprite_batch);
             }
 
+            foreach (ITile tile in sceneSolidTiles)
+            {
+                tile.Draw(state, sprite_batch);
+            }
+
             foreach (Entity entity in sceneEntities)
             {
                 entity.Draw(state, sprite_batch);
@@ -105,11 +110,6 @@ namespace RewindGame.Game
             foreach (Solid solid in sceneSolids)
             {
                 solid.Draw(state, sprite_batch);
-            }
-
-            foreach (ITile tile in sceneSolidTiles)
-            {
-                tile.Draw(state, sprite_batch);
             }
 
         }

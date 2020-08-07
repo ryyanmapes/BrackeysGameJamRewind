@@ -107,7 +107,7 @@ namespace RewindGame.Game
         public static RawLevel GetLevelData(String level_name)
         {
             string level_json;
-            using (StreamReader sr = new StreamReader("Content/levels/" + level_name + ".json"))
+            using (StreamReader sr = new StreamReader("Content/levels/limbo/" + level_name + ".json"))
             {
                 level_json = sr.ReadToEnd();
             }

@@ -397,6 +397,39 @@
 /processorParam:TextureFormat=Color
 /build:gui/barlimbo2.png
 
+#begin levels/limbo/limbo1.json
+/copy:levels/limbo/limbo1.json
+
+#begin levels/limbo/limbo10.json
+/copy:levels/limbo/limbo10.json
+
+#begin levels/limbo/limbo2.json
+/copy:levels/limbo/limbo2.json
+
+#begin levels/limbo/limbo3.json
+/copy:levels/limbo/limbo3.json
+
+#begin levels/limbo/limbo4.json
+/copy:levels/limbo/limbo4.json
+
+#begin levels/limbo/limbo5.json
+/copy:levels/limbo/limbo5.json
+
+#begin levels/limbo/limbo6.json
+/copy:levels/limbo/limbo6.json
+
+#begin levels/limbo/limbo7.json
+/copy:levels/limbo/limbo7.json
+
+#begin levels/limbo/limbo8.json
+/copy:levels/limbo/limbo8.json
+
+#begin levels/limbo/limbo9.json
+/copy:levels/limbo/limbo9.json
+
+#begin levels/limbo/limboS1.json
+/copy:levels/limbo/limboS1.json
+
 #begin levels/test1.json
 /copy:levels/test1.json
 
@@ -444,6 +477,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:limbo/chainball.png
+
+#begin limbo/limboplatformlongdown.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:limbo/limboplatformlongdown.png;limbo/platformlongdown.png
+
+#begin limbo/pimboplatformlongup.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:limbo/pimboplatformlongup.png;limbo/platformlongup.png
 
 #begin limbo/platformdown.png
 /importer:TextureImporter

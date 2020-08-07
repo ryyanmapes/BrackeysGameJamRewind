@@ -245,7 +245,7 @@ namespace RewindGame
             collisionSheetTexture = Content.Load<Texture2D>("tilesets/collision");
 
 
-            loadLevelAndConnections("test1");
+            loadLevelAndConnections("limbo1");
 
             player = new PlayerEntity(this, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 - 300));
             player.position = activeLevel.playerSpawnpoint;

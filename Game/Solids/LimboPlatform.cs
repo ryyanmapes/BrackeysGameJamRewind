@@ -27,11 +27,12 @@ namespace RewindGame.Game.Solids
             {
                 if (velocity_.Y < 0)
                 {
-                    anim = new Animation("limbo/platform4down", 3, 4, true);
+                    anim = new Animation("limbo/platformlongdown", 3, 4, true);
                 }
                 else
                 {
-                    anim = new Animation("limbo/platform4up", 3, 4, true);
+                    anim = new Animation("limbo/platformlong" +
+                        "up", 3, 4, true);
                 }
             }
             else
