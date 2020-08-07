@@ -64,7 +64,7 @@ namespace RewindGame.Game
             animator.changeAnimation("idle");
 
             collisionSize = new Vector2(35, 56);
-            collisionOffset = new Vector2(5, 0);
+            collisionOffset = new Vector2(16, 0);
             Initialize(parentGame.activeLevel, starting_pos);
         }
 

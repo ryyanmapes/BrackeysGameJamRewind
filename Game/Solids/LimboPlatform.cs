@@ -28,7 +28,7 @@ namespace RewindGame.Game.Solids
                 if (velocity_.Y < 0)
                 {
                     anim = new Animation("limbo/platformlongdown", 6, 4, true);
-                    collisionOffset = new Vector2(0, Level.TILE_WORLD_SIZE + 16);
+                    collisionOffset = new Vector2(0, Level.TILE_WORLD_SIZE + 8);
                 }
                 else
                 {
