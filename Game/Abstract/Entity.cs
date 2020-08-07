@@ -13,7 +13,9 @@ namespace RewindGame.Game
         normal,
         death,
         refresh_jump,
-        timestop
+        timestop,
+        forward_floof,
+        backward_floof
     }
 
     public enum MoveDirection

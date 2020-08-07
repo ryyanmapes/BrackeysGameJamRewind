@@ -413,6 +413,13 @@ namespace RewindGame.Game
                 case EntityType.LimboSpikyBall:
                     sceneSolids.Add(LimboSpikyBall.Make(this, position, info.radius, info.speed, info.starting_rotation_degrees));
                     return;
+                case EntityType.CottonwoodPlatform:
+                    // TODO
+                    sceneSolids.Add(LimboPlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    return;
+                case EntityType.FloofForwards:
+                    sceneSolids.Add(LimboSpikyBall.Make(this, position, info.radius, info.speed, info.starting_rotation_degrees));
+                    return;
                 case EntityType.lunarshrine:
                 case EntityType.obelisk:
                 case EntityType.treesear:

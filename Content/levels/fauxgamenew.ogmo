@@ -21,7 +21,7 @@
   "compactExport": false,
   "externalScript": "",
   "playCommand": "",
-  "entityTags": ["playerspawn", "limbo", "platforms", "danger", "special"],
+  "entityTags": ["playerspawn", "limbo", "danger", "special", "cottonwood"],
   "layers": [
     {
       "definition": "tile",
@@ -120,7 +120,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["limbo", "platforms"],
+      "tags": ["limbo"],
       "values": [
         {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000},
         {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000}
@@ -405,7 +405,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["limbo", "platforms"],
+      "tags": ["limbo"],
       "values": [
         {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
         {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
@@ -526,7 +526,166 @@
       "values": [],
       "texture": "C:/Users/ryan_/Desktop/jammm/cottonwoodsecret.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURQAAABkZIThCVJCAkwAAAIElICUAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAJ4gAACeIBR+hDHwAAAWdJREFUSEvl1Y1ugzAQA+At8P7PPJ9twoWfW+imatIsDULir5S06j7WIZ9FXHFOsLl2jivOr8H272HSsxDTsfwixNG9N8HsnsBYcw15AFtrbkUewXTDI8SrunnIj2B28zDmXWL+NnRH2SEX3gtju1+D+Ea99lZxS8ELXEB+Ty8hpyoY7ALy6jn0uIKWexlpyzaoYcg4sot0NwG3Q5wXOl6VkO/VJTEMFl/NQrB+fABbPBw+Vb5X0lnIbjDoGH8D/SOng+7GIQfjT84txF/Dxmx2HsZJH4YvJqAfEel7WkM8/QDBuiuhUIdJIeUdsdbhoBBOusjkZ+wVf3gZl1CSFQ50Um4gb4PfKjUG4XCWXSegWESNGzjuTsCYRLkf3R3CRREFcO/izMIhMRHz+T/5DrfnO7sd5lsK6rm1rHIOpyqoXWJ3SIdZanPSHd3L4YtdQa7GmWs38CgDSiI3MEuiCKGlXQm9G+v6BS5jHWndo+3IAAAAAElFTkSuQmCC"
+    },
+    {
+      "exportID": "82444963",
+      "name": "floof_forward",
+      "limit": -1,
+      "size": {"x": 14, "y": 14},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["cottonwood"],
+      "values": [],
+      "texture": "../../../../../../../../ryan_/Stuff/Misc/Downloads/jumppoofpink.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURQAAANix0ZCAkzhCVAAAAPKTXPIAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAJ4gAACeIBR+hDHwAAAINJREFUOE+l0EsOgCAMBFCB3v/M0nZKP5huHBeSeRkSfShkzP3gzHFk4Ow3GkcBCzpDXVmwBaL0SKuYdxzZKqKJceyWKHIM76FO/y7t18UYfmj4TrbijmNyooblrdICi8rOMSu6g6absYu4w2ArTkJaZyTJSHPhICmYpwWpxe7aFqMRveHFCHDv/67bAAAAAElFTkSuQmCC"
+    },
+    {
+      "exportID": "82453170",
+      "name": "floof_backwards",
+      "limit": -1,
+      "size": {"x": 14, "y": 14},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["cottonwood"],
+      "values": [],
+      "texture": "../../../../../../../../ryan_/Stuff/Misc/Downloads/jumppoofgreen.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAASUExURQAAALHTbnybWDhCVJCAkwAAAKz3utYAAAAGdFJOU///////ALO/pL8AAAAJcEhZcwAACeIAAAniAUfoQx8AAACESURBVDhPpdBJDoAwDANASpv/f5ksDlmKesEcqDxyJbgoZdz84CwJFJDwG02gggedo6082AJRRrQ1rDuJbg3R5ASelihqHPehTf8u/dflOH5o+k6x5oHjlmRNy121BTbVXWBVdC+6MmOXkSPgK0lBmgsHS0VaEwdNwzptSEc8XXvEbEQPGd8KKZ48v1sAAAAASUVORK5CYII="
+    },
+	{
+      "exportID": "54636356",
+      "name": "cottonwoodplatform",
+      "limit": -1,
+      "size": {"x": 28, "y": 14},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["cottonwood"],
+      "values": [
+        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000},
+        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000}
+      ],
+      "texture": "C:/Users/ryan_/Desktop/jammm/limboplatformup0.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAFMSURBVEhLxZS7bsIwFIadPAqPwNIlUpkqmLq1zwFrVxgLz8HYCalTB5Y+VeC3ciLH9rk4JO0nJTIJ8ZdzS7Vev7XOSPPy5JrXVffLzvXrx12/f/262h8/7cIRMoKkNU5k18BDYyFH7c93rOIx0vCZXkhYxKXScL9ECC6Xc/Wx3fmju5Rglcb/S4SQdUsVizTO1kAYyw6no9rBkhT34j17YUlkMZyUShLuXbUtH8Rm895i2DmQrvB+OKd4iVwPsELI4qhxrVsmkJikz4tlNmPZLs3JgJZ2P1L3yKS6ZoWPoI1TVohIcunjUop0IjotA0BsGmksrIIYNqVzyMDkNdRIhKgTDqnwqBlXT41BDbEJl6opGgb0EUoywN2DrCTi/6shIpDecqqUJnNIqf3TsZhLBgZCrXGmgP20zRWl+C0NyTVNacMA01hI3VuGczeWz+wDOfU+pQAAAABJRU5ErkJggg=="
+    },
+	{
+      "exportID": "75472653",
+      "name": "cottonwoodplatformlarge",
+      "limit": -1,
+      "size": {"x": 56, "y": 14},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["cottonwood"],
+      "values": [
+        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
+        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
+      ],
+      "texture": "C:/Users/ryan_/Desktop/jammm/limboplatformlongup0.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAcCAYAAAA0u3w+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAGmSURBVFhH5ZaxTsMwEIaTPgqPwMJSCSbUTmzwHLB2LSPlORiZKjExdOGpgv4qf3Sx70wcu60TPilqE8f2fTr7nHq1emwqwfL+plo+3LV3p+fw+V0dvn7au7j53b4a9Xb31hc8oxxBoCR2ftkXuMILPJAP3Q5TQsvmov09NvKFS0mmZE+TA50goSg6n0OUc6TIbZ5f6vavh1dkwH7/0XV4fd8d20+1NxFoLrn1+slz8TIo5SQYVA6cg5xyQIu9J+i+wOxJcovGjBWSI65DJ2hlziJVVPYdMs4QOSJd6qbxktSBNY2D1wLFiO1jlxqDxWqxxoiRczEFIedmVdvEJEYUAWuBapIpckAV1OSIJQnBoRm9vbo2A5WSqXLAq6KpIBBcCE4GSLRnEq3vWDmQZYkye1rW5TmKoIcGy34pciBYZDiJhiVkkSvgWEzBnHKXJPseLA1PEPsMV2gpYc9Z+7E0ektUKyxkTIEpgS6DITlgtfHsKzWj/2cPIkOhLEx1iXrHBJfqrI+JuciBnuBfhWaKzP5LJvgtKtGKTOkFBgw6JkLVtWyq6heXVFhzm5lTFwAAAABJRU5ErkJggg=="
     }
+	
   ],
   "tilesets": [
     {"label": "Main", "path": "../Desktop/jammm/collisionlayer.png", "image": "data:image/png;base64,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", "tileWidth": 14, "tileHeight": 14, "tileSeparationX": 0, "tileSeparationY": 0},
