@@ -473,7 +473,7 @@ namespace RewindGame
                 timeData.time_status = TimeState.still;
                 timeData.time_moment = 0;
                 activeLevel.Reset();
-                overlayEffect.MakeStasisParticles(state);
+                //overlayEffect.MakeStasisParticles(state);
                 // todo add particles
             }
             else if (player.isRewinding)
