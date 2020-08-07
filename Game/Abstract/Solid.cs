@@ -83,7 +83,7 @@ namespace RewindGame.Game
                         }
                         else if (riding_entities.Contains(entity))
                         {
-                            entity.moveY(move_components.X, null);
+                            entity.moveY(move_components.Y, null);
                         }
                     }
                 }

@@ -380,6 +380,7 @@ namespace RewindGame.Game
             {
                 case EntityType.Spawnpoint:
                     position.Y += 55;
+                    position.X += 24;
                     playerSpawnpoint = position;
                     return;
                 case EntityType.LimboPlatform:

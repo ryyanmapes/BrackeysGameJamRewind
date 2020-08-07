@@ -75,6 +75,15 @@
       "exportMode": 0,
       "arrayMode": 0,
       "defaultTileset": "Main"
+    },
+    {
+      "definition": "tile",
+      "name": "foreforeground",
+      "gridSize": {"x": 14, "y": 14},
+      "exportID": "76285095",
+      "exportMode": 0,
+      "arrayMode": 0,
+      "defaultTileset": "Main"
     }
   ],
   "entities": [

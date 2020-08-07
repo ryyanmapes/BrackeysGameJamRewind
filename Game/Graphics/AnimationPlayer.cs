@@ -51,7 +51,8 @@ namespace RewindGame.Game.Graphics
             Rectangle source_rect = new Rectangle(texture_width * frame, 0, texture_width, texture.Height);
             Rectangle destination_rect = new Rectangle((int)(position.X + offset.X), (int)(position.Y + offset.Y), texture_width * scale, texture.Height * scale);
 
-            sprite_batch.Draw(texture, destination_rect, source_rect, Color.White, 0.0f, Vector2.Zero, effect, 0);
+            if (!(!animation.do_loop && callCount > animation.frame_count))
+                sprite_batch.Draw(texture, destination_rect, source_rect, Color.White, 0.0f, Vector2.Zero, effect, 0);
             
             callCount += timeN;
         }

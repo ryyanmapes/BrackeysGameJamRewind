@@ -122,6 +122,8 @@ namespace RewindGame.Game.Sound
         }
 
         // 0 = light rain, 1 = bad storm
+        // set the rain effect equal to zero by default and after endrain is called
+        // increase volume of pelting rain as intensity increases
         public void ModifyOverrain(float intensity) { }
         public void EndOverrain() { }
 
