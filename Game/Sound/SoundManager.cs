@@ -15,14 +15,17 @@ namespace RewindGame.Game.Sound
     {
         public RewindGame parentGame;
         public ContentManager Content;
-        public ChaiFoxes.FMODAudio.Studio.EventInstance loop1;
-        public ChaiFoxes.FMODAudio.Studio.EventInstance loop2;
+        public ChaiFoxes.FMODAudio.Studio.EventInstance limboLoop1;
+        public ChaiFoxes.FMODAudio.Studio.EventInstance limboLoop2;
+        public ChaiFoxes.FMODAudio.Studio.EventInstance cottonLoop1;
+        public ChaiFoxes.FMODAudio.Studio.EventInstance cottonLoop2;
         public ChaiFoxes.FMODAudio.Sound playerJumpSound;
         public ChaiFoxes.FMODAudio.Sound playerLandSound;
         public ChaiFoxes.FMODAudio.Sound playerDieSound;
         public ChaiFoxes.FMODAudio.Sound peltingRain;
         public ChaiFoxes.FMODAudio.Sound sliding;
-        public float fadeIntoLoop2;
+        public float fadeIntoLimboLoop2;
+        public float fadeIntoCottonLoop2;
         public bool pianoFadeoutInc = false;
         public float fadeIntoPiano;
         public float menuChange;
@@ -41,7 +44,8 @@ namespace RewindGame.Game.Sound
             //playerLandSound = CoreSystem.LoadSound("Content/sfx/wood.wav"); // needs variants?
             //playerDieSound = CoreSystem.LoadSound("Content/sfx/death.wav"); for simple sounds we should just be using the builtin Content.Load
 
-            fadeIntoLoop2 = -1f;
+            fadeIntoLimboLoop2 = -1f;
+            fadeIntoCottonLoop2 = -1f;
             fadeIntoPiano = -1f;
             menuChange = -1f;
             FMODManager.Init(FMODMode.CoreAndStudio, "Content/music");
@@ -49,14 +53,15 @@ namespace RewindGame.Game.Sound
             StudioSystem.LoadBank("Master Bank.bank").LoadSampleData();
             StudioSystem.LoadBank("Master Bank.strings.bank").LoadSampleData();
 
-            this.loop1 = StudioSystem.GetEvent("Event:/Music/Limbo/Loop1").CreateInstance();
-            this.loop2 = StudioSystem.GetEvent("Event:/Music/Limbo/Loop2").CreateInstance();
+            this.limboLoop1 = StudioSystem.GetEvent("Event:/Music/Limbo/Loop1").CreateInstance();
+            this.limboLoop2 = StudioSystem.GetEvent("Event:/Music/Limbo/Loop2").CreateInstance();
+            this.cottonLoop1 = StudioSystem.GetEvent("Event:/Music/Cotton Forest/Loop1").CreateInstance();
+            this.cottonLoop2 = StudioSystem.GetEvent("Event:/Music/Cotton Forest/Loop2").CreateInstance();
             this.peltingRain = CoreSystem.LoadStreamedSound("peltingrain.wav");
             peltingRain.Volume = 1;
             this.sliding = CoreSystem.LoadStreamedSound("slide.wav");
             sliding.Volume = 0;
             sliding.Looping = true;
-            peltingRain.Play();
 
         }
 
@@ -66,25 +71,36 @@ namespace RewindGame.Game.Sound
             float elapsed = (float)state.getDeltaTime();
             FMODManager.Update();
             // you can use state to get deltatime, whether time is backwards or forwards, etc
-            if(fadeIntoLoop2 != -1)
+            if(fadeIntoLimboLoop2 != -1)
             {
-                loop1.SetParameterValue("loop1 to loop2", fadeIntoLoop2);
-                loop2.SetParameterValue("loop1 to loop2", 1-fadeIntoLoop2);
-                fadeIntoLoop2 -= elapsed;
-                if(fadeIntoLoop2 <= 0)
+                limboLoop1.SetParameterValue("loop1 to loop2", fadeIntoLimboLoop2);
+                limboLoop2.SetParameterValue("loop1 to loop2", 1-fadeIntoLimboLoop2);
+                fadeIntoLimboLoop2 -= elapsed;
+                if(fadeIntoLimboLoop2 <= 0)
                 {
-                    fadeIntoLoop2 = -1;
-                    loop1.Stop();
+                    fadeIntoLimboLoop2 = -1;
+                    limboLoop1.Stop();
                 }
             }
-            if(fadeIntoPiano != -1)
+            if (fadeIntoCottonLoop2 != -1)
+            {
+                limboLoop1.SetParameterValue("loop1 to loop2", fadeIntoCottonLoop2);
+                limboLoop2.SetParameterValue("loop1 to loop2", 1 - fadeIntoCottonLoop2);
+                fadeIntoCottonLoop2 -= elapsed;
+                if (fadeIntoCottonLoop2 <= 0)
+                {
+                    fadeIntoCottonLoop2 = -1;
+                    cottonLoop1.Stop();
+                }
+            }
+            if (fadeIntoPiano != -1)
             {
                 fadeIntoPiano += elapsed * (pianoFadeoutInc ? 1 : -1);
                 if ((fadeIntoPiano > 1 && pianoFadeoutInc) || (fadeIntoPiano < 0 && !pianoFadeoutInc))
                 {
                     fadeIntoPiano = -1;
                 }
-                loop2.SetParameterValue("full to piano only", fadeIntoPiano);
+                limboLoop2.SetParameterValue("full to piano only", fadeIntoPiano);
             }
             if(menuChange != -1)
             {
@@ -96,8 +112,8 @@ namespace RewindGame.Game.Sound
                     menuChange -= elapsed;
                 }
 
-                loop1.SetParameterValue("menu open", menuChange);
-                loop2.SetParameterValue("menu open", menuChange);
+                limboLoop1.SetParameterValue("menu open", menuChange);
+                limboLoop2.SetParameterValue("menu open", menuChange);
                 if(menuChange > 1 || menuChange < 0)
                 {
                     menuChange = -1;
@@ -131,6 +147,7 @@ namespace RewindGame.Game.Sound
         public void ModifyOverrain(float intensity) {
             peltingRain.Volume = intensity;
             peltingRain.Play();
+
         }
         public void EndOverrain() {
             peltingRain.Volume = 0;
@@ -161,14 +178,14 @@ namespace RewindGame.Game.Sound
 
         public void BeginLimboMusic1()
         {
-            loop1.Start();
+            limboLoop1.Start();
         }
 
 
         public void BeginLimboMusic2()
         {
-            loop2.Start();
-            fadeIntoLoop2 = 1f;
+            limboLoop2.Start();
+            fadeIntoLimboLoop2 = 1f;
         }
 
         // this is the relaxed ending theme
@@ -195,17 +212,20 @@ namespace RewindGame.Game.Sound
         }
         public void stopAllMusic()
         {
-            loop1.Stop();
-            loop2.Stop();
+            limboLoop1.Stop();
+            limboLoop2.Stop();
+            cottonLoop1.Stop();
+            cottonLoop2.Stop();
             EndPiano();
         }
         public void BeginCottonwoodMusic1()
         {
-
+            cottonLoop1.Start();
         }
         public void BeginCottonwoodMusic2()
         {
-
+            cottonLoop2.Start();
+            fadeIntoCottonLoop2 = 1f;
         }
     }
 }
