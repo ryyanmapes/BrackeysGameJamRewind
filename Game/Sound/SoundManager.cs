@@ -56,7 +56,6 @@ namespace RewindGame.Game.Sound
             this.sliding = CoreSystem.LoadStreamedSound("slide.wav");
             sliding.Volume = 0;
             sliding.Looping = true;
-            sliding.Play();
             peltingRain.Play();
 
         }
@@ -120,6 +119,7 @@ namespace RewindGame.Game.Sound
         public void BeginPlayerWallslide()
         {
             sliding.Volume = 30;
+            sliding.Play();
         }
 
         public void EndPlayerWallslide()
