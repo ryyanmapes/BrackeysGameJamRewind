@@ -286,14 +286,14 @@ namespace RewindGame
             collisionSheetTexture = Content.Load<Texture2D>("tilesets/collision");
 
 
-            loadLevelAndConnections("limbo1");
-
-            player = new PlayerEntity(this, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 - 300));
-            player.position = activeLevel.playerSpawnpoint;
-
             overlayEffect = new OverlayEffects(this, Content);
             soundManager = new SoundManager(this, Content);
             timelineGUI = new TimelineBarGUI(this, Content);
+
+            LoadArea(AreaState.limbo);
+
+            player = new PlayerEntity(this, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 - 300));
+            player.position = activeLevel.playerSpawnpoint;
 
             LoadNextArea();
             //DoTrigger("limbo_fourth");
@@ -315,7 +315,7 @@ namespace RewindGame
 
         public void LoadArea(AreaState area)
         {
-            areaEffect.Dispose();
+            if (areaEffect != null) areaEffect.Dispose();
             switch (area)
             {
                 case AreaState.limbo:
