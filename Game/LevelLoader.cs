@@ -186,6 +186,7 @@ namespace RewindGame.Game
             bool is_collision_layer = false;
             bool is_technical_layer = false;
             bool is_large_tile = false;
+            bool is_foreforefront = false;
             TileSheet sheet_type = TileSheet.none;
             int sorting_layer = 0;
 
@@ -209,6 +210,11 @@ namespace RewindGame.Game
                     sorting_layer = 2;
                     is_large_tile = true;
                     sheet_type = TileSheet.decorative;
+                    break;
+                case "foreforeground":
+                    sorting_layer = 3;
+                    sheet_type = TileSheet.collision;
+                    is_foreforefront = true;
                     break;
             }
 

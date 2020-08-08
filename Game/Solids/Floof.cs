@@ -4,6 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using RewindGame.Game.Abstract;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using RewindGame.Game.Graphics;
+using RewindGame.Game.Sound;
+using System;
+using RewindGame.Game.Solids;
+using System.Collections.Generic;
+using System.Text;
 
 namespace RewindGame.Game.Solids
 {
@@ -13,8 +21,14 @@ namespace RewindGame.Game.Solids
         public bool isForwards;
         public Vector2 velocity;
         public Vector2 startingPos;
-        public int timeMomentConsumedOn = -1;
-        public bool isActive = false;
+        public int timeMomentConsumedOn = -9999;
+        public int activeState = -1;
+        protected AnimationChooser anims;
+
+        protected Animation anim_idle_pink = new Animation("cottonwood/jumppoofpink", 1, 1, true);
+        protected Animation anim_idle_green = new Animation("cottonwood/jumppoofgreen", 1, 1, true);
+        protected Animation anim_poof_pink = new Animation("cottonwood/jumppoofpinkpop", 3, 2, false);
+        protected Animation anim_poof_green = new Animation("cottonwood/jumppoofgreenpop", 3, 2, false);
 
         public static Floof Make(Level level, Vector2 starting_pos, Vector2 velocity_, bool isForwards)
         {
@@ -38,47 +52,62 @@ namespace RewindGame.Game.Solids
         {
             position += new Vector2(velocity.X * state.getTimeDependentDeltaTime(), velocity.Y * state.getTimeDependentDeltaTime());
 
-            if (timeMomentConsumedOn != -1 && state.time_data.time_moment < timeMomentConsumedOn)
+            if (activeState == 1) activeState = 0;
+            else if (activeState == 0)
             {
-                isActive = true;
+                anims.changeAnimation("idle");
+                activeState = -1;
+            }
+
+            if (timeMomentConsumedOn != -9999 && state.time_data.time_moment < timeMomentConsumedOn)
+            {
+                activeState = 2;
+                timeMomentConsumedOn = -9999;
+                anims.changeAnimation("poof");
             }
         }
 
         public override void LoadContent()
-        { 
+        {
+            anims = new AnimationChooser(1, Vector2.Zero);
+
             if (isForwards)
             {
-                texturePath = "cottonwood/jumppoofpink";
+                anims.addAnimaton(anim_idle_pink, "idle", localLevel.Content);
+                anims.addAnimaton(anim_idle_pink, "poof", localLevel.Content);
             }
             else
             {
-                texturePath = "cottonwood/jumppoofgreen";
+                anims.addAnimaton(anim_idle_green, "idle", localLevel.Content);
+                anims.addAnimaton(anim_idle_green, "poof", localLevel.Content);
             }
-            base.LoadContent();
+            anims.changeAnimation("idle");
+            //base.LoadContent();
         }
 
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            if (isActive)
-                sprite_batch.Draw(this.texture, position + new Vector2(0,state.time_data.getFloaty(position.X, true)), Color.White);
+            if (activeState > 2 || activeState == -1)
+                anims.Draw(state, sprite_batch, position + new Vector2(0, state.time_data.getFloaty(position.X, true)), SpriteEffects.None, state.getTimeN());
         }
 
         public override void Reset()
         {
             position = startingPos;
-            isActive = true;
+            activeState = -1;
             base.Reset();
         }
 
         public void Consume(StateData state)
         {
-            timeMomentConsumedOn = state.time_data.time_moment - 1;
-            isActive = false;
+            timeMomentConsumedOn = state.time_data.time_moment - 2;
+            activeState = 0;
+            anims.changeAnimation("poof");
         }
 
         public override CollisionReturn getCollisionReturn()
         {
-            if (isActive)
+            if (activeState == -1)
             {
                 return new CollisionReturn(isForwards ? CollisionType.forward_floof : CollisionType.backward_floof, this, 3);
             }

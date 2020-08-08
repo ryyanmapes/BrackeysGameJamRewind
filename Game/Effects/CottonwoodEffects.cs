@@ -49,7 +49,7 @@ namespace RewindGame.Game.Effects
         }
         public void Update(StateData state)
         {
-            waterflow -= (int)(1500 * state.getTimeDependentDeltaTime());
+            waterflow -= (int)(100 * state.getTimeDependentDeltaTime());
             if(waterflow >= cottonwoodHorizontalWater0.Width)
             {
                 waterflow = 0;

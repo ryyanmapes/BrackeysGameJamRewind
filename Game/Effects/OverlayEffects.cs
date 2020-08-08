@@ -24,10 +24,10 @@ namespace RewindGame.Game.Effects
         private List<Texture2D> starTextures = new List<Texture2D>();
         private List<EffectParticle> starParticles = new List<EffectParticle>();
 
-        private const int numStarParticles = 50;
-        private const float starFadeIn = 1f;
-        private const float starLifetime = 2f;
-        private const float starFadeOut = 1f;
+        private const int numStarParticles = 100;
+        private const float starFadeIn = 0.1f;
+        private const float starLifetime = 0.5f;
+        private const float starFadeOut = 0.2f;
 
         private bool forceFadeout;
 

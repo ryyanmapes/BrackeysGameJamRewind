@@ -483,8 +483,8 @@
         {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
         {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
       ],
-      "texture": "../../../../../../../../ryan_/Stuff/Misc/Downloads/jumppoofpink.png",
-      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURQAAANix0ZCAkzhCVAAAAPKTXPIAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAJ4gAACeIBR+hDHwAAAINJREFUOE+l0EsOgCAMBFCB3v/M0nZKP5huHBeSeRkSfShkzP3gzHFk4Ow3GkcBCzpDXVmwBaL0SKuYdxzZKqKJceyWKHIM76FO/y7t18UYfmj4TrbijmNyooblrdICi8rOMSu6g6absYu4w2ArTkJaZyTJSHPhICmYpwWpxe7aFqMRveHFCHDv/67bAAAAAElFTkSuQmCC"
+      "texture": "../../../../../../../../ryan_/Stuff/Misc/Downloads/jumppoofpink (1).png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAASCAMAAABcgh8DAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURQAAANix0ZCAkzhCVAAAAPKTXPIAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAJ4gAACeIBR+hDHwAAAFdJREFUKFNNj0ESACAIAo38/5tj1aa4yMaMUiRaWioDGhAPxgYEjkUyvtBxjGkpvHM8Cm6Mr1Q/e9Xj2vxx1YCRa1GyU7lUIT0LLubuD13U7nnTHoNDmQcKrgJTJXuykwAAAABJRU5ErkJggg=="
     },
     {
       "exportID": "82453170",
@@ -524,8 +524,8 @@
         {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
         {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
       ],
-      "texture": "../../../../../../../../ryan_/Stuff/Misc/Downloads/jumppoofgreen.png",
-      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAASUExURQAAALHTbnybWDhCVJCAkwAAAKz3utYAAAAGdFJOU///////ALO/pL8AAAAJcEhZcwAACeIAAAniAUfoQx8AAACESURBVDhPpdBJDoAwDANASpv/f5ksDlmKesEcqDxyJbgoZdz84CwJFJDwG02gggedo6082AJRRrQ1rDuJbg3R5ASelihqHPehTf8u/dflOH5o+k6x5oHjlmRNy121BTbVXWBVdC+6MmOXkSPgK0lBmgsHS0VaEwdNwzptSEc8XXvEbEQPGd8KKZ48v1sAAAAASUVORK5CYII="
+      "texture": "../../../../../../../../ryan_/Stuff/Misc/Downloads/jumppoofgreen (1).png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAASCAMAAABcgh8DAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAASUExURQAAALHTbnybWDhCVJCAkwAAAKz3utYAAAAGdFJOU///////ALO/pL8AAAAJcEhZcwAACeIAAAniAUfoQx8AAABYSURBVChTTY5BDgAhDAJrtf//8jItxuUCI0klCq1c2QEUIB6EAwh0RCl8pepwGGXopjMK/nDuNv+sU4/78o97Bow0i5HTpkY1srPhYu0zbjx7/LZjRlPVBzAOArm1/4W9AAAAAElFTkSuQmCC"
     },
     {
       "exportID": "54636356",
