@@ -39,7 +39,7 @@
           "y": 140,
           "originX": 0,
           "originY": 0,
-          "values": {"velocity_x": 0, "velocity_y": 0}
+          "values": {"velocity_x": 200, "velocity_y": 0}
         },
         {
           "name": "limboplatformlarge",
@@ -49,7 +49,7 @@
           "y": 140,
           "originX": 0,
           "originY": 0,
-          "values": {"velocity_x": 0, "velocity_y": 0}
+          "values": {"velocity_x": 200, "velocity_y": 0}
         },
         {
           "name": "limboplatformlarge",
@@ -59,7 +59,7 @@
           "y": 140,
           "originX": 0,
           "originY": 0,
-          "values": {"velocity_x": 0, "velocity_y": 0}
+          "values": {"velocity_x": 200, "velocity_y": 0}
         }
       ]
     },
