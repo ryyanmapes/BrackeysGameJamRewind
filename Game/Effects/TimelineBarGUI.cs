@@ -27,7 +27,7 @@ namespace RewindGame.Game.Effects
 
         public Texture2D eternalBar1;
         public Texture2D eternalBarHalf;
-        public Texture2D eternalFourth;
+        public Texture2D eternalBarFourth;
 
         public float currentBarSize = 105 * 4;
         public float barDistanceFromTop = 16 * 2;
@@ -41,6 +41,14 @@ namespace RewindGame.Game.Effects
             limboBar1 = Content.Load<Texture2D>("gui/barlimbo0");
             limboBarHalf = Content.Load<Texture2D>("gui/barlimbo1");
             limboBarFourth = Content.Load<Texture2D>("gui/barlimbo2");
+
+            cottonBar1 = Content.Load<Texture2D>("gui/barcottonwood");
+            cottonBarHalf = Content.Load<Texture2D>("gui/barcottonwoodhalf");
+            cottonBarFourth = Content.Load<Texture2D>("gui/barcottonwoodquarter");
+
+            eternalBar1 = Content.Load<Texture2D>("gui/barterrarium");
+            eternalBarHalf = Content.Load<Texture2D>("gui/barlimbo1");
+            eternalBarFourth = Content.Load<Texture2D>("gui/barlimbo2");
 
             indicator = Content.Load<Texture2D>("gui/barindicator");
 

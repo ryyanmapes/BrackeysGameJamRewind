@@ -122,7 +122,7 @@ namespace RewindGame.Game
                 jumpHeldTime = -1f;
             }
 
-            if (hangDirection != HangDirection.None)
+            if (hangDirection != HangDirection.None && grounded != GroundedReturn.grounded)
             {
                 if (velocity.Y > 0) parentGame.soundManager.BeginPlayerWallslide();
 
