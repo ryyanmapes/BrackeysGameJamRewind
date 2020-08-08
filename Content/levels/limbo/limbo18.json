@@ -4,7 +4,7 @@
   "height": 238,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"exit_right": "limbo17", "exit_left": "/T/limbo19", "exit_up": "", "exit_down": "", "triggers": "limbo_half"},
+  "values": {"exit_right": "limbo19", "exit_left": "limbo17", "exit_up": "", "exit_down": "", "triggers": "limbo_half"},
   "layers": [
     {
       "name": "entities",
