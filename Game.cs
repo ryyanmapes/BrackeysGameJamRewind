@@ -206,7 +206,7 @@ namespace RewindGame
         public const float LEVEL_SIZE_X = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_X;
         public const float LEVEL_SIZE_Y = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_Y;
 
-        public const bool SHOULD_SOLIDTILES_RENDER = true;
+        public const bool SHOULD_SOLIDTILES_RENDER = false;
 
         public const float playerDeathTime = 0.5f;
         // will change
@@ -513,7 +513,7 @@ namespace RewindGame
             else if (Keyboard.GetState().IsKeyDown(Keys.J))
                 loadLevelAndConnections("limbofinal");
             else if (Keyboard.GetState().IsKeyDown(Keys.P))
-                loadLevelAndConnections("limbo18");
+                loadLevelAndConnections("cottonfinal");
             else if (Keyboard.GetState().IsKeyDown(Keys.U)) LoadArea(AreaState.cotton);
             else if (Keyboard.GetState().IsKeyDown(Keys.N)) LoadArea(AreaState.eternal);
             else if (Keyboard.GetState().IsKeyDown(Keys.NumPad8))
