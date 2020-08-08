@@ -206,7 +206,7 @@ namespace RewindGame
         public const float LEVEL_SIZE_X = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_X;
         public const float LEVEL_SIZE_Y = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_Y;
 
-        public const bool SHOULD_SOLIDTILES_RENDER = true;
+        public const bool SHOULD_SOLIDTILES_RENDER = false;
 
         public const float playerDeathTime = 0.5f;
         // will change
@@ -505,46 +505,47 @@ namespace RewindGame
 
             if (inputData.is_restart_pressed)
                 qued_player_death = true;
-            
-            if (Keyboard.GetState().IsKeyDown(Keys.K))
-                loadLevelAndConnections("limbo1");      
-            else if (Keyboard.GetState().IsKeyDown(Keys.L))
-                loadLevelAndConnections("limbo19");
-            else if (Keyboard.GetState().IsKeyDown(Keys.J))
-                loadLevelAndConnections("limbofinal");
-            else if (Keyboard.GetState().IsKeyDown(Keys.P))
-                loadLevelAndConnections("limbo18");
-            else if (Keyboard.GetState().IsKeyDown(Keys.U)) LoadArea(AreaState.cotton);
-            else if (Keyboard.GetState().IsKeyDown(Keys.N)) LoadArea(AreaState.eternal);
-            else if (Keyboard.GetState().IsKeyDown(Keys.NumPad8))
+            if (true)
             {
-                if (activeLevel.connectedLevelNames[2] != "")
+                if (Keyboard.GetState().IsKeyDown(Keys.K))
+                    loadLevelAndConnections("limbo1");
+                else if (Keyboard.GetState().IsKeyDown(Keys.L))
+                    loadLevelAndConnections("limbo19");
+                else if (Keyboard.GetState().IsKeyDown(Keys.J))
+                    loadLevelAndConnections("limbofinal");
+                else if (Keyboard.GetState().IsKeyDown(Keys.P))
+                    loadLevelAndConnections("cottonfinal");
+                else if (Keyboard.GetState().IsKeyDown(Keys.U)) LoadArea(AreaState.cotton);
+                else if (Keyboard.GetState().IsKeyDown(Keys.N)) LoadArea(AreaState.eternal);
+                else if (Keyboard.GetState().IsKeyDown(Keys.NumPad8))
                 {
-                    loadLevelAndConnections(activeLevel.connectedLevelNames[2]);
+                    if (activeLevel.connectedLevelNames[2] != "")
+                    {
+                        loadLevelAndConnections(activeLevel.connectedLevelNames[2]);
+                    }
                 }
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.NumPad6))
-            {
-                if (activeLevel.connectedLevelNames[0] != "")
+                else if (Keyboard.GetState().IsKeyDown(Keys.NumPad6))
                 {
-                    loadLevelAndConnections(activeLevel.connectedLevelNames[0]);
+                    if (activeLevel.connectedLevelNames[0] != "")
+                    {
+                        loadLevelAndConnections(activeLevel.connectedLevelNames[0]);
+                    }
                 }
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.NumPad2))
-            {
+                else if (Keyboard.GetState().IsKeyDown(Keys.NumPad2))
+                {
                     if (activeLevel.connectedLevelNames[3] != "")
                     {
                         loadLevelAndConnections(activeLevel.connectedLevelNames[3]);
                     }
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.NumPad4))
+                {
+                    if (activeLevel.connectedLevelNames[1] != "")
+                    {
+                        loadLevelAndConnections(activeLevel.connectedLevelNames[1]);
+                    }
+                }
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.NumPad4))
-            {
-                        if (activeLevel.connectedLevelNames[1] != "")
-                        {
-                            loadLevelAndConnections(activeLevel.connectedLevelNames[1]);
-                        }
-            }
-
             StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition, timeNegBound, timePosBound);
 
 
