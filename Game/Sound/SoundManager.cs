@@ -22,6 +22,8 @@ namespace RewindGame.Game.Sound
         public ChaiFoxes.FMODAudio.Studio.EventInstance limboLoop2;
         public ChaiFoxes.FMODAudio.Studio.EventInstance cottonLoop1;
         public ChaiFoxes.FMODAudio.Studio.EventInstance cottonLoop2;
+        public ChaiFoxes.FMODAudio.Studio.EventInstance eternalLoop1;
+        public ChaiFoxes.FMODAudio.Studio.EventInstance eternalLoop2;
         public ChaiFoxes.FMODAudio.Sound playerJumpSound;
         public ChaiFoxes.FMODAudio.Sound playerLandSound;
         public ChaiFoxes.FMODAudio.Sound playerDieSound;
@@ -30,6 +32,7 @@ namespace RewindGame.Game.Sound
 
         public float fadeIntoLimboLoop2;
         public float fadeIntoCottonLoop2;
+        public float fadeIntoEternalLoop2;
 
         public bool pianoFadeoutInc = false;
         public float fadeIntoPiano;
@@ -63,6 +66,8 @@ namespace RewindGame.Game.Sound
             this.limboLoop2 = StudioSystem.GetEvent("Event:/Music/Limbo/Loop2").CreateInstance();
             this.cottonLoop1 = StudioSystem.GetEvent("Event:/Music/Cotton Forest/Loop1").CreateInstance();
             this.cottonLoop2 = StudioSystem.GetEvent("Event:/Music/Cotton Forest/Loop2").CreateInstance();
+            //this.eternalLoop1 = StudioSystem.GetEvent("Event:/Music/Eternal/Loop1").CreateInstance();
+            //this.eternalLoop2 = StudioSystem.GetEvent("Event:/Music/Eternal/Loop2").CreateInstance();
             this.peltingRain = CoreSystem.LoadStreamedSound("peltingrain.wav");
             peltingRain.Volume = 1;
             peltingRain.Play();
@@ -90,8 +95,8 @@ namespace RewindGame.Game.Sound
             }
             if (fadeIntoCottonLoop2 != -1)
             {
-                limboLoop1.SetParameterValue("loop1 to loop2", fadeIntoCottonLoop2);
-                limboLoop2.SetParameterValue("loop1 to loop2", 1 - fadeIntoCottonLoop2);
+                cottonLoop1.SetParameterValue("loop1 to loop2", fadeIntoCottonLoop2);
+                cottonLoop2.SetParameterValue("loop1 to loop2", 1 - fadeIntoCottonLoop2);
                 fadeIntoCottonLoop2 -= elapsed;
                 if (fadeIntoCottonLoop2 <= 0)
                 {
@@ -99,6 +104,19 @@ namespace RewindGame.Game.Sound
                     cottonLoop1.Stop();
                 }
             }
+            /*
+            if (fadeIntoEternalLoop2 != -1)
+            {
+                eternalLoop1.SetParameterValue("loop1 to loop2", fadeIntoEternalLoop2);
+                eternalLoop2.SetParameterValue("loop1 to loop2", 1 - fadeIntoEternalLoop2);
+                fadeIntoEternalLoop2 -= elapsed;
+                if (fadeIntoEternalLoop2 <= 0)
+                {
+                    fadeIntoEternalLoop2 = -1;
+                    eternalLoop1.Stop();
+                }
+            }
+            */
             if (fadeIntoPiano != -1)
             {
                 fadeIntoPiano += elapsed * (pianoFadeoutInc ? 1 : -1);
@@ -108,23 +126,7 @@ namespace RewindGame.Game.Sound
                 }
                 limboLoop2.SetParameterValue("full to piano only", fadeIntoPiano);
             }
-            if(menuChange != -1)
-            {
-                if(menuInc)
-                {
-                    menuChange += elapsed;
-                } else
-                {
-                    menuChange -= elapsed;
-                }
-
-                limboLoop1.SetParameterValue("menu open", menuChange);
-                limboLoop2.SetParameterValue("menu open", menuChange);
-                if(menuChange > 1 || menuChange < 0)
-                {
-                    menuChange = -1;
-                }
-            }
+            
 
         }
 
@@ -219,16 +221,7 @@ namespace RewindGame.Game.Sound
             fadeIntoPiano = 0f;
             pianoFadeoutInc = true;
         }
-        public void OpenMenu()
-        {
-            menuChange = 0f;
-            menuInc = true;
-        }
-        public void CloseMenu()
-        {
-            menuChange = 1f;
-            menuInc = false;
-        }
+
         public void stopAllMusic()
         {
             limboLoop1.Stop();
@@ -246,6 +239,15 @@ namespace RewindGame.Game.Sound
             cottonLoop2.Start();
             fadeIntoCottonLoop2 = 1f;
         }
+        /*public void BeginEternalMusic1()
+        {
+            eternalLoop1.Start();
+        }
+        public void BeginEternalMusic2()
+        {
+            eternalLoop2.Start();
+            fadeIntoEternalLoop2 = 1f;
+        }*/
         public void TriggerTimeBackwards()
         {
             if(masterVolume != 0)
@@ -272,6 +274,15 @@ namespace RewindGame.Game.Sound
                 warpSFX.Play();
             }
             
+        }
+        public void TriggerBounce()
+        {
+            if (masterVolume != 0)
+            {
+                SoundEffect playerBounce = Content.Load<SoundEffect>("sfx/boing");
+                playerBounce.Play();
+            }
+
         }
         //  piano stuff? area 3 music.
     }
