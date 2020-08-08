@@ -59,6 +59,7 @@ namespace RewindGame.Game.Sound
             this.cottonLoop2 = StudioSystem.GetEvent("Event:/Music/Cotton Forest/Loop2").CreateInstance();
             this.peltingRain = CoreSystem.LoadStreamedSound("peltingrain.wav");
             peltingRain.Volume = 1;
+            peltingRain.Play();
             this.sliding = CoreSystem.LoadStreamedSound("slide.wav");
             sliding.Volume = 0;
             sliding.Looping = true;
