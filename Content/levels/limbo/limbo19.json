@@ -4,7 +4,7 @@
   "height": 560,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"exit_right": "/B/limbofinal", "exit_left": "/T/limbo18", "exit_up": "", "exit_down": "", "triggers": "limbo_full"},
+  "values": {"exit_right": "/B/limbofinal", "exit_left": "limbo18", "exit_up": "", "exit_down": "", "triggers": "limbo_full"},
   "layers": [
     {
       "name": "entities",
