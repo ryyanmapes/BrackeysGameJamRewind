@@ -599,11 +599,20 @@
 #begin levels/limbo/limbo16.json
 /copy:levels/limbo/limbo16.json
 
+#begin levels/limbo/limbo17.json
+/copy:levels/limbo/limbo17.json
+
 #begin levels/limbo/limbo18.json
 /copy:levels/limbo/limbo18.json
 
+#begin levels/limbo/limbo19.json
+/copy:levels/limbo/limbo19.json
+
 #begin levels/limbo/limbo2.json
 /copy:levels/limbo/limbo2.json
+
+#begin levels/limbo/limbo20.json
+/copy:levels/limbo/limbo20.json
 
 #begin levels/limbo/limbo3.json
 /copy:levels/limbo/limbo3.json
@@ -631,6 +640,15 @@
 
 #begin levels/limbo/limboS1.json
 /copy:levels/limbo/limboS1.json
+
+#begin levels/limbo/limbosecret1.json
+/copy:levels/limbo/limbosecret1.json
+
+#begin levels/limbo/limbosecret2.json
+/copy:levels/limbo/limbosecret2.json
+
+#begin levels/limbo/limbosecret3.json
+/copy:levels/limbo/limbosecret3.json
 
 #begin levels/limbo/limbosecretfinal.json
 /copy:levels/limbo/limbosecretfinal.json
