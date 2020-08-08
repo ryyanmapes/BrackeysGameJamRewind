@@ -234,13 +234,14 @@ namespace RewindGame.Game.Sound
         }
         public void TriggerTimeBackwardsEnd()
         {
-
+            SoundEffect playerEndTimeBackSound = Content.Load<SoundEffect>("sfx/end time reverse");
+            playerEndTimeBackSound.Play();
         }
         public void TriggerWarp()
         {
-            SoundEffect warpSFX = Content.Load<SoundEffect>("sfx/exit sound");
+            SoundEffect warpSFX = Content.Load<SoundEffect>("sfx/area exit");
             warpSFX.Play();
         }
-        // backwards timme backwards. freeze sfx. warp sfx. area 3 music. piano stuff.
+        //  freeze sfx.  piano stuff. area 3 music. 
     }
 }

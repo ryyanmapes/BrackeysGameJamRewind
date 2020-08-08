@@ -800,6 +800,12 @@
 /processorParam:Quality=Best
 /build:sfx/death.wav
 
+#begin sfx/end time reverse.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/end time reverse.wav
+
 #begin sfx/jump.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
