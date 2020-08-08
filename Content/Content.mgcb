@@ -1214,6 +1214,12 @@
 /processorParam:Quality=Best
 /build:sfx/area exit.wav
 
+#begin sfx/boing.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/boing.wav
+
 #begin sfx/death.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
