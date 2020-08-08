@@ -212,14 +212,14 @@ namespace RewindGame.Game.Sound
         // this is the relaxed ending theme
         public void BeginPiano()
         {
-            fadeIntoPiano = 1f;
-            pianoFadeoutInc = false;
+            fadeIntoPiano = 0f;
+            pianoFadeoutInc = true;
         }
 
         public void EndPiano()
         {
-            fadeIntoPiano = 0f;
-            pianoFadeoutInc = true;
+            fadeIntoPiano = -1f;
+            pianoFadeoutInc = false;
         }
 
         public void stopAllMusic()
