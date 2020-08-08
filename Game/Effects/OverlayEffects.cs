@@ -80,6 +80,7 @@ namespace RewindGame.Game.Effects
         {
             playerWarpPos = new Vector2(position.X + 42, position.Y);
             showPlayerWarp = true;
+            parentGame.soundManager.TriggerWarp();
         }
         public void StartWarpArtifact(Vector2 position, StateData sate)
         {

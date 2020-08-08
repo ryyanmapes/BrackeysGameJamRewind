@@ -4,7 +4,7 @@
   "height": 238,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"exit_right": "", "exit_left": "limbo19", "exit_up": "", "exit_down": "", "triggers": "still,pianostart"},
+  "values": {"exit_right": "", "exit_left": "/B/limbo19", "exit_up": "", "exit_down": "", "triggers": "still,pianostart"},
   "layers": [
     {
       "name": "collisionlayer",

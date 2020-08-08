@@ -649,6 +649,30 @@
 /processorParam:TextureFormat=Color
 /build:faux/fauxwalk.png
 
+#begin faux/giraffe.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:faux/giraffe.jpg
+
+#begin faux/lamp.jpeg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:faux/lamp.jpeg
+
 #begin faux/wall.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1027,6 +1051,12 @@
 
 #begin Music/slide.wav
 /copy:Music/slide.wav
+
+#begin sfx/area exit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/area exit.wav
 
 #begin sfx/death.wav
 /importer:WavImporter
