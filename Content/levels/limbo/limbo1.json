@@ -16,27 +16,7 @@
       "gridCellsX": 29,
       "gridCellsY": 17,
       "entities": [
-        {"name": "playerspawn", "id": 0, "_eid": "67213102", "x": 140, "y": 154, "originX": -3, "originY": -7},
-        {
-          "name": "cottonwoodplatform",
-          "id": 1,
-          "_eid": "54636356",
-          "x": 84,
-          "y": 154,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 0, "velocity_y": -20}
-        },
-        {
-          "name": "cottonwoodplatformlarge",
-          "id": 2,
-          "_eid": "75472653",
-          "x": 238,
-          "y": 196,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 0, "velocity_y": 20}
-        }
+        {"name": "playerspawn", "id": 0, "_eid": "67213102", "x": 140, "y": 154, "originX": -3, "originY": -7}
       ]
     },
     {
