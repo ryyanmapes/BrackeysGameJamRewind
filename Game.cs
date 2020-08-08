@@ -340,7 +340,7 @@ namespace RewindGame
                 case AreaState.eternal:
                     this.area = AreaState.eternal;
                     //soundManager.BeginCottonwoodMusic1(); todo
-                    areaEffect = new EternalEffects(this, Services);
+                    areaEffect = new EternalEscapeEffects(this, Services);
                     timeData.time_kind = TimeKind.eternal;
                     loadLevelAndConnections("test1");
                     break;

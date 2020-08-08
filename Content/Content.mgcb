@@ -313,6 +313,78 @@
 /processorParam:TextureFormat=Color
 /build:effects/backgrounds/limbo/limbovertical2.png
 
+#begin effects/backgrounds/redhouse/greenhousehorizontal0urgempt.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/redhouse/greenhousehorizontal0urgempt.png
+
+#begin effects/backgrounds/redhouse/greenhousehorizontal1urgempt.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/redhouse/greenhousehorizontal1urgempt.png
+
+#begin effects/backgrounds/redhouse/greenhousehorizontal2urgempt.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/redhouse/greenhousehorizontal2urgempt.png
+
+#begin effects/backgrounds/redhouse/greenhousehorizontal3urgempt.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/redhouse/greenhousehorizontal3urgempt.png
+
+#begin effects/backgrounds/redhouse/greenhouseurgempt.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/redhouse/greenhouseurgempt.png
+
+#begin effects/backgrounds/redhouse/terrariumverticalurgempt.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:effects/backgrounds/redhouse/terrariumverticalurgempt.png
+
 #begin effects/raindrop0.png
 /importer:TextureImporter
 /processor:TextureProcessor
