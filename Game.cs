@@ -206,7 +206,7 @@ namespace RewindGame
         public const float LEVEL_SIZE_X = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_X;
         public const float LEVEL_SIZE_Y = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_Y;
 
-        public const bool SHOULD_SOLIDTILES_RENDER = true;
+        public const bool SHOULD_SOLIDTILES_RENDER = false;
 
         public const float playerDeathTime = 0.5f;
         // will change
