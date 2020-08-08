@@ -22,7 +22,7 @@ namespace RewindGame.Game.Solids
         public Vector2 velocity;
         public Vector2 startingPos;
         public int timeMomentConsumedOn = -9999;
-        public int activeState = -1;
+        public bool isActive = true;
         protected AnimationChooser anims;
 
         protected Animation anim_idle_pink = new Animation("cottonwood/jumppoofpink", 1, 1, true);
@@ -52,18 +52,11 @@ namespace RewindGame.Game.Solids
         {
             position += new Vector2(velocity.X * state.getTimeDependentDeltaTime(), velocity.Y * state.getTimeDependentDeltaTime());
 
-            if (activeState == 1) activeState = 0;
-            else if (activeState == 0)
-            {
-                anims.changeAnimation("idle");
-                activeState = -1;
-            }
-
             if (timeMomentConsumedOn != -9999 && state.time_data.time_moment < timeMomentConsumedOn)
             {
-                activeState = 2;
+                isActive = true;
                 timeMomentConsumedOn = -9999;
-                anims.changeAnimation("poof");
+                anims.changeAnimation("idle");
             }
         }
 
@@ -87,27 +80,27 @@ namespace RewindGame.Game.Solids
 
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            if (activeState > 2 || activeState == -1)
+            if (!anims.isCurrentAnimationDone())
                 anims.Draw(state, sprite_batch, position + new Vector2(0, state.time_data.getFloaty(position.X, true)), SpriteEffects.None, state.getTimeN());
         }
 
         public override void Reset()
         {
             position = startingPos;
-            activeState = -1;
+            isActive = true;
             base.Reset();
         }
 
         public void Consume(StateData state)
         {
-            timeMomentConsumedOn = state.time_data.time_moment - 2;
-            activeState = 0;
+            timeMomentConsumedOn = state.time_data.time_moment - 1;
+            isActive = false;
             anims.changeAnimation("poof");
         }
 
         public override CollisionReturn getCollisionReturn()
         {
-            if (activeState == -1)
+            if (isActive)
             {
                 return new CollisionReturn(isForwards ? CollisionType.forward_floof : CollisionType.backward_floof, this, 3);
             }
