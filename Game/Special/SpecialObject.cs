@@ -16,10 +16,23 @@ namespace RewindGame.Game.Special
                                         "Our actions become undone, as if a higher power is turning back the second hand.", "Those among us have also noticed something quite unsettling recently: the heavenly body is not the same as it once was.", "It waxes when it should wane, new when meant to be full.", "It is a bad omen to our people.",
                                         "Periods of waiting yield no change,and appeasement rituals offer nothing but less food the next day.", "The only option now is to leave our home and seek some sort of normalcy.", "I fear that if the Heavens remain this way, though, there will no longer be a normal to seek out.", "Left to you is only one of many obelisks built in reverence to the great moon above.",
                                         "To my knowledge, it is the last.", "May the moon regain its rhythm once again.\"", "", ""};
+        String[] seartreeLines = { "There's a message seared into the side of this tree:", "and so with the ends we seek,", "then endings we shall receive", "" };
+        String[] barrelLines = { "There’s what seems to be an old order form among the broken barrels","It outlines the details of a product called \"stasis seeds \":","With the power of temporal manipulation, say goodbye to famine and hunger!","Our patent pending technology will assure your harvest is ALWAYS perfect!",
+                                        "Unlike your average fragile seedling, these are engineered to have the ultimate defense against any conflict- temporal locking!", "Too much water? That little germ will seize right up until the moisture is just right!", "Sun a bit too harsh for your delicate sapling? It'll petrify until that perfect evening temperature hits.", " Everything is just right, now and forever with Stasis Seeds on your farm.",
+                                        "And with our engineers ensuring no time shenanigans beyond your precious plants, what do you have to lose? ","","",""};
+        String[] posterLines = { "You're quite familiar with this- it's a diagram of the nearby spacetime dimensions", "Most of it is covered with black streaks, with the exception of an area surrounding a red dot in the center", "It must be outdated.", "" };
+        
+
         String[] currentLines;
 
-        Animation lunarShrineTex = new Animation("limbo/lunarshrine", 5, 4, true); //todo
-        Animation obeliskTex = new Animation("limbo/obelisk", 1, 1, true); //todo
+        Animation lunarShrineTex = new Animation("limbo/lunarshrine", 5, 4, true); 
+        Animation obeliskTex = new Animation("limbo/obelisk", 1, 1, true);
+        Animation seartreeTex = new Animation("cotton/cottonwoodsecret", 1, 1, true); 
+        Animation barrelTex = new Animation("cotton/barrel", 1, 1, true);
+        Animation barrelTreeTex = new Animation("cotton/wagon", 1, 1, true);
+        Animation posterTex = new Animation("eternal/poster.png", 1, 1, true);
+        Animation deskTex = new Animation("limbo/tableplant.png", 1, 1, true);
+        Animation deskTexPost = new Animation("limbo/table.png", 1, 1, true);
 
         SpriteFont font;
 
@@ -67,6 +80,29 @@ namespace RewindGame.Game.Special
                     currentLines = obeliskLines;
                     anim = obeliskTex;
                     collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 2, Level.TILE_WORLD_SIZE * 4);
+                    break;
+                case EntityType.treesear:
+                    currentLines = seartreeLines;
+                    anim = seartreeTex;
+                    collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 4, Level.TILE_WORLD_SIZE * 4);
+                    break;
+                case EntityType.barrel:
+                    currentLines = barrelLines;
+                    anim = barrelTex;
+                    collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 4, Level.TILE_WORLD_SIZE * 4);
+                    break;
+                case EntityType.poster:
+                    currentLines = posterLines;
+                    anim = posterTex;
+                    collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 4, Level.TILE_WORLD_SIZE * 4);
+                    break;
+                case EntityType.desk:
+                    anim = deskTex;
+                    //collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 4, Level.TILE_WORLD_SIZE * 4);
+                    break;
+                case EntityType.barreltree:
+                    anim = barrelTreeTex;
+                    //collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 4, Level.TILE_WORLD_SIZE * 4);
                     break;
                 default:
                     anim = null;

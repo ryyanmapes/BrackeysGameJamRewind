@@ -481,8 +481,14 @@ namespace RewindGame.Game
                 case EntityType.lunarshrine:
                 case EntityType.obelisk:
                 case EntityType.treesear:
+                case EntityType.barrel:
+                case EntityType.poster:
                     specialObject = SpecialObject.Make(this, position, type);
                     return;
+                case EntityType.barreltree:
+                case EntityType.desk:
+                    sceneSolids.Add(SpecialObject.Make(this, position, type));
+                    break;
                 default:
                     //todo
                     return;

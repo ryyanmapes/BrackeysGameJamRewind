@@ -354,7 +354,13 @@ namespace RewindGame.Game
                 case "treesear":
                     return EntityType.treesear;
                 case "barrel":
-                    return EntityType.treesear;
+                    return EntityType.barrel;
+                case "barreltree":
+                    return EntityType.barreltree;
+                case "poster":
+                    return EntityType.poster;
+                case "desk":
+                    return EntityType.desk;
                 default:
                     Console.WriteLine("Unable to find entity type of name: {0}", name);
                     return EntityType.unknown;
