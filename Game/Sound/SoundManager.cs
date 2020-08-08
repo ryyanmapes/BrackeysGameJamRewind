@@ -154,7 +154,7 @@ namespace RewindGame.Game.Sound
         // 0 = light rain, 1 = bad storm
         public void ModifyOverrain(float intensity) {
             peltingRain.Volume = intensity;
-            peltingRain.Play();
+            //peltingRain.Play();
 
         }
         public void EndOverrain() {
