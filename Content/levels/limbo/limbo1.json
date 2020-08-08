@@ -36,16 +36,6 @@
           "originX": 0,
           "originY": 0,
           "values": {"velocity_x": 0, "velocity_y": -200}
-        },
-        {
-          "name": "eternalspikyball",
-          "id": 6,
-          "_eid": "7433328081",
-          "x": 238,
-          "y": 56,
-          "originX": 0,
-          "originY": 0,
-          "values": {"radius": 100, "starting_rotation_degrees": 0, "rotations": 1}
         }
       ]
     },
