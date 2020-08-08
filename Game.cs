@@ -340,7 +340,7 @@ namespace RewindGame
                 case AreaState.eternal:
                     this.area = AreaState.eternal;
                     //soundManager.BeginCottonwoodMusic1(); todo
-                    areaEffect = new EternalEffects(this, Services);
+                    areaEffect = new EternalEscapeEffects(this, Services);
                     timeData.time_kind = TimeKind.eternal;
                     loadLevelAndConnections("test1");
                     break;
@@ -858,35 +858,66 @@ namespace RewindGame
             {
                 timeData.time_kind = TimeKind.limbo;
                 timelineGUI.SetBar(timelineGUI.limboBar1);
-                timelineGUI.currentBarSize = 105*4;
-                timeNegBound = -300;
-                timePosBound = 300;
-                timeDangerNegBound = -250;
-                timeDangerPosBound = 250;
-
+                setBarSizeLarge();
             }
             else if (trigger == "limbo_half")
             {
                 timeData.time_kind = TimeKind.limbo;
                 timelineGUI.SetBar(timelineGUI.limboBarHalf);
-                timelineGUI.currentBarSize = 102 * 2;
-                timeNegBound = -150;
-                timePosBound = 150;
-                timeDangerNegBound = -110;
-                timeDangerPosBound = 110;
+                setBarSizeMedium();
             }
             else if (trigger == "limbo_fourth")
             {
                 timeData.time_kind = TimeKind.limbo;
                 timelineGUI.SetBar(timelineGUI.limboBarFourth);
-                timelineGUI.currentBarSize = 100;
-                timeNegBound = -75;
-                timePosBound = 75;
-                timeDangerNegBound = -25;
-                timeDangerPosBound = 25;
+                setBarSizeSmall();
+            }
+            else if (trigger == "cotton_begin" || trigger == "cotton_full")
+            {
+                timeData.time_kind = TimeKind.cottonwood;
+                timelineGUI.SetBar(timelineGUI.limboBar1);
+                setBarSizeLarge();
+            }
+            else if (trigger == "cotton_half")
+            {
+                timeData.time_kind = TimeKind.cottonwood;
+                timelineGUI.SetBar(timelineGUI.limboBarHalf);
+                setBarSizeMedium();
+            }
+            else if (trigger == "cotton_fourth")
+            {
+                timeData.time_kind = TimeKind.cottonwood;
+                timelineGUI.SetBar(timelineGUI.limboBarFourth);
+                setBarSizeSmall();
             }
         }
 
+        public void setBarSizeLarge()
+        {
+            timelineGUI.currentBarSize = 105 * 4;
+            timeNegBound = -300;
+            timePosBound = 300;
+            timeDangerNegBound = -250;
+            timeDangerPosBound = 250;
+        }
+
+        public void setBarSizeMedium()
+        {
+            timelineGUI.currentBarSize = 102 * 2;
+            timeNegBound = -150;
+            timePosBound = 150;
+            timeDangerNegBound = -110;
+            timeDangerPosBound = 110;
+        }
+
+        public void setBarSizeSmall()
+        {
+            timelineGUI.currentBarSize = 100;
+            timeNegBound = -75;
+            timePosBound = 75;
+            timeDangerNegBound = -25;
+            timeDangerPosBound = 25;
+        }
 
         // says if the object can save it's state in this moment-
         // more often means more memory consumption
