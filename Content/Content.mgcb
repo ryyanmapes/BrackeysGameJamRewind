@@ -745,6 +745,30 @@
 /processorParam:TextureFormat=Color
 /build:eternal/terrariumplatformuplong.png
 
+#begin eternal/terrariumspikeplatform.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:eternal/terrariumspikeplatform.png
+
+#begin eternal/terrariumspikeplatformlong.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:eternal/terrariumspikeplatformlong.png
+
 #begin faux/death.png
 /importer:TextureImporter
 /processor:TextureProcessor

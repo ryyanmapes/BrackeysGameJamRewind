@@ -18,6 +18,8 @@ namespace RewindGame.Game.Solids
         public Animation shortUp = new Animation("eternal/terrariumplatformup", 1, 1, true);
         public Animation shortDown = new Animation("eternal/terrariumplatformdown", 1, 1, true);
 
+
+
         public AnimationChooser anims = new AnimationChooser(1, Vector2.Zero);
 
         public new static EternalPlatform Make(Level level, Vector2 starting_pos, Vector2 velocity_, bool isLong)

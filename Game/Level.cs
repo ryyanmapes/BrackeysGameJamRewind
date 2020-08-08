@@ -478,6 +478,12 @@ namespace RewindGame.Game
                 case EntityType.EternalSpikyBall:
                     sceneSolids.Add(EternalSpikyBall.Make(this, position, info.radius, info.rotations, info.starting_rotation_degrees));
                     return;
+                case EntityType.EternalSpikyPlat:
+                    sceneSolids.Add(EternalSpikePlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    return;
+                case EntityType.EternalSpikyPlatLong:
+                    sceneSolids.Add(EternalSpikePlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    return;
                 case EntityType.lunarshrine:
                 case EntityType.obelisk:
                 case EntityType.treesear:

@@ -922,6 +922,88 @@
       "values": [],
       "texture": "../../../../../../../../ryan_/Stuff/Misc/Downloads/tableplant.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAkCAMAAADM4ogkAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkUExURQAAALHTbnybWElJKerh5C0TD6WQl2tQWUhIVoSOjRkZGQAAAOy19GoAAAAMdFJOU///////////////ABLfzs4AAAAJcEhZcwAACeIAAAniAUfoQx8AAACDSURBVDhP7Y/dDoAgCEYT/Cve/31DpSUxm1dtbZ4LQXf41I0mWeIrPxSdVIsW3bQI0lh60RGMM5XoEIeR6moAhKlEjkPpDfozc6K/kL2mF1nFQBTLDC+a/uoYMYSUuGPxaeo3xqpx9a12FDHvliw0i6mJ1jyE6lSa2Abvc3OwxI9FohOYjDspuxiBngAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "87356225",
+      "name": "eternalspikyplatform",
+      "limit": -1,
+      "size": {"x": 28, "y": 14},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["eternal"],
+      "values": [
+        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
+        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
+      ],
+      "texture": "C:/Users/ryan_/Desktop/jammm/2spikeplatform.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAOCAYAAAA8E3wEAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAFISURBVDhPjZSxbgIxEETv7qdoKFIhqNKRj0gVmiDRgkQKSJWPSJkKKRUFTb7K8CzmmFvsiJFWXo93d3atOzcppYGt97vLcttPp/O8dx5OpjP5WmvWNQXMZi/p6g4AH882n/t0+v1rDofvlv14Msp8rUaLqoNAklREBQUVBM4TG3PhxQH4O0HgIiogP8JFPRa4kBpouXMFelesYPn1ntft60dfYPz8lNfTzzHn1XhBdUHHRkkIuZgjFgXu10AeN4ZRu7/SKCQBnwBfEwtM45M5SlN2CKGuoiWQqGSuVigJuIjgV5on9OkQLiVFPjZYygEuBvJ/GElHbXIXkO+x+BjD+ED9j48oAUr2JvDhORevWBd2rN4WfY6E4e9eGgqqqIs6vDF8ITbFijAmbiBY6lYcCfh8YF5AYB+5IvhoHrX4MPujLfv/8U7NGaX1mdcmsSSoAAAAAElFTkSuQmCC"
+    },
+    {
+      "exportID": "87350631",
+      "name": "eternalspikyplatformlarge",
+      "limit": -1,
+      "size": {"x": 56, "y": 14},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["eternal"],
+      "values": [
+        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
+        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
+      ],
+      "texture": "C:/Users/ryan_/Desktop/jammm/4spikeplatform.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAOCAYAAAB6pd+uAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAJUSURBVEhLhZYxbhUxFEVn/qZoUqSKkipdWAQVSREkKIlECkKVRUBHlShVkGhoWAJbGThmztedN56fI1ljP3vue9f2/GR4iWmaho93n6fT04tpDi1gngasyXGSc9mEHL2445p/q57Kbn6uSIH3by/Ho5NXXdGzs9f7GGvEoiww5/Id54H4OI6tb0x8v6d3iE2DVeDn068Wo+g06rpqnmKrhsYeHr6ON1/uJsc8U58YYMQ1wBwbUGOa7rVmkOvRVheqIEWIwsA8xeV8kgWJhnpzxIy7GWqT11z0mW8TM9SbbUeRXEG/M8Y8LSB5d3/dWlJNWZhFOK56FJbvont0frzSh14tCTnYBBq1z+HG3n3ujOR4Zez78/9nKRI+vbndv2th9tlMxrkRGKugAZ6Q6yupD6sT1RhksWAcahHVYN0AC9zSBucOGRT1ydvTyo3InGN+R60TsNDkCGeflzNpLdJTBNZWo4ferdTckkbVB+OY3vkxMrC12X+kADRjkSBZJJ77FNXanJx+PWmomr0cxGhqSjuE2Dza4+O3kUZscV8hv0WfoAj0YmAc2Kgff363W2FhSb3ClVyfho3XKwzk5LCSlUF+TdNAFi3sjr9WFljN1Su/9Y0mvU2EXg6wvrx1otHFH3rMfbi8asfryx51xThraBaRybLgNESfdbUwtdRznrFYG7jOzyybLAxibu4uSNE0bJ85Nwbx/CVLuGqYSw1N9NajtbURrEeHvFv/qMDmv2qIZCEIIVr/kGpuHjaI5a5DaiVuhvlovfc1BazJ+a2DGYZh+Ave4Fdnt2ee/gAAAABJRU5ErkJggg=="
     }
   ],
   "tilesets": [
