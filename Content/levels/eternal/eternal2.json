@@ -4,7 +4,7 @@
   "height": 238,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"exit_right": "eternal3", "exit_left": "", "exit_up": "", "exit_down": "", "triggers": ""},
+  "values": {"exit_right": "eternal3", "exit_left": "eternal1", "exit_up": "", "exit_down": "", "triggers": ""},
   "layers": [
     {
       "name": "entities",
