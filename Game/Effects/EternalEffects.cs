@@ -30,12 +30,12 @@ namespace RewindGame.Game.Effects
             //
             //Texture Init
             //
-            greenhouse0 = Content.Load<Texture2D>("effects/greenhouse/greenhouse0");
-            greenhousehorizontal0 = Content.Load<Texture2D>("effects/greenhouse/greenhousehorizontal0");
-            greenhousehorizontal1 = Content.Load<Texture2D>("effects/greenhouse/greenhousehorizontal1");
-            greenhousehorizontal2 = Content.Load<Texture2D>("effects/greenhouse/greenhousehorizontal2");
-            greenhousehorizontal3 = Content.Load<Texture2D>("effects/greenhouse/greenhousehorizontal3");
-            terrariumvertical = Content.Load<Texture2D>("effects/greenhouse/terrariumvertical");
+            greenhouse0 = Content.Load<Texture2D>("effects/backgrounds/greenhouse/greenhouse0");
+            greenhousehorizontal0 = Content.Load<Texture2D>("effects/backgrounds/greenhouse/greenhousehorizontal0");
+            greenhousehorizontal1 = Content.Load<Texture2D>("effects/backgrounds/greenhouse/greenhousehorizontal1");
+            greenhousehorizontal2 = Content.Load<Texture2D>("effects/backgrounds/greenhouse/greenhousehorizontal2");
+            greenhousehorizontal3 = Content.Load<Texture2D>("effects/backgrounds/greenhouse/greenhousehorizontal3");
+            terrariumvertical = Content.Load<Texture2D>("effects/backgrounds/greenhouse/terrariumvertical");
 
         }
         public void Update(StateData state)
@@ -53,7 +53,7 @@ namespace RewindGame.Game.Effects
             }
             else if (parentGame.activeLevel.screensHorizontal == parentGame.activeLevel.screensVertical)
             {
-                sprite_batch.Draw(greenhouse0, CameraPosReal, Color.White);
+                sprite_batch.Draw(greenhouse0, CameraPosReal, new Rectangle((int)CameraPosReal.X, (int)CameraPosReal.Y, greenhouse0.Width, greenhouse0.Height), Color.White);
             }
         }
 
