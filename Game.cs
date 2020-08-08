@@ -499,7 +499,7 @@ namespace RewindGame
             else if (Keyboard.GetState().IsKeyDown(Keys.L))
                 loadLevelAndConnections("limbo18");
             else if (Keyboard.GetState().IsKeyDown(Keys.J))
-                loadLevelAndConnections("limbosecretfinal");
+                loadLevelAndConnections("limbofinal");
             else if (Keyboard.GetState().IsKeyDown(Keys.U)) LoadArea(AreaState.cotton);
             else if (Keyboard.GetState().IsKeyDown(Keys.N)) LoadArea(AreaState.eternal);
 
