@@ -44,9 +44,13 @@ namespace RewindGame.Game
         CottonwoodPlatformLarge,
         FloofForwards,
         FloofBackwards,
+        EternalPlatform,
+        EternalPlatformLarge,
+        EternalSpikyBall,
         obelisk,
         lunarshrine,
         treesear,
+        barrel,
         unknown
     }
 
@@ -104,7 +108,8 @@ namespace RewindGame.Game
         public float velocity_y = 0;
         public float radius = 0;
         public float speed = 0;
-        public int starting_rotation_degrees;
+        public int starting_rotation_degrees=0;
+        public int rotations=1;
     }
     
     class LevelLoader
@@ -333,11 +338,19 @@ namespace RewindGame.Game
                     return EntityType.FloofForwards;
                 case "floof_backwards":
                     return EntityType.FloofBackwards;
+                case "eternalplatform":
+                    return EntityType.EternalPlatform;
+                case "eternalplatformlarge":
+                    return EntityType.EternalPlatformLarge;
+                case "eternalspikyball":
+                    return EntityType.EternalSpikyBall;
                 case "lunarshrine":
                     return EntityType.lunarshrine;
                 case "obelisk":
                     return EntityType.obelisk;
                 case "treesear":
+                    return EntityType.treesear;
+                case "barrel":
                     return EntityType.treesear;
                 default:
                     Console.WriteLine("Unable to find entity type of name: {0}", name);

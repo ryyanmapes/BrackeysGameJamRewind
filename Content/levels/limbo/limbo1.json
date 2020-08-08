@@ -18,24 +18,34 @@
       "entities": [
         {"name": "playerspawn", "id": 0, "_eid": "67213102", "x": 140, "y": 154, "originX": -3, "originY": -7},
         {
-          "name": "cottonwoodplatform",
-          "id": 1,
-          "_eid": "54636356",
-          "x": 84,
-          "y": 154,
+          "name": "eternalplatform",
+          "id": 4,
+          "_eid": "75472653",
+          "x": 98,
+          "y": 126,
           "originX": 0,
           "originY": 0,
-          "values": {"velocity_x": 0, "velocity_y": -20}
+          "values": {"velocity_x": 0, "velocity_y": -200}
         },
         {
-          "name": "cottonwoodplatformlarge",
-          "id": 2,
+          "name": "eternalplatformlarge",
+          "id": 5,
           "_eid": "75472653",
-          "x": 238,
-          "y": 196,
+          "x": 84,
+          "y": 98,
           "originX": 0,
           "originY": 0,
-          "values": {"velocity_x": 0, "velocity_y": 20}
+          "values": {"velocity_x": 0, "velocity_y": -200}
+        },
+        {
+          "name": "eternalspikyball",
+          "id": 6,
+          "_eid": "7433328081",
+          "x": 238,
+          "y": 56,
+          "originX": 0,
+          "originY": 0,
+          "values": {"radius": 100, "starting_rotation_degrees": 0, "rotations": 1}
         }
       ]
     },

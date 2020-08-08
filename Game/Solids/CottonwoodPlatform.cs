@@ -35,7 +35,7 @@ namespace RewindGame.Game.Solids
             }
             else
             {
-                if (velocity_.Y > 0)
+                if (velocity_.Y < 0)
                 {
                     anim = new Animation("cottonwood/cottonwoodplatformdown", 1, 1, true);
                     //collisionOffset = new Vector2(0, Level.TILE_WORLD_SIZE + 8);

@@ -85,6 +85,18 @@
 /processorParam:TextureFormat=Color
 /build:cottonwood/jumppoofpink.png
 
+#begin cottonwood/wagon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cottonwood/wagon.png
+
 #begin debug/platform.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -577,6 +589,102 @@
 /processorParam:TextureFormat=Color
 /build:effects/timeriploop.png
 
+#begin eternal/poster.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:eternal/poster.png
+
+#begin eternal/table.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:eternal/table.png
+
+#begin eternal/tableplant.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:eternal/tableplant.png
+
+#begin eternal/terrariumchainball.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:eternal/terrariumchainball.png
+
+#begin eternal/terrariumplatformdown.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:eternal/terrariumplatformdown.png
+
+#begin eternal/terrariumplatformdownlong.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:eternal/terrariumplatformdownlong.png
+
+#begin eternal/terrariumplatformup.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:eternal/terrariumplatformup.png
+
+#begin eternal/terrariumplatformuplong.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:eternal/terrariumplatformuplong.png
+
 #begin faux/death.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -838,6 +946,42 @@
 
 #begin levels/cotton/cotton1.json
 /copy:levels/cotton/cotton1.json
+
+#begin levels/cotton/cotton10.json
+/copy:levels/cotton/cotton10.json
+
+#begin levels/cotton/cotton11.json
+/copy:levels/cotton/cotton11.json
+
+#begin levels/cotton/cotton2.json
+/copy:levels/cotton/cotton2.json
+
+#begin levels/cotton/cotton3.json
+/copy:levels/cotton/cotton3.json
+
+#begin levels/cotton/cotton4.json
+/copy:levels/cotton/cotton4.json
+
+#begin levels/cotton/cotton5.json
+/copy:levels/cotton/cotton5.json
+
+#begin levels/cotton/cotton6.json
+/copy:levels/cotton/cotton6.json
+
+#begin levels/cotton/cotton7.json
+/copy:levels/cotton/cotton7.json
+
+#begin levels/cotton/cotton8.json
+/copy:levels/cotton/cotton8.json
+
+#begin levels/cotton/cotton9.json
+/copy:levels/cotton/cotton9.json
+
+#begin levels/cotton/cottonfinal.json
+/copy:levels/cotton/cottonfinal.json
+
+#begin levels/cotton/cottonsecretfinal.json
+/copy:levels/cotton/cottonsecretfinal.json
 
 #begin levels/limbo/limbo1.json
 /copy:levels/limbo/limbo1.json
