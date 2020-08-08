@@ -319,7 +319,7 @@ namespace RewindGame
                 case AreaState.limbo:
                     this.area = AreaState.limbo;
                     soundManager.BeginLimboMusic1();
-                    areaEffect = new EternalEffects(this, Services);
+                    areaEffect = new LimboEffects(this, Services);
                     timeData.time_kind = TimeKind.limbo;
                     loadLevelAndConnections("limbo1");
 
