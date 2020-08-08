@@ -159,18 +159,13 @@ namespace RewindGame.Game
 
             level.startTriggers = raw_level.values.triggers;
 
-
-            foreach (RawLayer layer in raw_level.layers)
-            {
-                if (layer.name == "entities")
-                {
-                    LoadEntities(layer, level);
-                }
-                else
-                {
-                    LoadTileLayer(layer, level);
-                }
-            }
+            LoadTileLayer(raw_level.layers[5], level);
+            LoadEntities(raw_level.layers[0], level);
+            LoadTileLayer(raw_level.layers[1], level);
+            LoadTileLayer(raw_level.layers[2], level);
+            LoadTileLayer(raw_level.layers[3], level);
+            LoadTileLayer(raw_level.layers[4], level);
+            LoadTileLayer(raw_level.layers[6], level);
         }
 
         public static void LoadEntities(RawLayer tile_layer, Level level)
