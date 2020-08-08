@@ -351,7 +351,7 @@ namespace RewindGame
                     break;
                 case AreaState.eternal:
                     this.area = AreaState.eternal;
-                    //soundManager.BeginCottonwoodMusic1(); todo
+                    //soundManager.beg
                     areaEffect = new EternalEffects(this, Services);
                     timeData.time_kind = TimeKind.eternal;
                     loadLevelAndConnections("eternal1");
@@ -513,7 +513,7 @@ namespace RewindGame
             else if (Keyboard.GetState().IsKeyDown(Keys.J))
                 loadLevelAndConnections("limbofinal");
             else if (Keyboard.GetState().IsKeyDown(Keys.P))
-                loadLevelAndConnections("limbo15");
+                loadLevelAndConnections("limbo18");
             else if (Keyboard.GetState().IsKeyDown(Keys.U)) LoadArea(AreaState.cotton);
             else if (Keyboard.GetState().IsKeyDown(Keys.N)) LoadArea(AreaState.eternal);
             else if (Keyboard.GetState().IsKeyDown(Keys.NumPad8))

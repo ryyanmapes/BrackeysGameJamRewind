@@ -40,6 +40,7 @@ namespace RewindGame.Game.Solids
                 anims.addAnimaton(shortDown, "down", level.parentGame.Content);
                 anims.addAnimaton(shortUp, "up", level.parentGame.Content);
             }
+            anims.changeAnimation("up");
 
             doLeftCollision = false;
             doRightCollision = false;
