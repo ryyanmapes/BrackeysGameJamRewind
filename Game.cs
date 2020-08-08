@@ -507,7 +507,7 @@ namespace RewindGame
                 qued_player_death = true;
             
             if (Keyboard.GetState().IsKeyDown(Keys.K))
-                loadLevelAndConnections("limbosecret3");      
+                loadLevelAndConnections("limbo1");      
             else if (Keyboard.GetState().IsKeyDown(Keys.L))
                 loadLevelAndConnections("cotton1");
             else if (Keyboard.GetState().IsKeyDown(Keys.J))
