@@ -99,13 +99,15 @@ namespace RewindGame
 
     public class StateData
     {
-        public StateData(InputData inputdata, TimeData timedata, GameTime gametime, Vector2 levelcenter, Vector2 cameraoffset)
+        public StateData(InputData inputdata, TimeData timedata, GameTime gametime, Vector2 levelcenter, Vector2 cameraoffset, int nb, int pb)
         {
             input_data = inputdata;
             time_data = timedata;
             game_time = gametime;
             level_center = levelcenter;
             camera_position = cameraoffset;
+            time_bound_neg = nb;
+            time_bound_pos = pb;
         }
 
         public int getTimeN()
@@ -118,6 +120,8 @@ namespace RewindGame
         public GameTime game_time;
         public Vector2 level_center;
         public Vector2 camera_position;
+        public int time_bound_neg = -1000000;
+        public int time_bound_pos = 1000000;
 
         public float getDeltaTime()
         {
@@ -127,6 +131,11 @@ namespace RewindGame
         public float getTimeDependentDeltaTime()
         {
             return (float) getDeltaTime() * getTimeN();
+        }
+
+        public float getTimeLen()
+        {
+            return time_bound_pos - time_bound_neg;
         }
     }
 
@@ -506,7 +515,7 @@ namespace RewindGame
             else if (Keyboard.GetState().IsKeyDown(Keys.U)) LoadArea(AreaState.cotton);
             else if (Keyboard.GetState().IsKeyDown(Keys.N)) LoadArea(AreaState.eternal);
 
-            StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition);
+            StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition, timeNegBound, timePosBound);
 
 
             if (stateTimer != -1)
@@ -780,7 +789,7 @@ namespace RewindGame
             //spriteBatch.Begin(SpriteSortMode.Immediate, transformMatrix:matrix);
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointWrap, null, transformMatrix: matrix);
 
-            StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition);
+            StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition, timeNegBound, timePosBound);
 
             areaEffect.DrawBackground(state, spriteBatch);
 

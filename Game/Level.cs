@@ -469,6 +469,15 @@ namespace RewindGame.Game
                 case EntityType.FloofBackwards:
                     sceneSolids.Add(Floof.Make(this, position, Vector2.Zero, false));
                     return;
+                case EntityType.EternalPlatform:
+                    sceneSolids.Add(EternalPlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    return;
+                case EntityType.EternalPlatformLarge:
+                    sceneSolids.Add(EternalPlatform.Make(this, position, new Vector2(info.velocity_x, info.velocity_y), true));
+                    return;
+                case EntityType.EternalSpikyBall:
+                    sceneSolids.Add(EternalSpikyBall.Make(this, position, info.radius, info.rotations, info.starting_rotation_degrees));
+                    return;
                 case EntityType.lunarshrine:
                 case EntityType.obelisk:
                 case EntityType.treesear:

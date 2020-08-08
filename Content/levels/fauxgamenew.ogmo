@@ -21,7 +21,7 @@
   "compactExport": false,
   "externalScript": "",
   "playCommand": "",
-  "entityTags": ["functioning", "limbo", "danger", "special", "cottonwood"],
+  "entityTags": ["functioning", "limbo", "special", "cottonwood", "eternal"],
   "layers": [
     {
       "definition": "entity",
@@ -199,7 +199,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["limbo", "danger"],
+      "tags": ["limbo"],
       "values": [
         {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
         {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
@@ -240,7 +240,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["limbo", "danger"],
+      "tags": ["limbo"],
       "values": [
         {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
         {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
@@ -281,7 +281,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": ["limbo", "danger"],
+      "tags": ["limbo"],
       "values": [
         {"name": "radius", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000},
         {"name": "speed", "definition": "Float", "defaults": 0, "bounded": false, "min": -1000, "max": 1000},
@@ -528,51 +528,10 @@
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAASCAMAAABcgh8DAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAASUExURQAAALHTbnybWDhCVJCAkwAAAKz3utYAAAAGdFJOU///////ALO/pL8AAAAJcEhZcwAACeIAAAniAUfoQx8AAABYSURBVChTTY5BDgAhDAJrtf//8jItxuUCI0klCq1c2QEUIB6EAwh0RCl8pepwGGXopjMK/nDuNv+sU4/78o97Bow0i5HTpkY1srPhYu0zbjx7/LZjRlPVBzAOArm1/4W9AAAAAElFTkSuQmCC"
     },
     {
-      "exportID": "54636356",
+      "exportID": "75472653",
       "name": "cottonwoodplatform",
       "limit": -1,
       "size": {"x": 28, "y": 14},
-      "origin": {"x": 0, "y": 0},
-      "originAnchored": true,
-      "shape": {
-        "label": "Rectangle",
-        "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
-        ]
-      },
-      "color": "#ff0000ff",
-      "tileX": false,
-      "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
-      "resizeableX": false,
-      "resizeableY": false,
-      "rotatable": false,
-      "rotationDegrees": 360,
-      "canFlipX": false,
-      "canFlipY": false,
-      "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
-      "nodeDisplay": 0,
-      "nodeGhost": true,
-      "tags": ["cottonwood"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000}
-      ],
-      "texture": "C:/Users/ryan_/Desktop/jammm/cottonwoodplatformup.png",
-      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURQAAALHTbnybWElJKQAAAC0f9uEAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAJ4gAACeIBR+hDHwAAAH1JREFUOE/tjwEOgDAIAwf2/2+2LWzT7AUmNgbGDjoZQGTyy5CYXUjAIPN1ywW5Ikahi1J+NcZQSKJzPrImheQ1e+zCSfCyLG1er7mHbwJiNSB7niuG/la0mUbTTLlhblstOJkhqTfjrZdX2FBqVEXnBanFpp7w0A+pL0HgBjsQCebA71bYAAAAAElFTkSuQmCC"
-    },
-    {
-      "exportID": "75472653",
-      "name": "cottonwoodplatformlarge",
-      "limit": -1,
-      "size": {"x": 56, "y": 14},
       "origin": {"x": 0, "y": 0},
       "originAnchored": true,
       "shape": {
@@ -608,6 +567,171 @@
       ],
       "texture": "C:/Users/ryan_/Desktop/jammm/cottonwoodplatformuplong.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAcCAMAAAADZYwMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURQAAALHTbnybWElJKQAAAC0f9uEAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAJ4gAACeIBR+hDHwAAANJJREFUOE/tkVkOwjAMRBPj+5+Z2WKBKirx3ymKsTMvdtrVvavwq00hKsHCZ1KKu/bs6l7ghETeSk1uh2FS7GXLC2J0Npo0R6m9C0srsC/k7GpNxMJ4pnFHYqwcXt0pp9L0YijcEYDH1MCyVnisSv0/IO5Xmy+nycWoq2bVw2L8dcbAK4UAggzHliWOMU5UeQJSdKLEGTyH2S+yCmVXORKL5S/nhgJh0VgyiFBAXVVdBqLzYAGpYE5OjFFDDGINCA131XXnE/xLD3ijB7zRA/5U9xvVoBOUqVvKnwAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "75472653",
+      "name": "cottonwoodplatformlarge",
+      "limit": -1,
+      "size": {"x": 56, "y": 14},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 56, "y": 14},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["cottonwood"],
+      "values": [
+        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
+        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
+      ],
+      "texture": "C:/Users/ryan_/Desktop/jammm/cottonwoodplatformuplong.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAcCAMAAAADZYwMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURQAAALHTbnybWElJKQAAAC0f9uEAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAJ4gAACeIBR+hDHwAAANJJREFUOE/tkVkOwjAMRBPj+5+Z2WKBKirx3ymKsTMvdtrVvavwq00hKsHCZ1KKu/bs6l7ghETeSk1uh2FS7GXLC2J0Npo0R6m9C0srsC/k7GpNxMJ4pnFHYqwcXt0pp9L0YijcEYDH1MCyVnisSv0/IO5Xmy+nycWoq2bVw2L8dcbAK4UAggzHliWOMU5UeQJSdKLEGTyH2S+yCmVXORKL5S/nhgJh0VgyiFBAXVVdBqLzYAGpYE5OjFFDDGINCA131XXnE/xLD3ijB7zRA/5U9xvVoBOUqVvKnwAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "75472653",
+      "name": "eternalplatform",
+      "limit": -1,
+      "size": {"x": 28, "y": 14},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["eternal"],
+      "values": [
+        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
+        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
+      ],
+      "texture": "../../../../../../../../ryan_/Stuff/Misc/Downloads/terrariumplatformup.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExURQAAAOrh5C0TD6WQl0lJKXybWGtQWbHTbgAAAO0ejEAAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAACeIAAAniAUfoQx8AAABrSURBVDhP7c5LDsAgCEVRBLTsf8V9UPwktem4Se9EwolRsvKYUQ7bXtG23ZA5B1SKkCyoVaeKAL0WaT1U+ZpjvSAMmBpr8uuhbhUYGkujfCGN8Sw0lx3xGVhrruNTE5GfjGKBBu76EX0JzU4F2RQQE210MwAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "75472653",
+      "name": "eternalplatformlarge",
+      "limit": -1,
+      "size": {"x": 56, "y": 14},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 56, "y": 14},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["eternal"],
+      "values": [
+        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
+        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
+      ],
+      "texture": "../../../../../../../../ryan_/Stuff/Misc/Downloads/terrariumplatformuplong.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAcCAMAAAADZYwMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExURQAAAOrh5C0TD6WQl0lJKXybWGtQWbHTbgAAAO0ejEAAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAACeIAAAniAUfoQx8AAACSSURBVDhP7ZDBFoQgCEUV0OH/v3geQrOQbE619W4EerewovURWqK4zSsR2+o9QjT3DKIoErVy4aUoTVYmM0Tm6Bzm7kj7iFA0KZREtB6FB/Ewc8pEw5+PxKjNaxDdnBPgRMQbwyNcE6Z/IgI/0WZGjLuvBLFJ72b6D5o9LWOcsCXtJDAGiYX4ny1esMULtrhE9QsA1iimCBfENAAAAABJRU5ErkJggg=="
+    },
+    {
+      "exportID": "7433328081",
+      "name": "eternalspikyball",
+      "limit": -1,
+      "size": {"x": 14, "y": 14},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": ["eternal"],
+      "values": [
+        {"name": "radius", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000},
+        {"name": "starting_rotation_degrees", "definition": "Integer", "defaults": 0, "bounded": false, "min": 0, "max": 360},
+        {"name": "rotations", "definition": "Integer", "defaults": 0, "bounded": false, "min": 0, "max": 100}
+      ],
+      "texture": "C:/Users/ryan_/Pictures/chainball.png",
+      "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAEoSURBVDhPrZQ9DsIwDIVTjsIRWFgqwYTUiZFDMMECEheAA3AIRqZKTCB1YeEIXKXoRXZwTNwGxCdVSdz41X9q0bat+zdZorfnI1yaDEcFbU0GtCapqkWLh44BtqfegShSHRGcytmYLG+ay92v2+PGr0BmYIo25yvtnCvnU9rZdika0pepSMcurHtRTffLQ7Ygg/u6eSF9jjRVwz64xnV98uIhUhh+EQTaz0fKDUIquimIQnYZJYKIvsdnlKJzTjktrnNYyW7RKSphwRyiRsna9EUD5P3dav05pyBHKAX85JxH3eeR0PjG0JNDFCmmgLuoBWS3Ab+HXU4HSDZKC4ezYQcyS/OHgnkEqZRRQ4jovxptY1FGFl0788es+oOkqMaKyCJL9DucewHgp7lUDYSmmgAAAABJRU5ErkJggg=="
     },
     {
       "exportID": "83602113",
