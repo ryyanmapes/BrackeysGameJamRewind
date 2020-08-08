@@ -1,5 +1,5 @@
 Credits:
-Goldey2 - Lead Programmer and Lead Level Designer
+Goldey2 - Lead Programmer and Project Lead
 
 TreatyOfParis (Ian He) - Composer and Sound Designer
 
@@ -18,5 +18,3 @@ Special Thanks:
 ChillyCheeseFryz, Steve Walter, Dylan Tanya, Yannis Fu, Richard Hoang
 
 Coding inspired by Matt Thorson of EXOK Games, some sound effects adapted from Zapsplat
-
-a secret lies deep within the game files.
