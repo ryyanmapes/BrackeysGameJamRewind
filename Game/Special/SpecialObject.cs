@@ -31,9 +31,9 @@ namespace RewindGame.Game.Special
         Animation seartreeTex = new Animation("cotton/cottonwoodsecret", 1, 1, true); 
         Animation barrelTex = new Animation("cotton/barrel", 1, 1, true);
         Animation barrelTreeTex = new Animation("cotton/wagon", 1, 1, true);
-        Animation posterTex = new Animation("eternal/poster.png", 1, 1, true);
-        Animation deskTex = new Animation("limbo/tableplant.png", 1, 1, true);
-        Animation deskTexPost = new Animation("limbo/table.png", 1, 1, true);
+        Animation posterTex = new Animation("eternal/poster", 1, 1, true);
+        Animation deskTex = new Animation("limbo/tableplant", 1, 1, true);
+        Animation deskTexPost = new Animation("limbo/table", 1, 1, true);
 
         SpriteFont font;
 
