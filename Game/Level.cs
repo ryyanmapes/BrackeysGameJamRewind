@@ -126,8 +126,6 @@ namespace RewindGame.Game
                 tile.Draw(state, sprite_batch);
             }
 
-            if (specialObject != null) specialObject.Draw(state, sprite_batch);
-
         }
 
         public void DrawForeground(StateData state, SpriteBatch sprite_batch) {
@@ -140,6 +138,8 @@ namespace RewindGame.Game
             {
                 tile.Draw(state, sprite_batch);
             }
+
+            if (specialObject != null) specialObject.Draw(state, sprite_batch);
         }
 
         public void DrawTile(TileSprite tile_sprite, Vector2 position, SpriteBatch sprite_batch)
