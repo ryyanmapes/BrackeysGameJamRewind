@@ -13,7 +13,7 @@ namespace RewindGame.Game.Solids
     public class Warp : CollisionObject
     {
 
-        protected Animation anim_idle = new Animation("warp/timeriploop", 4, 2, true);
+        protected Animation anim_idle = new Animation("warp/timeriploop", 6, 2, true);
         protected Animation anim_close = new Animation("warp/timerip", 4, 6, false);
 
         protected AnimationChooser anims;

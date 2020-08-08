@@ -21,7 +21,8 @@ namespace RewindGame.Game.Special
                                         "Unlike your average fragile seedling, these are engineered to have the ultimate defense against any conflict- temporal locking!", "Too much water? That little germ will seize right up until the moisture is just right!", "Sun a bit too harsh for your delicate sapling? It'll petrify until that perfect evening temperature hits.", " Everything is just right, now and forever with Stasis Seeds on your farm.",
                                         "And with our engineers ensuring no time shenanigans beyond your precious plants, what do you have to lose? ","","",""};
         String[] posterLines = { "You're quite familiar with this- it's a diagram of the nearby spacetime dimensions", "Most of it is covered with black streaks, with the exception of an area surrounding a red dot in the center", "It must be outdated.", "" };
-        
+
+        String[] sadLines = { "This is the end of the game.", "sadly the time constraints cut our level design team off", "", "Thank you for playing our game!" };
 
         String[] currentLines;
 
@@ -92,7 +93,7 @@ namespace RewindGame.Game.Special
                     collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 4, Level.TILE_WORLD_SIZE * 4);
                     break;
                 case EntityType.poster:
-                    currentLines = posterLines;
+                    currentLines = sadLines;
                     anim = posterTex;
                     collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 4, Level.TILE_WORLD_SIZE * 4);
                     break;

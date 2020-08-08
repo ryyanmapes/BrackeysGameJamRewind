@@ -4,7 +4,7 @@
   "height": 238,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"exit_right": "cotton5", "exit_left": "cotton3", "exit_up": "", "exit_down": "", "triggers": ""},
+  "values": {"exit_right": "cottonfinal", "exit_left": "cotton3", "exit_up": "", "exit_down": "", "triggers": ""},
   "layers": [
     {
       "name": "entities",
