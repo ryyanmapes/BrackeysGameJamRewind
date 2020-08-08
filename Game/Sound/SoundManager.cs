@@ -15,6 +15,9 @@ namespace RewindGame.Game.Sound
     {
         public RewindGame parentGame;
         public ContentManager Content;
+
+        public float masterVolume = 1;
+
         public ChaiFoxes.FMODAudio.Studio.EventInstance limboLoop1;
         public ChaiFoxes.FMODAudio.Studio.EventInstance limboLoop2;
         public ChaiFoxes.FMODAudio.Studio.EventInstance cottonLoop1;
@@ -24,8 +27,10 @@ namespace RewindGame.Game.Sound
         public ChaiFoxes.FMODAudio.Sound playerDieSound;
         public ChaiFoxes.FMODAudio.Sound peltingRain;
         public ChaiFoxes.FMODAudio.Sound sliding;
+
         public float fadeIntoLimboLoop2;
         public float fadeIntoCottonLoop2;
+
         public bool pianoFadeoutInc = false;
         public float fadeIntoPiano;
         public float menuChange;
@@ -62,7 +67,7 @@ namespace RewindGame.Game.Sound
             peltingRain.Volume = 1;
             peltingRain.Play();
             this.sliding = CoreSystem.LoadStreamedSound("slide.wav");
-            sliding.Volume = 0.1f;
+            sliding.Volume = 0.05f;
             sliding.Looping = true;
         }
 
@@ -137,7 +142,7 @@ namespace RewindGame.Game.Sound
         {
             if(!canSlide)
             {
-                sliding.Volume = 0.1f;
+                sliding.Volume = 0.05f*masterVolume;
                 sliding.Play();
                 canSlide = true;
             }
@@ -167,14 +172,22 @@ namespace RewindGame.Game.Sound
 
         public void TriggerPlayerWalljump()
         {
-            SoundEffect playerWallJumpSound = Content.Load<SoundEffect>("sfx/jump1");
-            playerWallJumpSound.Play();
+            if(masterVolume != 0)
+            {
+                SoundEffect playerWallJumpSound = Content.Load<SoundEffect>("sfx/jump1");
+                playerWallJumpSound.Play();
+            }
+            
         }
 
         public void TriggerPlayerDie()
         {
-            SoundEffect playerDieSound = Content.Load<SoundEffect>("sfx/death");
-            playerDieSound.Play();
+            if(masterVolume != 0)
+            {
+                SoundEffect playerDieSound = Content.Load<SoundEffect>("sfx/death");
+                playerDieSound.Play();
+            }
+            
         }
 
         public void TriggerTimeFreeze()
@@ -235,19 +248,31 @@ namespace RewindGame.Game.Sound
         }
         public void TriggerTimeBackwards()
         {
-            SoundEffect playerTimeBackSound = Content.Load<SoundEffect>("sfx/jump");
-            playerTimeBackSound.Play();
+            if(masterVolume != 0)
+            {
+                SoundEffect playerTimeBackSound = Content.Load<SoundEffect>("sfx/jump");
+                playerTimeBackSound.Play();
+            }
+            
         }
         public void TriggerTimeBackwardsEnd()
         {
-            SoundEffect playerEndTimeBackSound = Content.Load<SoundEffect>("sfx/end time reverse");
-            playerEndTimeBackSound.Play();
+            if(masterVolume != 0)
+            {
+                SoundEffect playerEndTimeBackSound = Content.Load<SoundEffect>("sfx/end time reverse");
+                playerEndTimeBackSound.Play();
+            }
+            
         }
         public void TriggerWarp()
         {
-            SoundEffect warpSFX = Content.Load<SoundEffect>("sfx/area exit");
-            warpSFX.Play();
+            if(masterVolume != 0)
+            {
+                SoundEffect warpSFX = Content.Load<SoundEffect>("sfx/area exit");
+                warpSFX.Play();
+            }
+            
         }
-        //  freeze sfx.  piano stuff. area 3 music.
+        //  piano stuff? area 3 music.
     }
 }
