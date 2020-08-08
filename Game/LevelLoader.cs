@@ -47,6 +47,8 @@ namespace RewindGame.Game
         EternalPlatform,
         EternalPlatformLarge,
         EternalSpikyBall,
+        EternalSpikyPlat,
+        EternalSpikyPlatLong,
         obelisk,
         lunarshrine,
         treesear,
@@ -135,7 +137,7 @@ namespace RewindGame.Game
                     prefix = "Content/levels/cotton/";
                     break;
                 case AreaState.eternal:
-                    prefix = "Content/levels/";
+                    prefix = "Content/levels/eternal/";
                     break;
                 default:
                     prefix = "Content/levels/";
@@ -347,6 +349,10 @@ namespace RewindGame.Game
                     return EntityType.EternalPlatformLarge;
                 case "eternalspikyball":
                     return EntityType.EternalSpikyBall;
+                case "eternalspikyplatform":
+                    return EntityType.EternalSpikyPlat;
+                case "eternalspikyplatformlarge":
+                    return EntityType.EternalSpikyPlatLong;
                 case "lunarshrine":
                     return EntityType.lunarshrine;
                 case "obelisk":

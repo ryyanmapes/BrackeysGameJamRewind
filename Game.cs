@@ -354,7 +354,7 @@ namespace RewindGame
                     //soundManager.BeginCottonwoodMusic1(); todo
                     areaEffect = new EternalEffects(this, Services);
                     timeData.time_kind = TimeKind.eternal;
-                    loadLevelAndConnections("test1");
+                    loadLevelAndConnections("eternal1");
                     break;
 
             }

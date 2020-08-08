@@ -71,6 +71,11 @@ namespace RewindGame.Game.Effects
 
 
             }
+            if(state.getTimeDependentDeltaTime() == 0f)
+            {
+                parentGame.soundManager.ModifyOverrain(0);
+                parentGame.soundManager.EndOverrain();
+            }
             //   fade += (Math.Abs(state.time_data.time_moment) / parentGame.timeDangerPosBound) * 2;
             if (rainfall >= raindrop0.Height)
             {

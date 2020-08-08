@@ -745,6 +745,30 @@
 /processorParam:TextureFormat=Color
 /build:eternal/terrariumplatformuplong.png
 
+#begin eternal/terrariumspikeplatform.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:eternal/terrariumspikeplatform.png
+
+#begin eternal/terrariumspikeplatformlong.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:eternal/terrariumspikeplatformlong.png
+
 #begin faux/death.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1030,6 +1054,57 @@
 
 #begin levels/cotton/cottonsecretfinal.json
 /copy:levels/cotton/cottonsecretfinal.json
+
+#begin levels/eternal/eternal1.json
+/copy:levels/eternal/eternal1.json
+
+#begin levels/eternal/eternal10.json
+/copy:levels/eternal/eternal10.json
+
+#begin levels/eternal/eternal11.json
+/copy:levels/eternal/eternal11.json
+
+#begin levels/eternal/eternal12.json
+/copy:levels/eternal/eternal12.json
+
+#begin levels/eternal/eternal13.json
+/copy:levels/eternal/eternal13.json
+
+#begin levels/eternal/eternal14.json
+/copy:levels/eternal/eternal14.json
+
+#begin levels/eternal/eternal15.json
+/copy:levels/eternal/eternal15.json
+
+#begin levels/eternal/eternal2.json
+/copy:levels/eternal/eternal2.json
+
+#begin levels/eternal/eternal3.json
+/copy:levels/eternal/eternal3.json
+
+#begin levels/eternal/eternal4.json
+/copy:levels/eternal/eternal4.json
+
+#begin levels/eternal/eternal5.json
+/copy:levels/eternal/eternal5.json
+
+#begin levels/eternal/eternal6.json
+/copy:levels/eternal/eternal6.json
+
+#begin levels/eternal/eternal7.json
+/copy:levels/eternal/eternal7.json
+
+#begin levels/eternal/eternal8.json
+/copy:levels/eternal/eternal8.json
+
+#begin levels/eternal/eternal9.json
+/copy:levels/eternal/eternal9.json
+
+#begin levels/eternal/eternalsecret1.json
+/copy:levels/eternal/eternalsecret1.json
+
+#begin levels/eternal/eternalsecret2.json
+/copy:levels/eternal/eternalsecret2.json
 
 #begin levels/limbo/limbo1.json
 /copy:levels/limbo/limbo1.json
