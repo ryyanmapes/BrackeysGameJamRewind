@@ -141,7 +141,7 @@ namespace RewindGame.Game.Sound
                 sliding.Play();
                 canSlide = true;
             }
-            
+
         }
 
         public void EndPlayerWallslide()
@@ -179,7 +179,7 @@ namespace RewindGame.Game.Sound
 
         public void TriggerTimeFreeze()
         {
-            
+
         }
 
         public void BeginLimboMusic1()
@@ -248,6 +248,6 @@ namespace RewindGame.Game.Sound
             SoundEffect warpSFX = Content.Load<SoundEffect>("sfx/area exit");
             warpSFX.Play();
         }
-        //  freeze sfx.  piano stuff. area 3 music. 
+        //  freeze sfx.  piano stuff. area 3 music.
     }
 }
