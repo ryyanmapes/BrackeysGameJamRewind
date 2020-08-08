@@ -137,7 +137,7 @@ namespace RewindGame.Game
                     prefix = "Content/levels/cotton/";
                     break;
                 case AreaState.eternal:
-                    prefix = "Content/levels/";
+                    prefix = "Content/levels/eternal/";
                     break;
                 default:
                     prefix = "Content/levels/";
