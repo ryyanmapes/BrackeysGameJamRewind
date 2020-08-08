@@ -66,8 +66,8 @@ namespace RewindGame.Game.Sound
             this.limboLoop2 = StudioSystem.GetEvent("Event:/Music/Limbo/Loop2").CreateInstance();
             this.cottonLoop1 = StudioSystem.GetEvent("Event:/Music/Cotton Forest/Loop1").CreateInstance();
             this.cottonLoop2 = StudioSystem.GetEvent("Event:/Music/Cotton Forest/Loop2").CreateInstance();
-            //this.eternalLoop1 = StudioSystem.GetEvent("Event:/Music/Eternal/Loop1").CreateInstance();
-            //this.eternalLoop2 = StudioSystem.GetEvent("Event:/Music/Eternal/Loop2").CreateInstance();
+            this.eternalLoop1 = StudioSystem.GetEvent("Event:/Music/Eternal/Loop1").CreateInstance();
+            this.eternalLoop2 = StudioSystem.GetEvent("Event:/Music/Eternal/Loop2").CreateInstance();
             this.peltingRain = CoreSystem.LoadStreamedSound("peltingrain.wav");
             peltingRain.Volume = 1;
             peltingRain.Play();
@@ -104,7 +104,7 @@ namespace RewindGame.Game.Sound
                     cottonLoop1.Stop();
                 }
             }
-            /*
+            
             if (fadeIntoEternalLoop2 != -1)
             {
                 eternalLoop1.SetParameterValue("loop1 to loop2", fadeIntoEternalLoop2);
@@ -116,7 +116,7 @@ namespace RewindGame.Game.Sound
                     eternalLoop1.Stop();
                 }
             }
-            */
+            
             if (fadeIntoPiano != -1)
             {
                 fadeIntoPiano += elapsed * (pianoFadeoutInc ? 1 : -1);
@@ -239,7 +239,7 @@ namespace RewindGame.Game.Sound
             cottonLoop2.Start();
             fadeIntoCottonLoop2 = 1f;
         }
-        /*public void BeginEternalMusic1()
+        public void BeginEternalMusic1()
         {
             eternalLoop1.Start();
         }
@@ -247,7 +247,7 @@ namespace RewindGame.Game.Sound
         {
             eternalLoop2.Start();
             fadeIntoEternalLoop2 = 1f;
-        }*/
+        }
         public void TriggerTimeBackwards()
         {
             if(masterVolume != 0)
