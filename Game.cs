@@ -516,19 +516,31 @@ namespace RewindGame
             else if (Keyboard.GetState().IsKeyDown(Keys.N)) LoadArea(AreaState.eternal);
             else if (Keyboard.GetState().IsKeyDown(Keys.NumPad8))
             {
-                loadLevelAndConnections(activeLevel.connectedLevelNames[2]);
+                if (activeLevel.connectedLevelNames[2] != "")
+                {
+                    loadLevelAndConnections(activeLevel.connectedLevelNames[2]);
+                }
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.NumPad6))
             {
-                loadLevelAndConnections(activeLevel.connectedLevelNames[0]);
+                if (activeLevel.connectedLevelNames[0] != "")
+                {
+                    loadLevelAndConnections(activeLevel.connectedLevelNames[0]);
+                }
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.NumPad2))
             {
-                loadLevelAndConnections(activeLevel.connectedLevelNames[3]);
+                    if (activeLevel.connectedLevelNames[3] != "")
+                    {
+                        loadLevelAndConnections(activeLevel.connectedLevelNames[3]);
+                    }
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.NumPad4))
             {
-                loadLevelAndConnections(activeLevel.connectedLevelNames[1]);
+                        if (activeLevel.connectedLevelNames[1] != "")
+                        {
+                            loadLevelAndConnections(activeLevel.connectedLevelNames[1]);
+                        }
             }
 
             StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition, timeNegBound, timePosBound);
