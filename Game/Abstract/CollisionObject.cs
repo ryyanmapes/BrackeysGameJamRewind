@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace RewindGame.Game
 {
@@ -130,6 +131,11 @@ namespace RewindGame.Game
         public static Vector2 getRectangleBottomCenter(FRectangle rect)
         {
             return new Vector2(rect.X + rect.Width / 2.0f , rect.Y + rect.Height);
+        }
+
+        public Vector2 getCenterPosition()
+        {
+            return new Vector2(position.X + collisionSize.X / 2, position.Y + collisionSize.Y / 2);
         }
 
         public new virtual void Draw(StateData state, SpriteBatch sprite_batch)

@@ -106,6 +106,7 @@ namespace RewindGame.Game
             }
 
             if (specialObject != null) specialObject.Draw(state, sprite_batch);
+            if (warp != null) warp.Draw(state, sprite_batch);
             foreach (Entity entity in sceneEntities)
             {
                 entity.Draw(state, sprite_batch);
@@ -178,6 +179,7 @@ namespace RewindGame.Game
             }
 
             if (specialObject != null) specialObject.Update(state);
+            if (warp != null) warp.Update(state);
         }
 
         public void Reset()

@@ -234,8 +234,8 @@ namespace RewindGame
         public RunState runState = RunState.playing;
         public float stateTimer = -1f;
         public float playerHoverTime = 2;
-        public float warpTime = 5;
-        public float areaSwapTime = 5;
+        public float warpTime = 2;
+        public float areaSwapTime = 2;
 
         public int deathsStat = 0;
 
@@ -489,10 +489,14 @@ namespace RewindGame
             
             if (Keyboard.GetState().IsKeyDown(Keys.K))
                 loadLevelAndConnections("limbo11");
-            if (Keyboard.GetState().IsKeyDown(Keys.L))
+            else if (Keyboard.GetState().IsKeyDown(Keys.L))
                 loadLevelAndConnections("limbo18");
-            if (Keyboard.GetState().IsKeyDown(Keys.J))
+            else if (Keyboard.GetState().IsKeyDown(Keys.J))
                 loadLevelAndConnections("limbosecretfinal");
+            else if (Keyboard.GetState().IsKeyDown(Keys.U))
+            {
+                LoadArea(AreaState.cotton);
+            }
 
             StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition);
 
@@ -517,8 +521,8 @@ namespace RewindGame
 
                         case RunState.areaswap_1:
                             activeLevel.warp.TriggerActivation();
-                            overlayEffect.StartWarpPlayer(player.position, state);
-                            overlayEffect.StartWarpArtifact(activeLevel.specialObject.position, state);
+                            overlayEffect.StartWarpPlayer(player.getCenterPosition(), state);
+                            overlayEffect.StartWarpArtifact(activeLevel.specialObject.getCenterPosition(), state);
 
 
                             stateTimer = warpTime;
@@ -545,6 +549,7 @@ namespace RewindGame
 
                             stateTimer = -1;
                             runState = RunState.playing;
+                            player.hidden = false;
                             break;
 
                     }
