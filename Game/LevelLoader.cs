@@ -206,6 +206,10 @@ namespace RewindGame.Game
                     sheet_type = TileSheet.collision;
                     sorting_layer = -1;
                     break;
+                case "visual":
+                    sorting_layer = 1;
+                    sheet_type = TileSheet.collision;
+                    break;
                 case "foreground":
                     sorting_layer = 2;
                     is_large_tile = true;
@@ -218,7 +222,7 @@ namespace RewindGame.Game
                     break;
             }
 
-                int n = 0;
+            int n = 0;
             int x_pos = 0;
             int y_pos = 0;
             while (n < tile_layer.data.Count)

@@ -313,6 +313,7 @@ namespace RewindGame
 
         public void LoadArea(AreaState new_area)
         {
+            soundManager.stopAllMusic();
             if (areaEffect != null) areaEffect.Dispose();
             switch (new_area)
             {
@@ -529,6 +530,7 @@ namespace RewindGame
                             overlayEffect.StartWarpPlayer(player.getCenterPosition(), state);
                             overlayEffect.StartWarpArtifact(activeLevel.specialObject.getCenterPosition(), state);
 
+                            soundManager.TriggerWarp();
 
                             stateTimer = warpTime;
                             runState = RunState.areaswap_2;
@@ -609,6 +611,7 @@ namespace RewindGame
                 // begin warp!
                 runState = RunState.areaswap_1;
                 stateTimer = playerHoverTime;
+                soundManager.stopAllMusic();
                 return;
             }
 

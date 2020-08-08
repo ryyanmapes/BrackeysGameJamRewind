@@ -54,6 +54,7 @@ namespace RewindGame.Game
         public List<CollisionObject> sceneSolids = new List<CollisionObject>();
         public List<ISolidTile> sceneSolidTiles = new List<ISolidTile>();
         public List<ITile> sceneDecorativesBackground = new List<ITile>();
+        public List<ITile> sceneDecoratives = new List<ITile>();
         public List<ITile> sceneDecorativesForeground = new List<ITile>();
         public List<ITile> sceneDecorativesForeforeground = new List<ITile>();
         public Vector2 playerSpawnpoint = Vector2.Zero;
@@ -117,6 +118,11 @@ namespace RewindGame.Game
                 solid.Draw(state, sprite_batch);
             }
 
+            foreach (ITile tile in sceneDecoratives)
+            {
+                tile.Draw(state, sprite_batch);
+            }
+
             if (specialObject != null) specialObject.Draw(state, sprite_batch);
 
         }
@@ -131,8 +137,6 @@ namespace RewindGame.Game
             {
                 tile.Draw(state, sprite_batch);
             }
-
-
         }
 
         public void DrawTile(TileSprite tile_sprite, Vector2 position, SpriteBatch sprite_batch)
@@ -180,6 +184,11 @@ namespace RewindGame.Game
             }
 
             foreach (ITile tile in sceneDecorativesForeground)
+            {
+                tile.Update(state);
+            }
+
+            foreach (ITile tile in sceneDecoratives)
             {
                 tile.Update(state);
             }
@@ -475,8 +484,13 @@ namespace RewindGame.Game
             if (sprite.sorting_layer >= 3)
             {
                 sceneDecorativesForeforeground.Add(DecorativeTile.Make(this, position, sprite));
+                
             }
-            if (sprite.sorting_layer > 0)
+            else if (sprite.sorting_layer == 1)
+            {
+                sceneDecoratives.Add(DecorativeTile.Make(this, position, sprite));
+            }
+            else if (sprite.sorting_layer > 1)
             {
                 sceneDecorativesForeground.Add(DecorativeTile.Make(this, position, sprite));
             }
