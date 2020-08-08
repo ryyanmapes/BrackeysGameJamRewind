@@ -67,12 +67,12 @@ namespace RewindGame.Game.Solids
             if (isForwards)
             {
                 anims.addAnimaton(anim_idle_pink, "idle", localLevel.Content);
-                anims.addAnimaton(anim_idle_pink, "poof", localLevel.Content);
+                anims.addAnimaton(anim_poof_pink, "poof", localLevel.Content);
             }
             else
             {
                 anims.addAnimaton(anim_idle_green, "idle", localLevel.Content);
-                anims.addAnimaton(anim_idle_green, "poof", localLevel.Content);
+                anims.addAnimaton(anim_poof_green, "poof", localLevel.Content);
             }
             anims.changeAnimation("idle");
             //base.LoadContent();
@@ -88,13 +88,14 @@ namespace RewindGame.Game.Solids
         {
             position = startingPos;
             isActive = true;
+            anims.changeAnimation("idle");
             base.Reset();
         }
 
         public void Consume(StateData state)
         {
             if (state.time_data.time_status == TimeState.still) return;
-            timeMomentConsumedOn = state.time_data.time_moment - 1;
+            timeMomentConsumedOn = state.time_data.time_moment - 2;
             isActive = false;
             anims.changeAnimation("poof");
         }

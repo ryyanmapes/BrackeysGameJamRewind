@@ -50,7 +50,10 @@ namespace RewindGame.Game
         obelisk,
         lunarshrine,
         treesear,
+        barreltree,
         barrel,
+        poster,
+        desk,
         unknown
     }
 

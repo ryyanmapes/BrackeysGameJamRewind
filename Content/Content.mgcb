@@ -73,6 +73,18 @@
 /processorParam:TextureFormat=Color
 /build:cottonwood/jumppoofgreen.png
 
+#begin cottonwood/jumppoofgreenpop.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cottonwood/jumppoofgreenpop.png
+
 #begin cottonwood/jumppoofpink.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -84,6 +96,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:cottonwood/jumppoofpink.png
+
+#begin cottonwood/jumppoofpinkpop.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cottonwood/jumppoofpinkpop.png
 
 #begin cottonwood/wagon.png
 /importer:TextureImporter
@@ -733,6 +757,18 @@
 /processorParam:TextureFormat=Color
 /build:faux/fauxidle.png
 
+#begin faux/fauxjumpnormal.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:faux/fauxjumpnormal.png
+
 #begin faux/fauxjumprewind.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -756,30 +792,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:faux/fauxwalk.png
-
-#begin faux/giraffe.jpg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:faux/giraffe.jpg
-
-#begin faux/lamp.jpeg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:faux/lamp.jpeg
 
 #begin faux/wall.png
 /importer:TextureImporter
