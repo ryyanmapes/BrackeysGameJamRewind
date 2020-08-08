@@ -15,6 +15,9 @@ namespace RewindGame.Game.Sound
     {
         public RewindGame parentGame;
         public ContentManager Content;
+
+        public float masterVolume = 1;
+
         public ChaiFoxes.FMODAudio.Studio.EventInstance limboLoop1;
         public ChaiFoxes.FMODAudio.Studio.EventInstance limboLoop2;
         public ChaiFoxes.FMODAudio.Studio.EventInstance cottonLoop1;
@@ -24,8 +27,10 @@ namespace RewindGame.Game.Sound
         public ChaiFoxes.FMODAudio.Sound playerDieSound;
         public ChaiFoxes.FMODAudio.Sound peltingRain;
         public ChaiFoxes.FMODAudio.Sound sliding;
+
         public float fadeIntoLimboLoop2;
         public float fadeIntoCottonLoop2;
+
         public bool pianoFadeoutInc = false;
         public float fadeIntoPiano;
         public float menuChange;
@@ -62,7 +67,7 @@ namespace RewindGame.Game.Sound
             peltingRain.Volume = 1;
             peltingRain.Play();
             this.sliding = CoreSystem.LoadStreamedSound("slide.wav");
-            sliding.Volume = 0.1f;
+            sliding.Volume = 0.05f;
             sliding.Looping = true;
         }
 
@@ -137,7 +142,7 @@ namespace RewindGame.Game.Sound
         {
             if(!canSlide)
             {
-                sliding.Volume = 0.1f;
+                sliding.Volume = 0.05f*masterVolume;
                 sliding.Play();
                 canSlide = true;
             }
