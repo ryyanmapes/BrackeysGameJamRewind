@@ -55,6 +55,7 @@ namespace RewindGame.Game
         public List<ISolidTile> sceneSolidTiles = new List<ISolidTile>();
         public List<ITile> sceneDecorativesBackground = new List<ITile>();
         public List<ITile> sceneDecorativesForeground = new List<ITile>();
+        public List<ITile> sceneDecorativesForeforeground = new List<ITile>();
         public Vector2 playerSpawnpoint = Vector2.Zero;
 
         public Vector2 levelOrgin;
@@ -127,6 +128,11 @@ namespace RewindGame.Game
                 tile.Draw(state, sprite_batch);
             }
 
+            foreach (ITile tile in sceneDecorativesForeforeground)
+            {
+                tile.Draw(state, sprite_batch);
+            }
+
         }
 
         public void DrawTile(TileSprite tile_sprite, Vector2 position, SpriteBatch sprite_batch)
@@ -168,6 +174,11 @@ namespace RewindGame.Game
                 tile.Update(state);
             }
 
+            foreach (ITile tile in sceneDecorativesForeforeground)
+            {
+                tile.Update(state);
+            }
+
             foreach (ITile tile in sceneDecorativesForeground)
             {
                 tile.Update(state);
@@ -180,6 +191,8 @@ namespace RewindGame.Game
 
             if (specialObject != null) specialObject.Update(state);
             if (warp != null) warp.Update(state);
+
+
         }
 
         public void Reset()
@@ -459,6 +472,10 @@ namespace RewindGame.Game
         {
             Vector2 position = is_large ? getLargePositionFromGrid(x, y) : getPositionFromGrid(x, y);
 
+            if (sprite.sorting_layer >= 3)
+            {
+                sceneDecorativesForeforeground.Add(DecorativeTile.Make(this, position, sprite));
+            }
             if (sprite.sorting_layer > 0)
             {
                 sceneDecorativesForeground.Add(DecorativeTile.Make(this, position, sprite));

@@ -235,7 +235,7 @@ namespace RewindGame
         public float stateTimer = -1f;
         public float playerHoverTime = 2;
         public float warpTime = 2;
-        public float areaSwapTime = 2;
+        public float areaSwapTime = 1;
 
         public int deathsStat = 0;
 
