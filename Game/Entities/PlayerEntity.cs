@@ -25,6 +25,7 @@ namespace RewindGame.Game
         protected AnimationChooser animator = new AnimationChooser(playerAnimScale, playerAnimationOffset);
         protected Animation idleAnim = new Animation("faux/fauxidle", 6, 8, true);
         protected Animation walkAnim = new Animation("faux/fauxwalk", 2, 12, true);
+        protected Animation jumpAnim = new Animation("faux/fauxjumpnormal", 1, 1, true);
         protected Animation fallAnim = new Animation("faux/fauxfallnormal", 1, 1, true);
         protected Animation wallAnim = new Animation("faux/wall", 1, 1, true);
         protected Animation jumpRewindAnim = new Animation("faux/fauxjumprewind", 4, 6, true);
@@ -64,6 +65,7 @@ namespace RewindGame.Game
 
             animator.addAnimaton(idleAnim, "idle",  parentGame.Content);
             animator.addAnimaton(walkAnim, "walk",  parentGame.Content);
+            animator.addAnimaton(jumpAnim, "jump", parentGame.Content);
             animator.addAnimaton(fallAnim, "fall", parentGame.Content);
             animator.addAnimaton(wallAnim, "wallhang", parentGame.Content);
             animator.addAnimaton(jumpRewindAnim, "rewind_jump",  parentGame.Content);
@@ -269,7 +271,14 @@ namespace RewindGame.Game
             {
                 if (velocity.Y < 0)
                 {
-                    animator.changeAnimation("rewind_jump");
+                    if (isRewinding)
+                    {
+                        animator.changeAnimation("rewind_jump");
+                    }
+                    else
+                    {
+                        animator.changeAnimation("jump");
+                    }
                 }
                 else
                 {

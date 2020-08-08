@@ -4,7 +4,7 @@
   "height": 238,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"exit_right": "cotton3", "exit_left": "cotton1", "exit_up": "", "exit_down": "", "triggers": "limbo_half"},
+  "values": {"exit_right": "cotton3", "exit_left": "cotton1", "exit_up": "", "exit_down": "", "triggers": "cotton_half"},
   "layers": [
     {
       "name": "entities",
