@@ -340,7 +340,7 @@ namespace RewindGame
                 case AreaState.eternal:
                     this.area = AreaState.eternal;
                     //soundManager.BeginCottonwoodMusic1(); todo
-                    areaEffect = new EternalEscapeEffects(this, Services);
+                    areaEffect = new EternalEffects(this, Services);
                     timeData.time_kind = TimeKind.eternal;
                     loadLevelAndConnections("test1");
                     break;
@@ -647,7 +647,7 @@ namespace RewindGame
                         soundManager.TriggerLightining();
                         break;
                     case TimeKind.cottonwood:
-                        timeData.time_status = TimeState.still;
+                        if (timeData.time_status == TimeState.backward) timeData.time_status = TimeState.still;
                         break;
                     case TimeKind.eternal:
                         timeData.time_moment = timePosBound - 1;
@@ -663,7 +663,7 @@ namespace RewindGame
                         soundManager.TriggerLightining();
                         break;
                     case TimeKind.cottonwood:
-                        timeData.time_status = TimeState.still;
+                        if (timeData.time_status == TimeState.forward) timeData.time_status = TimeState.still;
                         break;
                     case TimeKind.eternal:
                         timeData.time_moment = timeNegBound + 1;
@@ -875,19 +875,37 @@ namespace RewindGame
             else if (trigger == "cotton_begin" || trigger == "cotton_full")
             {
                 timeData.time_kind = TimeKind.cottonwood;
-                timelineGUI.SetBar(timelineGUI.limboBar1);
+                timelineGUI.SetBar(timelineGUI.cottonBar1);
                 setBarSizeLarge();
             }
             else if (trigger == "cotton_half")
             {
                 timeData.time_kind = TimeKind.cottonwood;
-                timelineGUI.SetBar(timelineGUI.limboBarHalf);
+                timelineGUI.SetBar(timelineGUI.cottonBarHalf);
                 setBarSizeMedium();
             }
             else if (trigger == "cotton_fourth")
             {
                 timeData.time_kind = TimeKind.cottonwood;
-                timelineGUI.SetBar(timelineGUI.limboBarFourth);
+                timelineGUI.SetBar(timelineGUI.cottonBarFourth);
+                setBarSizeSmall();
+            }
+            else if (trigger == "eternal_begin" || trigger == "eternal_full")
+            {
+                timeData.time_kind = TimeKind.eternal;
+                timelineGUI.SetBar(timelineGUI.eternalBar1);
+                setBarSizeLarge();
+            }
+            else if (trigger == "eternal_half")
+            {
+                timeData.time_kind = TimeKind.eternal;
+                timelineGUI.SetBar(timelineGUI.eternalBarHalf);
+                setBarSizeMedium();
+            }
+            else if (trigger == "eternal_fourth")
+            {
+                timeData.time_kind = TimeKind.eternal;
+                timelineGUI.SetBar(timelineGUI.eternalBarFourth);
                 setBarSizeSmall();
             }
         }

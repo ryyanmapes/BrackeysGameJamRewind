@@ -57,14 +57,15 @@ namespace RewindGame.Game.Effects
             {
                 speedUp = true;
                 whiteOut = false;
-//                parentGame.soundManager.EndOverrain();
-//                parentGame.soundManager.ModifyOverrain(10);
+                //parentGame.soundManager.EndOverrain();
+                parentGame.soundManager.ModifyOverrain(1);
             }
 
             else
             {
                 whiteOut = false;
                 speedUp = false;
+                parentGame.soundManager.ModifyOverrain(0.5f);
                 speedFactor = 1f;
                 
 

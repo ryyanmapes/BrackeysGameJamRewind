@@ -141,7 +141,7 @@ namespace RewindGame.Game.Sound
                 sliding.Play();
                 canSlide = true;
             }
-            
+
         }
 
         public void EndPlayerWallslide()
@@ -151,14 +151,13 @@ namespace RewindGame.Game.Sound
             canSlide = false;
         }
 
-        // 0 = light rain, 1 = bad storm
+        // 0 = no rain, 1 = bad storm
         public void ModifyOverrain(float intensity) {
             peltingRain.Volume = intensity;
-            peltingRain.Play();
-
         }
         public void EndOverrain() {
             peltingRain.Volume = 0;
+            peltingRain.Play();
         }
 
         public void TriggerLightining() {
@@ -180,7 +179,7 @@ namespace RewindGame.Game.Sound
 
         public void TriggerTimeFreeze()
         {
-            
+
         }
 
         public void BeginLimboMusic1()
@@ -249,6 +248,6 @@ namespace RewindGame.Game.Sound
             SoundEffect warpSFX = Content.Load<SoundEffect>("sfx/area exit");
             warpSFX.Play();
         }
-        //  freeze sfx.  piano stuff. area 3 music. 
+        //  freeze sfx.  piano stuff. area 3 music.
     }
 }

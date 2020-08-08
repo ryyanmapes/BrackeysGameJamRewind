@@ -93,6 +93,7 @@ namespace RewindGame.Game.Solids
 
         public void Consume(StateData state)
         {
+            if (state.time_data.time_status == TimeState.still) return;
             timeMomentConsumedOn = state.time_data.time_moment - 1;
             isActive = false;
             anims.changeAnimation("poof");
