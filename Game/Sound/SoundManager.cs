@@ -172,14 +172,22 @@ namespace RewindGame.Game.Sound
 
         public void TriggerPlayerWalljump()
         {
-            SoundEffect playerWallJumpSound = Content.Load<SoundEffect>("sfx/jump1");
-            playerWallJumpSound.Play();
+            if(masterVolume != 0)
+            {
+                SoundEffect playerWallJumpSound = Content.Load<SoundEffect>("sfx/jump1");
+                playerWallJumpSound.Play();
+            }
+            
         }
 
         public void TriggerPlayerDie()
         {
-            SoundEffect playerDieSound = Content.Load<SoundEffect>("sfx/death");
-            playerDieSound.Play();
+            if(masterVolume != 0)
+            {
+                SoundEffect playerDieSound = Content.Load<SoundEffect>("sfx/death");
+                playerDieSound.Play();
+            }
+            
         }
 
         public void TriggerTimeFreeze()
@@ -240,19 +248,31 @@ namespace RewindGame.Game.Sound
         }
         public void TriggerTimeBackwards()
         {
-            SoundEffect playerTimeBackSound = Content.Load<SoundEffect>("sfx/jump");
-            playerTimeBackSound.Play();
+            if(masterVolume != 0)
+            {
+                SoundEffect playerTimeBackSound = Content.Load<SoundEffect>("sfx/jump");
+                playerTimeBackSound.Play();
+            }
+            
         }
         public void TriggerTimeBackwardsEnd()
         {
-            SoundEffect playerEndTimeBackSound = Content.Load<SoundEffect>("sfx/end time reverse");
-            playerEndTimeBackSound.Play();
+            if(masterVolume != 0)
+            {
+                SoundEffect playerEndTimeBackSound = Content.Load<SoundEffect>("sfx/end time reverse");
+                playerEndTimeBackSound.Play();
+            }
+            
         }
         public void TriggerWarp()
         {
-            SoundEffect warpSFX = Content.Load<SoundEffect>("sfx/area exit");
-            warpSFX.Play();
+            if(masterVolume != 0)
+            {
+                SoundEffect warpSFX = Content.Load<SoundEffect>("sfx/area exit");
+                warpSFX.Play();
+            }
+            
         }
-        //  freeze sfx.  piano stuff. area 3 music.
+        //  piano stuff? area 3 music.
     }
 }
