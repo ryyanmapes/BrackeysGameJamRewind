@@ -173,8 +173,7 @@ namespace RewindGame.Game.Sound
 
         public void TriggerTimeFreeze()
         {
-            SoundEffect playerTimeSound = Content.Load<SoundEffect>("sfx/jump");
-            playerTimeSound.Play();
+            
         }
 
         public void BeginLimboMusic1()
@@ -228,5 +227,20 @@ namespace RewindGame.Game.Sound
             cottonLoop2.Start();
             fadeIntoCottonLoop2 = 1f;
         }
+        public void TriggerTimeBackwards()
+        {
+            SoundEffect playerTimeBackSound = Content.Load<SoundEffect>("sfx/jump");
+            playerTimeBackSound.Play();
+        }
+        public void TriggerTimeBackwardsEnd()
+        {
+
+        }
+        public void TriggerWarp()
+        {
+            SoundEffect warpSFX = Content.Load<SoundEffect>("sfx/exit sound");
+            warpSFX.Play();
+        }
+        // backwards timme backwards. freeze sfx. warp sfx. area 3 music. piano stuff.
     }
 }

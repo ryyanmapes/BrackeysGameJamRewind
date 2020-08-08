@@ -788,6 +788,12 @@
 #begin Music/slide.wav
 /copy:Music/slide.wav
 
+#begin sfx/area exit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/area exit.wav
+
 #begin sfx/death.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
