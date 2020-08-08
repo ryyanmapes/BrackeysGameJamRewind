@@ -505,7 +505,7 @@ namespace RewindGame
 
             if (inputData.is_restart_pressed)
                 qued_player_death = true;
-            if (true)
+            if (false)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.K))
                     loadLevelAndConnections("limbo1");
