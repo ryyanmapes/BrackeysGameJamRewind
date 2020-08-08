@@ -99,9 +99,9 @@ namespace RewindGame.Game.Effects
         public void DrawForeground(StateData state, SpriteBatch sprite_batch)
         {
             Vector2 CameraPosReal = state.camera_position - new Vector2(RewindGame.LEVEL_SIZE_X / 2, RewindGame.LEVEL_SIZE_Y / 2);
-            sprite_batch.Draw(floofies, CameraPosReal, new Rectangle((int)(CameraPosReal.X) - floofifate / 3, (int)(CameraPosReal.Y) + floofifate, floofies.Width, floofies.Height), Color.White);
-            sprite_batch.Draw(floofies, CameraPosReal, new Rectangle(((int)(CameraPosReal.X) - floofifate / 3) + 200, ((int)(CameraPosReal.Y) + floofifate) + 200, floofies.Width, floofies.Height), Color.White);
-            sprite_batch.Draw(floofies, CameraPosReal, new Rectangle(((int)(CameraPosReal.X) - floofifate / 3) + 400, ((int)(CameraPosReal.Y) + floofifate) + 400, floofies.Width, floofies.Height), Color.White);
+        //    sprite_batch.Draw(floofies, CameraPosReal, new Rectangle((int)(CameraPosReal.X) - floofifate / 3, (int)(CameraPosReal.Y) + floofifate, floofies.Width, floofies.Height), Color.White);
+        //    sprite_batch.Draw(floofies, CameraPosReal, new Rectangle(((int)(CameraPosReal.X) - floofifate / 3) + 200, ((int)(CameraPosReal.Y) + floofifate) + 200, floofies.Width, floofies.Height), Color.White);
+        //    sprite_batch.Draw(floofies, CameraPosReal, new Rectangle(((int)(CameraPosReal.X) - floofifate / 3) + 400, ((int)(CameraPosReal.Y) + floofifate) + 400, floofies.Width, floofies.Height), Color.White);
         }
 
         public void Reset()
