@@ -197,6 +197,8 @@ namespace RewindGame
         public const float LEVEL_SIZE_X = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_X;
         public const float LEVEL_SIZE_Y = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_Y;
 
+        public const bool SHOULD_SOLIDTILES_RENDER = true;
+
         public const float playerDeathTime = 0.5f;
         // will change
         public int timeNegBound = -1000000;
@@ -786,11 +788,11 @@ namespace RewindGame
 
             DrawAllConnectedLevelBackgrounds(state, spriteBatch);
 
-            player.Draw(state, spriteBatch);
-
             activeLevel.DrawForeground(state, spriteBatch);
 
             DrawAllConnectedLevelForegrounds(state, spriteBatch);
+
+            player.Draw(state, spriteBatch);
 
             areaEffect.DrawForeground(state, spriteBatch);
 

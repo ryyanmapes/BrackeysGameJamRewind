@@ -10,7 +10,6 @@ namespace RewindGame.Game.Tiles
 
     class SolidTile : CollisionObject, ISolidTile
     {
-
         public TileSprite tile_sprite { get; set; }
 
         public SolidTile() { }
@@ -35,7 +34,7 @@ namespace RewindGame.Game.Tiles
 
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            if (hidden) return;
+            if (hidden || !RewindGame.SHOULD_SOLIDTILES_RENDER) return;
             localLevel.DrawTile(tile_sprite, position, sprite_batch);
         }
 

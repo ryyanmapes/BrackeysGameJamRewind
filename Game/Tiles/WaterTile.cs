@@ -42,5 +42,10 @@ namespace RewindGame.Game.Tiles
             return CollisionReturn.None();
         }
 
+        public bool ShouldRenderTile()
+        {
+            return true;
+        }
+
     }
 }

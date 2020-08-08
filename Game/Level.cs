@@ -104,7 +104,9 @@ namespace RewindGame.Game
 
             foreach (ITile tile in sceneSolidTiles)
             {
+
                 tile.Draw(state, sprite_batch);
+                
             }
 
             if (warp != null) warp.Draw(state, sprite_batch);
@@ -116,6 +118,7 @@ namespace RewindGame.Game
             foreach (CollisionObject solid in sceneSolids)
             {
                 solid.Draw(state, sprite_batch);
+                
             }
 
             foreach (ITile tile in sceneDecoratives)
