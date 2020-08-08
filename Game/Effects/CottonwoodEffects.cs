@@ -26,8 +26,10 @@ namespace RewindGame.Game.Effects
         private Texture2D cottonwoodWater0;
         private Texture2D cottonwoodWater1;
         private Texture2D cottonwoodWater2;
+        private Texture2D floofies;
 
         private int waterflow = 0;
+        private int floofifate = 0;
 
         public CottonwoodEffects(RewindGame parent_game, IServiceProvider serviceProvider)
         {
@@ -46,6 +48,7 @@ namespace RewindGame.Game.Effects
             cottonwoodWater0 = Content.Load<Texture2D>("effects/backgrounds/cottonwood/cottonwoodwater0");
             cottonwoodWater1 = Content.Load<Texture2D>("effects/backgrounds/cottonwood/cottonwoodwater1");
             cottonwoodWater2 = Content.Load<Texture2D>("effects/backgrounds/cottonwood/cottonwoodwater2");
+            floofies = Content.Load<Texture2D>("effects/floofies");
         }
         public void Update(StateData state)
         {
@@ -53,6 +56,11 @@ namespace RewindGame.Game.Effects
             if(waterflow >= cottonwoodHorizontalWater0.Width)
             {
                 waterflow = 0;
+            }
+            floofifate -= (int)(100 * state.getTimeDependentDeltaTime());
+            if(floofifate >= floofies.Height)
+            {
+                floofifate = 0;
             }
         }
         public void DrawBackground(StateData state, SpriteBatch sprite_batch)
@@ -90,7 +98,10 @@ namespace RewindGame.Game.Effects
 
         public void DrawForeground(StateData state, SpriteBatch sprite_batch)
         {
-            
+            Vector2 CameraPosReal = state.camera_position - new Vector2(RewindGame.LEVEL_SIZE_X / 2, RewindGame.LEVEL_SIZE_Y / 2);
+        //    sprite_batch.Draw(floofies, CameraPosReal, new Rectangle((int)(CameraPosReal.X) - floofifate / 3, (int)(CameraPosReal.Y) + floofifate, floofies.Width, floofies.Height), Color.White);
+        //    sprite_batch.Draw(floofies, CameraPosReal, new Rectangle(((int)(CameraPosReal.X) - floofifate / 3) + 200, ((int)(CameraPosReal.Y) + floofifate) + 200, floofies.Width, floofies.Height), Color.White);
+        //    sprite_batch.Draw(floofies, CameraPosReal, new Rectangle(((int)(CameraPosReal.X) - floofifate / 3) + 400, ((int)(CameraPosReal.Y) + floofifate) + 400, floofies.Width, floofies.Height), Color.White);
         }
 
         public void Reset()
