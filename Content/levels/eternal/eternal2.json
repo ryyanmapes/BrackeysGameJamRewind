@@ -27,7 +27,7 @@
           "originY": 0,
           "values": {"velocity_x": 0, "velocity_y": 800}
         },
-        {"name": "poster", "id": 6, "_eid": "86739212", "x": 168, "y": 28, "originX": 0, "originY": 0}
+        {"name": "poster", "id": 6, "_eid": "86739212", "x": 182, "y": 42, "originX": 0, "originY": 0}
       ]
     },
     {
