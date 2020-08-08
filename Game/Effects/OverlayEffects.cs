@@ -40,10 +40,10 @@ namespace RewindGame.Game.Effects
         private float currentBeamWidthPlayer = 0f;
         private float currentBeamWidthArtifact = 0f;
 
-        private const float stallTimeGlobal = 1f;
+        private const float stallTimeGlobal = 0f;
         private float stallTimePlayer = stallTimeGlobal;
         private float stallTimeArtifact = stallTimeGlobal;
-        private float maxGrowTime = RewindGame.LEVEL_SIZE_X * 2;
+        private float maxGrowTime = RewindGame.LEVEL_SIZE_X;
 
         private Vector2 playerWarpPos;
         private Vector2 artifactWarpPos;
@@ -101,7 +101,7 @@ namespace RewindGame.Game.Effects
             //StartWarpPlayer(parentGame.player.position, state);
             if (showPlayerWarp == true && currentBeamWidthPlayer < maxGrowTime)
             {
-                growTimePlayer += .25f;
+                growTimePlayer += 1f;
                 currentBeamWidthPlayer = growTimePlayer * growTimePlayer;
             }
             else if(showPlayerWarp == true && currentBeamWidthPlayer >= maxGrowTime && stallPlayer == false)
@@ -120,7 +120,7 @@ namespace RewindGame.Game.Effects
             }
             if (showArtifactWarp == true && currentBeamWidthArtifact < maxGrowTime)
             {
-                growTimeArtifact += .25f;
+                growTimeArtifact += 1f;
                 currentBeamWidthArtifact = growTimeArtifact * growTimeArtifact;
             }
             else if (showArtifactWarp == true && currentBeamWidthArtifact >= maxGrowTime && stallArtifact == false)
@@ -150,7 +150,7 @@ namespace RewindGame.Game.Effects
                 }
                 if (forceFadeout)
                 {
-                    stall = 12f;
+                    stall = 8f;
                     showCube = true;
                     forceFadeout = false;
                 }
