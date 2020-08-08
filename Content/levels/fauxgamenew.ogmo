@@ -24,15 +24,6 @@
   "entityTags": ["functioning", "limbo", "danger", "special", "cottonwood"],
   "layers": [
     {
-      "definition": "tile",
-      "name": "collisionlayer",
-      "gridSize": {"x": 14, "y": 14},
-      "exportID": "50510069",
-      "exportMode": 0,
-      "arrayMode": 0,
-      "defaultTileset": "Main"
-    },
-    {
       "definition": "entity",
       "name": "entities",
       "gridSize": {"x": 14, "y": 14},
@@ -48,6 +39,15 @@
       "exportMode": 0,
       "arrayMode": 0,
       "defaultTileset": "Technical"
+    },
+    {
+      "definition": "tile",
+      "name": "foreforeground",
+      "gridSize": {"x": 14, "y": 14},
+      "exportID": "76285095",
+      "exportMode": 0,
+      "arrayMode": 0,
+      "defaultTileset": "Main"
     },
     {
       "definition": "tile",
@@ -69,18 +69,18 @@
     },
     {
       "definition": "tile",
-      "name": "background",
+      "name": "collisionlayer",
       "gridSize": {"x": 14, "y": 14},
-      "exportID": "50538540",
+      "exportID": "50510069",
       "exportMode": 0,
       "arrayMode": 0,
       "defaultTileset": "Main"
     },
     {
       "definition": "tile",
-      "name": "foreforeground",
+      "name": "background",
       "gridSize": {"x": 14, "y": 14},
-      "exportID": "76285095",
+      "exportID": "50538540",
       "exportMode": 0,
       "arrayMode": 0,
       "defaultTileset": "Main"
