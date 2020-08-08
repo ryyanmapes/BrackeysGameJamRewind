@@ -59,6 +59,7 @@ namespace RewindGame.Game.Sound
             this.cottonLoop2 = StudioSystem.GetEvent("Event:/Music/Cotton Forest/Loop2").CreateInstance();
             this.peltingRain = CoreSystem.LoadStreamedSound("peltingrain.wav");
             peltingRain.Volume = 1;
+            peltingRain.Play();
             this.sliding = CoreSystem.LoadStreamedSound("slide.wav");
             sliding.Volume = 0;
             sliding.Looping = true;
@@ -172,8 +173,7 @@ namespace RewindGame.Game.Sound
 
         public void TriggerTimeFreeze()
         {
-            SoundEffect playerTimeSound = Content.Load<SoundEffect>("sfx/jump");
-            playerTimeSound.Play();
+            
         }
 
         public void BeginLimboMusic1()
@@ -227,5 +227,21 @@ namespace RewindGame.Game.Sound
             cottonLoop2.Start();
             fadeIntoCottonLoop2 = 1f;
         }
+        public void TriggerTimeBackwards()
+        {
+            SoundEffect playerTimeBackSound = Content.Load<SoundEffect>("sfx/jump");
+            playerTimeBackSound.Play();
+        }
+        public void TriggerTimeBackwardsEnd()
+        {
+            SoundEffect playerEndTimeBackSound = Content.Load<SoundEffect>("sfx/end time reverse");
+            playerEndTimeBackSound.Play();
+        }
+        public void TriggerWarp()
+        {
+            SoundEffect warpSFX = Content.Load<SoundEffect>("sfx/area exit");
+            warpSFX.Play();
+        }
+        //  freeze sfx.  piano stuff. area 3 music. 
     }
 }

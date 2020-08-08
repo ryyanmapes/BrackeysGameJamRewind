@@ -124,6 +124,8 @@ namespace RewindGame.Game
 
             if (hangDirection != HangDirection.None)
             {
+                if (velocity.Y > 0) parentGame.soundManager.BeginPlayerWallslide();
+
                 noOppositeTravelDirection = HangDirection.None;
                 velocity.Y = Math.Min(velocity.Y, wallHangMaxY);
                 isRewinding = false;
@@ -147,6 +149,10 @@ namespace RewindGame.Game
                     isRewinding = true;
                 }
 
+            }
+            else
+            {
+                parentGame.soundManager.EndPlayerWallslide();
             }
 
             bool can_move = true;
