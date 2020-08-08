@@ -180,7 +180,7 @@ namespace RewindGame.Game
             {
                 tile.Update(state);
             }
-
+            
             foreach (ITile tile in sceneDecorativesForeforeground)
             {
                 tile.Update(state);
