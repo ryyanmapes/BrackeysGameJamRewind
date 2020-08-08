@@ -235,7 +235,7 @@ namespace RewindGame
         public float stateTimer = -1f;
         public float playerHoverTime = 2;
         public float warpTime = 2;
-        public float areaSwapTime = 1;
+        public float areaSwapTime = 3;
 
         public int deathsStat = 0;
 
@@ -336,6 +336,13 @@ namespace RewindGame
                     areaEffect = new CottonwoodEffects(this, Services);
                     timeData.time_kind = TimeKind.cottonwood;
                     loadLevelAndConnections("cotton1");
+                    break;
+                case AreaState.eternal:
+                    this.area = AreaState.eternal;
+                    //soundManager.BeginCottonwoodMusic1(); todo
+                    areaEffect = new EternalEffects(this, Services);
+                    timeData.time_kind = TimeKind.eternal;
+                    loadLevelAndConnections("test1");
                     break;
 
             }
@@ -493,10 +500,8 @@ namespace RewindGame
                 loadLevelAndConnections("limbo18");
             else if (Keyboard.GetState().IsKeyDown(Keys.J))
                 loadLevelAndConnections("limbosecretfinal");
-            else if (Keyboard.GetState().IsKeyDown(Keys.U))
-            {
-                LoadArea(AreaState.cotton);
-            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.U)) LoadArea(AreaState.cotton);
+            else if (Keyboard.GetState().IsKeyDown(Keys.N)) LoadArea(AreaState.eternal);
 
             StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition);
 

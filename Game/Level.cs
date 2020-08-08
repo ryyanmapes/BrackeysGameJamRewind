@@ -106,7 +106,6 @@ namespace RewindGame.Game
                 tile.Draw(state, sprite_batch);
             }
 
-            if (specialObject != null) specialObject.Draw(state, sprite_batch);
             if (warp != null) warp.Draw(state, sprite_batch);
             foreach (Entity entity in sceneEntities)
             {
@@ -122,7 +121,7 @@ namespace RewindGame.Game
 
         public void DrawForeground(StateData state, SpriteBatch sprite_batch) {
 
-
+            if (specialObject != null) specialObject.Draw(state, sprite_batch);
             foreach (ITile tile in sceneDecorativesForeground)
             {
                 tile.Draw(state, sprite_batch);
@@ -132,6 +131,7 @@ namespace RewindGame.Game
             {
                 tile.Draw(state, sprite_batch);
             }
+
 
         }
 
