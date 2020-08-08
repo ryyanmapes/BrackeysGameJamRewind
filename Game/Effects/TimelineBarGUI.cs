@@ -21,6 +21,14 @@ namespace RewindGame.Game.Effects
         public Texture2D limboBarHalf;
         public Texture2D limboBarFourth;
 
+        public Texture2D cottonBar1;
+        public Texture2D cottonBarHalf;
+        public Texture2D cottonBarFourth;
+
+        public Texture2D eternalBar1;
+        public Texture2D eternalBarHalf;
+        public Texture2D eternalFourth;
+
         public float currentBarSize = 105 * 4;
         public float barDistanceFromTop = 16 * 2;
 

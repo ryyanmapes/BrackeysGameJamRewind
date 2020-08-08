@@ -27,9 +27,9 @@ namespace RewindGame.Game.Graphics
 
     public class AnimationPlayer
     {
-        protected Animation animation;
-        protected int callCount = 0;
-        protected Texture2D texture;
+        public Animation animation;
+        public int callCount = 0;
+        public Texture2D texture;
         protected int scale;
         protected int texture_width;
         protected Vector2 offset;

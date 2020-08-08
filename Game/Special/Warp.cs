@@ -26,15 +26,15 @@ namespace RewindGame.Game.Solids
             return tile;
         }
 
-        public void Initialize(Level level, Vector2 starting_pos)
+        public override void Initialize(Level level, Vector2 starting_pos)
         {
             collisionType = CollisionType.death;
 
             collisionSize = new Vector2(100,100);
 
             anims = new AnimationChooser(1, Vector2.Zero);
-            anims.addAnimaton(anim_idle, "idle", level.Content);
-            anims.addAnimaton(anim_idle, "close", level.Content);
+            anims.addAnimaton(anim_idle, "idle", level.parentGame.Content);
+            anims.addAnimaton(anim_idle, "close", level.parentGame.Content);
             anims.changeAnimation("idle");
 
             base.Initialize(level, starting_pos);

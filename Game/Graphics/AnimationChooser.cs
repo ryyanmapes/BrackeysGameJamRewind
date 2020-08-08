@@ -67,5 +67,10 @@ namespace RewindGame.Game.Graphics
         {
             currentAnimation.Draw(state, sprite_batch, position, effect, timeN);
         }
+
+        public bool isCurrentAnimationDone()
+        {
+            return currentAnimation.callCount > currentAnimation.animation.frame_count && !currentAnimation.animation.do_loop;
+        }
     }
 }

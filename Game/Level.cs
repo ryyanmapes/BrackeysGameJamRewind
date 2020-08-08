@@ -117,11 +117,11 @@ namespace RewindGame.Game
                 solid.Draw(state, sprite_batch);
             }
 
+            if (specialObject != null) specialObject.Draw(state, sprite_batch);
+
         }
 
         public void DrawForeground(StateData state, SpriteBatch sprite_batch) {
-
-            if (specialObject != null) specialObject.Draw(state, sprite_batch);
             foreach (ITile tile in sceneDecorativesForeground)
             {
                 tile.Draw(state, sprite_batch);
