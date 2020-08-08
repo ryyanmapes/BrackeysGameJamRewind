@@ -46,14 +46,21 @@ namespace RewindGame.Game.Effects
             Vector2 CameraPosReal = state.camera_position - new Vector2(RewindGame.LEVEL_SIZE_X / 2, RewindGame.LEVEL_SIZE_Y / 2);
             if (parentGame.activeLevel.screensHorizontal > parentGame.activeLevel.screensVertical)
             {
+                sprite_batch.Draw(greenhouse0, CameraPosReal, Color.White);
+                sprite_batch.Draw(greenhousehorizontal0, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 0.5f), (int)(CameraPosReal.Y * 0.0f), greenhousehorizontal0.Width, greenhousehorizontal0.Height), Color.White);
+                sprite_batch.Draw(greenhousehorizontal1, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 0.75f), (int)(CameraPosReal.Y * 0.0f), greenhousehorizontal1.Width, greenhousehorizontal1.Height), Color.White);
+                sprite_batch.Draw(greenhousehorizontal2, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 0.8f), (int)(CameraPosReal.Y * 0.0f), greenhousehorizontal2.Width, greenhousehorizontal2.Height), Color.White);
+                sprite_batch.Draw(greenhousehorizontal3, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 1f), (int)(CameraPosReal.Y * 0.0f), greenhousehorizontal3.Width, greenhousehorizontal3.Height), Color.White);
 
             }
             else if (parentGame.activeLevel.screensVertical > parentGame.activeLevel.screensHorizontal)
             {
+                sprite_batch.Draw(greenhouse0, CameraPosReal, Color.White);
+                sprite_batch.Draw(terrariumvertical, new Vector2(CameraPosReal.X, state.camera_position.Y - RewindGame.LEVEL_SIZE_Y), new Rectangle((int)(CameraPosReal.X * 0.0f), (int)(CameraPosReal.Y * .8f), terrariumvertical.Width, terrariumvertical.Height), Color.White);
             }
             else if (parentGame.activeLevel.screensHorizontal == parentGame.activeLevel.screensVertical)
             {
-                sprite_batch.Draw(greenhouse0, CameraPosReal, new Rectangle((int)CameraPosReal.X, (int)CameraPosReal.Y, greenhouse0.Width, greenhouse0.Height), Color.White);
+                sprite_batch.Draw(greenhouse0, CameraPosReal, Color.White);
             }
         }
 
