@@ -4,7 +4,7 @@
   "height": 240,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"exit_right": "limbo18", "exit_left": "limbo16", "exit_up": "", "exit_down": "", "triggers": "limbo_forth"},
+  "values": {"exit_right": "limbo18", "exit_left": "limbo16", "exit_up": "", "exit_down": "", "triggers": "limbo_fourth"},
   "layers": [
     {
       "name": "collisionlayer",
