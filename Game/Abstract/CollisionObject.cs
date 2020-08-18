@@ -35,7 +35,7 @@ namespace RewindGame.Game
     }
 
 
-    public abstract class CollisionObject : GameObject
+    public abstract class CollisionObject : GameObject, ICollisionObject
     {
         protected Vector2 collisionSize;
         protected Vector2 collisionOffset = Vector2.Zero;

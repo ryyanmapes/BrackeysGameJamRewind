@@ -23,5 +23,11 @@ namespace RewindGame.Game.Tiles
             base.Initialize(level, starting_pos, tile_sprite_);
             collisionSize.X = Level.WALLSPIKE_THICKNESS;
         }
+
+        public override void Draw(StateData state, SpriteBatch sprite_batch)
+        {
+            if (hidden) return;
+            localLevel.DrawTile(tile_sprite, position, sprite_batch);
+        }
     }
 }

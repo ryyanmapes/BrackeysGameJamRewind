@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RewindGame.Game
+namespace RewindGame.Game.Abstract
 {
     public interface ITimeTrackable
     {

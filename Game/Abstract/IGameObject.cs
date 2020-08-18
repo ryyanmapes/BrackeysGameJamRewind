@@ -1,21 +1,13 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using RewindGame.Game.Debug;
-using Microsoft.Xna.Framework;
-using RewindGame.Game.Abstract;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RewindGame.Game.Abstract
+namespace RewindGame.Game
 {
-    public interface ITile
+    public interface IGameObject
     {
-        public TileSprite tile_sprite
-        {
-            get;
-            set;
-        }
-
 
         public abstract void Initialize(Level level, Vector2 starting_pos);
 
@@ -30,5 +22,6 @@ namespace RewindGame.Game.Abstract
         public abstract void SetInactive();
 
         public abstract void SetActive();
+
     }
 }

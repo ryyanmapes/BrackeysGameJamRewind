@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using RewindGame.Game.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,9 +7,9 @@ using System.Text;
 namespace RewindGame.Game.Debug
 {
 
-    class DecorativeTile : GameObject, ITile
+    public class DecorativeTile : GameObject
     {
-        public TileSprite tile_sprite { get; set; }
+        public TileSprite tile_sprite;
 
         public DecorativeTile() { }
 
