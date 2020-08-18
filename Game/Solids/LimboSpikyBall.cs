@@ -29,7 +29,7 @@ namespace RewindGame.Game.Solids
             radius = radius_;
             speed = speed_;
             current_rotation_degrees = startingrotation;
-            startingPosition = starting_pos - new Vector2(Level.TILE_WORLD_SIZE/2, Level.TILE_WORLD_SIZE/2);
+            startingPosition = starting_pos - new Vector2(GameUtils.TILE_WORLD_SIZE/2, GameUtils.TILE_WORLD_SIZE/2);
             currentPosition = startingPosition;
 
             texturePath = "limbo/chainball";

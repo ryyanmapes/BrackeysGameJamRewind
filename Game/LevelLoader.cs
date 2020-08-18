@@ -134,8 +134,8 @@ namespace RewindGame.Game
         {
             level.name = level_name;
 
-            level.screensHorizontal = (float)raw_level.layers[0].gridCellsX / (float)RewindGame.LEVEL_GRID_SIZE_X;
-            level.screensVertical = (float)raw_level.layers[0].gridCellsY / (float)RewindGame.LEVEL_GRID_SIZE_Y;
+            level.screensHorizontal = (float)raw_level.layers[0].gridCellsX / (float)GameUtils.LEVEL_GRID_SIZE_X;
+            level.screensVertical = (float)raw_level.layers[0].gridCellsY / (float)GameUtils.LEVEL_GRID_SIZE_Y;
 
             // todo tag processing for these
 

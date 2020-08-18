@@ -23,7 +23,7 @@ namespace RewindGame.Game.Tiles
         public virtual void Initialize(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
         {
             tile_sprite = tile_sprite_;
-            collisionSize = new Vector2(Level.TILE_WORLD_SIZE, Level.TILE_WORLD_SIZE);
+            collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE, GameUtils.TILE_WORLD_SIZE);
             base.Initialize(level, starting_pos);
         }
 
@@ -33,7 +33,7 @@ namespace RewindGame.Game.Tiles
 
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            if (hidden || !RewindGame.SHOULD_SOLIDTILES_RENDER) return;
+            if (hidden || !GameUtils.SHOULD_SOLIDTILES_RENDER) return;
             localLevel.DrawTile(tile_sprite, position, sprite_batch);
         }
 

@@ -14,22 +14,6 @@ namespace RewindGame.Game
     public class UnpopulatedLevel
     {
 
-        public const int TILE_WORLD_SIZE = 56;
-        public const int LARGE_TILE_WORLD_SIZE = 112;
-
-        public const int TILE_SHEET_SIZE = 56;
-        public const int LARGE_TILE_SHEET_SIZE = 112;
-
-        public const int DECORATIVE_SHEET_TILES_X = 10;
-        public const int DECORATIVE_SHEET_TILES_Y = 13;
-
-        public const int COLLISION_SHEET_TILES_X = 20;
-        public const int COLLISION_SHEET_TILES_Y = 20;
-
-        public const float SEMISOLID_THICKNESS = 4f;
-        public const float SEMISOLID_THICKNESS_WINDOW = 20f;
-        public const float WALLSPIKE_THICKNESS = 16f;
-
 
         public Vector2 playerSpawnpoint = Vector2.Zero;
 
@@ -87,17 +71,17 @@ namespace RewindGame.Game
                     return;
             }
 
-            parentGame.qued_level_load_name = new_level_name;
+            parentGame.quedLevelLoadName = new_level_name;
         }
 
         public Vector2 getPositionFromGrid(int x, int y)
         {
-            return new Vector2(levelOrgin.X + x * TILE_WORLD_SIZE, levelOrgin.Y + y * TILE_WORLD_SIZE);
+            return new Vector2(levelOrgin.X + x * GameUtils.TILE_WORLD_SIZE, levelOrgin.Y + y * GameUtils.TILE_WORLD_SIZE);
         }
 
         public Vector2 getLargePositionFromGrid(int x, int y)
         {
-            return new Vector2(levelOrgin.X + x * TILE_WORLD_SIZE, levelOrgin.Y + y * TILE_WORLD_SIZE);
+            return new Vector2(levelOrgin.X + x * GameUtils.TILE_WORLD_SIZE, levelOrgin.Y + y * GameUtils.TILE_WORLD_SIZE);
         }
 
     }

@@ -25,16 +25,16 @@ namespace RewindGame.Game.Tiles
             switch (enterDirection_)
             {
                 case MoveDirection.right:
-                    collisionOffset.X += Level.TILE_WORLD_SIZE;
+                    collisionOffset.X += GameUtils.TILE_WORLD_SIZE;
                     break;
                 case MoveDirection.left:
-                    collisionOffset.X -= Level.TILE_WORLD_SIZE;
+                    collisionOffset.X -= GameUtils.TILE_WORLD_SIZE;
                     break;
                 case MoveDirection.down:
-                    collisionOffset.Y += Level.TILE_WORLD_SIZE;
+                    collisionOffset.Y += GameUtils.TILE_WORLD_SIZE;
                     break;
                 case MoveDirection.up:
-                    collisionOffset.Y -= Level.TILE_WORLD_SIZE;
+                    collisionOffset.Y -= GameUtils.TILE_WORLD_SIZE;
                     break;
             }
 

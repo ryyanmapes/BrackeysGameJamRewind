@@ -19,7 +19,7 @@ namespace RewindGame.Game.Solids
 
             doWallCarry = false;
 
-            collisionSize = new Vector2(tilelen * Level.TILE_WORLD_SIZE, Level.SEMISOLID_THICKNESS);
+            collisionSize = new Vector2(tilelen * GameUtils.TILE_WORLD_SIZE, GameUtils.SEMISOLID_THICKNESS);
             startingPosition = starting_pos;
             base.Initialize(level, starting_pos);
         }

@@ -69,10 +69,10 @@ namespace RewindGame.Game.Effects
         {
             if (currentBar != null)
             {
-                sprite_batch.Draw(currentBar, state.camera_position + new Vector2(-RewindGame.LEVEL_SIZE_X / 2, -RewindGame.LEVEL_SIZE_Y/2), Color.White);
+                sprite_batch.Draw(currentBar, state.camera_position + new Vector2(-GameUtils.LEVEL_SIZE_X / 2, -GameUtils.LEVEL_SIZE_Y/2), Color.White);
                 // todo draw indicator
-                float time_progress = (float)(state.time_data.time_moment - parentGame.timeNegBound)/(float)(parentGame.timePosBound - parentGame.timeNegBound);
-                sprite_batch.Draw(indicator, state.camera_position + new Vector2(-currentBarSize - indicator.Width*1.25f + (time_progress * currentBarSize * 2) , -RewindGame.LEVEL_SIZE_Y / 2 + barDistanceFromTop), Color.White);
+                float time_progress = (float)(state.time_data.time_moment - parentGame.timeDangerBound.min) /(float)(parentGame.timeBound.length());
+                sprite_batch.Draw(indicator, state.camera_position + new Vector2(-currentBarSize - indicator.Width*1.25f + (time_progress * currentBarSize * 2) , -GameUtils.LEVEL_SIZE_Y / 2 + barDistanceFromTop), Color.White);
             }
         }
 

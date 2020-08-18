@@ -21,16 +21,16 @@ namespace RewindGame.Game.Tiles
         {
             //collisionDirection = MoveDirection.down;
             base.Initialize(level, starting_pos, tile_sprite_);
-            collisionSize.Y = Level.SEMISOLID_THICKNESS;
+            collisionSize.Y = GameUtils.SEMISOLID_THICKNESS;
         }
 
         public override CollisionReturn getCollision(FRectangle rect, MoveDirection direction)
         {
             var return_c = base.getCollision(rect, MoveDirection.none);
             if (return_c.priority == 0) return return_c;
-            if (direction == MoveDirection.up && rect.Y + rect.Height < position.Y + Level.SEMISOLID_THICKNESS_WINDOW)
+            if (direction == MoveDirection.up && rect.Y + rect.Height < position.Y + GameUtils.SEMISOLID_THICKNESS_WINDOW)
                 return new CollisionReturn(CollisionType.refresh_jump, this, 2);
-            if (direction != MoveDirection.down || rect.Y + rect.Height > position.Y + Level.SEMISOLID_THICKNESS)
+            if (direction != MoveDirection.down || rect.Y + rect.Height > position.Y + GameUtils.SEMISOLID_THICKNESS)
                 return CollisionReturn.None();
             return return_c;
         }

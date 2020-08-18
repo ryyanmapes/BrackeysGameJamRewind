@@ -33,7 +33,7 @@ namespace RewindGame.Game.Solids
             radius = radius_;
             rotations = rots;
             current_rotation_degrees = startingrotation;
-            startingPosition = starting_pos - new Vector2(Level.TILE_WORLD_SIZE/2, Level.TILE_WORLD_SIZE/2);
+            startingPosition = starting_pos - new Vector2(GameUtils.TILE_WORLD_SIZE/2, GameUtils.TILE_WORLD_SIZE/2);
             currentPosition = startingPosition;
 
             anim = new AnimationPlayer(idle, 1, Vector2.Zero, level.parentGame.Content);

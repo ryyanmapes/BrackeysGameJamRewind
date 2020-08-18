@@ -15,231 +15,49 @@ using System.Runtime.InteropServices.WindowsRuntime;
 namespace RewindGame
 {
 
-    public class InputData
-    {
-        public InputData()
-        {
-            is_jump_pressed = false;
-            is_jump_held = false;
-
-            is_interact_pressed = false;
-            is_exit_pressed = false;
-            is_restart_pressed = false;
-
-            horizontal_axis_value = 0;
-        }
-
-        public bool is_jump_pressed;
-        public bool is_jump_held;
-
-        public bool is_interact_pressed;
-        public bool is_exit_pressed;
-        public bool is_restart_pressed;
-
-
-        public float horizontal_axis_value;
-    }
-
-    public enum TimeState
-    {
-        forward,
-        backward,
-        still
-    }
-
-    public enum TimeKind
-    {
-        none,
-        limbo,
-        cottonwood,
-        eternal
-    }
-
-    public class TimeData
-    {
-        public TimeData()
-        {
-            time_moment = 0;
-            time_status = TimeState.forward;
-        }
-
-        public int time_moment;
-        public TimeState time_status;
-        public TimeKind time_kind;
-
-        public void Reset()
-        {
-            time_moment = 0;
-            time_status = TimeState.forward;
-        }
-
-        public int getFloaty(float xpos, bool use_still)
-        {
-            if (use_still && time_status == TimeState.still) return 0;
-
-            int real_xpos = (int)xpos / Level.TILE_WORLD_SIZE;
-            int real_mod = (time_moment + real_xpos)/10;
-            int mult = 2;
-            switch (real_mod % 10)
-            {
-                case 5:
-                case 0: return 0;
-                case 4:
-                case 1: return mult;
-                case 2:
-                case 3: return 2 * mult;
-                case 9:
-                case 6: return -mult;
-                case 8:
-                case 7: return -2 * mult;
-            }
-            return 0;
-        }
-    }
-
-    public class StateData
-    {
-        public StateData(InputData inputdata, TimeData timedata, GameTime gametime, Vector2 levelcenter, Vector2 cameraoffset, int nb, int pb)
-        {
-            input_data = inputdata;
-            time_data = timedata;
-            game_time = gametime;
-            level_center = levelcenter;
-            camera_position = cameraoffset;
-            time_bound_neg = nb;
-            time_bound_pos = pb;
-        }
-
-        public int getTimeN()
-        {
-            return time_data.time_status == TimeState.backward ? -1 : time_data.time_status == TimeState.still ? 0 : 1;
-        }
-
-        public InputData input_data;
-        public TimeData time_data;
-        public GameTime game_time;
-        public Vector2 level_center;
-        public Vector2 camera_position;
-        public int time_bound_neg = -1000000;
-        public int time_bound_pos = 1000000;
-
-        public float getDeltaTime()
-        {
-            return (float)game_time.ElapsedGameTime.TotalSeconds;
-        }
-
-        public float getTimeDependentDeltaTime()
-        {
-            return (float) getDeltaTime() * getTimeN();
-        }
-
-        public float getTimeLen()
-        {
-            return time_bound_pos - time_bound_neg;
-        }
-    }
-
-    public enum RunState
-    {
-        playing,
-        playerdead,
-        areaswap_1,
-        areaswap_2,
-        areaswap_3,
-    }
-
-    public enum AreaState
-    {
-        none,
-        limbo,
-        cotton,
-        eternal
-    }
-
-    public class LevelNameData
-    {
-        public LevelNameData(string fullname)
-        {
-            string[] arr = fullname.Split("/");
-
-            bool is_before_name = true;
-            foreach (string s in arr)
-            {
-                if (s.Length == 0) continue;
-                else if (s.Length > 1)
-                {
-                    name = s.Trim();
-                    is_before_name = false;
-                }
-                else
-                {
-                    if (is_before_name)
-                    {
-                        is_entrance_extreme = s == "R" | s == "B" ? true : false;
-                    }
-                    else
-                    {
-                        is_exit_extreme = s == "R" | s == "B" ? true : false;
-                    }
-                }
-            }
-            
-        }
-
-        public bool isUpward() { return !is_entrance_extreme && is_exit_extreme; }
-
-        public bool isDownward() { return is_entrance_extreme && !is_exit_extreme; }
-
-        public String name;
-        public bool is_entrance_extreme = false;
-        public bool is_exit_extreme = false;
-    }
 
     public class RewindGame : Microsoft.Xna.Framework.Game
     {
-        public const float MOVE_STICK_SCALE = 1.0f;
-        public const float MOVE_STICK_MAX = 1.0f;
-
-        public const int LEVEL_GRID_SIZE_X = 29;
-        public const int LEVEL_GRID_SIZE_Y = 17;
-
-        public const float LEVEL_SIZE_X = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_X;
-        public const float LEVEL_SIZE_Y = Level.TILE_WORLD_SIZE * LEVEL_GRID_SIZE_Y;
-
-        public const bool SHOULD_SOLIDTILES_RENDER = false;
-
-        public const float playerDeathTime = 0.5f;
-        // will change
-        public int timeNegBound = -1000000;
-        public int timePosBound = 1000000;
-        public int timeDangerNegBound = -1000000;
-        public int timeDangerPosBound = 1000000;
-
-        public Vector2 baseScreenSize = new Vector2(1600, 900);
+        // rendering stuff
 
         public GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
         public List<Texture2D> textures = new List<Texture2D>();
 
-        public InputData inputData = new InputData();
-        public TimeData timeData = new TimeData();
-
         public Texture2D decorativeSheetTexture;
         public Texture2D collisionSheetTexture;
 
-        public Level activeLevel;
-        public Vector2 activeLevelOffset = Vector2.Zero;
-        public Vector2 currentLevelCenter;
-        public Vector2 currentCameraPosition;
+
+        // children
 
         public ILevelEffect areaEffect;
         public OverlayEffects overlayEffect;
         public SoundManager soundManager;
         public TimelineBarGUI timelineGUI;
 
-        public String qued_level_load_name = "";
-        public bool qued_player_death = false;
+        public PlayerEntity player;
+
+        // connected levels are loaded, but not updated actively
+        // 1: right
+        // 2: left
+        // 3: up
+        // 4: down
+        private Level[] connectedLevels = { null, null, null, null };
+
+
+        // state
+
+        public Interval timeBound;
+        public Interval timeDangerBound;
+
+        public Level activeLevel;
+        public Vector2 activeLevelOffset = Vector2.Zero;
+        public Vector2 currentLevelCenter;
+        public Vector2 currentCameraPosition;
+
+        public String quedLevelLoadName = "";
+        public bool isPlayerDeathQued = false;
 
         public AreaState area = AreaState.none;
         public RunState runState = RunState.playing;
@@ -250,14 +68,12 @@ namespace RewindGame
 
         public int deathsStat = 0;
 
-        // connected levels are loaded, but not updated actively
-        // 1: right
-        // 2: left
-        // 3: up
-        // 4: down
-        private Level[] connectedLevels = { null, null, null, null };
 
-        public PlayerEntity player;
+        // datas
+
+
+        public InputData inputData = new InputData();
+        public TimeData timeData = new TimeData();
 
         public RewindGame()
         {
@@ -270,8 +86,8 @@ namespace RewindGame
             // run at a fixed timestep for 60 fps
             TargetElapsedTime = TimeSpan.FromMilliseconds(1000.0f / 60);
 
-            graphics.PreferredBackBufferWidth = (int)baseScreenSize.X;
-            graphics.PreferredBackBufferHeight = (int)baseScreenSize.Y;
+            graphics.PreferredBackBufferWidth = (int)GameUtils.BASE_SCREEN_SIZE.X;
+            graphics.PreferredBackBufferHeight = (int)GameUtils.BASE_SCREEN_SIZE.Y;
 
             graphics.ApplyChanges();
 
@@ -337,17 +153,19 @@ namespace RewindGame
 
                     timelineGUI.SetBar(timelineGUI.limboBar1);
                     timelineGUI.currentBarSize = 105 * 4;
-                    timeNegBound = -300;
-                    timePosBound = 300;
-                    timeDangerNegBound = -250;
-                    timeDangerPosBound = 250;
+
+                    setBarSizeLarge(AreaState.limbo);
+
                     break;
                 case AreaState.cotton:
-                    this.area= AreaState.cotton;
+                    this.area = AreaState.cotton;
                     soundManager.BeginCottonwoodMusic1();
                     areaEffect = new CottonwoodEffects(this, Services);
                     timeData.time_kind = TimeKind.cottonwood;
                     loadLevelAndConnections("cotton1");
+
+                    setBarSizeLarge(AreaState.cotton);
+
                     break;
                 case AreaState.eternal:
                     this.area = AreaState.eternal;
@@ -355,6 +173,9 @@ namespace RewindGame
                     areaEffect = new EternalEffects(this, Services);
                     timeData.time_kind = TimeKind.eternal;
                     loadLevelAndConnections("eternal1");
+
+                    setBarSizeLarge(AreaState.eternal);
+
                     break;
 
             }
@@ -443,43 +264,43 @@ namespace RewindGame
                     bool is_horizontal = index <= 1;
                     bool is_forwards = index == 0 || index == 3;
 
-                    float new_horiz = (float)raw_level.layers[0].gridCellsX / (float)RewindGame.LEVEL_GRID_SIZE_X;
-                    float new_vert = (float)raw_level.layers[0].gridCellsY / (float)RewindGame.LEVEL_GRID_SIZE_Y;
+                    float new_horiz = (float)raw_level.layers[0].gridCellsX / (float)GameUtils.LEVEL_GRID_SIZE_X;
+                    float new_vert = (float)raw_level.layers[0].gridCellsY / (float)GameUtils.LEVEL_GRID_SIZE_Y;
 
                     if (is_horizontal)
                     {
 
                         if (is_forwards) 
                         {
-                            orgin.X += LEVEL_SIZE_X * current_level.screensHorizontal;
+                            orgin.X += GameUtils.LEVEL_SIZE_X * current_level.screensHorizontal;
                         }
                         else
                         {
-                            orgin.X -= LEVEL_SIZE_X * new_horiz;
+                            orgin.X -= GameUtils.LEVEL_SIZE_X * new_horiz;
                         }
                         
                         if (name_data.isUpward())
                         {
-                            orgin.Y -= (LEVEL_SIZE_Y * (new_vert - 1));
+                            orgin.Y -= (GameUtils.LEVEL_SIZE_Y * (new_vert - 1));
                         }
-                        else if (name_data.isDownward()) orgin.Y += (LEVEL_SIZE_Y * (current_level.screensVertical - 1));
+                        else if (name_data.isDownward()) orgin.Y += (GameUtils.LEVEL_SIZE_Y * (current_level.screensVertical - 1));
                     }
                     else
                     {
                         if (is_forwards)
                         {
-                            orgin.Y += LEVEL_SIZE_Y * current_level.screensVertical;
+                            orgin.Y += GameUtils.LEVEL_SIZE_Y * current_level.screensVertical;
                         }
                         else
                         {
-                            orgin.Y -= LEVEL_SIZE_Y * new_vert;
+                            orgin.Y -= GameUtils.LEVEL_SIZE_Y * new_vert;
                         }
 
                         if (name_data.isUpward())
                         {
-                            orgin.X -= (LEVEL_SIZE_X * (new_horiz - 1));
+                            orgin.X -= (GameUtils.LEVEL_SIZE_X * (new_horiz - 1));
                         }
-                        else if (name_data.isDownward()) orgin.X += (LEVEL_SIZE_X * (current_level.screensHorizontal - 1));
+                        else if (name_data.isDownward()) orgin.X += (GameUtils.LEVEL_SIZE_X * (current_level.screensHorizontal - 1));
                     }
 
                 }
@@ -505,7 +326,7 @@ namespace RewindGame
                 Exit();
 
             if (inputData.is_restart_pressed)
-                qued_player_death = true;
+                isPlayerDeathQued = true;
             if (true)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.K))
@@ -547,7 +368,7 @@ namespace RewindGame
                     }
                 }
             }
-            StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition, timeNegBound, timePosBound);
+            StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition, timeBound);
 
 
             if (stateTimer != -1)
@@ -565,7 +386,7 @@ namespace RewindGame
                             activeLevel.Reset();
 
                             stateTimer = -1;
-                            qued_player_death = false;
+                            isPlayerDeathQued = false;
                             break;
 
                         case RunState.areaswap_1:
@@ -612,7 +433,7 @@ namespace RewindGame
                         activeLevel.Reset();
 
                         stateTimer = -1;
-                        qued_player_death = false;
+                        isPlayerDeathQued = false;
                     }
                 }
             }
@@ -684,44 +505,44 @@ namespace RewindGame
             }
 
             // what to do at the bounds of time
-            if (timeData.time_moment <= timeNegBound)
+            if (timeData.time_moment <= timeBound.min)
             {
                 switch (timeData.time_kind)
                 {
                     case TimeKind.limbo:
-                        qued_player_death = true;
+                        isPlayerDeathQued = true;
                         soundManager.TriggerLightining();
                         break;
                     case TimeKind.cottonwood:
                         if (timeData.time_status == TimeState.backward) timeData.time_status = TimeState.still;
                         break;
                     case TimeKind.eternal:
-                        timeData.time_moment = timePosBound - 1;
+                        timeData.time_moment = timeBound.max - 1;
                         break;
                 }
             }
-            else if (timeData.time_moment >= timePosBound)
+            else if (timeData.time_moment >= timeBound.max)
             {
                 switch (timeData.time_kind)
                 {
                     case TimeKind.limbo:
-                        qued_player_death = true;
+                        isPlayerDeathQued = true;
                         soundManager.TriggerLightining();
                         break;
                     case TimeKind.cottonwood:
                         if (timeData.time_status == TimeState.forward) timeData.time_status = TimeState.still;
                         break;
                     case TimeKind.eternal:
-                        timeData.time_moment = timeNegBound + 1;
+                        timeData.time_moment = timeBound.min + 1;
                         break;
                 }
             }
 
             // what happens if the player goes out of bounds
-            if (player.position.Y > activeLevelOffset.Y + LEVEL_SIZE_Y * activeLevel.screensVertical + Level.TILE_WORLD_SIZE * 2
-                || player.position.Y < activeLevelOffset.Y - Level.TILE_WORLD_SIZE)
+            if (player.position.Y > activeLevelOffset.Y + GameUtils.LEVEL_SIZE_Y * activeLevel.screensVertical + GameUtils.TILE_WORLD_SIZE * 2
+                || player.position.Y < activeLevelOffset.Y - GameUtils.TILE_WORLD_SIZE)
             {
-                qued_player_death = true;
+                isPlayerDeathQued = true;
             }
 
             // time state incrementing
@@ -743,16 +564,16 @@ namespace RewindGame
 
             player.Update(state);
 
-            if (qued_level_load_name != "")
+            if (quedLevelLoadName != "")
             {
-                loadLevelAndConnections(qued_level_load_name);
-                qued_level_load_name = "";
+                loadLevelAndConnections(quedLevelLoadName);
+                quedLevelLoadName = "";
                 timeData.Reset();
             }
-            else if (qued_player_death && runState != RunState.playerdead)
+            else if (isPlayerDeathQued && runState != RunState.playerdead)
             {
                 KillPlayer();
-                qued_player_death = false;
+                isPlayerDeathQued = false;
             }
         }
 
@@ -770,11 +591,11 @@ namespace RewindGame
             if (is_any_left_button_down && is_any_right_button_down)
                 input_data.horizontal_axis_value = 0;
             else if (is_any_left_button_down)
-                input_data.horizontal_axis_value = -MOVE_STICK_MAX;
+                input_data.horizontal_axis_value = -GameUtils.MOVE_STICK_MAX;
             else if (is_any_right_button_down)
-                input_data.horizontal_axis_value = MOVE_STICK_MAX;
+                input_data.horizontal_axis_value = GameUtils.MOVE_STICK_MAX;
             else
-                input_data.horizontal_axis_value = gamepad_state.ThumbSticks.Left.X * MOVE_STICK_SCALE;
+                input_data.horizontal_axis_value = gamepad_state.ThumbSticks.Left.X * GameUtils.MOVE_STICK_SCALE;
 
 
 
@@ -803,7 +624,7 @@ namespace RewindGame
         {
             deathsStat += 1;
             runState = RunState.playerdead;
-            stateTimer = playerDeathTime;
+            stateTimer = GameUtils.PLAYER_DEATH_TIME;
             timeData.time_status = TimeState.still;
 
             overlayEffect.TriggerDeath();
@@ -816,12 +637,12 @@ namespace RewindGame
             GraphicsDevice.Clear(Color.DarkGray);
 
             var matrix = Matrix.Identity;
-            matrix.Translation = new Vector3(-1 * (currentCameraPosition.X - LEVEL_SIZE_X / 2), -1 * (currentCameraPosition.Y - LEVEL_SIZE_Y / 2), 0);
+            matrix.Translation = new Vector3(-1 * (currentCameraPosition.X - GameUtils.LEVEL_SIZE_X / 2), -1 * (currentCameraPosition.Y - GameUtils.LEVEL_SIZE_Y / 2), 0);
 
             //spriteBatch.Begin(SpriteSortMode.Immediate, transformMatrix:matrix);
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointWrap, null, transformMatrix: matrix);
 
-            StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition, timeNegBound, timePosBound);
+            StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition, timeBound);
 
             areaEffect.DrawBackground(state, spriteBatch);
 
@@ -873,16 +694,16 @@ namespace RewindGame
 
         public Vector2 getLevelCenter()
         {
-            return new Vector2(12 + activeLevelOffset.X + LEVEL_SIZE_X/2, activeLevelOffset.Y + LEVEL_GRID_SIZE_Y/2);
+            return new Vector2(12 + activeLevelOffset.X + GameUtils.LEVEL_SIZE_X /2, activeLevelOffset.Y + GameUtils.LEVEL_GRID_SIZE_Y /2);
         }
 
         // gets the position of the center of the camera
         public Vector2 getCameraPosition()
         {
-            float edge_left = 12 + activeLevelOffset.X + LEVEL_SIZE_X / 2;
-            float edge_right = 12 + activeLevelOffset.X + (LEVEL_SIZE_X * (activeLevel.screensHorizontal - 0.5f));
-            float edge_down = 12 + activeLevelOffset.Y + LEVEL_SIZE_Y / 2;
-            float edge_up = 12 + activeLevelOffset.Y + (LEVEL_SIZE_Y * (activeLevel.screensVertical - 0.5f));
+            float edge_left = 12 + activeLevelOffset.X + GameUtils.LEVEL_SIZE_X / 2;
+            float edge_right = 12 + activeLevelOffset.X + (GameUtils.LEVEL_SIZE_X * (activeLevel.screensHorizontal - 0.5f));
+            float edge_down = 12 + activeLevelOffset.Y + GameUtils.LEVEL_SIZE_Y / 2;
+            float edge_up = 12 + activeLevelOffset.Y + (GameUtils.LEVEL_SIZE_Y * (activeLevel.screensVertical - 0.5f));
             return new Vector2(Math.Clamp(player.position.X, edge_left, edge_right), Math.Clamp(player.position.Y, edge_down, edge_up));
         }
 
@@ -897,90 +718,115 @@ namespace RewindGame
            
             if (trigger == "still")
             {
+                // this should probably be in it's own function
                 timeData.time_kind = TimeKind.none;
                 timelineGUI.SetBar(null);
             }
             else if (trigger == "limbo_begin" || trigger == "limbo_full")
             {
-                timeData.time_kind = TimeKind.limbo;
-                timelineGUI.SetBar(timelineGUI.limboBar1);
-                setBarSizeLarge();
+                setBarSizeLarge(AreaState.limbo);
             }
             else if (trigger == "limbo_half")
             {
-                timeData.time_kind = TimeKind.limbo;
-                timelineGUI.SetBar(timelineGUI.limboBarHalf);
-                setBarSizeMedium();
+                setBarSizeMedium(AreaState.limbo);
             }
             else if (trigger == "limbo_fourth")
             {
-                timeData.time_kind = TimeKind.limbo;
-                timelineGUI.SetBar(timelineGUI.limboBarFourth);
-                setBarSizeSmall();
+                setBarSizeSmall(AreaState.limbo);
             }
             else if (trigger == "cotton_begin" || trigger == "cotton_full")
             {
-                timeData.time_kind = TimeKind.cottonwood;
-                timelineGUI.SetBar(timelineGUI.cottonBar1);
-                setBarSizeLarge();
+                setBarSizeLarge(AreaState.cotton);
             }
             else if (trigger == "cotton_half")
             {
-                timeData.time_kind = TimeKind.cottonwood;
-                timelineGUI.SetBar(timelineGUI.cottonBarHalf);
-                setBarSizeMedium();
+                setBarSizeMedium(AreaState.cotton);
             }
             else if (trigger == "cotton_fourth")
             {
-                timeData.time_kind = TimeKind.cottonwood;
-                timelineGUI.SetBar(timelineGUI.cottonBarFourth);
-                setBarSizeSmall();
+                setBarSizeSmall(AreaState.cotton);
             }
             else if (trigger == "eternal_begin" || trigger == "eternal_full")
             {
-                timeData.time_kind = TimeKind.eternal;
-                timelineGUI.SetBar(timelineGUI.eternalBar1);
-                setBarSizeLarge();
+                setBarSizeLarge(AreaState.eternal);
             }
             else if (trigger == "eternal_half")
             {
-                timeData.time_kind = TimeKind.eternal;
-                timelineGUI.SetBar(timelineGUI.eternalBarHalf);
-                setBarSizeMedium();
+                setBarSizeMedium(AreaState.eternal);
             }
             else if (trigger == "eternal_fourth")
             {
-                timeData.time_kind = TimeKind.eternal;
-                timelineGUI.SetBar(timelineGUI.eternalBarFourth);
-                setBarSizeSmall();
+                setBarSizeSmall(AreaState.eternal);
             }
         }
 
-        public void setBarSizeLarge()
+        public void setBarSizeLarge(AreaState this_area)
         {
             timelineGUI.currentBarSize = 105 * 4;
-            timeNegBound = -300;
-            timePosBound = 300;
-            timeDangerNegBound = -250;
-            timeDangerPosBound = 250;
+            timeBound = GameUtils.FULL_TIME_BOUND;
+            timeDangerBound = GameUtils.FULL_DANGER_BOUND;
+            
+            switch(this_area)
+            {
+                case AreaState.limbo:
+                    timeData.time_kind = TimeKind.limbo;
+                    timelineGUI.SetBar(timelineGUI.limboBar1);
+                    return;
+                case AreaState.cotton:
+                    timeData.time_kind = TimeKind.cottonwood;
+                    timelineGUI.SetBar(timelineGUI.cottonBar1);
+                    return;
+                case AreaState.eternal:
+                    timeData.time_kind = TimeKind.eternal;
+                    timelineGUI.SetBar(timelineGUI.eternalBar1);
+                    return;
+            }
         }
 
-        public void setBarSizeMedium()
+        public void setBarSizeMedium(AreaState this_area)
         {
             timelineGUI.currentBarSize = 102 * 2;
-            timeNegBound = -150;
-            timePosBound = 150;
-            timeDangerNegBound = -110;
-            timeDangerPosBound = 110;
+            timeBound = GameUtils.HALF_TIME_BOUND;
+            timeDangerBound = GameUtils.HALF_DANGER_BOUND;
+
+            switch (this_area)
+            {
+                case AreaState.limbo:
+                    timeData.time_kind = TimeKind.limbo;
+                    timelineGUI.SetBar(timelineGUI.limboBarHalf);
+                    return;
+                case AreaState.cotton:
+                    timeData.time_kind = TimeKind.cottonwood;
+                    timelineGUI.SetBar(timelineGUI.cottonBarHalf);
+                    return;
+                case AreaState.eternal:
+                    timeData.time_kind = TimeKind.eternal;
+                    timelineGUI.SetBar(timelineGUI.eternalBarHalf);
+                    return;
+            }
         }
 
-        public void setBarSizeSmall()
+        public void setBarSizeSmall(AreaState this_area)
         {
             timelineGUI.currentBarSize = 100;
-            timeNegBound = -75;
-            timePosBound = 75;
-            timeDangerNegBound = -25;
-            timeDangerPosBound = 25;
+            timeBound = GameUtils.FOURTH_TIME_BOUND;
+            timeDangerBound = GameUtils.FOURTH_DANGER_BOUND;
+
+            switch (this_area)
+            {
+                case AreaState.limbo:
+                    timeData.time_kind = TimeKind.limbo;
+                    timelineGUI.SetBar(timelineGUI.limboBarFourth);
+                    return;
+                case AreaState.cotton:
+                    timeData.time_kind = TimeKind.cottonwood;
+                    timelineGUI.SetBar(timelineGUI.cottonBarFourth);
+                    return;
+                case AreaState.eternal:
+                    timeData.time_kind = TimeKind.eternal;
+                    timelineGUI.SetBar(timelineGUI.eternalBarFourth);
+                    return;
+            }
         }
 
         // says if the object can save it's state in this moment-

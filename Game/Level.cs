@@ -198,16 +198,16 @@ namespace RewindGame.Game
 
             Texture2D sheet_texture = (tile_sprite.sheet == TileSheet.decorative ? parentGame.decorativeSheetTexture : parentGame.collisionSheetTexture);
 
-            int sheet_size = (tile_sprite.sheet == TileSheet.decorative ? LARGE_TILE_SHEET_SIZE : TILE_SHEET_SIZE);
-            int sheet_tile_len_x = (tile_sprite.sheet == TileSheet.decorative ? DECORATIVE_SHEET_TILES_X : COLLISION_SHEET_TILES_X);
-            int sheet_tile_len_y = (tile_sprite.sheet == TileSheet.decorative ? DECORATIVE_SHEET_TILES_Y : COLLISION_SHEET_TILES_Y);
+            int sheet_size = (tile_sprite.sheet == TileSheet.decorative ? GameUtils.LARGE_TILE_SHEET_SIZE : GameUtils.TILE_SHEET_SIZE);
+            int sheet_tile_len_x = (tile_sprite.sheet == TileSheet.decorative ? GameUtils.DECORATIVE_SHEET_TILES_X : GameUtils.COLLISION_SHEET_TILES_X);
+            int sheet_tile_len_y = (tile_sprite.sheet == TileSheet.decorative ? GameUtils.DECORATIVE_SHEET_TILES_Y : GameUtils.COLLISION_SHEET_TILES_Y);
 
             int sheet_x = (tile_sprite.tex_id % sheet_tile_len_x) * sheet_size;
             int sheet_y = (int)Math.Floor((float)tile_sprite.tex_id / (float)sheet_tile_len_x) * sheet_size;
 
             Rectangle source_rect = new Rectangle(sheet_x, sheet_y, sheet_size, sheet_size);
 
-            int world_size = (tile_sprite.sheet == TileSheet.decorative ? LARGE_TILE_WORLD_SIZE : TILE_WORLD_SIZE);
+            int world_size = (tile_sprite.sheet == TileSheet.decorative ? GameUtils.LARGE_TILE_WORLD_SIZE : GameUtils.TILE_WORLD_SIZE);
             Rectangle end_rect = new Rectangle((int)position.X, (int)position.Y, world_size, world_size);
 
             sprite_batch.Draw(sheet_texture, end_rect, source_rect, Color.White);

@@ -28,7 +28,7 @@ namespace RewindGame.Game.Solids
                 if (velocity_.Y < 0)
                 {
                     anim = new Animation("limbo/platformlongdown", 6, 4, true);
-                    collisionOffset = new Vector2(0, Level.TILE_WORLD_SIZE + 8);
+                    collisionOffset = new Vector2(0, GameUtils.TILE_WORLD_SIZE + 8);
                 }
                 else
                 {
@@ -40,7 +40,7 @@ namespace RewindGame.Game.Solids
                 if (velocity_.Y < 0)
                 {
                     anim = new Animation("limbo/platformdown", 6, 4, true);
-                    collisionOffset = new Vector2(0, Level.TILE_WORLD_SIZE + 8);
+                    collisionOffset = new Vector2(0, GameUtils.TILE_WORLD_SIZE + 8);
                 }
                 else
                 {
@@ -69,9 +69,9 @@ namespace RewindGame.Game.Solids
         {
             var return_c = base.getCollision(rect, MoveDirection.none);
             if (return_c.priority == 0) return return_c;
-            if (direction == MoveDirection.up && rect.Y + rect.Height < position.Y + Level.SEMISOLID_THICKNESS_WINDOW + collisionOffset.Y)
+            if (direction == MoveDirection.up && rect.Y + rect.Height < position.Y + GameUtils.SEMISOLID_THICKNESS_WINDOW + collisionOffset.Y)
                 return new CollisionReturn(CollisionType.refresh_jump, this, 2);
-            if (direction != MoveDirection.down || rect.Y + rect.Height > position.Y + Level.SEMISOLID_THICKNESS + collisionOffset.Y)
+            if (direction != MoveDirection.down || rect.Y + rect.Height > position.Y + GameUtils.SEMISOLID_THICKNESS + collisionOffset.Y)
                 return CollisionReturn.None();
             return return_c;
         }
@@ -79,7 +79,7 @@ namespace RewindGame.Game.Solids
         public override Vector2 getEntityOverlap(Entity entity)
         {
             var rect = entity.getCollisionBox();
-            if (rect.Y + rect.Height > position.Y + Level.SEMISOLID_THICKNESS + collisionOffset.Y)
+            if (rect.Y + rect.Height > position.Y + GameUtils.SEMISOLID_THICKNESS + collisionOffset.Y)
                 return Vector2.Zero;
             var overlap = entity.getOverlap(this);
             return entity.getOverlap(this);

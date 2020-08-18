@@ -211,7 +211,7 @@ namespace RewindGame.Game
         public override void Die()
         {
             velocity = Vector2.Zero;
-            parentGame.qued_player_death = true;
+            parentGame.isPlayerDeathQued = true;
             animator.changeAnimation("death");
         }
 
@@ -251,7 +251,7 @@ namespace RewindGame.Game
 
         public void UpdateAnimations()
         {
-            if (parentGame.qued_player_death) { 
+            if (parentGame.isPlayerDeathQued) { 
                 animator.changeAnimation("death");
                 return;
             }

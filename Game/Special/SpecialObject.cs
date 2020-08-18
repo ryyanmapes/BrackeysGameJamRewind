@@ -75,36 +75,36 @@ namespace RewindGame.Game.Special
                 case "lunarshrine":
                     currentLines = lunarShrineLines;
                     anim = lunarShrineTex;
-                    collisionSize = new Vector2(Level.TILE_WORLD_SIZE*4, Level.TILE_WORLD_SIZE * 4);
+                    collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE*4, GameUtils.TILE_WORLD_SIZE * 4);
                     break;
                 case "obelisk":
                     currentLines = obeliskLines;
                     anim = obeliskTex;
-                    collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 2, Level.TILE_WORLD_SIZE * 4);
+                    collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 2, GameUtils.TILE_WORLD_SIZE * 4);
                     break;
                     /*
                 case EntityType.treesear:
                     currentLines = seartreeLines;
                     anim = seartreeTex;
-                    collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 4, Level.TILE_WORLD_SIZE * 4);
+                    collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
                     break;
                 case EntityType.barrel:
                     currentLines = barrelLines;
                     anim = barrelTex;
-                    collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 4, Level.TILE_WORLD_SIZE * 4);
+                    collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
                     break;
                 case EntityType.poster:
                     currentLines = sadLines;
                     anim = posterTex;
-                    collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 4, Level.TILE_WORLD_SIZE * 4);
+                    collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
                     break;
                 case EntityType.desk:
                     anim = deskTex;
-                    //collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 4, Level.TILE_WORLD_SIZE * 4);
+                    //collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
                     break;
                 case EntityType.barreltree:
                     anim = barrelTreeTex;
-                    //collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 4, Level.TILE_WORLD_SIZE * 4);
+                    //collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
                     break;*/
                 default:
                     anim = null;

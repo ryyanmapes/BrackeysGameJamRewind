@@ -65,15 +65,15 @@ namespace RewindGame.Game.Effects
         }
         public void DrawBackground(StateData state, SpriteBatch sprite_batch)
         {
-            Vector2 CameraPosReal = state.camera_position - new Vector2(RewindGame.LEVEL_SIZE_X / 2, RewindGame.LEVEL_SIZE_Y / 2);
-            Vector2 CameraPosRealWater = CameraPosReal - new Vector2(0, RewindGame.LEVEL_SIZE_Y / 8);
+            Vector2 CameraPosReal = state.camera_position - new Vector2(GameUtils.LEVEL_SIZE_X / 2, GameUtils.LEVEL_SIZE_Y / 2);
+            Vector2 CameraPosRealWater = CameraPosReal - new Vector2(0, GameUtils.LEVEL_SIZE_Y / 8);
             if (parentGame.activeLevel.screensHorizontal > parentGame.activeLevel.screensVertical)
             {
                 sprite_batch.Draw(cottonwood0, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 0.0f), (int)(CameraPosReal.Y * 0.0f), cottonwood0.Width, cottonwood0.Height), Color.White);
                 sprite_batch.Draw(cottonwoodHorizontalWater0, CameraPosRealWater, new Rectangle((int)(CameraPosRealWater.X * 0.0f) + waterflow, (int)(CameraPosRealWater.Y * 0.0f), cottonwoodHorizontalWater0.Width, cottonwoodHorizontalWater0.Height), Color.White);
                 sprite_batch.Draw(cottonwoodHorizontalWater1, CameraPosRealWater, new Rectangle((int)(CameraPosRealWater.X * 0.0f) + waterflow + 200, (int)(CameraPosRealWater.Y * 0.0), cottonwoodHorizontalWater1.Width, cottonwoodHorizontalWater1.Height), Color.White);
                 sprite_batch.Draw(cottonwoodHorizontalWater2, CameraPosRealWater, new Rectangle((int)(CameraPosRealWater.X * 0.0f) + waterflow + 400, (int)(CameraPosRealWater.Y * 0.0f), cottonwoodHorizontalWater2.Width, cottonwoodHorizontalWater2.Height), Color.White);
-                //sprite_batch.Draw(cottonwood2, new Vector2(CameraPosReal.X, state.camera_position.Y - RewindGame.LEVEL_SIZE_Y / 2), new Rectangle((int)(CameraPosReal.X * 0.8f), (int)(CameraPosReal.Y * 0.0f), cottonwood2.Width, cottonwood2.Height), Color.White);
+                //sprite_batch.Draw(cottonwood2, new Vector2(CameraPosReal.X, state.camera_position.Y - GameUtils.LEVEL_SIZE_Y / 2), new Rectangle((int)(CameraPosReal.X * 0.8f), (int)(CameraPosReal.Y * 0.0f), cottonwood2.Width, cottonwood2.Height), Color.White);
                 sprite_batch.Draw(cottonwoodHorizontal2, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 0.8f), (int)(CameraPosReal.Y * 0.0f), cottonwoodHorizontal2.Width, cottonwoodHorizontal2.Height), Color.White);
 
             }
@@ -83,8 +83,8 @@ namespace RewindGame.Game.Effects
                 sprite_batch.Draw(cottonwoodHorizontalWater0, CameraPosRealWater, new Rectangle((int)(CameraPosRealWater.X * 0.0f) + waterflow, (int)(CameraPosRealWater.Y * 0.0f), cottonwoodHorizontalWater0.Width, cottonwoodHorizontalWater0.Height), Color.White);
                 sprite_batch.Draw(cottonwoodHorizontalWater1, CameraPosRealWater, new Rectangle((int)(CameraPosRealWater.X * 0.0f) + waterflow + 200, (int)(CameraPosRealWater.Y * 0.0), cottonwoodHorizontalWater1.Width, cottonwoodHorizontalWater1.Height), Color.White);
                 sprite_batch.Draw(cottonwoodHorizontalWater2, CameraPosRealWater, new Rectangle((int)(CameraPosRealWater.X * 0.0f) + waterflow + 400, (int)(CameraPosRealWater.Y * 0.0f), cottonwoodHorizontalWater2.Width, cottonwoodHorizontalWater2.Height), Color.White);
-                //sprite_batch.Draw(cottonwood2, new Vector2(CameraPosReal.X, state.camera_position.Y - RewindGame.LEVEL_SIZE_Y / 2), new Rectangle((int)(CameraPosReal.X * 0.8f), (int)(CameraPosReal.Y * 0.0f), cottonwood2.Width, cottonwood2.Height), Color.White);
-                sprite_batch.Draw(cottonwoodVertical2, new Vector2(CameraPosReal.X, state.camera_position.Y - RewindGame.LEVEL_SIZE_Y), new Rectangle((int)(CameraPosReal.X * 0.0f), (int)(CameraPosReal.Y * 0.5f), cottonwoodVertical2.Width, cottonwoodVertical2.Height), Color.White);
+                //sprite_batch.Draw(cottonwood2, new Vector2(CameraPosReal.X, state.camera_position.Y - GameUtils.LEVEL_SIZE_Y / 2), new Rectangle((int)(CameraPosReal.X * 0.8f), (int)(CameraPosReal.Y * 0.0f), cottonwood2.Width, cottonwood2.Height), Color.White);
+                sprite_batch.Draw(cottonwoodVertical2, new Vector2(CameraPosReal.X, state.camera_position.Y - GameUtils.LEVEL_SIZE_Y), new Rectangle((int)(CameraPosReal.X * 0.0f), (int)(CameraPosReal.Y * 0.5f), cottonwoodVertical2.Width, cottonwoodVertical2.Height), Color.White);
             }
             else if (parentGame.activeLevel.screensHorizontal == parentGame.activeLevel.screensVertical)
             {
@@ -98,7 +98,7 @@ namespace RewindGame.Game.Effects
 
         public void DrawForeground(StateData state, SpriteBatch sprite_batch)
         {
-            Vector2 CameraPosReal = state.camera_position - new Vector2(RewindGame.LEVEL_SIZE_X / 2, RewindGame.LEVEL_SIZE_Y / 2);
+            Vector2 CameraPosReal = state.camera_position - new Vector2(GameUtils.LEVEL_SIZE_X / 2, GameUtils.LEVEL_SIZE_Y / 2);
         //    sprite_batch.Draw(floofies, CameraPosReal, new Rectangle((int)(CameraPosReal.X) - floofifate / 3, (int)(CameraPosReal.Y) + floofifate, floofies.Width, floofies.Height), Color.White);
         //    sprite_batch.Draw(floofies, CameraPosReal, new Rectangle(((int)(CameraPosReal.X) - floofifate / 3) + 200, ((int)(CameraPosReal.Y) + floofifate) + 200, floofies.Width, floofies.Height), Color.White);
         //    sprite_batch.Draw(floofies, CameraPosReal, new Rectangle(((int)(CameraPosReal.X) - floofifate / 3) + 400, ((int)(CameraPosReal.Y) + floofifate) + 400, floofies.Width, floofies.Height), Color.White);

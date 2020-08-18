@@ -26,7 +26,7 @@ namespace RewindGame.Game.Solids
                 if (velocity_.Y < 0)
                 {
                     anim = new Animation("cottonwood/cottonwoodplatformdownlong", 1, 1, true);
-                    //collisionOffset = new Vector2(0, Level.TILE_WORLD_SIZE + 8);
+                    //collisionOffset = new Vector2(0, GameUtils.TILE_WORLD_SIZE + 8);
                 }
                 else
                 {
@@ -38,7 +38,7 @@ namespace RewindGame.Game.Solids
                 if (velocity_.Y < 0)
                 {
                     anim = new Animation("cottonwood/cottonwoodplatformdown", 1, 1, true);
-                    //collisionOffset = new Vector2(0, Level.TILE_WORLD_SIZE + 8);
+                    //collisionOffset = new Vector2(0, GameUtils.TILE_WORLD_SIZE + 8);
                 }
                 else
                 {

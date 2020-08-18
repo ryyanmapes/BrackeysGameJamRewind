@@ -43,7 +43,7 @@ namespace RewindGame.Game.Effects
         private const float stallTimeGlobal = 0f;
         private float stallTimePlayer = stallTimeGlobal;
         private float stallTimeArtifact = stallTimeGlobal;
-        private float maxGrowTime = RewindGame.LEVEL_SIZE_X;
+        private float maxGrowTime = GameUtils.LEVEL_SIZE_X;
 
         private Vector2 playerWarpPos;
         private Vector2 artifactWarpPos;
@@ -192,10 +192,10 @@ namespace RewindGame.Game.Effects
 
         public void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            Vector2 CameraPosReal = state.camera_position - new Vector2(RewindGame.LEVEL_SIZE_X / 2, RewindGame.LEVEL_SIZE_Y / 2);
-            Vector2 playerWarpBeamPos = new Vector2(playerWarpPos.X, state.camera_position.Y - RewindGame.LEVEL_SIZE_Y/2);
+            Vector2 CameraPosReal = state.camera_position - new Vector2(GameUtils.LEVEL_SIZE_X / 2, GameUtils.LEVEL_SIZE_Y / 2);
+            Vector2 playerWarpBeamPos = new Vector2(playerWarpPos.X, state.camera_position.Y - GameUtils.LEVEL_SIZE_Y/2);
             Vector2 playweWarpBeamRealPos = new Vector2(playerWarpBeamPos.X - currentBeamWidthPlayer, playerWarpBeamPos.Y);
-            Vector2 artifactWarpBeamPos = new Vector2(artifactWarpPos.X, state.camera_position.Y - RewindGame.LEVEL_SIZE_Y / 2);
+            Vector2 artifactWarpBeamPos = new Vector2(artifactWarpPos.X, state.camera_position.Y - GameUtils.LEVEL_SIZE_Y / 2);
             Vector2 artifactWarpBeamRealPos = new Vector2(artifactWarpBeamPos.X - currentBeamWidthArtifact, artifactWarpBeamPos.Y);
 
             foreach (EffectParticle particle in starParticles)
@@ -204,15 +204,15 @@ namespace RewindGame.Game.Effects
             }
             if (showPlayerWarp == true)
             {
-                sprite_batch.Draw(deathSquare, playweWarpBeamRealPos, new Rectangle((int)playweWarpBeamRealPos.X, (int)playweWarpBeamRealPos.Y, (int)currentBeamWidthPlayer * 2, (int)RewindGame.LEVEL_SIZE_Y), Color.White * (1));
+                sprite_batch.Draw(deathSquare, playweWarpBeamRealPos, new Rectangle((int)playweWarpBeamRealPos.X, (int)playweWarpBeamRealPos.Y, (int)currentBeamWidthPlayer * 2, (int)GameUtils.LEVEL_SIZE_Y), Color.White * (1));
             }
             if (showArtifactWarp == true)
             {
-                sprite_batch.Draw(deathSquare, artifactWarpBeamRealPos, new Rectangle((int)artifactWarpBeamRealPos.X, (int)artifactWarpBeamRealPos.Y, (int)currentBeamWidthArtifact * 2, (int)RewindGame.LEVEL_SIZE_Y), Color.White * (1));
+                sprite_batch.Draw(deathSquare, artifactWarpBeamRealPos, new Rectangle((int)artifactWarpBeamRealPos.X, (int)artifactWarpBeamRealPos.Y, (int)currentBeamWidthArtifact * 2, (int)GameUtils.LEVEL_SIZE_Y), Color.White * (1));
             }
             if (showCube)
             {
-                sprite_batch.Draw(deathSquare, CameraPosReal, new Rectangle((int)CameraPosReal.X, (int)CameraPosReal.Y, (int)RewindGame.LEVEL_SIZE_X, (int)RewindGame.LEVEL_SIZE_Y), new Color(cubeColor, fadeValue), 0f, Vector2.Zero, new Vector2(RewindGame.LEVEL_SIZE_X, RewindGame.LEVEL_SIZE_Y), SpriteEffects.None, 0f);
+                sprite_batch.Draw(deathSquare, CameraPosReal, new Rectangle((int)CameraPosReal.X, (int)CameraPosReal.Y, (int)GameUtils.LEVEL_SIZE_X, (int)GameUtils.LEVEL_SIZE_Y), new Color(cubeColor, fadeValue), 0f, Vector2.Zero, new Vector2(GameUtils.LEVEL_SIZE_X, GameUtils.LEVEL_SIZE_Y), SpriteEffects.None, 0f);
             }
             
         }
@@ -221,8 +221,8 @@ namespace RewindGame.Game.Effects
             if (starParticles.Count > 100) return;
             for (int i = 0; i < numStarParticles; i++)
             {
-                float rand_x =  (float)((rnd.NextDouble()-0.5) * RewindGame.LEVEL_SIZE_X) + state.camera_position.X;
-                float rand_y = (float)((rnd.NextDouble() - 0.5) * RewindGame.LEVEL_SIZE_Y) + state.camera_position.Y;
+                float rand_x =  (float)((rnd.NextDouble()-0.5) * GameUtils.LEVEL_SIZE_X) + state.camera_position.X;
+                float rand_y = (float)((rnd.NextDouble() - 0.5) * GameUtils.LEVEL_SIZE_Y) + state.camera_position.Y;
                 float rand_fadein = (float)((rnd.NextDouble() - 0.5) / 50) + starFadeIn;
                 float rand_lifetime = (float)((rnd.NextDouble() - 0.5) / 5) + starLifetime;
                 float rand_fadeout = (float)((rnd.NextDouble() - 0.5) / 30) + starFadeOut;

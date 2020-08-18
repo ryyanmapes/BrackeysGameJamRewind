@@ -21,12 +21,12 @@ namespace RewindGame.Game.Tiles
         {
             collisionDirection = MoveDirection.right;
             base.Initialize(level, starting_pos, tile_sprite_);
-            collisionSize.X = Level.SEMISOLID_THICKNESS;
+            collisionSize.X = GameUtils.SEMISOLID_THICKNESS;
         }
         
         public override bool isThisOverlapping(FRectangle rect, MoveDirection direction)
         {
-            if (rect.X + rect.Width > position.X + Level.SEMISOLID_THICKNESS) return false;
+            if (rect.X + rect.Width > position.X + GameUtils.SEMISOLID_THICKNESS) return false;
             return base.isThisOverlapping(rect, direction);
         }
 

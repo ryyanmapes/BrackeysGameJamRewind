@@ -40,7 +40,7 @@ namespace RewindGame.Game.Effects
 
         public void DrawBackground(StateData state, SpriteBatch sprite_batch)
         {
-            Vector2 CameraPosReal = state.camera_position - new Vector2(RewindGame.LEVEL_SIZE_X / 2, RewindGame.LEVEL_SIZE_Y / 2);
+            Vector2 CameraPosReal = state.camera_position - new Vector2(GameUtils.LEVEL_SIZE_X / 2, GameUtils.LEVEL_SIZE_Y / 2);
             if (parentGame.activeLevel.screensHorizontal > parentGame.activeLevel.screensVertical)
             {
                 sprite_batch.Draw(greenhousehorizontal0urgempt, CameraPosReal, new Rectangle((int)(CameraPosReal.X * 0.5f), (int)(CameraPosReal.Y * 0.0f), greenhousehorizontal0urgempt.Width, greenhousehorizontal0urgempt.Height), Color.White);
@@ -51,7 +51,7 @@ namespace RewindGame.Game.Effects
             }
             else if (parentGame.activeLevel.screensVertical > parentGame.activeLevel.screensHorizontal)
             {
-                sprite_batch.Draw(terrariumverticalurgempt, new Vector2(CameraPosReal.X, state.camera_position.Y - RewindGame.LEVEL_SIZE_Y), new Rectangle((int)(CameraPosReal.X * 0.0f), (int)(CameraPosReal.Y * .8f), terrariumverticalurgempt.Width, terrariumverticalurgempt.Height), Color.White);
+                sprite_batch.Draw(terrariumverticalurgempt, new Vector2(CameraPosReal.X, state.camera_position.Y - GameUtils.LEVEL_SIZE_Y), new Rectangle((int)(CameraPosReal.X * 0.0f), (int)(CameraPosReal.Y * .8f), terrariumverticalurgempt.Width, terrariumverticalurgempt.Height), Color.White);
             }
             else if (parentGame.activeLevel.screensHorizontal == parentGame.activeLevel.screensVertical)
             {

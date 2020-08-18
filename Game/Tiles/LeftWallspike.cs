@@ -21,7 +21,7 @@ namespace RewindGame.Game.Tiles
         {
             collisionType = CollisionType.death;
             base.Initialize(level, starting_pos, tile_sprite_);
-            collisionSize.X = Level.WALLSPIKE_THICKNESS;
+            collisionSize.X = GameUtils.WALLSPIKE_THICKNESS;
         }
 
         public override void Draw(StateData state, SpriteBatch sprite_batch)

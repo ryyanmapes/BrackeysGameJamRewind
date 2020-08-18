@@ -40,8 +40,8 @@ namespace RewindGame.Game.Solids
 
         public virtual void Initialize(Level level, Vector2 starting_pos, Vector2 velocity_, bool is_forwards)
         {
-            collisionSize.X = Level.LARGE_TILE_WORLD_SIZE;
-            collisionSize.Y = Level.SEMISOLID_THICKNESS_WINDOW;
+            collisionSize.X = GameUtils.LARGE_TILE_WORLD_SIZE;
+            collisionSize.Y = GameUtils.SEMISOLID_THICKNESS_WINDOW;
             isForwards = is_forwards;
             velocity = velocity_;
             this.startingPos = starting_pos;

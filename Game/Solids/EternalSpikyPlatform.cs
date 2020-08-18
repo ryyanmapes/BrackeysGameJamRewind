@@ -33,9 +33,9 @@ namespace RewindGame.Game.Solids
 
             anims = new AnimationPlayer(is_long ? idleLong : idle, 1, Vector2.Zero, level.parentGame.Content);
 
-            //starting_pos -= new Vector2(0, 0.5f*Level.TILE_WORLD_SIZE);
-            //collisionOffset = new Vector2(0, 0.25f * Level.TILE_WORLD_SIZE);
-            collisionSize = new Vector2(Level.TILE_WORLD_SIZE * (is_long ? 4 : 2), Level.TILE_WORLD_SIZE);
+            //starting_pos -= new Vector2(0, 0.5f*GameUtils.TILE_WORLD_SIZE);
+            //collisionOffset = new Vector2(0, 0.25f * GameUtils.TILE_WORLD_SIZE);
+            collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * (is_long ? 4 : 2), GameUtils.TILE_WORLD_SIZE);
             velocity = velocity_;
             startingPos = starting_pos;
 
