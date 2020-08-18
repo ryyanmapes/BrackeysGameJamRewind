@@ -491,12 +491,17 @@ namespace RewindGame
         }
 
 
-
-
+        //Fixes a bug in devtools I should have thought of a while ago
+        private KeyboardState _previousKey;
+        private KeyboardState _currentKey;
+        //
         protected override void Update(GameTime game_time)
         {
             currentLevelCenter = getLevelCenter();
             currentCameraPosition = getCameraPosition();
+
+            _previousKey = _currentKey;
+            _currentKey = Keyboard.GetState();
 
             inputData = ReadInputs(inputData);
 
@@ -505,7 +510,7 @@ namespace RewindGame
 
             if (inputData.is_restart_pressed)
                 qued_player_death = true;
-            if (false)
+            if (true)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.K))
                     loadLevelAndConnections("limbo1");
@@ -517,28 +522,32 @@ namespace RewindGame
                     loadLevelAndConnections("cottonfinal");
                 else if (Keyboard.GetState().IsKeyDown(Keys.U)) LoadArea(AreaState.cotton);
                 else if (Keyboard.GetState().IsKeyDown(Keys.N)) LoadArea(AreaState.eternal);
-                else if (Keyboard.GetState().IsKeyDown(Keys.NumPad8))
+                else if (_currentKey.IsKeyDown(Keys.NumPad8) &&
+                _previousKey.IsKeyUp(Keys.NumPad8))
                 {
                     if (activeLevel.connectedLevelNames[2] != "")
                     {
                         loadLevelAndConnections(activeLevel.connectedLevelNames[2]);
                     }
                 }
-                else if (Keyboard.GetState().IsKeyDown(Keys.NumPad6))
+                else if (_currentKey.IsKeyDown(Keys.NumPad6) &&
+                _previousKey.IsKeyUp(Keys.NumPad6))
                 {
                     if (activeLevel.connectedLevelNames[0] != "")
                     {
                         loadLevelAndConnections(activeLevel.connectedLevelNames[0]);
                     }
                 }
-                else if (Keyboard.GetState().IsKeyDown(Keys.NumPad2))
+                else if (_currentKey.IsKeyDown(Keys.NumPad2) &&
+                _previousKey.IsKeyUp(Keys.NumPad2))
                 {
                     if (activeLevel.connectedLevelNames[3] != "")
                     {
                         loadLevelAndConnections(activeLevel.connectedLevelNames[3]);
                     }
                 }
-                else if (Keyboard.GetState().IsKeyDown(Keys.NumPad4))
+                else if (_currentKey.IsKeyDown(Keys.NumPad4) &&
+                _previousKey.IsKeyUp(Keys.NumPad4))
                 {
                     if (activeLevel.connectedLevelNames[1] != "")
                     {
