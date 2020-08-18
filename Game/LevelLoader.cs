@@ -4,6 +4,11 @@ using System.Text;
 using System.IO;
 using Newtonsoft.Json;
 using Microsoft.Xna.Framework;
+using RewindGame.Game.Tiles;
+using RewindGame.Game.Debug;
+using RewindGame.Game.Tiles;
+using RewindGame.Game.Solids;
+using RewindGame.Game.Special;
 
 namespace RewindGame.Game
 {
@@ -28,34 +33,6 @@ namespace RewindGame.Game
         down_wallspike,
         centerspike,
         water,
-        unknown
-    }
-
-    public enum EntityType
-    {
-        Spawnpoint,
-        Warp,
-        LimboPlatform,
-        LargeLimboPlatform,
-        LimboSpikePlatform,
-        LargeLimboSpikePlatform,
-        LimboSpikyBall,
-        CottonwoodPlatform,
-        CottonwoodPlatformLarge,
-        FloofForwards,
-        FloofBackwards,
-        EternalPlatform,
-        EternalPlatformLarge,
-        EternalSpikyBall,
-        EternalSpikyPlat,
-        EternalSpikyPlatLong,
-        obelisk,
-        lunarshrine,
-        treesear,
-        barreltree,
-        barrel,
-        poster,
-        desk,
         unknown
     }
 
@@ -182,7 +159,7 @@ namespace RewindGame.Game
         {
             foreach (RawEntities entity in tile_layer.entities)
             {
-                level.PlaceEntity(getEntityTypeFromName(entity.name), entity.x, entity.y, entity.values);
+                PlaceEntity(entity.name, entity.x, entity.y, entity.values, level);
             }
         }
 
@@ -193,7 +170,7 @@ namespace RewindGame.Game
             bool is_large_tile = false;
             bool is_foreforefront = false;
             TileSheet sheet_type = TileSheet.none;
-            int sorting_layer = 0;
+            SortingLayer sorting_layer = SortingLayer.normal;
 
             
             switch (tile_layer.name)
@@ -205,23 +182,21 @@ namespace RewindGame.Game
                 case "collisionlayer":
                     sheet_type = TileSheet.collision;
                     is_collision_layer = true;
-                    sorting_layer = 1;
                     break;
                 case "background":
                     sheet_type = TileSheet.collision;
-                    sorting_layer = -1;
+                    sorting_layer = SortingLayer.background;
                     break;
                 case "visual":
-                    sorting_layer = 1;
                     sheet_type = TileSheet.collision;
                     break;
                 case "foreground":
-                    sorting_layer = 2;
+                    sorting_layer = SortingLayer.foreground;
                     is_large_tile = true;
                     sheet_type = TileSheet.decorative;
                     break;
                 case "foreforeground":
-                    sorting_layer = 3;
+                    sorting_layer = SortingLayer.foreforeground;
                     sheet_type = TileSheet.collision;
                     is_foreforefront = true;
                     break;
@@ -239,15 +214,15 @@ namespace RewindGame.Game
 
                     if (is_collision_layer)
                     {
-                        level.PlaceTile(getCollisionTileTypeFromID(tile), x_pos, y_pos, new TileSprite(sheet_type, tile, sorting_layer));
+                        PlaceTile(getCollisionTileTypeFromID(tile), x_pos, y_pos, new TileSprite(sheet_type, tile), level);
                     }
                     else if (is_technical_layer)
                     {
-                        level.PlaceTile(getTechnicalTileTypeFromID(tile), x_pos, y_pos, new TileSprite(sheet_type, tile, sorting_layer));
+                        PlaceTile(getTechnicalTileTypeFromID(tile), x_pos, y_pos, new TileSprite(sheet_type, tile), level);
                     }
                     else
                     {
-                        level.PlaceDecorative(is_large_tile, x_pos, y_pos, new TileSprite(sheet_type, tile, sorting_layer));
+                        PlaceDecorative(is_large_tile, x_pos, y_pos, new TileSprite(sheet_type, tile), sorting_layer, level);
                     }
                 }
 
@@ -260,6 +235,152 @@ namespace RewindGame.Game
                 }
             }
         }
+
+
+        public static void PlaceTile(TileType type, int x, int y, TileSprite sprite, Level level)
+        {
+            Vector2 position = level.getPositionFromGrid(x, y);
+
+            switch (type)
+            {
+                case TileType.intangible:
+                    // I don't think any of these will ever be rendered
+                    //sceneDecorativesForeground.Add(DecorativeTile.Make(level, position, sprite));
+                    break;
+                case TileType.solid:
+                    level.AddSolid(SolidTile.Make(level, position, sprite));
+                    break;
+                case TileType.platform:
+                    level.AddSolid(PlatformTile.Make(level, position, sprite));
+                    break;
+                case TileType.left_oneway:
+                    level.AddSolid(LeftOnewayTile.Make(level, position, sprite));
+                    break;
+                case TileType.right_oneway:
+                    level.AddSolid(RightOnewayTile.Make(level, position, sprite));
+                    break;
+                case TileType.topleft_oneway:
+                    level.AddSolid(PlatformTile.Make(level, position, sprite));
+                    level.AddSolid(LeftOnewayTile.Make(level, position, sprite));
+                    break;
+                case TileType.topright_oneway:
+                    level.AddSolid(PlatformTile.Make(level, position, sprite));
+                    level.AddSolid(RightOnewayTile.Make(level, position, sprite));
+                    break;
+                case TileType.right_transition:
+                    level.AddSolid(TransitionTriggerTile.Make(level, position, sprite, MoveDirection.right));
+                    break;
+                case TileType.left_transition:
+                    level.AddSolid(TransitionTriggerTile.Make(level, position, sprite, MoveDirection.left));
+                    break;
+                case TileType.up_transition:
+                    level.AddSolid(TransitionTriggerTile.Make(level, position, sprite, MoveDirection.up));
+                    break;
+                case TileType.down_transition:
+                    level.AddSolid(TransitionTriggerTile.Make(level, position, sprite, MoveDirection.down));
+                    break;
+                case TileType.right_wallspike:
+                    level.AddSolid(RightWallspike.Make(level, position, sprite));
+                    break;
+                case TileType.left_wallspike:
+                    level.AddSolid(LeftWallspike.Make(level, position, sprite));
+                    break;
+                case TileType.up_wallspike:
+                    level.AddSolid(TopWallspike.Make(level, position, sprite));
+                    break;
+                case TileType.down_wallspike:
+                    level.AddSolid(BottomWallspike.Make(level, position, sprite));
+                    break;
+                case TileType.centerspike:
+                    level.AddSolid(Centerspike.Make(level, position, sprite));
+                    break;
+                case TileType.freezetime:
+                    level.AddSolid(StaticZone.Make(level, position, sprite));
+                    break;
+                case TileType.water:
+                    level.AddSolid(WaterTile.Make(level, position, sprite));
+                    break;
+                default:
+                    // todo
+                    break;
+            }
+        }
+
+        public static void PlaceEntity(string name, int x, int y, EntityInfo info, Level level)
+        {
+            Vector2 position = new Vector2(x, y) * 4 + level.levelOrgin;
+
+            switch (name)
+            {
+                case "playerspawn":
+                    position.Y += 55;
+                    position.X += 24;
+                    level.playerSpawnpoint = position;
+                    return;
+                case "warp":
+                    level.warp = Warp.Make(level, position);
+                    return;
+                case "limboplatform":
+                    level.AddSolid(LimboPlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    return;
+                case "limboplatformlarge":
+                    level.AddSolid(LimboPlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), true));
+                    return;
+                case "limbospikeplatform":
+                    level.AddSolid(LimboSpikePlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    return;
+                case "limbospikeplatformlarge":
+                    level.AddSolid(LimboSpikePlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), true));
+                    return;
+                case "limbospikyball":
+                    level.AddSolid(LimboSpikyBall.Make(level, position, info.radius, info.speed, info.starting_rotation_degrees));
+                    return;
+                case "cottonwoodplatform":
+                    level.AddSolid(CottonwoodPlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    return;
+                case "cottonwoodplatformlarge":
+                    level.AddSolid(CottonwoodPlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), true));
+                    return;
+                case "floof_forward":
+                    level.AddSolid(Floof.Make(level, position, Vector2.Zero, true));
+                    return;
+                case "floof_backwards":
+                    level.AddSolid(Floof.Make(level, position, Vector2.Zero, false));
+                    return;
+                case "eternalplatform":
+                    level.AddSolid(EternalPlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    return;
+                case "eternalplatformlarge":
+                    level.AddSolid(EternalPlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), true));
+                    return;
+                case "eternalspikyball":
+                    level.AddSolid(EternalSpikyBall.Make(level, position, info.radius, info.rotations, info.starting_rotation_degrees));
+                    return;
+                case "eternalspikyplatform":
+                    level.AddSolid(EternalSpikePlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    return;
+                case "eternalspikyplatformlarge":
+                    level.AddSolid(EternalSpikePlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    return;
+                case "lunarshrine":
+                case "obelisk":
+                    level.specialObject = SpecialObject.Make(level, position, name);
+                    return;
+                // todo decorative entities, other special objects
+                default:
+                    //todo
+                    return;
+            }
+        }
+
+        public static void PlaceDecorative(bool is_large, int x, int y, TileSprite sprite, SortingLayer sorting_layer, Level level)
+        {
+            Vector2 position = is_large ? level.getLargePositionFromGrid(x, y) : level.getPositionFromGrid(x, y);
+
+            level.AddDecorative(DecorativeTile.Make(level, position, sprite), sorting_layer);
+
+        }
+
 
         public static TileType getCollisionTileTypeFromID(int tile)
         {
@@ -313,63 +434,6 @@ namespace RewindGame.Game
                     return TileType.down_transition;
                 default:
                     return TileType.intangible;
-            }
-        }
-
-
-        public static EntityType getEntityTypeFromName(string name)
-        {
-            switch (name)
-            {
-                case "playerspawn":
-                    return EntityType.Spawnpoint;
-                case "warp":
-                    return EntityType.Warp;
-                case "limboplatform":
-                    return EntityType.LimboPlatform;
-                case "limboplatformlarge":
-                    return EntityType.LargeLimboPlatform;
-                case "limbospikeplatform":
-                    return EntityType.LimboSpikePlatform;
-                case "limbospikeplatformlarge":
-                    return EntityType.LargeLimboSpikePlatform;
-                case "limbospikyball":
-                    return EntityType.LimboSpikyBall;
-                case "cottonwoodplatform":
-                    return EntityType.CottonwoodPlatform;
-                case "cottonwoodplatformlarge":
-                    return EntityType.CottonwoodPlatformLarge;
-                case "floof_forward":
-                    return EntityType.FloofForwards;
-                case "floof_backwards":
-                    return EntityType.FloofBackwards;
-                case "eternalplatform":
-                    return EntityType.EternalPlatform;
-                case "eternalplatformlarge":
-                    return EntityType.EternalPlatformLarge;
-                case "eternalspikyball":
-                    return EntityType.EternalSpikyBall;
-                case "eternalspikyplatform":
-                    return EntityType.EternalSpikyPlat;
-                case "eternalspikyplatformlarge":
-                    return EntityType.EternalSpikyPlatLong;
-                case "lunarshrine":
-                    return EntityType.lunarshrine;
-                case "obelisk":
-                    return EntityType.obelisk;
-                case "treesear":
-                    return EntityType.treesear;
-                case "barrel":
-                    return EntityType.barrel;
-                case "barreltree":
-                    return EntityType.barreltree;
-                case "poster":
-                    return EntityType.poster;
-                case "desk":
-                    return EntityType.desk;
-                default:
-                    Console.WriteLine("Unable to find entity type of name: {0}", name);
-                    return EntityType.unknown;
             }
         }
 

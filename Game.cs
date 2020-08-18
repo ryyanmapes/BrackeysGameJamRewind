@@ -351,7 +351,7 @@ namespace RewindGame
                     break;
                 case AreaState.eternal:
                     this.area = AreaState.eternal;
-                    //soundManager.beg
+                    soundManager.BeginEternalMusic1();
                     areaEffect = new EternalEffects(this, Services);
                     timeData.time_kind = TimeKind.eternal;
                     loadLevelAndConnections("eternal1");
@@ -378,7 +378,8 @@ namespace RewindGame
                 i += 1;
             }
 
-
+            // todo do we need to do some special level unloading method?
+            /*
             foreach (Level lvl in connectedLevels)
             {
                 if (lvl != null)
@@ -388,7 +389,7 @@ namespace RewindGame
                         lvl.Dispose();
                     }
                 }
-            }
+            }*/
 
             if (activeLevel != null) { center_level.RunStartTriggers(); }
 
@@ -483,7 +484,7 @@ namespace RewindGame
 
                 }
 
-                level = new Level(Services, orgin, this);
+                level = Level.Make(Services, orgin, this);
                 LevelLoader.LoadLevel(raw_level, name_data.name, level);
             }
 
@@ -579,7 +580,7 @@ namespace RewindGame
                         case RunState.areaswap_1:
                             activeLevel.warp.TriggerActivation();
                             overlayEffect.StartWarpPlayer(player.getCenterPosition(), state);
-                            overlayEffect.StartWarpArtifact(activeLevel.specialObject.getCenterPosition(), state);
+                            //overlayEffect.StartWarpArtifact(activeLevel.specialObject.getCenterPosition(), state);
 
                             soundManager.TriggerWarp();
 
@@ -589,7 +590,7 @@ namespace RewindGame
 
                         case RunState.areaswap_2:
                             player.hidden = true;
-                            activeLevel.specialObject.hidden = true;
+                            //activeLevel.specialObject.hidden = true;
                             activeLevel.warp.hidden = true;
 
                             overlayEffect.StartAreaFadeout();
@@ -647,7 +648,7 @@ namespace RewindGame
         protected void FullUpdate(StateData state)
         {
             // special text collision check
-            if (activeLevel.getIsInSpecial(player.getCollisionBox()))
+            if (activeLevel.getPlayerIsInSpecial(player.getCollisionBox()))
             {
                 if (activeLevel.specialObject.charState == -1) activeLevel.specialObject.charState = 0;
             }
@@ -657,7 +658,7 @@ namespace RewindGame
             }
 
             //warp collision check
-            if (activeLevel.getIsInWarp(player.getCollisionBox()))
+            if (activeLevel.getPlayerIsInWarp(player.getCollisionBox()))
             {
                 // begin warp!
                 runState = RunState.areaswap_1;
@@ -666,7 +667,7 @@ namespace RewindGame
                 return;
             }
 
-            if (activeLevel.getIsInStasis(player.getCollisionBox()))
+            if (activeLevel.getPlayerIsInStasis(player.getCollisionBox()))
             {
                 if (timeData.time_status != TimeState.still)
                 {

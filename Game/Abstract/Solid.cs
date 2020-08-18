@@ -34,7 +34,7 @@ namespace RewindGame.Game
 
                 if (move_components.X > 0)
                 {
-                    foreach (Entity entity in localLevel.getAllEntities())
+                    foreach (Entity entity in localLevel.getAllEntitiesAndPlayer())
                     {
                         Vector2 overlap = getEntityOverlap(entity) * -1;
                         if (overlap.X != 0)
@@ -50,7 +50,7 @@ namespace RewindGame.Game
                 }
                 else
                 {
-                    foreach (Entity entity in localLevel.getAllEntities())
+                    foreach (Entity entity in localLevel.getAllEntitiesAndPlayer())
                     {
                         Vector2 overlap = getEntityOverlap(entity) * -1;
                         if (overlap.X != 0)
@@ -73,7 +73,7 @@ namespace RewindGame.Game
 
                 if (move_components.Y > 0)
                 {
-                    foreach (Entity entity in localLevel.getAllEntities())
+                    foreach (Entity entity in localLevel.getAllEntitiesAndPlayer())
                     {
                         Vector2 overlap = getEntityOverlap(entity) * -1;
                         if (overlap.Y != 0)
@@ -89,7 +89,7 @@ namespace RewindGame.Game
                 }
                 else
                 {
-                    foreach (Entity entity in localLevel.getAllEntities())
+                    foreach (Entity entity in localLevel.getAllEntitiesAndPlayer())
                     {
                         Vector2 overlap = getEntityOverlap(entity) * -1;
                         if (overlap.Y != 0)

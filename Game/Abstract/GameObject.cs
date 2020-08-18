@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RewindGame.Game
 {
-    public abstract class GameObject
+    public abstract class GameObject : IGameObject
     {
         protected String texturePath = "UNDEFINED";
         protected Color textureColor = Color.White;

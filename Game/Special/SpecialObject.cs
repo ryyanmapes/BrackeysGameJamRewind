@@ -53,16 +53,16 @@ namespace RewindGame.Game.Special
         // either waiting for superline or waiting for line
         public bool waitingForSuperline = false;
 
-        EntityType type;
+        string type;
 
-        public static SpecialObject Make(Level level, Vector2 starting_pos, EntityType type)
+        public static SpecialObject Make(Level level, Vector2 starting_pos, string type)
         {
             var tile = new SpecialObject();
             tile.Initialize(level, starting_pos, type);
             return tile;
         }
 
-        public virtual void Initialize(Level level, Vector2 starting_pos, EntityType type_)
+        public virtual void Initialize(Level level, Vector2 starting_pos, string type_)
         {
             type = type_;
             base.Initialize(level, starting_pos);
@@ -72,16 +72,17 @@ namespace RewindGame.Game.Special
         {
             Animation anim;
             switch (type) {
-                case EntityType.lunarshrine:
+                case "lunarshrine":
                     currentLines = lunarShrineLines;
                     anim = lunarShrineTex;
                     collisionSize = new Vector2(Level.TILE_WORLD_SIZE*4, Level.TILE_WORLD_SIZE * 4);
                     break;
-                case EntityType.obelisk:
+                case "obelisk":
                     currentLines = obeliskLines;
                     anim = obeliskTex;
                     collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 2, Level.TILE_WORLD_SIZE * 4);
                     break;
+                    /*
                 case EntityType.treesear:
                     currentLines = seartreeLines;
                     anim = seartreeTex;
@@ -104,7 +105,7 @@ namespace RewindGame.Game.Special
                 case EntityType.barreltree:
                     anim = barrelTreeTex;
                     //collisionSize = new Vector2(Level.TILE_WORLD_SIZE * 4, Level.TILE_WORLD_SIZE * 4);
-                    break;
+                    break;*/
                 default:
                     anim = null;
                     break;
