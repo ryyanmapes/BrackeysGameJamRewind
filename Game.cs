@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 
+
 namespace RewindGame
 {
 
@@ -362,6 +363,71 @@ namespace RewindGame
                 input_data.is_jump_held = true;
 
 
+            var is_level_left_down = keyboard_state.IsKeyDown(Keys.NumPad4);
+            var is_level_right_down = keyboard_state.IsKeyDown(Keys.NumPad6);
+            var is_level_up_down = keyboard_state.IsKeyDown(Keys.NumPad8);
+            var is_level_down_down = keyboard_state.IsKeyDown(Keys.NumPad2);
+
+            if (!(previous_input_data.is_level_down || previous_input_data.is_devkey_down[3]) && is_level_down_down)
+                    input_data.is_level_down = true;
+                else if (is_level_down_down)
+                    input_data.is_devkey_down[3] = true;
+
+            if (!(previous_input_data.is_level_up || previous_input_data.is_devkey_down[2]) && is_level_up_down)
+                    input_data.is_level_up = true;
+                else if (is_level_up_down)
+                    input_data.is_devkey_down[2] = true;
+
+            if (!(previous_input_data.is_level_left || previous_input_data.is_devkey_down[0]) && is_level_left_down)
+                    input_data.is_level_left = true;
+                else if (is_level_left_down)
+                    input_data.is_devkey_down[0] = true;
+
+            if (!(previous_input_data.is_level_right || previous_input_data.is_devkey_down[1]) && is_level_right_down)
+                    input_data.is_level_right = true;
+                else if (is_level_right_down)
+                    input_data.is_devkey_down[1] = true;
+
+
+
+            var is_limbo1_down_here = keyboard_state.IsKeyDown(Keys.Insert);
+            var is_limboHalf_down_here = keyboard_state.IsKeyDown(Keys.Delete);
+            var is_cotton1_down_here = keyboard_state.IsKeyDown(Keys.Home);
+            var is_cottonHalf_down_here = keyboard_state.IsKeyDown(Keys.End);
+            var is_eternal1_down_here = keyboard_state.IsKeyDown(Keys.PageUp);
+            var is_eternalHalf_down_here = keyboard_state.IsKeyDown(Keys.PageDown);
+
+            if (!(previous_input_data.is_limbo1_down || previous_input_data.is_devkey_down[4]) && is_limbo1_down_here)
+                input_data.is_limbo1_down = true;
+            else if (is_limbo1_down_here)
+                input_data.is_devkey_down[4] = true;
+
+            if (!(previous_input_data.is_limboHalf_down || previous_input_data.is_devkey_down[7]) && is_limboHalf_down_here)
+                input_data.is_limboHalf_down = true;
+            else if (is_limboHalf_down_here)
+                input_data.is_devkey_down[7] = true;
+
+            if (!(previous_input_data.is_cotton1_down || previous_input_data.is_devkey_down[5]) && is_cotton1_down_here)
+                input_data.is_cotton1_down = true;
+            else if (is_cotton1_down_here)
+                input_data.is_devkey_down[5] = true;
+
+            if (!(previous_input_data.is_cottonHalf_down || previous_input_data.is_devkey_down[8]) && is_cottonHalf_down_here)
+                input_data.is_cottonHalf_down = true;
+            else if (is_cottonHalf_down_here)
+                input_data.is_devkey_down[8] = true;
+
+            if (!(previous_input_data.is_eternal1_down || previous_input_data.is_devkey_down[6]) && is_eternal1_down_here)
+                input_data.is_eternal1_down = true;
+            else if (is_eternal1_down_here)
+                input_data.is_devkey_down[6] = true;
+
+            if (!(previous_input_data.is_eternalHalf_down || previous_input_data.is_devkey_down[9]) && is_eternalHalf_down_here)
+                input_data.is_eternalHalf_down = true;
+            else if (is_eternalHalf_down_here)
+                input_data.is_devkey_down[9] = true;
+
+
 
             // force exit
             if (gamepad_state.Buttons.Back == ButtonState.Pressed || keyboard_state.IsKeyDown(Keys.Escape))
@@ -605,49 +671,72 @@ namespace RewindGame
             // All debug keys need to first be defined as bools in InputData, read in ReadInputs, then have functionality defined here
             // (you can define keys that should only be triggered once per press much easier in ReadInputs since we pass in the previous input data, see jump_pressed
 
-            /*
-            if (Keyboard.GetState().IsKeyDown(Keys.K))
-                loadLevelAndConnections("limbo1");
-            else if (Keyboard.GetState().IsKeyDown(Keys.L))
-                loadLevelAndConnections("limbo19");
-            else if (Keyboard.GetState().IsKeyDown(Keys.J))
-                loadLevelAndConnections("limbofinal");
-            else if (Keyboard.GetState().IsKeyDown(Keys.P))
-                loadLevelAndConnections("cottonfinal");
-            else if (Keyboard.GetState().IsKeyDown(Keys.U)) LoadArea(AreaState.cotton);
-            else if (Keyboard.GetState().IsKeyDown(Keys.N)) LoadArea(AreaState.eternal);
-            else if (_currentKey.IsKeyDown(Keys.NumPad8) &&
-            _previousKey.IsKeyUp(Keys.NumPad8))
+
+            if (inputs.is_limbo1_down)
+            {
+                LoadArea(AreaState.limbo);
+                isPlayerDeathQued = true;
+            }
+            else if (inputs.is_cotton1_down)
+            {
+                LoadArea(AreaState.cotton);
+                isPlayerDeathQued = true;
+            }
+
+            else if (inputs.is_eternal1_down)
+            {
+                LoadArea(AreaState.eternal);
+                isPlayerDeathQued = true;
+            }
+            else if (inputs.is_limboHalf_down)
+            {
+                LoadArea(AreaState.limbo);
+                loadLevelAndConnections("limbo12");
+                isPlayerDeathQued = true;
+            }
+            else if (inputs.is_cottonHalf_down)
+            {
+                LoadArea(AreaState.cotton);
+                loadLevelAndConnections("cotton3");
+                isPlayerDeathQued = true;
+            }
+            else if (inputs.is_eternalHalf_down)
+            {
+                //todo: get to the point where there is a 50% point for eternal
+            }
+
+            else if (inputs.is_level_up)
             {
                 if (activeLevel.connectedLevelNames[2] != "")
                 {
                     loadLevelAndConnections(activeLevel.connectedLevelNames[2]);
+                    isPlayerDeathQued = true;
                 }
             }
-            else if (_currentKey.IsKeyDown(Keys.NumPad6) &&
-            _previousKey.IsKeyUp(Keys.NumPad6))
+            else if (inputs.is_level_right)
             {
                 if (activeLevel.connectedLevelNames[0] != "")
                 {
                     loadLevelAndConnections(activeLevel.connectedLevelNames[0]);
+                    isPlayerDeathQued = true;
                 }
             }
-            else if (_currentKey.IsKeyDown(Keys.NumPad2) &&
-            _previousKey.IsKeyUp(Keys.NumPad2))
+            else if (inputs.is_level_down)
             {
                 if (activeLevel.connectedLevelNames[3] != "")
                 {
                     loadLevelAndConnections(activeLevel.connectedLevelNames[3]);
+                    isPlayerDeathQued = true;
                 }
             }
-            else if (_currentKey.IsKeyDown(Keys.NumPad4) &&
-            _previousKey.IsKeyUp(Keys.NumPad4))
+            else if (inputs.is_level_left)
             {
                 if (activeLevel.connectedLevelNames[1] != "")
                 {
                     loadLevelAndConnections(activeLevel.connectedLevelNames[1]);
+                    isPlayerDeathQued = true;
                 }
-            }*/
+            }
         }
         
         public void KillPlayer()

@@ -78,6 +78,21 @@ namespace RewindGame
             is_exit_pressed = false;
             is_restart_pressed = false;
 
+            is_level_down = false;
+            is_level_left = false;
+            is_level_right = false;
+            is_level_up = false;
+            is_limbo1_down = false;
+            is_cotton1_down = false;
+            is_eternal1_down = false;
+            is_limboHalf_down = false;
+            is_cottonHalf_down = false;
+            is_eternalHalf_down = false;
+            for (int i = 0; i < is_devkey_down.Length; i++)
+            {
+                is_devkey_down[i] = false;
+            }
+
             horizontal_axis_value = 0;
         }
 
@@ -87,6 +102,20 @@ namespace RewindGame
         public bool is_interact_pressed;
         public bool is_exit_pressed;
         public bool is_restart_pressed;
+
+        public bool is_level_left;      //0  LEFT
+        public bool is_level_right;     //1  RIGHT
+        public bool is_level_up;        //2  UP
+        public bool is_level_down;      //3  DOWN
+        public bool is_limbo1_down;     //4  LIMBO 1
+        public bool is_cotton1_down;    //5  COTTON 1
+        public bool is_eternal1_down;   //6  ETERNAL 1
+        public bool is_limboHalf_down;  //7  LIMBO 50%
+        public bool is_cottonHalf_down; //8  COTTON 50%
+        public bool is_eternalHalf_down;//9  ETERNAL 50%
+        public bool is_level_select;    //10 LEVEL SELECT
+
+        public bool[] is_devkey_down = new bool[10];
 
 
         public float horizontal_axis_value;
