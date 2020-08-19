@@ -34,9 +34,9 @@ namespace RewindGame.Game.Effects
 
         protected Texture2D currentBar;
 
-        public TimelineBarGUI(RewindGame parent_game, ContentManager content)
+        public TimelineBarGUI(RewindGame parent_game)
         {
-            Content = content;
+            Content = parent_game.Content;
             parentGame = parent_game;
             limboBar1 = Content.Load<Texture2D>("gui/barlimbo0");
             limboBarHalf = Content.Load<Texture2D>("gui/barlimbo1");

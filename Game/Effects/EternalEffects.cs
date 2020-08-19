@@ -23,9 +23,9 @@ namespace RewindGame.Game.Effects
         private Texture2D greenhousehorizontal3;
         private Texture2D terrariumvertical;
 
-        public EternalEffects(RewindGame parent_game, IServiceProvider serviceProvider)
+        public EternalEffects(RewindGame parent_game)
         {
-            Content = new ContentManager(serviceProvider, "Content");
+            Content = parent_game.areaContent;
             parentGame = parent_game;
             //
             //Texture Init

@@ -31,9 +31,9 @@ namespace RewindGame.Game.Effects
         private int waterflow = 0;
         private int floofifate = 0;
 
-        public CottonwoodEffects(RewindGame parent_game, IServiceProvider serviceProvider)
+        public CottonwoodEffects(RewindGame parent_game)
         {
-            Content = new ContentManager(serviceProvider, "Content");
+            Content = parent_game.areaContent;
             parentGame = parent_game;
             //
             //Texture Init

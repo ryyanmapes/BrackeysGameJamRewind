@@ -48,9 +48,9 @@ namespace RewindGame.Game.Effects
         private Vector2 playerWarpPos;
         private Vector2 artifactWarpPos;
 
-        public OverlayEffects(RewindGame parent_game, ContentManager content)
+        public OverlayEffects(RewindGame parent_game)
         {
-            Content = content;
+            Content = parent_game.Content;
             parentGame = parent_game;
             //setup textures here
             // see GameObject

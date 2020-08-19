@@ -1,5 +1,6 @@
 ﻿using ChaiFoxes.FMODAudio;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RewindGame.Game;
@@ -60,6 +61,9 @@ namespace RewindGame
         public bool isPlayerDeathQued = false;
 
         public AreaState area = AreaState.none;
+        public ContentManager areaContent;
+
+
         public RunState runState = RunState.playing;
         public float stateTimer = -1f;
         public float playerHoverTime = 2;
@@ -113,9 +117,9 @@ namespace RewindGame
             collisionSheetTexture = Content.Load<Texture2D>("tilesets/collision");
 
 
-            overlayEffect = new OverlayEffects(this, Content);
-            soundManager = new SoundManager(this, Content);
-            timelineGUI = new TimelineBarGUI(this, Content);
+            overlayEffect = new OverlayEffects(this);
+            soundManager = new SoundManager(this);
+            timelineGUI = new TimelineBarGUI(this);
 
             LoadArea(AreaState.limbo);
 
@@ -141,13 +145,20 @@ namespace RewindGame
         public void LoadArea(AreaState new_area)
         {
             soundManager.stopAllMusic();
+
+            // we dispose all assets loaded specifically for the current area and start anew
             if (areaEffect != null) areaEffect.Dispose();
+            if (areaContent != null) areaContent.Dispose();
+
+            areaContent = new ContentManager(Services, "Content");
+
             switch (new_area)
             {
                 case AreaState.limbo:
                     this.area = AreaState.limbo;
+
                     soundManager.BeginLimboMusic1();
-                    areaEffect = new LimboEffects(this, Services);
+                    areaEffect = new LimboEffects(this);
                     timeData.time_kind = TimeKind.limbo;
                     loadLevelAndConnections("limbo1");
 
@@ -160,7 +171,7 @@ namespace RewindGame
                 case AreaState.cotton:
                     this.area = AreaState.cotton;
                     soundManager.BeginCottonwoodMusic1();
-                    areaEffect = new CottonwoodEffects(this, Services);
+                    areaEffect = new CottonwoodEffects(this);
                     timeData.time_kind = TimeKind.cottonwood;
                     loadLevelAndConnections("cotton1");
 
@@ -170,7 +181,7 @@ namespace RewindGame
                 case AreaState.eternal:
                     this.area = AreaState.eternal;
                     soundManager.BeginEternalMusic1();
-                    areaEffect = new EternalEffects(this, Services);
+                    areaEffect = new EternalEffects(this);
                     timeData.time_kind = TimeKind.eternal;
                     loadLevelAndConnections("eternal1");
 
@@ -305,7 +316,7 @@ namespace RewindGame
 
                 }
 
-                level = Level.Make(Services, orgin, this);
+                level = Level.Make(orgin, this);
                 LevelLoader.LoadLevel(raw_level, name_data.name, level);
             }
 

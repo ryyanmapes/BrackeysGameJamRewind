@@ -18,6 +18,7 @@ namespace RewindGame.Game.Sound
 
         public float masterVolume = 1;
 
+        // maybe this should be a dictionary or something?
         public ChaiFoxes.FMODAudio.Studio.EventInstance limboLoop1;
         public ChaiFoxes.FMODAudio.Studio.EventInstance limboLoop2;
         public ChaiFoxes.FMODAudio.Studio.EventInstance cottonLoop1;
@@ -41,10 +42,10 @@ namespace RewindGame.Game.Sound
         public bool canSlide = false;
 
 
-        public SoundManager(RewindGame parent_game, ContentManager content)
+        public SoundManager(RewindGame parent_game)
         {
             parentGame = parent_game;
-            Content = content;
+            Content = parent_game.Content;
             //does anything else need to be passed in initially?
 
             //Initialization stuff

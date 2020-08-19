@@ -49,16 +49,16 @@ namespace RewindGame.Game
         public List<IGameObject> sceneDecoratives = new List<IGameObject>();
         public List<IGameObject> sceneDecorativesForeground = new List<IGameObject>();
         public List<IGameObject> sceneDecorativesForeforeground = new List<IGameObject>();
-
+        
         public SpecialObject specialObject;
         public Warp warp;
 
 
-        public static Level Make(IServiceProvider serviceProvider, Vector2 orgin, RewindGame parent)
+        public static Level Make(Vector2 orgin, RewindGame parent)
         {
             Level level = new Level();
 
-            level.Content = parent.Content;
+            level.Content = parent.areaContent;
 
             level.levelOrgin = orgin;
 
