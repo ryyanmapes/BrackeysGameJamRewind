@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RewindGame.Game;
+using RewindGame.Game.LevelSelector;
 using RewindGame.Game.Effects;
 using RewindGame.Game.Solids;
 using RewindGame.Game.Sound;
@@ -429,6 +430,15 @@ namespace RewindGame
 
 
 
+            var is_level_select_here = keyboard_state.IsKeyDown(Keys.NumPad5);
+
+            if (!(previous_input_data.is_level_select || previous_input_data.is_devkey_down[10]) && is_level_select_here)
+                input_data.is_level_select = true;
+            else if (is_level_select_here)
+                input_data.is_devkey_down[10] = true;
+
+
+
             // force exit
             if (gamepad_state.Buttons.Back == ButtonState.Pressed || keyboard_state.IsKeyDown(Keys.Escape))
                 input_data.is_exit_pressed = true;
@@ -663,14 +673,18 @@ namespace RewindGame
                 isPlayerDeathQued = false;
             }
         }
-
+        bool hello = false;
         private void CheckDebugKeys(InputData inputs)
         {
             // This needs to be redone- 
             // If a new level is loaded, always kill the player with isPlayerDeathQued = true;
             // All debug keys need to first be defined as bools in InputData, read in ReadInputs, then have functionality defined here
             // (you can define keys that should only be triggered once per press much easier in ReadInputs since we pass in the previous input data, see jump_pressed
-
+            if (!hello)
+            {
+                Console.WriteLine("Developer Tools are running! (do not close this window)"); //ok so basically right click the csproj click properties and under application you can change that back to a monogame game to do things like build for release, im just doing it like this cause it is less jank
+                hello = true;
+            }
 
             if (inputs.is_limbo1_down)
             {
@@ -703,6 +717,8 @@ namespace RewindGame
             else if (inputs.is_eternalHalf_down)
             {
                 //todo: get to the point where there is a 50% point for eternal
+                PopupBox.ShowEternalUnimplimentedBox();
+
             }
 
             else if (inputs.is_level_up)
@@ -712,6 +728,10 @@ namespace RewindGame
                     loadLevelAndConnections(activeLevel.connectedLevelNames[2]);
                     isPlayerDeathQued = true;
                 }
+                else
+                {
+                    PopupBox.NoConnectedLevel("Up");
+                }
             }
             else if (inputs.is_level_right)
             {
@@ -719,6 +739,10 @@ namespace RewindGame
                 {
                     loadLevelAndConnections(activeLevel.connectedLevelNames[0]);
                     isPlayerDeathQued = true;
+                }
+                else
+                {
+                    PopupBox.NoConnectedLevel("Right");
                 }
             }
             else if (inputs.is_level_down)
@@ -728,6 +752,10 @@ namespace RewindGame
                     loadLevelAndConnections(activeLevel.connectedLevelNames[3]);
                     isPlayerDeathQued = true;
                 }
+                else
+                {
+                    PopupBox.NoConnectedLevel("Down");
+                }
             }
             else if (inputs.is_level_left)
             {
@@ -736,6 +764,15 @@ namespace RewindGame
                     loadLevelAndConnections(activeLevel.connectedLevelNames[1]);
                     isPlayerDeathQued = true;
                 }
+                else
+                {
+                    PopupBox.NoConnectedLevel("Left");
+                }
+            }
+            else if(inputs.is_level_select)
+            {
+                loadLevelAndConnections(PopupBox.GetLevel());
+                isPlayerDeathQued = true;
             }
         }
         
