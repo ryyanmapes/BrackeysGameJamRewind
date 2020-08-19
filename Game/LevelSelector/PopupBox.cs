@@ -9,7 +9,7 @@ namespace RewindGame.Game.LevelSelector
     {
         public static void ShowEternalUnimplimentedBox()
         {
-            MessageBox.Show("Currently there is not enough eternal levels for me to care to impliment this feture at the moment");
+            MessageBox.Show("Currently there is not enough eternal levels for me to care to impliment this feature at the moment");
         }
         public static void NoConnectedLevel(string loc)
         {
@@ -19,7 +19,7 @@ namespace RewindGame.Game.LevelSelector
         {
             MessageBox.Show("Please press ok on this box and then check the console (little purple rectangle on task bar)");
             Console.Clear();
-            Console.WriteLine("Please type the level you wish to load eg(limbo15 cotton5 eternal2) WARNING! If you type the name of a level that does not exist the game WILL crash, I have no power over that");
+            Console.WriteLine("Please type the level you wish to load eg(limbo15 cotton5 eterna2) you must be in limbo to load a limbo level, cotton for cotton, eternal for eternal. WARNING! If you type the name of a level that does not exist the game WILL crash, I have no power over that");
             string userout = Console.ReadLine();
             Console.WriteLine("Great! teleporting you to: " + userout + " you may now click back on your game (remember do not close this window it will close the game)");
             return userout;
