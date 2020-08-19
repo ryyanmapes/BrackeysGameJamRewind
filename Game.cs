@@ -79,6 +79,9 @@ namespace RewindGame
         public InputData inputData = new InputData();
         public TimeData timeData = new TimeData();
 
+
+        // Initialization
+
         public RewindGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -127,6 +130,9 @@ namespace RewindGame
             player.position = activeLevel.playerSpawnpoint;
             //DoTrigger("limbo_fourth");
         }
+
+
+        // Loading Stuff
 
         public void LoadNextArea()
         {
@@ -324,10 +330,51 @@ namespace RewindGame
         }
 
 
-        //Fixes a bug in devtools I should have thought of a while ago
-        private KeyboardState _previousKey;
-        private KeyboardState _currentKey;
-        //
+        // Update Stuff
+
+        private static InputData ReadInputs(InputData previous_input_data)
+        {
+            var input_data = new InputData();
+
+            var keyboard_state = Keyboard.GetState();
+            var gamepad_state = GamePad.GetState(PlayerIndex.One);
+
+            var is_any_left_button_down = gamepad_state.IsButtonDown(Buttons.DPadLeft) || keyboard_state.IsKeyDown(Keys.A) || keyboard_state.IsKeyDown(Keys.Left);
+
+            var is_any_right_button_down = gamepad_state.IsButtonDown(Buttons.DPadRight) || keyboard_state.IsKeyDown(Keys.D) || keyboard_state.IsKeyDown(Keys.Right);
+
+            if (is_any_left_button_down && is_any_right_button_down)
+                input_data.horizontal_axis_value = 0;
+            else if (is_any_left_button_down)
+                input_data.horizontal_axis_value = -GameUtils.MOVE_STICK_MAX;
+            else if (is_any_right_button_down)
+                input_data.horizontal_axis_value = GameUtils.MOVE_STICK_MAX;
+            else
+                input_data.horizontal_axis_value = gamepad_state.ThumbSticks.Left.X * GameUtils.MOVE_STICK_SCALE;
+
+
+
+            var is_any_jump_button_down = gamepad_state.Buttons.A == ButtonState.Pressed || keyboard_state.IsKeyDown(Keys.Z) || keyboard_state.IsKeyDown(Keys.Space);
+
+            if (!(previous_input_data.is_jump_pressed || previous_input_data.is_jump_held) && is_any_jump_button_down)
+                input_data.is_jump_pressed = true;
+            else if (is_any_jump_button_down)
+                input_data.is_jump_held = true;
+
+
+
+            // force exit
+            if (gamepad_state.Buttons.Back == ButtonState.Pressed || keyboard_state.IsKeyDown(Keys.Escape))
+                input_data.is_exit_pressed = true;
+
+            if (gamepad_state.Buttons.Y == ButtonState.Pressed || keyboard_state.IsKeyDown(Keys.R))
+                input_data.is_restart_pressed = true;
+
+            // todo interact, restart bindings
+
+            return input_data;
+        }
+
         protected override void Update(GameTime game_time)
         {
             currentLevelCenter = getLevelCenter();
@@ -551,49 +598,6 @@ namespace RewindGame
             }
         }
 
-        private static InputData ReadInputs(InputData previous_input_data)
-        {
-            var input_data = new InputData();
-
-            var keyboard_state = Keyboard.GetState();
-            var gamepad_state = GamePad.GetState(PlayerIndex.One);
-
-            var is_any_left_button_down = gamepad_state.IsButtonDown(Buttons.DPadLeft) || keyboard_state.IsKeyDown(Keys.A) || keyboard_state.IsKeyDown(Keys.Left);
-
-            var is_any_right_button_down = gamepad_state.IsButtonDown(Buttons.DPadRight) || keyboard_state.IsKeyDown(Keys.D) || keyboard_state.IsKeyDown(Keys.Right);
-
-            if (is_any_left_button_down && is_any_right_button_down)
-                input_data.horizontal_axis_value = 0;
-            else if (is_any_left_button_down)
-                input_data.horizontal_axis_value = -GameUtils.MOVE_STICK_MAX;
-            else if (is_any_right_button_down)
-                input_data.horizontal_axis_value = GameUtils.MOVE_STICK_MAX;
-            else
-                input_data.horizontal_axis_value = gamepad_state.ThumbSticks.Left.X * GameUtils.MOVE_STICK_SCALE;
-
-
-
-            var is_any_jump_button_down = gamepad_state.Buttons.A == ButtonState.Pressed || keyboard_state.IsKeyDown(Keys.Z) || keyboard_state.IsKeyDown(Keys.Space);
-
-            if (!(previous_input_data.is_jump_pressed || previous_input_data.is_jump_held) && is_any_jump_button_down )
-                input_data.is_jump_pressed = true;
-            else if (is_any_jump_button_down)
-                input_data.is_jump_held = true;
-
-
-
-            // force exit
-            if (gamepad_state.Buttons.Back == ButtonState.Pressed || keyboard_state.IsKeyDown(Keys.Escape))
-                input_data.is_exit_pressed = true;
-
-            if (gamepad_state.Buttons.Y == ButtonState.Pressed || keyboard_state.IsKeyDown(Keys.R))
-                input_data.is_restart_pressed = true;
-
-            // todo interact, restart bindings
-
-            return input_data;
-        }
-
         private void CheckDebugKeys(InputData inputs)
         {
             // This needs to be redone- 
@@ -601,6 +605,7 @@ namespace RewindGame
             // All debug keys need to first be defined as bools in InputData, read in ReadInputs, then have functionality defined here
             // (you can define keys that should only be triggered once per press much easier in ReadInputs since we pass in the previous input data, see jump_pressed
 
+            /*
             if (Keyboard.GetState().IsKeyDown(Keys.K))
                 loadLevelAndConnections("limbo1");
             else if (Keyboard.GetState().IsKeyDown(Keys.L))
@@ -642,7 +647,7 @@ namespace RewindGame
                 {
                     loadLevelAndConnections(activeLevel.connectedLevelNames[1]);
                 }
-            }
+            }*/
         }
         
         public void KillPlayer()
@@ -656,6 +661,9 @@ namespace RewindGame
 
             soundManager.TriggerPlayerDie();
         }
+
+
+        // Graphics
 
         protected override void Draw(GameTime game_time)
         {
@@ -692,8 +700,6 @@ namespace RewindGame
             base.Draw(game_time);
         }
 
-        
-
         public void DrawAllConnectedLevelBackgrounds(StateData state, SpriteBatch sprite_batch)
         {
             foreach(Level lvl in connectedLevels)
@@ -704,7 +710,7 @@ namespace RewindGame
                 }
             }
         }
-
+        
         public void DrawAllConnectedLevelForegrounds(StateData state, SpriteBatch sprite_batch)
         {
             foreach (Level lvl in connectedLevels)
@@ -716,6 +722,8 @@ namespace RewindGame
             }
         }
 
+
+        // Helper Methods
 
         public Vector2 getLevelCenter()
         {
