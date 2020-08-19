@@ -333,64 +333,17 @@ namespace RewindGame
             currentLevelCenter = getLevelCenter();
             currentCameraPosition = getCameraPosition();
 
-            _previousKey = _currentKey;
-            _currentKey = Keyboard.GetState();
-
             inputData = ReadInputs(inputData);
 
-            if (inputData.is_exit_pressed)
-                Exit();
+            if (inputData.is_exit_pressed) Exit();
+            else if (inputData.is_restart_pressed) isPlayerDeathQued = true;
+            else if (GameUtils.USE_DEBUG_KEYS) CheckDebugKeys(inputData);
 
-            if (inputData.is_restart_pressed)
-                isPlayerDeathQued = true;
-            if (true)
-            {
-                if (Keyboard.GetState().IsKeyDown(Keys.K))
-                    loadLevelAndConnections("limbo1");
-                else if (Keyboard.GetState().IsKeyDown(Keys.L))
-                    loadLevelAndConnections("limbo19");
-                else if (Keyboard.GetState().IsKeyDown(Keys.J))
-                    loadLevelAndConnections("limbofinal");
-                else if (Keyboard.GetState().IsKeyDown(Keys.P))
-                    loadLevelAndConnections("cottonfinal");
-                else if (Keyboard.GetState().IsKeyDown(Keys.U)) LoadArea(AreaState.cotton);
-                else if (Keyboard.GetState().IsKeyDown(Keys.N)) LoadArea(AreaState.eternal);
-                else if (_currentKey.IsKeyDown(Keys.NumPad8) &&
-                _previousKey.IsKeyUp(Keys.NumPad8))
-                {
-                    if (activeLevel.connectedLevelNames[2] != "")
-                    {
-                        loadLevelAndConnections(activeLevel.connectedLevelNames[2]);
-                    }
-                }
-                else if (_currentKey.IsKeyDown(Keys.NumPad6) &&
-                _previousKey.IsKeyUp(Keys.NumPad6))
-                {
-                    if (activeLevel.connectedLevelNames[0] != "")
-                    {
-                        loadLevelAndConnections(activeLevel.connectedLevelNames[0]);
-                    }
-                }
-                else if (_currentKey.IsKeyDown(Keys.NumPad2) &&
-                _previousKey.IsKeyUp(Keys.NumPad2))
-                {
-                    if (activeLevel.connectedLevelNames[3] != "")
-                    {
-                        loadLevelAndConnections(activeLevel.connectedLevelNames[3]);
-                    }
-                }
-                else if (_currentKey.IsKeyDown(Keys.NumPad4) &&
-                _previousKey.IsKeyUp(Keys.NumPad4))
-                {
-                    if (activeLevel.connectedLevelNames[1] != "")
-                    {
-                        loadLevelAndConnections(activeLevel.connectedLevelNames[1]);
-                    }
-                }
-            }
+
             StateData state = new StateData(inputData, timeData, game_time, currentLevelCenter, currentCameraPosition, timeBound);
 
-
+            // state timer ticking and warp stuff
+            // should this have a method of it's own?
             if (stateTimer != -1)
             {
                 stateTimer -= (float)state.getDeltaTime();
@@ -459,14 +412,14 @@ namespace RewindGame
             }
 
 
-
             switch (runState)
             {
                 case RunState.playing:
-                    FullUpdate(state);
+                    TickUpdate(state);
                     break;
                 case RunState.areaswap_1:
-                    player.position.Y -= 10*state.getDeltaTime();
+                    // player ascend speed once warp is reached
+                    player.position.Y -= 16*state.getDeltaTime();
                     break;
             }
 
@@ -477,9 +430,10 @@ namespace RewindGame
             base.Update( game_time);
         }
 
-        protected void FullUpdate(StateData state)
+        // Updates that only occur during normal gameplay- so not paused, not during a cutscene
+        protected void TickUpdate(StateData state)
         {
-            // special text collision check
+            // special text collision check (is this wonky?)
             if (activeLevel.getPlayerIsInSpecial(player.getCollisionBox()))
             {
                 if (activeLevel.specialObject.charState == -1) activeLevel.specialObject.charState = 0;
@@ -640,6 +594,57 @@ namespace RewindGame
             return input_data;
         }
 
+        private void CheckDebugKeys(InputData inputs)
+        {
+            // This needs to be redone- 
+            // If a new level is loaded, always kill the player with isPlayerDeathQued = true;
+            // All debug keys need to first be defined as bools in InputData, read in ReadInputs, then have functionality defined here
+            // (you can define keys that should only be triggered once per press much easier in ReadInputs since we pass in the previous input data, see jump_pressed
+
+            if (Keyboard.GetState().IsKeyDown(Keys.K))
+                loadLevelAndConnections("limbo1");
+            else if (Keyboard.GetState().IsKeyDown(Keys.L))
+                loadLevelAndConnections("limbo19");
+            else if (Keyboard.GetState().IsKeyDown(Keys.J))
+                loadLevelAndConnections("limbofinal");
+            else if (Keyboard.GetState().IsKeyDown(Keys.P))
+                loadLevelAndConnections("cottonfinal");
+            else if (Keyboard.GetState().IsKeyDown(Keys.U)) LoadArea(AreaState.cotton);
+            else if (Keyboard.GetState().IsKeyDown(Keys.N)) LoadArea(AreaState.eternal);
+            else if (_currentKey.IsKeyDown(Keys.NumPad8) &&
+            _previousKey.IsKeyUp(Keys.NumPad8))
+            {
+                if (activeLevel.connectedLevelNames[2] != "")
+                {
+                    loadLevelAndConnections(activeLevel.connectedLevelNames[2]);
+                }
+            }
+            else if (_currentKey.IsKeyDown(Keys.NumPad6) &&
+            _previousKey.IsKeyUp(Keys.NumPad6))
+            {
+                if (activeLevel.connectedLevelNames[0] != "")
+                {
+                    loadLevelAndConnections(activeLevel.connectedLevelNames[0]);
+                }
+            }
+            else if (_currentKey.IsKeyDown(Keys.NumPad2) &&
+            _previousKey.IsKeyUp(Keys.NumPad2))
+            {
+                if (activeLevel.connectedLevelNames[3] != "")
+                {
+                    loadLevelAndConnections(activeLevel.connectedLevelNames[3]);
+                }
+            }
+            else if (_currentKey.IsKeyDown(Keys.NumPad4) &&
+            _previousKey.IsKeyUp(Keys.NumPad4))
+            {
+                if (activeLevel.connectedLevelNames[1] != "")
+                {
+                    loadLevelAndConnections(activeLevel.connectedLevelNames[1]);
+                }
+            }
+        }
+        
         public void KillPlayer()
         {
             deathsStat += 1;

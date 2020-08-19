@@ -16,6 +16,13 @@ namespace RewindGame
 
     public class GameUtils
     {
+        // DEBUG SETTINGS
+
+        public const bool SHOULD_SOLIDTILES_RENDER = false;
+        public const bool USE_DEBUG_KEYS = true;
+
+        // GAME
+
         public static Vector2 BASE_SCREEN_SIZE = new Vector2(1600, 900);
 
         public const float MOVE_STICK_SCALE = 1.0f;
@@ -26,8 +33,6 @@ namespace RewindGame
 
         public const float LEVEL_SIZE_X = TILE_WORLD_SIZE * LEVEL_GRID_SIZE_X;
         public const float LEVEL_SIZE_Y = TILE_WORLD_SIZE * LEVEL_GRID_SIZE_Y;
-
-        public const bool SHOULD_SOLIDTILES_RENDER = false;
 
         public const float PLAYER_DEATH_TIME = 0.5f;
 
