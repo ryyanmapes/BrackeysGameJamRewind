@@ -771,8 +771,25 @@ namespace RewindGame
             }
             else if(inputs.is_level_select)
             {
-                loadLevelAndConnections(PopupBox.GetLevel());
-                isPlayerDeathQued = true;
+                string userout = PopupBox.GetLevel();
+                if (userout.Contains("limbo"))
+                {
+                    LoadArea(AreaState.limbo);
+                    loadLevelAndConnections(userout);
+                    isPlayerDeathQued = true;
+                }
+                else if (userout.Contains("cotton"))
+                {
+                    LoadArea(AreaState.cotton);
+                    loadLevelAndConnections(userout);
+                    isPlayerDeathQued = true;
+                }
+                else if (userout.Contains("eternal"))
+                {
+                    LoadArea(AreaState.eternal);
+                    loadLevelAndConnections(userout);
+                    isPlayerDeathQued = true;
+                }
             }
         }
         
