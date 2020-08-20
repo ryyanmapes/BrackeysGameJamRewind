@@ -682,7 +682,7 @@ namespace RewindGame
             // (you can define keys that should only be triggered once per press much easier in ReadInputs since we pass in the previous input data, see jump_pressed
             if (!hello)
             {
-                Console.WriteLine("Developer Tools are running! (do not close this window)"); //ok so basically right click the csproj click properties and under application you can change that back to a monogame game to do things like build for release, im just doing it like this cause it is less jank
+                Console.WriteLine("Developer Tools are running! (do not close this window)"); //ok so basically right click the csproj click properties and under application you can change that back to a windows application to do things like build for release, im just doing it like this cause it is less jank
                 hello = true;
             }
 
