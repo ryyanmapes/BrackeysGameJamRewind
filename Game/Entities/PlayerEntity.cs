@@ -49,7 +49,7 @@ namespace RewindGame.Game
         protected float playerMaxMove = 350f;
         protected float wallHangMaxY = 175f;
         protected float wallHangStickX = 4f;
-        protected float wallJumpLaunchVelocityY = -400f;
+        protected float wallJumpLaunchVelocityY = -430f;
         protected float wallJumpLaunchVelocityX = 300f;
         protected float wallJumpRemainingHoldTime = 0.05f;
         protected float maxNoOppositeTravelTime = 0.4f;
@@ -74,8 +74,8 @@ namespace RewindGame.Game
 
             renderer = new AnimationChooser(animations, parentGame.Content);
 
-            collisionSize = new Vector2(35, 56);
-            collisionOffset = new Vector2(16, 0);
+            collisionSize = new Vector2(48, 56);
+            collisionOffset = new Vector2(8, 0);
             Initialize(parentGame.activeLevel, starting_pos);
         }
 
@@ -109,12 +109,13 @@ namespace RewindGame.Game
             }
             else wasGroundedLastFrame = false;
 
+            // floof jumps
             if (grounded == GroundedReturn.floof_forwards) Jump(false, true);
             else if (grounded == GroundedReturn.floof_backwards) Jump(true, true);
-            if (input_data.is_jump_pressed && (grounded == GroundedReturn.grounded || temporaryAllowJump))
-            {
-                Jump(true);
-            } else if(input_data.is_jump_held && jumpHeldTime != -1 && jumpHeldTime <= maxJumpHoldTime && velocity.Y != 0) {
+            // regular jump sort of stuff
+            if (input_data.is_jump_pressed && (grounded == GroundedReturn.grounded || temporaryAllowJump)) Jump(true);
+            // holding jump stuff
+            else if(input_data.is_jump_held && jumpHeldTime != -1 && jumpHeldTime <= maxJumpHoldTime && velocity.Y != 0) {
                 velocity.Y += (heldJumpVelocity  - jumpHeldTime*heldJumpVelocityModifier  ) * elapsed;
                 jumpHeldTime += elapsed;
             } else if (!input_data.is_jump_held && jumpHeldTime != -1) {
@@ -125,7 +126,7 @@ namespace RewindGame.Game
                 jumpHeldTime = -1f;
             }
 
-            if (hangDirection != HangDirection.None && grounded != GroundedReturn.grounded)
+            if (hangDirection != HangDirection.None && grounded != GroundedReturn.grounded && jumpHeldTime == -1)
             {
                 if (velocity.Y > 0) parentGame.soundManager.BeginPlayerWallslide();
 

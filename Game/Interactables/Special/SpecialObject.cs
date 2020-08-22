@@ -111,10 +111,11 @@ namespace RewindGame.Game.Special
 
             renderer = new AnimationPlayer(anim, 1, Vector2.Zero);
 
+            base.Initialize(level, starting_pos);
+
+            // This has to be done after main initialization so that localLevel is set
             font = localLevel.parentGame.Content.Load<SpriteFont>("fonts/Roboto");
 
-
-            base.Initialize(level, starting_pos);
         }
 
         public override void Update(StateData state)

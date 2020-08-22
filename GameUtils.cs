@@ -65,6 +65,13 @@ namespace RewindGame
         public const float SEMISOLID_THICKNESS = 4f;
         public const float SEMISOLID_THICKNESS_WINDOW = 20f;
         public const float WALLSPIKE_THICKNESS = 16f;
+
+        // GUI
+
+
+        public const float TIMELINE_BAR_SIZE_FOURTH = 100;
+        public const float TIMELINE_BAR_SIZE_HALF = 104 * 2;
+        public const float TIMELINE_BAR_SIZE_FULL = 107 * 4;
     }
 
     public class InputData

@@ -35,7 +35,7 @@ namespace RewindGame
         // children
 
         public ILevelEffect areaEffect;
-        public OverlayEffects overlayEffect;
+        public GlobalEffects overlayEffect;
         public SoundManager soundManager;
         public TimelineBarGUI timelineGUI;
 
@@ -122,7 +122,7 @@ namespace RewindGame
             collisionSheetTexture = Content.Load<Texture2D>("tilesets/collision");
 
 
-            overlayEffect = new OverlayEffects(this);
+            overlayEffect = new GlobalEffects(this);
             soundManager = new SoundManager(this);
             timelineGUI = new TimelineBarGUI(this);
 
@@ -171,7 +171,7 @@ namespace RewindGame
                     loadLevelAndConnections("limbo1");
 
                     timelineGUI.SetBar(timelineGUI.limboBar1);
-                    timelineGUI.currentBarSize = 105 * 4;
+                    timelineGUI.currentBarSize = GameUtils.TIMELINE_BAR_SIZE_FULL;
 
                     setBarSizeLarge(AreaState.limbo);
 
@@ -938,7 +938,7 @@ namespace RewindGame
 
         public void setBarSizeLarge(AreaState this_area)
         {
-            timelineGUI.currentBarSize = 105 * 4;
+            timelineGUI.currentBarSize = GameUtils.TIMELINE_BAR_SIZE_FULL;
             timeBound = GameUtils.FULL_TIME_BOUND;
             timeDangerBound = GameUtils.FULL_DANGER_BOUND;
             
@@ -961,7 +961,7 @@ namespace RewindGame
 
         public void setBarSizeMedium(AreaState this_area)
         {
-            timelineGUI.currentBarSize = 102 * 2;
+            timelineGUI.currentBarSize = GameUtils.TIMELINE_BAR_SIZE_HALF;
             timeBound = GameUtils.HALF_TIME_BOUND;
             timeDangerBound = GameUtils.HALF_DANGER_BOUND;
 
@@ -984,7 +984,7 @@ namespace RewindGame
 
         public void setBarSizeSmall(AreaState this_area)
         {
-            timelineGUI.currentBarSize = 100;
+            timelineGUI.currentBarSize = GameUtils.TIMELINE_BAR_SIZE_FOURTH;
             timeBound = GameUtils.FOURTH_TIME_BOUND;
             timeDangerBound = GameUtils.FOURTH_DANGER_BOUND;
 

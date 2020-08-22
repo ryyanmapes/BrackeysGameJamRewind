@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace RewindGame.Game.Effects
 {
-    public class OverlayEffects
+    public class GlobalEffects
     {
         public ContentManager Content;
         public RewindGame parentGame;
@@ -48,7 +48,7 @@ namespace RewindGame.Game.Effects
         private Vector2 playerWarpPos;
         private Vector2 artifactWarpPos;
 
-        public OverlayEffects(RewindGame parent_game)
+        public GlobalEffects(RewindGame parent_game)
         {
             Content = parent_game.Content;
             parentGame = parent_game;
