@@ -10,14 +10,14 @@ namespace RewindGame.Game.Tiles
 
     class PlatformTile : SolidTile
     {
-        public new static PlatformTile Make(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
+        public new static PlatformTile Make(Level level, Vector2 starting_pos, TileSpriteInfo tile_sprite_)
         {
             var tile = new PlatformTile();
             tile.Initialize(level, starting_pos, tile_sprite_);
             return tile;
         }
 
-        public override void Initialize(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
+        public override void Initialize(Level level, Vector2 starting_pos, TileSpriteInfo tile_sprite_)
         {
             //collisionDirection = MoveDirection.down;
             base.Initialize(level, starting_pos, tile_sprite_);

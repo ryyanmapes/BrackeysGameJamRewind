@@ -6,6 +6,7 @@ using System;
 using RewindGame.Game.Solids;
 using System.Collections.Generic;
 using System.Text;
+using FMOD;
 
 namespace RewindGame.Game
 {
@@ -20,17 +21,21 @@ namespace RewindGame.Game
     public class PlayerEntity : PhysicsEntity
     {
         public static int playerAnimScale = 1;
-        public static Vector2 playerAnimationOffset = new Vector2(-18, -28);
+        // I lowered the animation offset by one pixel- i think there are other misalignment issues that are the real problem
+        public static Vector2 playerAnimationOffset = new Vector2(-18, -27);
 
-        protected AnimationChooser animator = new AnimationChooser(playerAnimScale, playerAnimationOffset);
-        protected Animation idleAnim = new Animation("faux/fauxidle", 6, 8, true);
-        protected Animation walkAnim = new Animation("faux/fauxwalk", 2, 12, true);
-        protected Animation jumpAnim = new Animation("faux/fauxjumpnormal", 1, 1, true);
-        protected Animation fallAnim = new Animation("faux/fauxfallnormal", 1, 1, true);
-        protected Animation wallAnim = new Animation("faux/wall", 1, 1, true);
-        protected Animation jumpRewindAnim = new Animation("faux/fauxjumprewind", 4, 6, true);
-        protected Animation fallRewindAnim = new Animation("faux/fauxfallrewind", 4, 6, true);
-        protected Animation deathAnim = new Animation("faux/death", 2, 9, false);
+        // should these animation names be constants defined somewhere? I'm too lazy
+        protected AnimationChoice[] animations = new AnimationChoice[]
+        {
+            new AnimationChoice("idle", "faux/fauxidle", 6, 8, true, playerAnimScale, playerAnimationOffset, false),
+            new AnimationChoice("walk", "faux/fauxwalk", 2, 12, true, playerAnimScale, playerAnimationOffset, false),
+            new AnimationChoice("jump", "faux/fauxjumpnormal", 1, 1, true, playerAnimScale, playerAnimationOffset, false),
+            new AnimationChoice("fall", "faux/fauxfallnormal", 1, 1, true, playerAnimScale, playerAnimationOffset, false),
+            new AnimationChoice("wallhang", "faux/wall", 1, 1, true, playerAnimScale, playerAnimationOffset, false),
+            new AnimationChoice("rewind_jump", "faux/fauxjumprewind", 4, 6, true, playerAnimScale, playerAnimationOffset, false),
+            new AnimationChoice("rewind_fall", "faux/fauxfallrewind", 4, 6, true, playerAnimScale, playerAnimationOffset, false),
+            new AnimationChoice("death", "faux/death", 2, 9, false, playerAnimScale, playerAnimationOffset, null, "", false)
+        };
 
         protected RewindGame parentGame;
 
@@ -56,22 +61,18 @@ namespace RewindGame.Game
         protected HangDirection noOppositeTravelDirection = HangDirection.None;
         public bool wasGroundedLastFrame = true;
 
-        //todo stuff make this correct
+        // this handy tool prevents a lot of unnecessary casts between AnimationChooser and IRenderMethod
+        protected new AnimationChooser renderer
+        {
+            get => (AnimationChooser)base.renderer;
+            set => base.renderer = value;
+        }
+
         public PlayerEntity(RewindGame parent_game, Vector2 starting_pos)
         {
-            texturePath = "debug/square";
-
             parentGame = parent_game;
 
-            animator.addAnimaton(idleAnim, "idle",  parentGame.Content);
-            animator.addAnimaton(walkAnim, "walk",  parentGame.Content);
-            animator.addAnimaton(jumpAnim, "jump", parentGame.Content);
-            animator.addAnimaton(fallAnim, "fall", parentGame.Content);
-            animator.addAnimaton(wallAnim, "wallhang", parentGame.Content);
-            animator.addAnimaton(jumpRewindAnim, "rewind_jump",  parentGame.Content);
-            animator.addAnimaton(fallRewindAnim, "rewind_fall",  parentGame.Content);
-            animator.addAnimaton(deathAnim, "death", parentGame.Content);
-            animator.changeAnimation("idle");
+            renderer = new AnimationChooser(animations, parentGame.Content);
 
             collisionSize = new Vector2(35, 56);
             collisionOffset = new Vector2(16, 0);
@@ -212,7 +213,7 @@ namespace RewindGame.Game
         {
             velocity = Vector2.Zero;
             parentGame.isPlayerDeathQued = true;
-            animator.changeAnimation("death");
+            renderer.changeAnimation("death");
         }
 
         public override void RefreshJump() 
@@ -252,7 +253,7 @@ namespace RewindGame.Game
         public void UpdateAnimations()
         {
             if (parentGame.isPlayerDeathQued) { 
-                animator.changeAnimation("death");
+                renderer.changeAnimation("death");
                 return;
             }
 
@@ -260,11 +261,11 @@ namespace RewindGame.Game
             {
                 if (Math.Abs(velocity.X) > 100)
                 {
-                    animator.changeAnimation("walk");
+                    renderer.changeAnimation("walk");
                 }
                 else
                 {
-                    animator.changeAnimation("idle");
+                    renderer.changeAnimation("idle");
                 }
             }
             else
@@ -273,26 +274,26 @@ namespace RewindGame.Game
                 {
                     if (isRewinding)
                     {
-                        animator.changeAnimation("rewind_jump");
+                        renderer.changeAnimation("rewind_jump");
                     }
                     else
                     {
-                        animator.changeAnimation("jump");
+                        renderer.changeAnimation("jump");
                     }
                 }
                 else
                 {
                     if (hangDirection != HangDirection.None)
                     {
-                        animator.changeAnimation("wallhang");
+                        renderer.changeAnimation("wallhang");
                     }
                     else if (isRewinding)
                     {
-                        animator.changeAnimation("rewind_fall");
+                        renderer.changeAnimation("rewind_fall");
                     }
                     else
                     {
-                        animator.changeAnimation("fall");
+                        renderer.changeAnimation("fall");
                     }
                 }
             }
@@ -301,9 +302,8 @@ namespace RewindGame.Game
 
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            if (hidden) return;
-            //base.Draw(state, sprite_batch);
-            animator.Draw(state, sprite_batch, position, facingRight? SpriteEffects.None : SpriteEffects.FlipHorizontally);
+            spriteEffects = facingRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            base.Draw(state, sprite_batch);
         }
 
     }

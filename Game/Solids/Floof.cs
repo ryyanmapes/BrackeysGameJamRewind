@@ -23,12 +23,11 @@ namespace RewindGame.Game.Solids
         public Vector2 startingPos;
         public int timeMomentConsumedOn = -9999;
         public bool isActive = true;
-        protected AnimationChooser anims;
 
-        protected Animation anim_idle_pink = new Animation("cottonwood/jumppoofpink", 1, 1, true);
-        protected Animation anim_idle_green = new Animation("cottonwood/jumppoofgreen", 1, 1, true);
-        protected Animation anim_poof_pink = new Animation("cottonwood/jumppoofpinkpop", 3, 2, false);
-        protected Animation anim_poof_green = new Animation("cottonwood/jumppoofgreenpop", 3, 2, false);
+        protected AnimationChoice anim_idle_pink = new AnimationChoice("idle", "cottonwood/jumppoofpink", 1, 1, true, 1, Vector2.Zero);
+        protected AnimationChoice anim_idle_green = new AnimationChoice("idle", "cottonwood/jumppoofgreen", 1, 1, true, 1, Vector2.Zero);
+        protected AnimationChoice anim_poof_pink = new AnimationChoice("pop", "cottonwood/jumppoofpinkpop", 1, 1, false, 1, Vector2.Zero, "idle", "");
+        protected AnimationChoice anim_poof_green = new AnimationChoice("pop", "cottonwood/jumppoofgreenpop", 1, 1, false, 1, Vector2.Zero, "idle", "");
 
         public static Floof Make(Level level, Vector2 starting_pos, Vector2 velocity_, bool isForwards)
         {
@@ -42,8 +41,20 @@ namespace RewindGame.Game.Solids
         {
             collisionSize.X = GameUtils.LARGE_TILE_WORLD_SIZE;
             collisionSize.Y = GameUtils.SEMISOLID_THICKNESS_WINDOW;
+
             isForwards = is_forwards;
             velocity = velocity_;
+
+            if (isForwards)
+            {
+                renderer = new AnimationChooser(new AnimationChoice[] { anim_idle_pink, anim_poof_pink }, localLevel.Content);
+            }
+            else
+            {
+                renderer = new AnimationChooser(new AnimationChoice[] { anim_idle_green, anim_poof_green }, localLevel.Content);
+            }
+            ((AnimationChooser)renderer).changeAnimation("idle");
+
             this.startingPos = starting_pos;
             base.Initialize(level, starting_pos);
         }
@@ -56,39 +67,15 @@ namespace RewindGame.Game.Solids
             {
                 isActive = true;
                 timeMomentConsumedOn = -9999;
-                anims.changeAnimation("idle");
+                ((AnimationChooser)renderer).changeAnimationBackwards("poof");
             }
-        }
-
-        public override void LoadContent()
-        {
-            anims = new AnimationChooser(1, Vector2.Zero);
-
-            if (isForwards)
-            {
-                anims.addAnimaton(anim_idle_pink, "idle", localLevel.Content);
-                anims.addAnimaton(anim_poof_pink, "poof", localLevel.Content);
-            }
-            else
-            {
-                anims.addAnimaton(anim_idle_green, "idle", localLevel.Content);
-                anims.addAnimaton(anim_poof_green, "poof", localLevel.Content);
-            }
-            anims.changeAnimation("idle");
-            //base.LoadContent();
-        }
-
-        public override void Draw(StateData state, SpriteBatch sprite_batch)
-        {
-            if (!anims.isCurrentAnimationDone())
-                anims.Draw(state, sprite_batch, position + new Vector2(0, state.time_data.getFloaty(position.X, true)), SpriteEffects.None, state.getTimeN());
         }
 
         public override void Reset()
         {
             position = startingPos;
             isActive = true;
-            anims.changeAnimation("idle");
+            ((AnimationChooser)renderer).changeAnimation("idle");
             base.Reset();
         }
 
@@ -97,7 +84,7 @@ namespace RewindGame.Game.Solids
             if (state.time_data.time_status == TimeState.still) return;
             timeMomentConsumedOn = state.time_data.time_moment - 2;
             isActive = false;
-            anims.changeAnimation("poof");
+            ((AnimationChooser)renderer).changeAnimation("poof");
         }
 
         public override CollisionReturn getCollisionReturn()

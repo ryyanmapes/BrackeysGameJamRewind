@@ -5,8 +5,6 @@ using System.IO;
 using Newtonsoft.Json;
 using Microsoft.Xna.Framework;
 using RewindGame.Game.Tiles;
-using RewindGame.Game.Debug;
-using RewindGame.Game.Tiles;
 using RewindGame.Game.Solids;
 using RewindGame.Game.Special;
 
@@ -214,15 +212,15 @@ namespace RewindGame.Game
 
                     if (is_collision_layer)
                     {
-                        PlaceTile(getCollisionTileTypeFromID(tile), x_pos, y_pos, new TileSprite(sheet_type, tile), level);
+                        PlaceTile(getCollisionTileTypeFromID(tile), x_pos, y_pos, new TileSpriteInfo(sheet_type, tile), level);
                     }
                     else if (is_technical_layer)
                     {
-                        PlaceTile(getTechnicalTileTypeFromID(tile), x_pos, y_pos, new TileSprite(sheet_type, tile), level);
+                        PlaceTile(getTechnicalTileTypeFromID(tile), x_pos, y_pos, new TileSpriteInfo(sheet_type, tile), level);
                     }
                     else
                     {
-                        PlaceDecorative(is_large_tile, x_pos, y_pos, new TileSprite(sheet_type, tile), sorting_layer, level);
+                        PlaceDecorative(is_large_tile, x_pos, y_pos, new TileSpriteInfo(sheet_type, tile), sorting_layer, level);
                     }
                 }
 
@@ -237,7 +235,7 @@ namespace RewindGame.Game
         }
 
 
-        public static void PlaceTile(TileType type, int x, int y, TileSprite sprite, Level level)
+        public static void PlaceTile(TileType type, int x, int y, TileSpriteInfo sprite, Level level)
         {
             Vector2 position = level.getPositionFromGrid(x, y);
 
@@ -286,10 +284,10 @@ namespace RewindGame.Game
                     level.AddSolid(LeftWallspike.Make(level, position, sprite));
                     break;
                 case TileType.up_wallspike:
-                    level.AddSolid(TopWallspike.Make(level, position, sprite));
+                    level.AddSolid(TopSpike.Make(level, position, sprite));
                     break;
                 case TileType.down_wallspike:
-                    level.AddSolid(BottomWallspike.Make(level, position, sprite));
+                    level.AddSolid(BottomSpike.Make(level, position, sprite));
                     break;
                 case TileType.centerspike:
                     level.AddSolid(Centerspike.Make(level, position, sprite));
@@ -373,7 +371,7 @@ namespace RewindGame.Game
             }
         }
 
-        public static void PlaceDecorative(bool is_large, int x, int y, TileSprite sprite, SortingLayer sorting_layer, Level level)
+        public static void PlaceDecorative(bool is_large, int x, int y, TileSpriteInfo sprite, SortingLayer sorting_layer, Level level)
         {
             Vector2 position = is_large ? level.getLargePositionFromGrid(x, y) : level.getPositionFromGrid(x, y);
 

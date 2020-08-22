@@ -421,9 +421,9 @@ namespace RewindGame
                             break;
 
                         case RunState.areaswap_2:
-                            player.hidden = true;
+                            player.isHidden = true;
                             //activeLevel.specialObject.hidden = true;
-                            activeLevel.warp.hidden = true;
+                            activeLevel.warp.isHidden = true;
 
                             overlayEffect.StartAreaFadeout();
 
@@ -440,7 +440,7 @@ namespace RewindGame
 
                             stateTimer = -1;
                             runState = RunState.playing;
-                            player.hidden = false;
+                            player.isHidden = false;
                             break;
 
                     }

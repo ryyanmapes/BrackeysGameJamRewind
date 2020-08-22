@@ -8,26 +8,25 @@ using System.Text;
 namespace RewindGame.Game.Tiles
 {
 
-    class WaterTile : SolidTile
+    class WaterTile : RenderedSolidTile
     {
         public bool isFrozen = false;
 
-        public new static WaterTile Make(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
+        public new static WaterTile Make(Level level, Vector2 starting_pos, TileSpriteInfo tile_sprite_)
         {
             var tile = new WaterTile();
             tile.Initialize(level, starting_pos, tile_sprite_);
             return tile;
         }
 
-        public override void Initialize(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
+        public override void Initialize(Level level, Vector2 starting_pos, TileSpriteInfo tile_sprite_)
         {
             base.Initialize(level, starting_pos, tile_sprite_);
         }
 
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            if (hidden) return;
-            localLevel.DrawTile(tile_sprite, position + new Vector2(0, state.time_data.getFloaty(position.X, true)), sprite_batch);
+            renderer.Draw(state, sprite_batch, position + new Vector2(0, state.time_data.getFloaty(position.X, true)), SpriteEffects.None);
         }
 
         public override void Update(StateData state)
@@ -40,11 +39,6 @@ namespace RewindGame.Game.Tiles
         {
             if (isFrozen) return new CollisionReturn(CollisionType.normal, this, 5);
             return CollisionReturn.None();
-        }
-
-        public bool ShouldRenderTile()
-        {
-            return true;
         }
 
     }

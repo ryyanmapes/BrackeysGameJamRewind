@@ -11,14 +11,14 @@ namespace RewindGame.Game.Tiles
     {
         public MoveDirection enterDirection;
 
-        public new static TransitionTriggerTile Make(Level level, Vector2 starting_pos, TileSprite tile_sprite_, MoveDirection enterDirection)
+        public new static TransitionTriggerTile Make(Level level, Vector2 starting_pos, TileSpriteInfo tile_sprite_, MoveDirection enterDirection)
         {
             var tile = new TransitionTriggerTile();
             tile.Initialize(level, starting_pos, tile_sprite_, enterDirection);
             return tile;
         }
 
-        public void Initialize(Level level, Vector2 starting_pos, TileSprite tile_sprite_, MoveDirection enterDirection_)
+        public void Initialize(Level level, Vector2 starting_pos, TileSpriteInfo tile_sprite_, MoveDirection enterDirection_)
         {
             enterDirection = enterDirection_;
 

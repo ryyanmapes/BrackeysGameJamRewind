@@ -44,6 +44,9 @@ namespace RewindGame.Game
         protected CollisionType collisionType = CollisionType.normal;
         protected int collisionPriority = 5;
 
+        // if this is set to true, the sprite will be scaled to fit within the collision box
+        // It's disabled by default for now because I don't think anything currently uses it
+        protected bool renderWithCollisionBox = false;
 
         // for semisolids: what direction does this exclusively stop?
         // none makes it a normal platform
@@ -138,11 +141,6 @@ namespace RewindGame.Game
             return new Vector2(position.X + collisionSize.X / 2, position.Y + collisionSize.Y / 2);
         }
 
-        public new virtual void Draw(StateData state, SpriteBatch sprite_batch)
-        {
-            sprite_batch.Draw(texture, getCollisionBox().toRectangle(), textureColor );
-        }
-
 
         public virtual CollisionType getCollisionType()
         {
@@ -152,6 +150,15 @@ namespace RewindGame.Game
         public virtual CollisionReturn getCollisionReturn()
         {
             return new CollisionReturn(collisionType, this, collisionPriority);
+        }
+
+        // Does anyone actually use this? maybe this is stupid...
+        public new virtual void Draw(StateData state, SpriteBatch sprite_batch)
+        {
+            if (renderWithCollisionBox)
+                renderer.Draw(state, sprite_batch, getCollisionBox().toRectangle(), spriteEffects);
+            else
+                base.Draw(state, sprite_batch);
         }
 
     }

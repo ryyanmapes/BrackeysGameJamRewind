@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using RewindGame.Game.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -10,36 +11,72 @@ using System.Text;
 
 namespace RewindGame.Game.Graphics
 {
-    public class AnimationChooser
+    public class AnimationChoice
     {
-        Dictionary<String, AnimationPlayer> animations = new Dictionary<string, AnimationPlayer>();
-        public String currentAnimationName = "";
-        AnimationPlayer currentAnimation = null;
-
-        int scale;
-        Vector2 offset;
-
-        public AnimationChooser(int scale_, Vector2 offset_)
+        public AnimationChoice(string name, string path, int frametime, int framecount, bool doloop, bool useTimeN = true)
         {
-            scale = scale_;
-            offset = offset_;
+            this.name = name;
+            animationPlayer = new AnimationPlayer(new AnimationInfo(path, frametime, framecount, doloop), 1, Vector2.Zero, useTimeN);
         }
 
-        public void addAnimaton(Animation anim, String name, ContentManager Content)
+        public AnimationChoice(string name, string path, int frametime, int framecount, bool doloop, int scale, Vector2 offset, bool useTimeN = true)
         {
-            animations.Add(name, new AnimationPlayer(anim, scale, offset, Content));
+            this.name = name;
+            animationPlayer = new AnimationPlayer(new AnimationInfo(path, frametime, framecount, doloop), scale, offset, useTimeN);
         }
 
-        public void changeAnimation(String name)
+        public AnimationChoice(string name, string path, int frametime, int framecount, bool doloop, int scale, Vector2 offset, string prev_anim, string next_anim, bool useTimeN = true)
         {
-            if (name == currentAnimationName) return;
-            AnimationPlayer animp;
+            this.name = name;
+            animationPlayer = new AnimationPlayer(path, frametime, framecount, doloop, scale, offset, useTimeN);
+            nextAnimName = next_anim;
+            prevAnimName = prev_anim;
+        }
+
+        public string name;
+        public AnimationPlayer animationPlayer;
+        public string nextAnimName;
+        public string prevAnimName;
+    }
+
+    public class AnimationChooser : IRenderMethod
+    {
+        Dictionary<string, AnimationChoice> animations = new Dictionary<string, AnimationChoice>();
+        public AnimationChoice currentAnimationChoice = null;
+
+        public bool isHidden { get; set; } = false;
+
+        public AnimationChooser() { }
+
+        public AnimationChooser(AnimationChoice[] animations, ContentManager Content) 
+        {
+            foreach (AnimationChoice anim in animations)
+            {
+                addAnimation(anim, Content);
+            }
+        }
+
+        public void addAnimation(AnimationChoice anim, ContentManager Content)
+        {
+            anim.animationPlayer.LoadContent(Content);
+            animations.Add(anim.name, anim);
+        }
+
+        public void changeAnimation(string name)
+        {
+            if (currentAnimationChoice != null && name == currentAnimationChoice.name) return;
+            else if (name == "")
+            {
+                stopAnimation();
+                return;
+            }
+
+            AnimationChoice animp;
+            
             if (animations.TryGetValue(name, out animp))
             {
-                currentAnimation = animp;
-                currentAnimationName = name;
-                animp.Reset();
-                
+                currentAnimationChoice = animp;
+                animp.animationPlayer.Reset();
             }
             else
             {
@@ -47,30 +84,75 @@ namespace RewindGame.Game.Graphics
             }
         }
 
-        public void stopAnimation()
+        public void changeAnimationBackwards(string name)
         {
-            currentAnimation = null;
-            currentAnimationName = "";
+            if (currentAnimationChoice != null && name == currentAnimationChoice.name) return;
+            else if (name == "")
+            {
+                stopAnimation();
+                return;
+            }
+
+            AnimationChoice animp;
+            if (animations.TryGetValue(name, out animp))
+            {
+                currentAnimationChoice = animp;
+                animp.animationPlayer.ResetToEnd();
+            }
+            else
+            {
+                Console.WriteLine("Unable to find animation player of name: {0}", name);
+            }
         }
 
-        public void Draw(StateData state, SpriteBatch sprite_batch, Vector2 position)
+        // This puts the animation state back to null so nothing is rendered at all
+        public void stopAnimation()
         {
-            Draw(state, sprite_batch, position, SpriteEffects.None);
+            currentAnimationChoice = null;
         }
 
         public void Draw(StateData state, SpriteBatch sprite_batch, Vector2 position, SpriteEffects effect)
         {
-            currentAnimation.Draw(state, sprite_batch, position, effect, 1);
+            if (currentAnimationChoice != null && !isHidden)
+            {
+                currentAnimationChoice.animationPlayer.Draw(state, sprite_batch, position, effect);
+                if (!currentAnimationChoice.animationPlayer.animationInfo.do_loop) CheckTransition();
+            }
         }
 
-        public void Draw(StateData state, SpriteBatch sprite_batch, Vector2 position, SpriteEffects effect, int timeN)
+        public void Draw(StateData state, SpriteBatch sprite_batch, Rectangle rect, SpriteEffects effect)
         {
-            currentAnimation.Draw(state, sprite_batch, position, effect, timeN);
+            if (currentAnimationChoice != null && !isHidden)
+            {
+                currentAnimationChoice.animationPlayer.Draw(state, sprite_batch, rect, effect);
+                if (!currentAnimationChoice.animationPlayer.animationInfo.do_loop) CheckTransition();
+            }
         }
+
+
+
+        public void CheckTransition()
+        {
+            if (currentAnimationChoice.animationPlayer.ExceedsMin() && currentAnimationChoice.prevAnimName != null)
+            {
+                changeAnimationBackwards(currentAnimationChoice.prevAnimName);
+            }
+            else if (currentAnimationChoice.animationPlayer.ExceedsMax() && currentAnimationChoice.nextAnimName != null)
+            {
+                changeAnimation(currentAnimationChoice.nextAnimName);
+            }
+        }
+
 
         public bool isCurrentAnimationDone()
         {
-            return currentAnimation.callCount > currentAnimation.animation.frame_count && !currentAnimation.animation.do_loop;
+            return (currentAnimationChoice.animationPlayer.ExceedsMax() || currentAnimationChoice.animationPlayer.ExceedsMin())
+                && !currentAnimationChoice.animationPlayer.animationInfo.do_loop;
         }
+
+
+        // Don't use this, it does nothing
+        // all content is loaded in addAnimation- should that be changed?
+        public void LoadContent(ContentManager Content) { }
     }
 }

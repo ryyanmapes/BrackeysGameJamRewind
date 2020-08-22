@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RewindGame.Game.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -36,19 +37,18 @@ namespace RewindGame.Game.Effects
             initFadeinTime = fadein_time;
             initLifeTime = life_time;
             initFadeoutTime = fadeout_time;
-            texture = tex;
-            textureColor = new Color(0, 0, 0, 0);
+
+            renderer = new BasicSprite(tex);
+
             base.Initialize(level, starting_pos);
         }
-
-        public override void LoadContent() { }
 
         public override void Update(StateData state)
         {
             if (fadeinTime < initFadeinTime && isFadeIn)
             {
                 //var fade = (byte)(255f * 1/(fadeinTime / initFadeinTime));
-                textureColor = Color.White * (fadeinTime / initFadeinTime);
+                ((BasicSprite) renderer).color = Color.White * (fadeinTime / initFadeinTime);
                 fadeinTime += state.getDeltaTime();
             }
             else if (fadeinTime >= initFadeinTime && isFadeIn)
@@ -60,7 +60,7 @@ namespace RewindGame.Game.Effects
             }
             else if (lifeTime > 0 && isLifetime)
             {
-                textureColor = Color.White;
+                ((BasicSprite)renderer).color = Color.White;
                 lifeTime -= state.getDeltaTime();
             }
             else if (lifeTime <= 0 && isLifetime)
@@ -74,21 +74,15 @@ namespace RewindGame.Game.Effects
             {
                 //var fade = (byte)(255f * (initFadeoutTime / fadeoutTime));
                 //textureColor = new Color(fade, fade, fade, fade);
-                textureColor = Color.White * (fadeoutTime / initFadeoutTime);
+                ((BasicSprite)renderer).color = Color.White * (fadeoutTime / initFadeoutTime);
                 fadeoutTime -= state.getDeltaTime();
             }
 
             else
             {
                 isDead = true;
-                textureColor = new Color(0, 0, 0, 0);
+                ((BasicSprite)renderer).color = new Color(0, 0, 0, 0);
             }
-        }
-
-        public override void Draw(StateData state, SpriteBatch sprite_batch)
-        {
-            if (hidden) return;
-            sprite_batch.Draw(texture, position, textureColor);
         }
 
     }

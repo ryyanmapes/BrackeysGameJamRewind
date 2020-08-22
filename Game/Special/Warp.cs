@@ -13,10 +13,9 @@ namespace RewindGame.Game.Solids
     public class Warp : CollisionObject
     {
 
-        protected Animation anim_idle = new Animation("warp/timeriploop", 6, 2, true);
-        protected Animation anim_close = new Animation("warp/timerip", 4, 6, false);
+        protected AnimationChoice anim_idle = new AnimationChoice("idle", "warp/timeriploop", 6, 2, true);
+        protected AnimationChoice anim_close = new AnimationChoice("idle", "warp/timerip", 4, 6, true);
 
-        protected AnimationChooser anims;
         protected bool isActivated;
 
         public static Warp Make(Level level, Vector2 starting_pos)
@@ -32,10 +31,9 @@ namespace RewindGame.Game.Solids
 
             collisionSize = new Vector2(100,100);
 
-            anims = new AnimationChooser(1, Vector2.Zero);
-            anims.addAnimaton(anim_idle, "idle", level.parentGame.Content);
-            anims.addAnimaton(anim_idle, "close", level.parentGame.Content);
+            AnimationChooser anims = new AnimationChooser( new AnimationChoice[] { anim_idle, anim_close }, level.Content);
             anims.changeAnimation("idle");
+            renderer = anims;
 
             base.Initialize(level, starting_pos);
 
@@ -46,25 +44,21 @@ namespace RewindGame.Game.Solids
         {
         }
 
-        public override void LoadContent() { }
-
         public void TriggerActivation()
         {
             isActivated = true;
-            anims.changeAnimation("close");
+            ((AnimationChooser)renderer).changeAnimation("close");
         }
 
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            if (hidden) return;
-            //base.Draw(state, sprite_batch);
-            anims.Draw(state, sprite_batch, position + new Vector2(0,state.time_data.getFloaty(0,false)), SpriteEffects.None, -1);
+            renderer.Draw(state, sprite_batch, position + new Vector2(0,state.time_data.getFloaty(0,false)), SpriteEffects.None);
         }
 
         public override void Reset()
         {
             isActivated = false;
-            anims.changeAnimation("idle");
+            ((AnimationChooser)renderer).changeAnimation("idle");
             base.Reset();
         }
 

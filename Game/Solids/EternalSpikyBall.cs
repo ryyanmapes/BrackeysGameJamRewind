@@ -18,8 +18,8 @@ namespace RewindGame.Game.Solids
         private float current_rotation_radians;
         private Vector2 startingPosition;
         private Vector2 currentPosition;
-        private AnimationPlayer anim;
-        private Animation idle = new Animation("eternal/terrariumchainball", 4, 2, true);
+
+        public new IRenderMethod renderer = new AnimationPlayer("eternal/terrariumchainball", 4, 2, true, 1, Vector2.Zero);
 
         public static EternalSpikyBall Make(Level level, Vector2 starting_pos, float radius, int rots, int starting_rotation)
         {
@@ -30,13 +30,12 @@ namespace RewindGame.Game.Solids
 
         public void Initialize(Level level, Vector2 starting_pos, float radius_, int rots, int startingrotation)
         {
+
             radius = radius_;
             rotations = rots;
             current_rotation_degrees = startingrotation;
             startingPosition = starting_pos - new Vector2(GameUtils.TILE_WORLD_SIZE/2, GameUtils.TILE_WORLD_SIZE/2);
             currentPosition = startingPosition;
-
-            anim = new AnimationPlayer(idle, 1, Vector2.Zero, level.parentGame.Content);
 
             collisionSize = new Vector2(84, 84);
             collisionType = CollisionType.death;
@@ -72,11 +71,10 @@ namespace RewindGame.Game.Solids
             }
         }
 
-        public override void LoadContent() { }
-
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            anim.Draw(state, sprite_batch, position, SpriteEffects.None, state.getTimeN());
+            base.Draw(state, sprite_batch);
+            ((AnimationPlayer)renderer).UpdateAnimation(state, state.getTimeN());
         }
         public override void Reset() 
         {

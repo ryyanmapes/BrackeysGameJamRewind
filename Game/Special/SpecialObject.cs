@@ -26,14 +26,14 @@ namespace RewindGame.Game.Special
 
         String[] currentLines;
 
-        Animation lunarShrineTex = new Animation("limbo/lunarshrine", 5, 4, true); 
-        Animation obeliskTex = new Animation("limbo/obelisk", 1, 1, true);
-        Animation seartreeTex = new Animation("cottonwood/cottonwoodsecret", 1, 1, true); 
-        Animation barrelTex = new Animation("cottonwood/barrel", 1, 1, true);
-        Animation barrelTreeTex = new Animation("cottonwood/wagon", 1, 1, true);
-        Animation posterTex = new Animation("eternal/poster", 1, 1, true);
-        Animation deskTex = new Animation("limbo/tableplant", 1, 1, true);
-        Animation deskTexPost = new Animation("limbo/table", 1, 1, true);
+        AnimationInfo lunarShrineTex = new AnimationInfo("limbo/lunarshrine", 5, 4, true); 
+        AnimationInfo obeliskTex = new AnimationInfo("limbo/obelisk", 1, 1, true);
+        AnimationInfo seartreeTex = new AnimationInfo("cottonwood/cottonwoodsecret", 1, 1, true); 
+        AnimationInfo barrelTex = new AnimationInfo("cottonwood/barrel", 1, 1, true);
+        AnimationInfo barrelTreeTex = new AnimationInfo("cottonwood/wagon", 1, 1, true);
+        AnimationInfo posterTex = new AnimationInfo("eternal/poster", 1, 1, true);
+        AnimationInfo deskTex = new AnimationInfo("limbo/tableplant", 1, 1, true);
+        AnimationInfo deskTexPost = new AnimationInfo("limbo/table", 1, 1, true);
 
         SpriteFont font;
 
@@ -65,57 +65,56 @@ namespace RewindGame.Game.Special
         public virtual void Initialize(Level level, Vector2 starting_pos, string type_)
         {
             type = type_;
-            base.Initialize(level, starting_pos);
-        }
 
-        public override void LoadContent()
-        {
-            Animation anim;
-            switch (type) {
+
+            AnimationInfo anim;
+            switch (type)
+            {
                 case "lunarshrine":
                     currentLines = lunarShrineLines;
                     anim = lunarShrineTex;
-                    collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE*4, GameUtils.TILE_WORLD_SIZE * 4);
+                    collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
                     break;
                 case "obelisk":
                     currentLines = obeliskLines;
                     anim = obeliskTex;
                     collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 2, GameUtils.TILE_WORLD_SIZE * 4);
                     break;
-                    /*
-                case EntityType.treesear:
-                    currentLines = seartreeLines;
-                    anim = seartreeTex;
-                    collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
-                    break;
-                case EntityType.barrel:
-                    currentLines = barrelLines;
-                    anim = barrelTex;
-                    collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
-                    break;
-                case EntityType.poster:
-                    currentLines = sadLines;
-                    anim = posterTex;
-                    collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
-                    break;
-                case EntityType.desk:
-                    anim = deskTex;
-                    //collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
-                    break;
-                case EntityType.barreltree:
-                    anim = barrelTreeTex;
-                    //collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
-                    break;*/
+                /*
+            case EntityType.treesear:
+                currentLines = seartreeLines;
+                anim = seartreeTex;
+                collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
+                break;
+            case EntityType.barrel:
+                currentLines = barrelLines;
+                anim = barrelTex;
+                collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
+                break;
+            case EntityType.poster:
+                currentLines = sadLines;
+                anim = posterTex;
+                collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
+                break;
+            case EntityType.desk:
+                anim = deskTex;
+                //collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
+                break;
+            case EntityType.barreltree:
+                anim = barrelTreeTex;
+                //collisionSize = new Vector2(GameUtils.TILE_WORLD_SIZE * 4, GameUtils.TILE_WORLD_SIZE * 4);
+                break;*/
                 default:
                     anim = null;
                     break;
             }
 
-            anims = new AnimationPlayer(anim, 1, Vector2.Zero, localLevel.parentGame.Content);
+            renderer = new AnimationPlayer(anim, 1, Vector2.Zero);
 
             font = localLevel.parentGame.Content.Load<SpriteFont>("fonts/Roboto");
 
 
+            base.Initialize(level, starting_pos);
         }
 
         public override void Update(StateData state)
@@ -154,8 +153,7 @@ namespace RewindGame.Game.Special
 
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            if (hidden) return;
-            anims.Draw(state, sprite_batch, position, SpriteEffects.None, state.getTimeN());
+            base.Draw(state, sprite_batch);
 
             if (charState == -1) return;
 
@@ -213,14 +211,15 @@ namespace RewindGame.Game.Special
             delay = -1;
         }
 
+        // todo this feels wrong
         public override void SetInactive()
         {
-            hidden = true;
+            renderer.isHidden = true;
         }
 
         public override void SetActive()
         {
-            hidden = false;
+            renderer.isHidden = false;
         }
 
     }

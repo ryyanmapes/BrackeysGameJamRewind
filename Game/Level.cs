@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using RewindGame.Game.Debug;
 using RewindGame.Game.Tiles;
 using RewindGame.Game.Solids;
 using RewindGame.Game.Special;
@@ -26,9 +25,9 @@ namespace RewindGame.Game
         foreforeground
     }
 
-    public class TileSprite
+    public class TileSpriteInfo
     {
-        public TileSprite(TileSheet sheet_, int tex_id_)
+        public TileSpriteInfo(TileSheet sheet_, int tex_id_)
         {
             sheet = sheet_;
             tex_id = tex_id_;
@@ -192,7 +191,7 @@ namespace RewindGame.Game
 
 
 
-        public void DrawTile(TileSprite tile_sprite, Vector2 position, SpriteBatch sprite_batch)
+        public void DrawTile(TileSpriteInfo tile_sprite, Vector2 position, SpriteBatch sprite_batch)
         {
             if (tile_sprite == null || tile_sprite.sheet == TileSheet.none) return;
 

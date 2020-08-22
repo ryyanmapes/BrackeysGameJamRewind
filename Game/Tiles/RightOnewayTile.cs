@@ -11,14 +11,14 @@ namespace RewindGame.Game.Tiles
     class RightOnewayTile : SolidTile
     {
 
-        public new static RightOnewayTile Make(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
+        public new static RightOnewayTile Make(Level level, Vector2 starting_pos)
         {
             var tile = new RightOnewayTile();
-            tile.Initialize(level, starting_pos, tile_sprite_);
+            tile.Initialize(level, starting_pos);
             return tile;
         }
 
-        public override void Initialize(Level level, Vector2 starting_pos, TileSprite tile_sprite_)
+        public override void Initialize(Level level, Vector2 starting_pos, TileSpriteInfo tile_sprite_)
         {
             collisionDirection = MoveDirection.left;
             base.Initialize(level, starting_pos, tile_sprite_);

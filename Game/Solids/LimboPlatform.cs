@@ -11,7 +11,10 @@ namespace RewindGame.Game.Solids
     class LimboPlatform : Platform
     {
 
-        protected AnimationPlayer anims;
+        protected AnimationPlayer renderLongDown = new AnimationPlayer("limbo/platformlongdown", 6, 4, true, 1, new Vector2(0, -GameUtils.TILE_WORLD_SIZE - 8));
+        protected AnimationPlayer renderLongUp = new AnimationPlayer("limbo/platformlongup", 6, 4, true, 1, Vector2.Zero);
+        protected AnimationPlayer renderDown = new AnimationPlayer("limbo/platformdown", 6, 4, true, 1, new Vector2(0, -GameUtils.TILE_WORLD_SIZE - 8));
+        protected AnimationPlayer renderUp = new AnimationPlayer("limbo/platformup", 6, 4, true, 1, Vector2.Zero);
 
         public static LimboPlatform Make(Level level, Vector2 starting_pos, Vector2 velocity_, bool isLong)
         {
@@ -22,67 +25,21 @@ namespace RewindGame.Game.Solids
 
         public virtual void Initialize(Level level, Vector2 starting_pos, Vector2 velocity_, bool is_long)
         {
-            Animation anim;
-            if (is_long)
-            {
-                if (velocity_.Y < 0)
-                {
-                    anim = new Animation("limbo/platformlongdown", 6, 4, true);
-                    collisionOffset = new Vector2(0, GameUtils.TILE_WORLD_SIZE + 8);
-                }
-                else
-                {
-                    anim = new Animation("limbo/platformlongup", 6, 4, true);
-                }
-            }
-            else
-            {
-                if (velocity_.Y < 0)
-                {
-                    anim = new Animation("limbo/platformdown", 6, 4, true);
-                    collisionOffset = new Vector2(0, GameUtils.TILE_WORLD_SIZE + 8);
-                }
-                else
-                {
-                    anim = new Animation("limbo/platformup", 6, 4, true);
-                }
-            }
 
-            anims = new AnimationPlayer(anim, 1, Vector2.Zero, level.Content);
-
-            doLeftCollision = false;
-            doRightCollision = false;
-            doDownCollision = false;
+            // I know this looks like an awful mess, but trust me it's better than the ten lines I had before
+            renderer = is_long ? ((velocity_.Y < 0) ? renderLongDown : renderLongUp) : ((velocity_.Y < 0) ? renderDown : renderUp);
 
             base.Initialize(level, starting_pos, velocity_, is_long? 4 : 2);
         }
 
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            if (hidden) return;
-            //base.Draw(state, sprite_batch);
-            anims.Draw(state, sprite_batch, position, velocity.X > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, state.getTimeN());
-        }
+            if (velocity.X < 0) spriteEffects = SpriteEffects.FlipHorizontally;
+            else spriteEffects = SpriteEffects.None;
 
-        
-        public override CollisionReturn getCollision(FRectangle rect, MoveDirection direction)
-        {
-            var return_c = base.getCollision(rect, MoveDirection.none);
-            if (return_c.priority == 0) return return_c;
-            if (direction == MoveDirection.up && rect.Y + rect.Height < position.Y + GameUtils.SEMISOLID_THICKNESS_WINDOW + collisionOffset.Y)
-                return new CollisionReturn(CollisionType.refresh_jump, this, 2);
-            if (direction != MoveDirection.down || rect.Y + rect.Height > position.Y + GameUtils.SEMISOLID_THICKNESS + collisionOffset.Y)
-                return CollisionReturn.None();
-            return return_c;
-        }
-        
-        public override Vector2 getEntityOverlap(Entity entity)
-        {
-            var rect = entity.getCollisionBox();
-            if (rect.Y + rect.Height > position.Y + GameUtils.SEMISOLID_THICKNESS + collisionOffset.Y)
-                return Vector2.Zero;
-            var overlap = entity.getOverlap(this);
-            return entity.getOverlap(this);
+            base.Draw(state, sprite_batch);
+
+            ((AnimationPlayer)renderer).UpdateAnimation(state, state.getTimeN());
         }
 
     }

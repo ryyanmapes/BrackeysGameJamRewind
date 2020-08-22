@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using RewindGame.Game.Abstract;
+using RewindGame.Game.Graphics;
 
 namespace RewindGame.Game.Solids
 {
     class LimboSpikyBall : CollisionObject
     {
-
+        // todo what's with the unused variables here
         public float radius;
         public float speed;
         public int starting_rotation_degrees;
@@ -17,6 +18,7 @@ namespace RewindGame.Game.Solids
         private float current_rotation_radians;
         private Vector2 startingPosition;
         private Vector2 currentPosition;
+
         public static LimboSpikyBall Make(Level level, Vector2 starting_pos, float radius, float speed, int starting_rotation)
         {
             var tile = new LimboSpikyBall();
@@ -32,7 +34,8 @@ namespace RewindGame.Game.Solids
             startingPosition = starting_pos - new Vector2(GameUtils.TILE_WORLD_SIZE/2, GameUtils.TILE_WORLD_SIZE/2);
             currentPosition = startingPosition;
 
-            texturePath = "limbo/chainball";
+            renderer = new BasicSprite("limbo/chainball");
+
             collisionSize = new Vector2(84, 84);
             collisionType = CollisionType.death;
             starting_rotation_degrees = startingrotation;
@@ -59,6 +62,7 @@ namespace RewindGame.Game.Solids
                 position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees - 90)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees - 90)));
                 //Move(new Vector2((int)(radius * -Math.Cos(current_rotation_radians)), (int)(radius * -Math.Sin(current_rotation_radians))));
             }
+            // todo what is the point of this?
             if (current_rotation_degrees == 0)
             {
                 current_rotation_degrees = 360;
