@@ -14,7 +14,7 @@ namespace RewindGame.Game.Solids
     {
 
         protected AnimationChoice anim_idle = new AnimationChoice("idle", "warp/timeriploop", 6, 2, true);
-        protected AnimationChoice anim_close = new AnimationChoice("idle", "warp/timerip", 4, 6, true);
+        protected AnimationChoice anim_close = new AnimationChoice("close", "warp/timerip", 4, 6, true);
 
         protected bool isActivated;
 

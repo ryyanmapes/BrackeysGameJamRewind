@@ -8,7 +8,7 @@ using RewindGame.Game.Graphics;
 
 namespace RewindGame.Game.Solids
 {
-    public abstract class BasicSolid : Solid
+    public abstract class MovingSolid : Solid
     {
         public Vector2 velocity;
         public Vector2 startingPosition;

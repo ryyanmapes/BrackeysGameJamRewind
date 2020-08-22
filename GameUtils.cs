@@ -18,7 +18,7 @@ namespace RewindGame
     {
         // DEBUG SETTINGS
 
-        public const bool SHOULD_SOLIDTILES_RENDER = false;
+        public const bool SHOULD_SOLIDTILES_RENDER = true;
         public const bool USE_DEBUG_KEYS = true;
 
         // GAME

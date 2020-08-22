@@ -22,8 +22,8 @@ namespace RewindGame.Game
 
         public bool isActiveScene = false;
 
-        public String name = "";
-        public String[] connectedLevelNames = { "", "", "", "" };
+        public string name = "";
+        public string[] connectedLevelNames = { "", "", "", "" };
         public float screensHorizontal;
         public float screensVertical;
         public string startTriggers = "";
