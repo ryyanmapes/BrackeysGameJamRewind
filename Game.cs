@@ -453,6 +453,7 @@ namespace RewindGame
 
         protected override void Update(GameTime game_time)
         {
+            // setting up state
             currentLevelCenter = getLevelCenter();
             currentCameraPosition = getCameraPosition();
 
@@ -655,6 +656,8 @@ namespace RewindGame
                     break;
             }
 
+
+
             areaEffect.Update(state);
 
             activeLevel.Update(state);
@@ -805,13 +808,14 @@ namespace RewindGame
             soundManager.TriggerPlayerDie();
         }
 
-
+        
         // Graphics
 
         protected override void Draw(GameTime game_time)
         {
             GraphicsDevice.Clear(Color.DarkGray);
 
+            // camera position
             var matrix = Matrix.Identity;
             matrix.Translation = new Vector3(-1 * (currentCameraPosition.X - GameUtils.LEVEL_SIZE_X / 2), -1 * (currentCameraPosition.Y - GameUtils.LEVEL_SIZE_Y / 2), 0);
 
