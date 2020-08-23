@@ -152,47 +152,35 @@ namespace RewindGame.Game.Special
             }
         }
 
-        public override void Draw(StateData state, SpriteBatch sprite_batch)
+        public void DrawText(StateData state, SpriteBatch sprite_batch)
         {
-            base.Draw(state, sprite_batch);
-
             if (charState == -1) return;
-
-            /*if (charState == -2)
-            {
-                DrawText(sprite_batch, currentLines[lineState], currentLines[lineState].Length, 0);
-                DrawText(sprite_batch, currentLines[lineState+1], currentLines[lineState+1].Length, 1);
-                DrawText(sprite_batch, currentLines[lineState+2], currentLines[lineState+2].Length, 2);
-                DrawText(sprite_batch, currentLines[lineState + 3], currentLines[lineState + 3].Length, 2);
-            }*/
 
             int line_state_rem = lineState % 4;
             int real_line_state = lineState - line_state_rem;
 
-            if (line_state_rem == 0) DrawText(sprite_batch, currentLines[lineState], charState, 0);
+            if (line_state_rem == 0) RenderLine(sprite_batch, currentLines[lineState], charState, 0);
             else if (line_state_rem == 1)
             {
-                DrawText(sprite_batch, currentLines[real_line_state], currentLines[real_line_state].Length, 0);
-                DrawText(sprite_batch, currentLines[real_line_state + 1], charState, 1);
+                RenderLine(sprite_batch, currentLines[real_line_state], currentLines[real_line_state].Length, 0);
+                RenderLine(sprite_batch, currentLines[real_line_state + 1], charState, 1);
             }
             else if (line_state_rem == 2)
             {
-                DrawText(sprite_batch, currentLines[real_line_state], currentLines[real_line_state].Length, 0);
-                DrawText(sprite_batch, currentLines[real_line_state + 1], currentLines[real_line_state + 1].Length, 1);
-                DrawText(sprite_batch, currentLines[real_line_state + 2], charState, 2);
+                RenderLine(sprite_batch, currentLines[real_line_state], currentLines[real_line_state].Length, 0);
+                RenderLine(sprite_batch, currentLines[real_line_state + 1], currentLines[real_line_state + 1].Length, 1);
+                RenderLine(sprite_batch, currentLines[real_line_state + 2], charState, 2);
             }
             else if (line_state_rem == 3)
             {
-                DrawText(sprite_batch, currentLines[real_line_state], currentLines[real_line_state].Length, 0);
-                DrawText(sprite_batch, currentLines[real_line_state + 1], currentLines[real_line_state + 1].Length, 1);
-                DrawText(sprite_batch, currentLines[real_line_state + 2], currentLines[real_line_state + 2].Length, 2);
-                DrawText(sprite_batch, currentLines[real_line_state + 3], charState, 3);
+                RenderLine(sprite_batch, currentLines[real_line_state], currentLines[real_line_state].Length, 0);
+                RenderLine(sprite_batch, currentLines[real_line_state + 1], currentLines[real_line_state + 1].Length, 1);
+                RenderLine(sprite_batch, currentLines[real_line_state + 2], currentLines[real_line_state + 2].Length, 2);
+                RenderLine(sprite_batch, currentLines[real_line_state + 3], charState, 3);
             }
-
-            // todo text render
         }
 
-        public void DrawText(SpriteBatch sprite_batch, string full_string, int chars_to_render, int line)
+        public void RenderLine(SpriteBatch sprite_batch, string full_string, int chars_to_render, int line)
         {
             
             float text_length = font.MeasureString(full_string).X;

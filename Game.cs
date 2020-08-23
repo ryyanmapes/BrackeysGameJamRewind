@@ -842,6 +842,8 @@ namespace RewindGame
 
             timelineGUI.Draw(state, spriteBatch);
 
+            if (activeLevel.specialObject != null) activeLevel.specialObject.DrawText(state, spriteBatch);
+
             spriteBatch.End();
 
             base.Draw(game_time);
