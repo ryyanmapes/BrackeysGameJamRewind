@@ -68,7 +68,7 @@ namespace RewindGame.Game
 
             if (phys_data == null)
             {
-                Console.WriteLine("Unable to find time moment for " + time_moment);
+                //Console.WriteLine("Unable to find time moment for " + time_moment);
                 return;
             }
 
