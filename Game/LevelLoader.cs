@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using RewindGame.Game.Tiles;
 using RewindGame.Game.Solids;
 using RewindGame.Game.Special;
+using RewindGame.Game.Physics.Temporal;
 
 namespace RewindGame.Game
 {
@@ -335,6 +336,10 @@ namespace RewindGame.Game
                     return;
                 case "limbosolid":
                     level.AddSolid(LimboSquare.Make(level, position));
+                    return;
+
+                case "citycrate":
+                    level.AddEntity(CityCrateEntity.Make(level, position));
                     return;
 
                 case "cottonwoodplatform":

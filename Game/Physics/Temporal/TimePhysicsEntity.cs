@@ -41,6 +41,8 @@ namespace RewindGame.Game
             moveX(velocity.X * elapsed_signed);
             moveY(velocity.Y * elapsed_signed);
 
+            if (linkedSolid != null) linkedSolid.MoveTo(position);
+
             is_grounded = isGrounded();
         }
 
@@ -48,13 +50,18 @@ namespace RewindGame.Game
         {
             var box = getCollisionBox();
             box.Y += 1;
-            if (localLevel.getSolidCollisionAt(box, MoveDirection.down).type == CollisionType.normal)
+            if (localLevel.getSolidCollisionAt(box, MoveDirection.down, linkedSolid).type == CollisionType.normal)
             {
                 return true;
             }
             return false;
         }
 
+        public override void Reset()
+        {
+            velocity = Vector2.Zero;
+            base.Reset();
+        }
 
     }
 }

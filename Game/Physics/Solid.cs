@@ -17,6 +17,8 @@ namespace RewindGame.Game
         public bool doUpCollision = true;
         public bool doDownCollision = true;
 
+        protected Entity linkedEntity;
+
         // Code inspired by https://medium.com/@MattThorson/celeste-and-towerfall-physics-d24bd2ae0fc5
         public void Move(Vector2 transform)
         {
@@ -34,6 +36,8 @@ namespace RewindGame.Game
 
                 foreach (Entity entity in localLevel.getAllEntitiesAndPlayer())
                 {
+                    if (entity == linkedEntity) continue;
+
                     Vector2 overlap = getEntityOverlap(entity) * -1;
                     if (overlap.X != 0)
                     {
@@ -56,6 +60,8 @@ namespace RewindGame.Game
 
                 foreach (Entity entity in localLevel.getAllEntitiesAndPlayer())
                 {
+                    if (entity == linkedEntity) continue;
+
                     Vector2 overlap = getEntityOverlap(entity) * -1;
                     if (overlap.Y != 0)
                     {
@@ -75,7 +81,14 @@ namespace RewindGame.Game
 
 
         }
-    
+        
+
+        public void MoveTo(Vector2 pos)
+        {
+            var diff = pos - position;
+            Move(diff);
+        }
+
         public virtual Vector2 getEntityOverlap( Entity entity )
         {
             return entity.getOverlap(this);

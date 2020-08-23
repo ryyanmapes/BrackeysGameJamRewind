@@ -42,6 +42,7 @@ namespace RewindGame.Game.Tiles
             base.Initialize(level, starting_pos, tile_sprite_);
         }
 
+        //todo this needs to be redone so it only detects the player
         public override bool isThisOverlapping(FRectangle rect, MoveDirection direction)
         {
             bool isOverlapping = base.isThisOverlapping(rect);

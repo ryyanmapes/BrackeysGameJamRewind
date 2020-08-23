@@ -1015,7 +1015,7 @@ namespace RewindGame
         // more often means more memory consumption
         public static bool isSavableMoment(int moment)
         {
-            return moment % 3 == 0;
+            return true;
         }
 
     

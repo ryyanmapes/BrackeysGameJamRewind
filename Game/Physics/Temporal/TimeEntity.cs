@@ -21,7 +21,7 @@ namespace RewindGame.Game
         public Vector2 velocity;
     }
 
-    public abstract class TimeEntity : Entity, ITimeTrackable 
+    public abstract class TimeEntity : Entity, ITimeEntity 
     {
 
         protected Dictionary<int, PhysData> pastPhysData = new Dictionary<int, PhysData>();
@@ -74,6 +74,12 @@ namespace RewindGame.Game
 
             position = phys_data.position;
             velocity = phys_data.velocity;
+        }
+
+        public override void Reset()
+        {
+            pastPhysData = new Dictionary<int, PhysData>();
+            base.Reset();
         }
 
     }

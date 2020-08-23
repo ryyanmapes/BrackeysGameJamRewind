@@ -58,11 +58,28 @@ namespace RewindGame.Game
     {
         protected Vector2 moveRemainder;
 
-        protected Vector2 velocity;
-        protected CollisionObject hungObject;
-        protected HangDirection hangDirection = HangDirection.None;
+        public Vector2 startingPosition;
+        public Vector2 velocity;
 
-        // Code inspired by https://medium.com/@MattThorson/celeste-and-towerfall-physics-d24bd2ae0fc5
+        protected Solid linkedSolid;
+
+        public override void Initialize(Level level, Vector2 starting_pos)
+        {
+            startingPosition = starting_pos;
+            base.Initialize(level, starting_pos);
+        }
+
+        public override void Update(StateData state)
+        {
+            float elapsed = (float)state.getDeltaTime();
+
+            moveX(velocity.X * elapsed);
+            moveY(velocity.Y * elapsed);
+
+            if (linkedSolid != null) linkedSolid.MoveTo(position);
+        }
+
+            // Code inspired by https://medium.com/@MattThorson/celeste-and-towerfall-physics-d24bd2ae0fc5
         public void moveX(float amount) { moveX(amount, null); }
         public void moveX(float amount, Solid pusher)
         {
@@ -75,25 +92,10 @@ namespace RewindGame.Game
 
             while (move != 0)
             {
-                /*
-                if (pusher != null)
-                {
-                    velocity.X = 0;
-                    hungObject = pusher;
-                    hangDirection = sign < 0 ? HangDirection.Right : HangDirection.Left;
-                }
-                else
-                {
-                    hungObject = null;
-                    hangDirection = HangDirection.None;
-                }*/
-
-                //hungObject = null;
-                //hangDirection = HangDirection.None;
 
                 Vector2 new_position = position + new Vector2(sign, 0);
 
-                CollisionReturn collision = localLevel.getSolidCollisionAt(this.getCollisionBoxAt(new_position), dir);
+                CollisionReturn collision = localLevel.getSolidCollisionAt(this.getCollisionBoxAt(new_position), dir, linkedSolid);
 
                 switch (collision.type)
                 {
@@ -106,8 +108,6 @@ namespace RewindGame.Game
                         else
                         {
                             velocity.X = 0;
-                            //hungObject = collision.collisionee;
-                            //hangDirection = sign > 0 ? HangDirection.Right : HangDirection.Left;
                         }
                         return;
                     case CollisionType.death:
@@ -137,7 +137,8 @@ namespace RewindGame.Game
 
                 Vector2 new_position = position + new Vector2(0, sign);
 
-                CollisionReturn collision = localLevel.getSolidCollisionAt(this.getCollisionBoxAt(new_position), dir, pusher);
+                // this used to include 'pusher'
+                CollisionReturn collision = localLevel.getSolidCollisionAt(this.getCollisionBoxAt(new_position), dir, linkedSolid);
 
                 switch ( collision.type )
                 {
@@ -173,6 +174,8 @@ namespace RewindGame.Game
 
         public virtual bool isRiding(Solid solid)
         {
+            if (solid == linkedSolid) return false;
+
             var box = getCollisionBox();
             box.Y += 1;
             if (solid.getCollision(box, MoveDirection.down).type == CollisionType.normal) return true;
@@ -180,6 +183,12 @@ namespace RewindGame.Game
             return false;
         }
 
+
+        public override void Reset()
+        {
+            position = startingPosition;
+            base.Reset();
+        }
 
     }
 }

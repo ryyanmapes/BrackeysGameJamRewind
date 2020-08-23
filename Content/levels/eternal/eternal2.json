@@ -19,7 +19,7 @@
         {"name": "playerspawn", "id": 0, "_eid": "67213102", "x": 14, "y": 98, "originX": -3, "originY": -7},
         {"name": "poster", "id": 7, "_eid": "86739212", "x": 98, "y": 84, "originX": 0, "originY": 0},
         {
-          "name": "eternalplatform",
+          "name": "cottonwoodplatform",
           "id": 10,
           "_eid": "75472653",
           "x": 182,

@@ -7,6 +7,7 @@ using RewindGame.Game.Special;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using RewindGame.Game.Abstract;
 
 namespace RewindGame.Game
 {
@@ -40,7 +41,7 @@ namespace RewindGame.Game
     public class Level : UnpopulatedLevel
     {
         // I don't even think we have any entities besides the player, which isn't even kept here...
-        public List<TimeEntity> sceneEntities = new List<TimeEntity>();
+        public List<ITimeEntity> sceneEntities = new List<ITimeEntity>();
 
         public List<ICollisionObject> sceneSolids = new List<ICollisionObject>();
 
@@ -83,11 +84,6 @@ namespace RewindGame.Game
                 i.Draw(state, sprite_batch);
             }
 
-            foreach (Entity i in getAllEntities())
-            {
-                i.Draw(state, sprite_batch);
-            }
-
         }
 
         public void DrawForeground(StateData state, SpriteBatch sprite_batch) {
@@ -96,14 +92,24 @@ namespace RewindGame.Game
             {
                 i.Draw(state, sprite_batch);
             }
+
+            foreach (Entity i in getAllEntities())
+            {
+                i.Draw(state, sprite_batch);
+            }
         }
         
         public void Update(StateData state)
         {
             // someone who knows how to do mapping functons in c# redo this
-            foreach (IGameObject i in getAllEverything())
+            foreach (IGameObject i in getEverythingButEntities())
             {
                 i.Update(state);
+            }
+
+            foreach (ITimeEntity i in getAllEntities())
+            {
+                i.TemporalUpdate(state);
             }
         }
 
@@ -136,12 +142,12 @@ namespace RewindGame.Game
 
         public CollisionReturn getSolidCollisionAt(FRectangle rect, MoveDirection direction) { return getSolidCollisionAt(rect, direction, null); }
 
-        public CollisionReturn getSolidCollisionAt(FRectangle rect, MoveDirection direction, Solid pusher)
+        public CollisionReturn getSolidCollisionAt(FRectangle rect, MoveDirection direction, Solid excluded_solid)
         {
             var return_collision = CollisionReturn.None();
-            foreach (CollisionObject solid in sceneSolids)
+            foreach (ICollisionObject solid in getAllSolids())
             {
-                if (solid == pusher) continue;
+                if (solid == excluded_solid) continue;
                 CollisionReturn collision = solid.getCollision(rect, direction);
                 if (collision.priority > return_collision.priority) return_collision = collision;
             }
@@ -293,8 +299,30 @@ namespace RewindGame.Game
                 yield return i;
             }
         }
-    
-    
+
+        public IEnumerable<IGameObject> getEverythingButEntities()
+        {
+            foreach (Entity i in getAllEntities())
+            {
+                yield return i;
+            }
+
+            foreach (ICollisionObject i in getAllSolids())
+            {
+                yield return i;
+            }
+
+            foreach (IGameObject i in getAllBackgroundDecoratives())
+            {
+                yield return i;
+            }
+
+            foreach (IGameObject i in getAllForegroundDecoratives())
+            {
+                yield return i;
+            }
+        }
+
         public void AddEntity(TimeEntity ent)
         {
             sceneEntities.Add(ent);

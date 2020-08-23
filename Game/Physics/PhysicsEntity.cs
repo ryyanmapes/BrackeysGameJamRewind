@@ -18,7 +18,10 @@ namespace RewindGame.Game
         protected float groundedXFriction = 1000f;
         protected float gravitationalAcceleration = 1250f;
 
-        protected GroundedReturn grounded = GroundedReturn.no;
+        public GroundedReturn grounded = GroundedReturn.no;
+
+        public CollisionObject hungObject;
+        public HangDirection hangDirection = HangDirection.None;
 
         public override void Update(StateData state)
         {
@@ -26,8 +29,7 @@ namespace RewindGame.Game
 
             float elapsed = (float)state.getDeltaTime();
 
-            moveX(velocity.X * elapsed);
-            moveY(velocity.Y * elapsed);
+            base.Update(state);
 
             // our main mechanic will have to do something about this
             // will this actually work just as expected if elapsed is negative?!
@@ -56,7 +58,7 @@ namespace RewindGame.Game
             var box = getCollisionBox();
             box.Y += 1;
 
-            if (localLevel.getSolidCollisionAt(box, MoveDirection.down).type == CollisionType.normal)
+            if (localLevel.getSolidCollisionAt(box, MoveDirection.down, linkedSolid).type == CollisionType.normal)
             {
                 grounded = GroundedReturn.grounded;
             }
@@ -73,7 +75,7 @@ namespace RewindGame.Game
             {
                 var box = getCollisionBox();
                 box.X += 1;
-                var collision = localLevel.getSolidCollisionAt(box, MoveDirection.right);
+                var collision = localLevel.getSolidCollisionAt(box, MoveDirection.right, linkedSolid);
                 if (collision.type == CollisionType.normal)
                 {
                     hungObject = collision.collisionee;
@@ -85,7 +87,7 @@ namespace RewindGame.Game
             {
                 var box = getCollisionBox();
                 box.X -= 1;
-                var collision = localLevel.getSolidCollisionAt(box, MoveDirection.left);
+                var collision = localLevel.getSolidCollisionAt(box, MoveDirection.left, linkedSolid);
                 if (collision.type == CollisionType.normal)
                 {
                     hungObject = collision.collisionee;
