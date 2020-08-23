@@ -223,7 +223,7 @@ namespace RewindGame.Game
         }
 
 
-        public override GroundedReturn getGrounded(StateData state)
+        public override void UpdateGrounded(StateData state)
         {
             var box = getCollisionBox();
             box.Y += 1;
@@ -231,23 +231,35 @@ namespace RewindGame.Game
             switch (collision.type)
             {
                 case CollisionType.normal:
-                    return GroundedReturn.grounded;
+                    grounded = GroundedReturn.grounded;
+                    return;
                 case CollisionType.forward_floof:
                     if (velocity.Y >= 0)
                     {
                         ((Floof)collision.collisionee).Consume(state);
-                        return GroundedReturn.floof_forwards;
+                        grounded = GroundedReturn.floof_forwards;
+                        return;
                     }
-                    else return GroundedReturn.no;
+                    else
+                    {
+                        grounded = GroundedReturn.no;
+                        return;
+                    }
                 case CollisionType.backward_floof:
                     if (velocity.Y >= 0)
                     {
                         ((Floof)collision.collisionee).Consume(state);
-                        return GroundedReturn.floof_backwards;
+                        grounded = GroundedReturn.floof_backwards;
+                        return;
                     }
-                    else return GroundedReturn.no;
+                    else
+                    {
+                        grounded = GroundedReturn.no;
+                        return;
+                    }
                 default:
-                    return GroundedReturn.no;
+                    grounded = GroundedReturn.no;
+                    return;
             }
         }
 

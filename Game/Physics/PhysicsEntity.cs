@@ -46,19 +46,57 @@ namespace RewindGame.Game
 
             velocity = new Vector2(minMagnitude(velocity.X, maxVelocityMagnitudeX), Math.Clamp(velocity.Y, minVelocityY, maxVelocityY));
 
-            grounded = getGrounded(state);
+            UpdateGrounded(state);
+
+            UpdateWallHang(state);
         }
 
-        public virtual GroundedReturn getGrounded(StateData state)
+        public virtual void UpdateGrounded(StateData state)
         {
             var box = getCollisionBox();
             box.Y += 1;
 
             if (localLevel.getSolidCollisionAt(box, MoveDirection.down).type == CollisionType.normal)
             {
-                return GroundedReturn.grounded;
+                grounded = GroundedReturn.grounded;
             }
-            return GroundedReturn.no;
+            else
+            {
+                grounded = GroundedReturn.no;
+            }
+        }
+
+        public virtual void UpdateWallHang(StateData state)
+        {
+
+            if (velocity.X > 0 || hangDirection == HangDirection.Right)
+            {
+                var box = getCollisionBox();
+                box.X += 1;
+                var collision = localLevel.getSolidCollisionAt(box, MoveDirection.right);
+                if (collision.type == CollisionType.normal)
+                {
+                    hungObject = collision.collisionee;
+                    hangDirection = HangDirection.Right;
+                    return;
+                }
+            }
+            else if (velocity.X < 0 || hangDirection == HangDirection.Left)
+            {
+                var box = getCollisionBox();
+                box.X -= 1;
+                var collision = localLevel.getSolidCollisionAt(box, MoveDirection.left);
+                if (collision.type == CollisionType.normal)
+                {
+                    hungObject = collision.collisionee;
+                    hangDirection = HangDirection.Left;
+                    return;
+                }
+            }
+
+            hungObject = null;
+            hangDirection = HangDirection.None;
+
         }
 
         public static float addMagnitude(float i, float addend)

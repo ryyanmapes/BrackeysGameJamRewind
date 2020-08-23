@@ -30,7 +30,8 @@
           ],
           "values": {"velocity_x": 0, "velocity_y": 0}
         },
-        {"name": "limbosolid", "id": 4, "_eid": "16462542", "x": 224, "y": 70, "originX": 0, "originY": 0}
+        {"name": "limbosolid", "id": 4, "_eid": "16462542", "x": 224, "y": 70, "originX": 0, "originY": 0},
+        {"name": "limbosolid", "id": 5, "_eid": "16462542", "x": 140, "y": 70, "originX": 0, "originY": 0}
       ]
     },
     {

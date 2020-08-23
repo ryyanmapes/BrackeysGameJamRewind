@@ -88,8 +88,8 @@ namespace RewindGame.Game
                     hangDirection = HangDirection.None;
                 }*/
 
-                hungObject = null;
-                hangDirection = HangDirection.None;
+                //hungObject = null;
+                //hangDirection = HangDirection.None;
 
                 Vector2 new_position = position + new Vector2(sign, 0);
 
@@ -106,8 +106,8 @@ namespace RewindGame.Game
                         else
                         {
                             velocity.X = 0;
-                            hungObject = collision.collisionee;
-                            hangDirection = sign > 0 ? HangDirection.Right : HangDirection.Left;
+                            //hungObject = collision.collisionee;
+                            //hangDirection = sign > 0 ? HangDirection.Right : HangDirection.Left;
                         }
                         return;
                     case CollisionType.death:

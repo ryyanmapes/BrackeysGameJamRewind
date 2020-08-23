@@ -23,7 +23,7 @@ namespace RewindGame.Game.Solids
         {
             renderer = new BasicSprite("debug/square");
             renderWithCollisionBox = true;
-            base.Initialize(level, starting_pos, new Vector2(-100, 0), new Vector2(GameUtils.TILE_WORLD_SIZE*3));
+            base.Initialize(level, starting_pos, new Vector2(100, 0), new Vector2(GameUtils.TILE_WORLD_SIZE*3));
         }
 
     }
