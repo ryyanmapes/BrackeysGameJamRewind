@@ -8,7 +8,7 @@ using RewindGame.Game.Graphics;
 namespace RewindGame.Game.Solids
 {
 
-    class Platform : MovingSolid
+    class Platform : SimpleSolid
     {
 
         public virtual void Initialize(Level level, Vector2 starting_pos, Vector2 velocity_, float tile_len)

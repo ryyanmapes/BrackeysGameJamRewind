@@ -222,6 +222,7 @@ namespace RewindGame.Game
             temporaryAllowJump = true;
         }
 
+
         public override GroundedReturn getGrounded(StateData state)
         {
             var box = getCollisionBox();
@@ -248,6 +249,26 @@ namespace RewindGame.Game
                 default:
                     return GroundedReturn.no;
             }
+        }
+
+        // for use with solids- the player is riding if it's either directly above (as base entity defines)
+        // or if they are wall riding the solid
+        public override bool isRiding(Solid solid)
+        {
+            bool foundWallRiding = false;
+
+            /*
+            var box = getCollisionBox();
+            box.X -= 1;
+            if (solid.getCollision(box, MoveDirection.left).type == CollisionType.normal) foundWallRiding = true;
+
+            box.X += 2;
+            if (solid.getCollision(box, MoveDirection.right).type == CollisionType.normal) foundWallRiding = true;
+            */
+
+            //(CollisionObject)solid == hungObject
+            return base.isRiding(solid) || foundWallRiding || (CollisionObject)solid == hungObject;
+
         }
 
 

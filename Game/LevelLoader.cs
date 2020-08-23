@@ -333,6 +333,10 @@ namespace RewindGame.Game
                 case "limbospikyball":
                     level.AddSolid(LimboSpikyBall.Make(level, position, info.radius, info.speed, info.starting_rotation_degrees));
                     return;
+                case "limbosolid":
+                    level.AddSolid(LimboSquare.Make(level, position));
+                    return;
+
                 case "cottonwoodplatform":
                     level.AddSolid(CottonwoodPlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), false));
                     return;

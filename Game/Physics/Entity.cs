@@ -75,6 +75,19 @@ namespace RewindGame.Game
 
             while (move != 0)
             {
+                /*
+                if (pusher != null)
+                {
+                    velocity.X = 0;
+                    hungObject = pusher;
+                    hangDirection = sign < 0 ? HangDirection.Right : HangDirection.Left;
+                }
+                else
+                {
+                    hungObject = null;
+                    hangDirection = HangDirection.None;
+                }*/
+
                 hungObject = null;
                 hangDirection = HangDirection.None;
 
@@ -158,14 +171,12 @@ namespace RewindGame.Game
         public virtual void RefreshJump() { }
 
 
-        public bool isRiding(Solid solid)
+        public virtual bool isRiding(Solid solid)
         {
             var box = getCollisionBox();
             box.Y += 1;
-            if (solid.getCollision(box, MoveDirection.down).type == CollisionType.normal)
-            {
-                return true;
-            }
+            if (solid.getCollision(box, MoveDirection.down).type == CollisionType.normal) return true;
+
             return false;
         }
 
