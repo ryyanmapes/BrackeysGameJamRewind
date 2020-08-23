@@ -438,6 +438,14 @@ namespace RewindGame
                 input_data.is_devkey_down[10] = true;
 
 
+            var is_level_reload_down = keyboard_state.IsKeyDown(Keys.Back);
+
+            if ((!previous_input_data.is_level_reload || previous_input_data.is_devkey_down[11]) && is_level_reload_down)
+                input_data.is_level_reload = true;
+            else if (is_level_reload_down)
+                input_data.is_devkey_down[11] = true;
+
+
 
             // force exit
             if (gamepad_state.Buttons.Back == ButtonState.Pressed || keyboard_state.IsKeyDown(Keys.Escape))
@@ -793,6 +801,11 @@ namespace RewindGame
                     loadLevelAndConnections(userout);
                     isPlayerDeathQued = true;
                 }
+            }
+            else if(inputs.is_level_reload)
+            {
+                loadLevelAndConnections(activeLevel.name);
+                isPlayerDeathQued = true;
             }
         }
         

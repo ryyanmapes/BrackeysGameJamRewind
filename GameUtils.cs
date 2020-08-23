@@ -99,6 +99,7 @@ namespace RewindGame
             is_cottonHalf_down = false;
             is_eternalHalf_down = false;
             is_level_select = false;
+            is_level_reload = false;
             for (int i = 0; i < is_devkey_down.Length; i++)
             {
                 is_devkey_down[i] = false;
@@ -125,8 +126,9 @@ namespace RewindGame
         public bool is_cottonHalf_down; //8  COTTON 50%
         public bool is_eternalHalf_down;//9  ETERNAL 50%
         public bool is_level_select;    //10 LEVEL SELECT
+        public bool is_level_reload;    //11 LEVEL RELOAD
 
-        public bool[] is_devkey_down = new bool[11];
+        public bool[] is_devkey_down = new bool[12];
 
 
         public float horizontal_axis_value;
