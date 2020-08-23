@@ -884,7 +884,7 @@ namespace RewindGame
             float edge_right = 12 + activeLevelOffset.X + (GameUtils.LEVEL_SIZE_X * (activeLevel.screensHorizontal - 0.5f));
             float edge_down = 12 + activeLevelOffset.Y + GameUtils.LEVEL_SIZE_Y / 2;
             float edge_up = 12 + activeLevelOffset.Y + (GameUtils.LEVEL_SIZE_Y * (activeLevel.screensVertical - 0.5f));
-            return new Vector2(Math.Clamp(player.position.X, edge_left, edge_right), Math.Clamp(player.position.Y, edge_down, edge_up));
+            return new Vector2(Math.Clamp(player.position.X, edge_left, edge_right), Math.Clamp(player.position.Y + GameUtils.CAMERA_FOCUS_Y_OFFSET, edge_down, edge_up));
         }
 
 

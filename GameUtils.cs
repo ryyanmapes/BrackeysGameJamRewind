@@ -37,6 +37,9 @@ namespace RewindGame
         public const float PLAYER_DEATH_TIME = 0.5f;
 
 
+        public const int CAMERA_FOCUS_Y_OFFSET = -112;
+
+
         public static Interval FULL_TIME_BOUND = new Interval(-300, 300);
         public static Interval FULL_DANGER_BOUND = new Interval(-250, 250);
 
