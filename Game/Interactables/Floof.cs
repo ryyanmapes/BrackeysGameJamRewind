@@ -26,8 +26,8 @@ namespace RewindGame.Game.Solids
 
         protected AnimationChoice anim_idle_pink = new AnimationChoice("idle", "cottonwood/jumppoofpink", 1, 1, true, 1, Vector2.Zero);
         protected AnimationChoice anim_idle_green = new AnimationChoice("idle", "cottonwood/jumppoofgreen", 1, 1, true, 1, Vector2.Zero);
-        protected AnimationChoice anim_poof_pink = new AnimationChoice("pop", "cottonwood/jumppoofpinkpop", 1, 1, false, 1, Vector2.Zero, "idle", "");
-        protected AnimationChoice anim_poof_green = new AnimationChoice("pop", "cottonwood/jumppoofgreenpop", 1, 1, false, 1, Vector2.Zero, "idle", "");
+        protected AnimationChoice anim_poof_pink = new AnimationChoice("poof", "cottonwood/jumppoofpinkpop", 1, 1, false, 1, Vector2.Zero, "idle", "");
+        protected AnimationChoice anim_poof_green = new AnimationChoice("poof", "cottonwood/jumppoofgreenpop", 1, 1, false, 1, Vector2.Zero, "idle", "");
 
         public static Floof Make(Level level, Vector2 starting_pos, Vector2 velocity_, bool isForwards)
         {
@@ -47,11 +47,11 @@ namespace RewindGame.Game.Solids
 
             if (isForwards)
             {
-                renderer = new AnimationChooser(new AnimationChoice[] { anim_idle_pink, anim_poof_pink }, localLevel.Content);
+                renderer = new AnimationChooser(new AnimationChoice[] { anim_idle_pink, anim_poof_pink }, level.Content);
             }
             else
             {
-                renderer = new AnimationChooser(new AnimationChoice[] { anim_idle_green, anim_poof_green }, localLevel.Content);
+                renderer = new AnimationChooser(new AnimationChoice[] { anim_idle_green, anim_poof_green }, level.Content);
             }
             ((AnimationChooser)renderer).changeAnimation("idle");
 

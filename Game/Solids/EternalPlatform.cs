@@ -10,32 +10,39 @@ namespace RewindGame.Game.Solids
 {
 
 
-    class EternalPlatform : LimboPlatform
+    class EternalPlatform : Platform
     {
 
-        protected new AnimationPlayer renderLongDown = new AnimationPlayer("eternal/terrariumplatformdownlong", 1, 1, true, 1, Vector2.Zero);
-        protected new AnimationPlayer renderLongUp = new AnimationPlayer("eternal/terrariumplatformuplong", 1, 1, true, 1, Vector2.Zero);
-        protected new AnimationPlayer renderDown = new AnimationPlayer("eternal/terrariumplatformup", 1, 1, true, 1, Vector2.Zero);
-        protected new AnimationPlayer renderUp = new AnimationPlayer("eternal/terrariumplatformdown", 1, 1, true, 1, Vector2.Zero);
+        protected  AnimationPlayer renderLongDown = new AnimationPlayer("eternal/terrariumplatformdownlong", 1, 1, true, 1, Vector2.Zero);
+        protected  AnimationPlayer renderLongUp = new AnimationPlayer("eternal/terrariumplatformuplong", 1, 1, true, 1, Vector2.Zero);
+        protected  AnimationPlayer renderDown = new AnimationPlayer("eternal/terrariumplatformup", 1, 1, true, 1, Vector2.Zero);
+        protected  AnimationPlayer renderUp = new AnimationPlayer("eternal/terrariumplatformdown", 1, 1, true, 1, Vector2.Zero);
 
-        public new static EternalPlatform Make(Level level, Vector2 starting_pos, Vector2 velocity_, bool isLong)
+        public  static EternalPlatform Make(Level level, Vector2 starting_pos, Vector2 velocity_, bool isLong)
         {
             var tile = new EternalPlatform();
             tile.Initialize(level, starting_pos, velocity_, isLong);
             return tile;
+
         }
 
-        public override void Update(StateData state)
+        public virtual void Initialize(Level level, Vector2 starting_pos, Vector2 velocity_, bool is_long)
         {
-            int sign = state.time_data.time_moment < 0 ? -1 : 1;
 
-            // This didn't make sense as we had it, so it's removed for now
-            // todo add a proper indicator of when the platform swaps directions
-            //if (sign * velocity.Y < 0) anims.changeAnimation("up");
-            //else anims.changeAnimation("down");
-            
+            // I know this looks like an awful mess, but trust me it's better than the ten lines I had before
+            renderer = is_long ? ((velocity_.Y < 0) ? renderLongDown : renderLongUp) : ((velocity_.Y < 0) ? renderDown : renderUp);
 
-            Move(new Vector2(velocity.X * state.getTimeDependentDeltaTime() * sign, velocity.Y * state.getTimeDependentDeltaTime() * sign));
+            base.Initialize(level, starting_pos, velocity_, is_long ? 4 : 2);
+        }
+
+        public override void Draw(StateData state, SpriteBatch sprite_batch)
+        {
+            if (velocity.X < 0) spriteEffects = SpriteEffects.FlipHorizontally;
+            else spriteEffects = SpriteEffects.None;
+
+            base.Draw(state, sprite_batch);
+
+            ((AnimationPlayer)renderer).UpdateAnimation(state, state.getTimeN());
         }
 
     }
