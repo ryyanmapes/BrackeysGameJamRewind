@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
+using Newtonsoft.Json;
 using System.IO;
 using System.Text;
 
@@ -9,30 +10,45 @@ namespace RewindGame.Game.ExternalUtills
 {
     class ProgressStore
     {
+        public class ProgressData
+        {
+            public string Level;
+            //Add properties here
+        }
+        static public string path  = "Progress.json";
+        
         public static string readSavedLevel()
         {
-            string path = "Level.txt";
-
-
             using (StreamReader sr = new StreamReader(path))
             {
-                return sr.ReadLine();
+                var data = JsonConvert.DeserializeObject<ProgressData>(sr.ReadToEnd());
+                return data.Level;
             }
         }
-        public static void StoreLevel(string level)
+        public static void StoreLevel(ProgressData data)
         {
-            string path = "Level.txt";
             File.Create(path).Close();
             using (StreamWriter sw = new StreamWriter(path))
             {
-                sw.WriteLine(level);
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(sw, data);
             }
         }
 
         public static void Init()
         {
-            string path = "Level.txt";
-            using (StreamWriter w = File.AppendText(path)) ;
+            using (StreamWriter w = File.AppendText(path));
+        }
+        public static bool DoesFileContainLevel()
+        {
+            using (StreamReader sr = new StreamReader(path))
+            {
+                var data = JsonConvert.DeserializeObject<ProgressData>(sr.ReadToEnd());
+                if (data.Level == "")
+                    return false;
+                else
+                    return true;
+            }
         }
     }
 }

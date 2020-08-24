@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-
+using System.Data.Common;
 
 namespace RewindGame
 {
@@ -129,7 +129,7 @@ namespace RewindGame
 
             if (!HasReadFromStored && !GameUtils.OVERRIDE_LEVEL_LOAD)
             {
-                if (new FileInfo("Level.txt").Exists && new FileInfo("Level.txt").Length > 0)
+                if (new FileInfo(ProgressStore.path).Exists && ProgressStore.DoesFileContainLevel())
                 {
                     string current = ProgressStore.readSavedLevel();
                     if (current.Contains("limbo"))
@@ -263,7 +263,14 @@ namespace RewindGame
             activeLevel = center_level;
             center_level.isActiveScene = true;
             center_level.SetActive();
-            ProgressStore.StoreLevel(activeLevel.name);
+            if (!GameUtils.OVERRIDE_LEVEL_SAVE)
+            {
+                var data = new ProgressStore.ProgressData 
+                { 
+                    Level = activeLevel.name,
+                };
+                ProgressStore.StoreLevel(data);
+            }
 
         }
 
