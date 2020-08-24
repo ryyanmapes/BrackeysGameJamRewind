@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using RewindGame.Game.Abstract;
 using RewindGame.Game.Graphics;
+using System.Drawing;
 
 namespace RewindGame.Game.Solids
 {
@@ -18,6 +19,7 @@ namespace RewindGame.Game.Solids
         private float current_rotation_radians;
         private Vector2 startingPosition;
         private Vector2 currentPosition;
+        private static int rott;
 
         public static LimboSpikyBall Make(Level level, Vector2 starting_pos, float radius, float rotations, int starting_rotation)
         {
@@ -46,8 +48,11 @@ namespace RewindGame.Game.Solids
 
         public override void Update(StateData state)
         {
-            float speed = (float)360 / state.time_bound.max;
-            speed *= rotations;
+            float speed = (float)360 / (float)(state.time_bound.max*112);
+            //Console.WriteLine(state);
+             speed *= rotations;
+
+            //current_rotation_degrees = rott;
 
             if (state.getTimeDependentDeltaTime() > 0)
             {
@@ -80,6 +85,5 @@ namespace RewindGame.Game.Solids
             position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees)));
             base.Reset();
         }
-
     }
 }
