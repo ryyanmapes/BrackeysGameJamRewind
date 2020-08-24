@@ -19,7 +19,8 @@ namespace RewindGame.Game.Solids
         private Vector2 startingPosition;
         private Vector2 currentPosition;
 
-        public new IRenderMethod renderer = new AnimationPlayer("eternal/terrariumchainball", 4, 2, true, 1, Vector2.Zero);
+        //public new IRenderMethod renderer = new AnimationPlayer("eternal/terrariumchainball", 4, 2, true, 1, Vector2.Zero);
+        protected AnimationChoice anim_only = new AnimationChoice("one", "eternal/terrariumchainball", 4, 2, true);
 
         public static EternalSpikyBall Make(Level level, Vector2 starting_pos, float radius, int rots, int starting_rotation)
         {
@@ -37,6 +38,10 @@ namespace RewindGame.Game.Solids
             startingPosition = starting_pos - new Vector2(GameUtils.TILE_WORLD_SIZE/2, GameUtils.TILE_WORLD_SIZE/2);
             currentPosition = startingPosition;
 
+            AnimationChooser anims = new AnimationChooser(new AnimationChoice[] {anim_only}, level.Content);
+            anims.changeAnimation("one");
+            renderer = anims;
+
             collisionSize = new Vector2(84, 84);
             collisionType = CollisionType.death;
             starting_rotation_degrees = startingrotation;
@@ -47,11 +52,11 @@ namespace RewindGame.Game.Solids
 
         public override void Update(StateData state)
         {
-            float speed = (float)(360) / (float)state.time_bound.max;
+            float speed = (float)(2 * Math.PI * radius) / (float)state.getTimeLen();
             speed *= rotations;
             if (state.getTimeDependentDeltaTime() > 0)
             {
-                current_rotation_degrees += speed;
+                current_rotation_degrees += speed * .1f;
                 current_rotation_radians = (float)(((current_rotation_degrees + 90) * Math.PI / 180));
                 // currentPosition += new Vector2((int)(Math.Cos(current_rotation_degrees)), (int)(Math.Sin(current_rotation_degrees)));
                 position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees - 90)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees - 90)));
@@ -59,7 +64,7 @@ namespace RewindGame.Game.Solids
             }
             else if (state.getTimeDependentDeltaTime() < 0)
             {
-                current_rotation_degrees -= speed;
+                current_rotation_degrees -= speed * .1f;
                 current_rotation_radians = (float)(((current_rotation_degrees + 90) * Math.PI / 180));
                 //currentPosition += new Vector2((int)(radius * Math.Cos(current_rotation_degrees)), (int)(radius * Math.Sin(current_rotation_degrees)));
                 position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees - 90)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees - 90)));
@@ -74,13 +79,15 @@ namespace RewindGame.Game.Solids
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
             base.Draw(state, sprite_batch);
-            ((AnimationPlayer)renderer).UpdateAnimation(state, state.getTimeSign());
+            //((AnimationPlayer)renderer).UpdateAnimation(state, state.getTimeN());
+            renderer.Draw(state, sprite_batch, position, SpriteEffects.None);
         }
         public override void Reset() 
         {
             currentPosition = startingPosition;
             current_rotation_degrees = 0;
             position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees)));
+            ((AnimationChooser)renderer).changeAnimation("one");
             base.Reset();
         }
 

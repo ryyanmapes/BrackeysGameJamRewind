@@ -66,6 +66,7 @@ namespace RewindGame.Game.Solids
                 //Move(new Vector2((int)(radius * -Math.Cos(current_rotation_radians)), (int)(radius * -Math.Sin(current_rotation_radians))));
             }
             // todo what is the point of this?
+            // to keep the number from overflowing, just as a saftey point not really needed unless the speed is really high or for some godforsaken reason someone spends way to long in a level
             if (current_rotation_degrees == 0)
             {
                 current_rotation_degrees = 360;
