@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace RewindGame.Game.LevelSelector
+namespace RewindGame.Game.ExternalUtills
 {
-    class PopupBox
+    class DevkeyUtills
     {
         public static void ShowEternalUnimplimentedBox()
         {

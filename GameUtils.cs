@@ -20,6 +20,7 @@ namespace RewindGame
 
         public const bool SHOULD_SOLIDTILES_RENDER = true;
         public const bool USE_DEBUG_KEYS = true;
+        public const bool OVERRIDE_LEVEL_LOAD = true;
 
         // GAME
 

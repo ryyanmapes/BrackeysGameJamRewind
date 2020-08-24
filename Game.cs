@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RewindGame.Game;
-using RewindGame.Game.LevelSelector;
+using RewindGame.Game.ExternalUtills;
 using RewindGame.Game.Effects;
 using RewindGame.Game.Solids;
 using RewindGame.Game.Sound;
@@ -100,15 +100,16 @@ namespace RewindGame
 
             graphics.ApplyChanges();
 
-        }
 
+            ProgressStore.Init(); // Creates progress store file if none exists
+
+        }
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             base.Initialize();
         }
-
+        private bool HasReadFromStored = false;
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -126,7 +127,32 @@ namespace RewindGame
             soundManager = new SoundManager(this);
             timelineGUI = new TimelineBarGUI(this);
 
-            LoadArea(AreaState.limbo);
+            if (!HasReadFromStored && !GameUtils.OVERRIDE_LEVEL_LOAD)
+            {
+                if (new FileInfo("Level.txt").Exists && new FileInfo("Level.txt").Length > 0)
+                {
+                    string current = ProgressStore.readSavedLevel();
+                    if (current.Contains("limbo"))
+                        LoadArea(AreaState.limbo);
+                    else if (current.Contains("cotton"))
+                        LoadArea(AreaState.cotton);
+                    else if (current.Contains("eternal"))
+                        LoadArea(AreaState.eternal);
+                    else
+                    {
+                        current = "limbo1";
+                        LoadArea(AreaState.limbo);
+                    }
+                        
+                    loadLevelAndConnections(current);
+                }
+                else
+                    LoadArea(AreaState.limbo);
+                HasReadFromStored = true;
+            }
+            else
+                LoadArea(AreaState.limbo);
+                HasReadFromStored = true;
 
             player = new PlayerEntity(this, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2 - 300));
             player.position = activeLevel.playerSpawnpoint;
@@ -237,6 +263,7 @@ namespace RewindGame
             activeLevel = center_level;
             center_level.isActiveScene = true;
             center_level.SetActive();
+            ProgressStore.StoreLevel(activeLevel.name);
 
         }
 
@@ -728,7 +755,7 @@ namespace RewindGame
             else if (inputs.is_eternalHalf_down)
             {
                 //todo: get to the point where there is a 50% point for eternal
-                PopupBox.ShowEternalUnimplimentedBox();
+                DevkeyUtills.ShowEternalUnimplimentedBox();
 
             }
 
@@ -741,7 +768,7 @@ namespace RewindGame
                 }
                 else
                 {
-                    PopupBox.NoConnectedLevel("Up");
+                    DevkeyUtills.NoConnectedLevel("Up");
                 }
             }
             else if (inputs.is_level_right)
@@ -753,7 +780,7 @@ namespace RewindGame
                 }
                 else
                 {
-                    PopupBox.NoConnectedLevel("Right");
+                    DevkeyUtills.NoConnectedLevel("Right");
                 }
             }
             else if (inputs.is_level_down)
@@ -765,7 +792,7 @@ namespace RewindGame
                 }
                 else
                 {
-                    PopupBox.NoConnectedLevel("Down");
+                    DevkeyUtills.NoConnectedLevel("Down");
                 }
             }
             else if (inputs.is_level_left)
@@ -777,12 +804,12 @@ namespace RewindGame
                 }
                 else
                 {
-                    PopupBox.NoConnectedLevel("Left");
+                    DevkeyUtills.NoConnectedLevel("Left");
                 }
             }
             else if(inputs.is_level_select)
             {
-                string userout = PopupBox.GetLevel();
+                string userout = DevkeyUtills.GetLevel();
                 if (userout.Contains("limbo"))
                 {
                     LoadArea(AreaState.limbo);
@@ -804,6 +831,7 @@ namespace RewindGame
             }
             else if(inputs.is_level_reload)
             {
+                Console.WriteLine(ProgressStore.readSavedLevel());
                 loadLevelAndConnections(activeLevel.name);
                 isPlayerDeathQued = true;
             }
