@@ -17,16 +17,7 @@
       "gridCellsY": 17,
       "entities": [
         {"name": "playerspawn", "id": 0, "_eid": "67213102", "x": 56, "y": 126, "originX": -3, "originY": -7},
-        {
-          "name": "limbospikeplatform",
-          "id": 3,
-          "_eid": "73855664",
-          "x": 308,
-          "y": 56,
-          "originX": 0,
-          "originY": -14,
-          "values": {"velocity_x": 0, "velocity_y": 10}
-        },
+        {"name": "limbospikeplatform", "id": 3, "_eid": "73855664", "x": 308, "y": 56, "originX": 0, "originY": -14},
         {
           "name": "limbospikyball",
           "id": 5,
@@ -35,18 +26,9 @@
           "y": 70,
           "originX": 0,
           "originY": 0,
-          "values": {"radius": 56, "speed": 1, "starting_rotation_degrees": 0}
+          "values": {"rotations": 0}
         },
-        {
-          "name": "limboplatform",
-          "id": 6,
-          "_eid": "69830920",
-          "x": 210,
-          "y": 210,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 0, "velocity_y": 100}
-        }
+        {"name": "limboplatform", "id": 6, "_eid": "69830920", "x": 210, "y": 210, "originX": 0, "originY": 0}
       ]
     },
     {

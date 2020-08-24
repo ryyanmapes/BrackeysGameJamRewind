@@ -11,19 +11,19 @@ namespace RewindGame.Game.Solids
     class LimboSquare : SimpleSolid
     {
 
-        public static LimboSquare Make(Level level, Vector2 starting_pos)
+        public static LimboSquare Make(Level level, Vector2 starting_pos, Vector2 vel)
         {
             var tile = new LimboSquare();
-            tile.Initialize(level, starting_pos);
+            tile.Initialize(level, starting_pos, vel);
             return tile;
         }
 
 
-        public override void Initialize(Level level, Vector2 starting_pos)
+        public virtual void Initialize(Level level, Vector2 starting_pos, Vector2 vel)
         {
             renderer = new BasicSprite("debug/square");
             renderWithCollisionBox = true;
-            base.Initialize(level, starting_pos, new Vector2(100, 0), new Vector2(GameUtils.TILE_WORLD_SIZE*3));
+            base.Initialize(level, starting_pos, vel, new Vector2(GameUtils.TILE_WORLD_SIZE*3));
         }
 
     }

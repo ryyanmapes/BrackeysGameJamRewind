@@ -25,7 +25,7 @@
           "y": 14,
           "originX": 0,
           "originY": 0,
-          "values": {"radius": 6.5, "starting_rotation_degrees": 0, "rotations": 2}
+          "values": {"rotations": 2}
         },
         {
           "name": "eternalspikyball",
@@ -35,7 +35,7 @@
           "y": 56,
           "originX": 0,
           "originY": 0,
-          "values": {"radius": 3, "starting_rotation_degrees": 0, "rotations": 1}
+          "values": {"rotations": 1}
         }
       ]
     },

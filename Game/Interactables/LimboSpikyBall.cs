@@ -12,24 +12,24 @@ namespace RewindGame.Game.Solids
     {
         // todo what's with the unused variables here
         public float radius;
-        public float speed;
+        public float rotations;
         public int starting_rotation_degrees;
         private float current_rotation_degrees;
         private float current_rotation_radians;
         private Vector2 startingPosition;
         private Vector2 currentPosition;
 
-        public static LimboSpikyBall Make(Level level, Vector2 starting_pos, float radius, float speed, int starting_rotation)
+        public static LimboSpikyBall Make(Level level, Vector2 starting_pos, float radius, float rotations, int starting_rotation)
         {
             var tile = new LimboSpikyBall();
-            tile.Initialize(level, starting_pos, radius, speed, starting_rotation);
+            tile.Initialize(level, starting_pos, radius, rotations, starting_rotation);
             return tile;
         }
 
-        public void Initialize(Level level, Vector2 starting_pos, float radius_, float speed_, int startingrotation)
+        public void Initialize(Level level, Vector2 starting_pos, float radius_, float rotations_, int startingrotation)
         {
             radius = radius_;
-            speed = speed_;
+            rotations = rotations_;
             current_rotation_degrees = startingrotation;
             startingPosition = starting_pos - new Vector2(GameUtils.TILE_WORLD_SIZE/2, GameUtils.TILE_WORLD_SIZE/2);
             currentPosition = startingPosition;
@@ -46,9 +46,12 @@ namespace RewindGame.Game.Solids
 
         public override void Update(StateData state)
         {
+            float speed = (float)360 / state.time_bound.max;
+            speed *= rotations;
+
             if (state.getTimeDependentDeltaTime() > 0)
             {
-                current_rotation_degrees += speed * .1f;
+                current_rotation_degrees += speed;
                 current_rotation_radians = (float)(((current_rotation_degrees + 90) * Math.PI / 180));
                 // currentPosition += new Vector2((int)(Math.Cos(current_rotation_degrees)), (int)(Math.Sin(current_rotation_degrees)));
                 position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees - 90)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees - 90)));
@@ -56,7 +59,7 @@ namespace RewindGame.Game.Solids
             }
             else if (state.getTimeDependentDeltaTime() < 0)
             {
-                current_rotation_degrees -= speed * .1f;
+                current_rotation_degrees -= speed;
                 current_rotation_radians = (float)(((current_rotation_degrees + 90) * Math.PI / 180));
                 //currentPosition += new Vector2((int)(radius * Math.Cos(current_rotation_degrees)), (int)(radius * Math.Sin(current_rotation_degrees)));
                 position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees - 90)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees - 90)));

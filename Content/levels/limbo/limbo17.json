@@ -17,36 +17,9 @@
       "gridCellsY": 19,
       "entities": [
         {"name": "playerspawn", "id": 1, "_eid": "67213102", "x": 14, "y": 112, "originX": -3, "originY": -7},
-        {
-          "name": "limboplatformlarge",
-          "id": 10,
-          "_eid": "75412653",
-          "x": 84,
-          "y": 140,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 200, "velocity_y": 0}
-        },
-        {
-          "name": "limboplatformlarge",
-          "id": 11,
-          "_eid": "75412653",
-          "x": 182,
-          "y": 140,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 200, "velocity_y": 0}
-        },
-        {
-          "name": "limboplatformlarge",
-          "id": 12,
-          "_eid": "75412653",
-          "x": 280,
-          "y": 140,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 200, "velocity_y": 0}
-        }
+        {"name": "limboplatformlarge", "id": 10, "_eid": "75412653", "x": 84, "y": 140, "originX": 0, "originY": 0},
+        {"name": "limboplatformlarge", "id": 11, "_eid": "75412653", "x": 182, "y": 140, "originX": 0, "originY": 0},
+        {"name": "limboplatformlarge", "id": 12, "_eid": "75412653", "x": 280, "y": 140, "originX": 0, "originY": 0}
       ]
     },
     {

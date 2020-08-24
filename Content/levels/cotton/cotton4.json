@@ -16,36 +16,9 @@
       "gridCellsX": 29,
       "gridCellsY": 17,
       "entities": [
-        {
-          "name": "floof_backwards",
-          "id": 1,
-          "_eid": "82453170",
-          "x": 98,
-          "y": 154,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 0, "velocity_y": 0}
-        },
-        {
-          "name": "floof_forward",
-          "id": 2,
-          "_eid": "82444963",
-          "x": 252,
-          "y": 140,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 0, "velocity_y": 0}
-        },
-        {
-          "name": "floof_forward",
-          "id": 3,
-          "_eid": "82444963",
-          "x": 350,
-          "y": 98,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 0, "velocity_y": 0}
-        },
+        {"name": "floof_backwards", "id": 1, "_eid": "82453170", "x": 98, "y": 154, "originX": 0, "originY": 0},
+        {"name": "floof_forward", "id": 2, "_eid": "82444963", "x": 252, "y": 140, "originX": 0, "originY": 0},
+        {"name": "floof_forward", "id": 3, "_eid": "82444963", "x": 350, "y": 98, "originX": 0, "originY": 0},
         {"name": "playerspawn", "id": 6, "_eid": "67213102", "x": 14, "y": 112, "originX": -3, "originY": -7}
       ]
     },

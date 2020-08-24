@@ -72,6 +72,7 @@ namespace RewindGame.Game
         public int originX;
         public int originY;
         public bool flippedX;
+        public List<NodeInfo> nodes;
         public EntityInfo values;
     }
     public class RawLevelInfo
@@ -85,12 +86,13 @@ namespace RewindGame.Game
     
     public class EntityInfo
     {
-        public float velocity_x = 0;
-        public float velocity_y = 0;
-        public float radius = 0;
-        public float speed = 0;
-        public int starting_rotation_degrees=0;
         public int rotations=1;
+    }
+
+    public class NodeInfo
+    {
+        public int x;
+        public int y;
     }
     
     class LevelLoader
@@ -158,7 +160,7 @@ namespace RewindGame.Game
         {
             foreach (RawEntities entity in tile_layer.entities)
             {
-                PlaceEntity(entity.name, entity.x, entity.y, entity.values, level);
+                PlaceEntity(entity.name, entity.x, entity.y, entity.values, entity.nodes, level);
             }
         }
 
@@ -305,7 +307,7 @@ namespace RewindGame.Game
             }
         }
 
-        public static void PlaceEntity(string name, int x, int y, EntityInfo info, Level level)
+        public static void PlaceEntity(string name, int x, int y, EntityInfo ent_info, List<NodeInfo> node_infos, Level level)
         {
             Vector2 position = new Vector2(x, y) * 4 + level.levelOrgin;
 
@@ -320,22 +322,22 @@ namespace RewindGame.Game
                     level.warp = Warp.Make(level, position);
                     return;
                 case "limboplatform":
-                    level.AddSolid(LimboPlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    level.AddSolid(LimboPlatform.Make(level, position, getDisplacementFromNode(x, y, node_infos), false));
                     return;
                 case "limboplatformlarge":
-                    level.AddSolid(LimboPlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), true));
+                    level.AddSolid(LimboPlatform.Make(level, position, getDisplacementFromNode(x, y, node_infos), true));
                     return;
                 case "limbospikeplatform":
-                    level.AddSolid(LimboSpikePlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    level.AddSolid(LimboSpikePlatform.Make(level, position, getDisplacementFromNode(x, y, node_infos), false));
                     return;
                 case "limbospikeplatformlarge":
-                    level.AddSolid(LimboSpikePlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), true));
+                    level.AddSolid(LimboSpikePlatform.Make(level, position, getDisplacementFromNode(x, y, node_infos), true));
                     return;
                 case "limbospikyball":
-                    level.AddSolid(LimboSpikyBall.Make(level, position, info.radius, info.speed, info.starting_rotation_degrees));
+                    level.AddSolid(LimboSpikyBall.Make(level, position, getRadiusFromNode(x, y, node_infos), ent_info.rotations, getAngleFromNode(x, y, node_infos)));
                     return;
                 case "limbosolid":
-                    level.AddSolid(LimboSquare.Make(level, position));
+                    level.AddSolid(LimboSquare.Make(level, position, getDisplacementFromNode(x, y, node_infos)));
                     return;
 
                 case "citycrate":
@@ -343,31 +345,31 @@ namespace RewindGame.Game
                     return;
 
                 case "cottonwoodplatform":
-                    level.AddSolid(CottonwoodPlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    level.AddSolid(CottonwoodPlatform.Make(level, position, getDisplacementFromNode(x, y, node_infos), false));
                     return;
                 case "cottonwoodplatformlarge":
-                    level.AddSolid(CottonwoodPlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), true));
+                    level.AddSolid(CottonwoodPlatform.Make(level, position, getDisplacementFromNode(x, y, node_infos), true));
                     return;
                 case "floof_forward":
-                    level.AddSolid(Floof.Make(level, position, Vector2.Zero, true));
+                    level.AddSolid(Floof.Make(level, position, getDisplacementFromNode(x, y, node_infos), true));
                     return;
                 case "floof_backwards":
-                    level.AddSolid(Floof.Make(level, position, Vector2.Zero, false));
+                    level.AddSolid(Floof.Make(level, position, getDisplacementFromNode(x, y, node_infos), false));
                     return;
                 case "eternalplatform":
-                    level.AddSolid(EternalPlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    level.AddSolid(EternalPlatform.Make(level, position, getDisplacementFromNode(x, y, node_infos), false));
                     return;
                 case "eternalplatformlarge":
-                    level.AddSolid(EternalPlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), true));
+                    level.AddSolid(EternalPlatform.Make(level, position, getDisplacementFromNode(x, y, node_infos), true));
                     return;
                 case "eternalspikyball":
-                    level.AddSolid(EternalSpikyBall.Make(level, position, info.radius, info.rotations, info.starting_rotation_degrees));
+                    level.AddSolid(EternalSpikyBall.Make(level, position, getRadiusFromNode(x,y,node_infos), ent_info.rotations, getAngleFromNode(x,y,node_infos)));
                     return;
                 case "eternalspikyplatform":
-                    level.AddSolid(EternalSpikePlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    level.AddSolid(EternalSpikePlatform.Make(level, position, getDisplacementFromNode(x, y, node_infos), false));
                     return;
                 case "eternalspikyplatformlarge":
-                    level.AddSolid(EternalSpikePlatform.Make(level, position, new Vector2(info.velocity_x, info.velocity_y), false));
+                    level.AddSolid(EternalSpikePlatform.Make(level, position, getDisplacementFromNode(x, y, node_infos), false));
                     return;
                 case "lunarshrine":
                 case "obelisk":
@@ -386,6 +388,28 @@ namespace RewindGame.Game
 
             level.AddDecorative(DecorativeTile.Make(level, position, sprite), sorting_layer);
 
+        }
+
+
+        public static Vector2 getDisplacementFromNode(int x, int y, List<NodeInfo> nodes)
+        {
+            if (nodes.Count == 0) return Vector2.Zero;
+            var node = nodes[0];
+            return new Vector2(node.x-x, node.y-y) * 4;
+        }
+
+        public static float getRadiusFromNode(int x, int y, List<NodeInfo> nodes)
+        {
+            if (nodes.Count == 0) return 0;
+            var node = nodes[0];
+            return (new Vector2(node.x - x, node.y - y).Length() + 7) * 4;
+        }
+
+        public static int getAngleFromNode(int x, int y, List<NodeInfo> nodes)
+        {
+            if (nodes.Count == 0) return 0;
+            var node = nodes[0];
+            return (int)Math.Atan2(node.x - x, node.y - y);
         }
 
 

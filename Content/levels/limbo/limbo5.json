@@ -24,7 +24,7 @@
           "y": 98,
           "originX": 0,
           "originY": 0,
-          "values": {"radius": 230, "speed": 0.5, "starting_rotation_degrees": 0}
+          "values": {"rotations": 0}
         },
         {"name": "playerspawn", "id": 1, "_eid": "67213102", "x": 14, "y": 112, "originX": -3, "originY": -7}
       ]

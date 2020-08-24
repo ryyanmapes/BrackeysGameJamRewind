@@ -16,16 +16,7 @@
       "gridCellsX": 29,
       "gridCellsY": 40,
       "entities": [
-        {
-          "name": "limbospikeplatformlarge",
-          "id": 7,
-          "_eid": "73863928",
-          "x": 0,
-          "y": 98,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 200, "velocity_y": 0}
-        },
+        {"name": "limbospikeplatformlarge", "id": 7, "_eid": "73863928", "x": 0, "y": 98, "originX": 0, "originY": 0},
         {
           "name": "limbospikyball",
           "id": 9,
@@ -34,58 +25,13 @@
           "y": 266,
           "originX": 0,
           "originY": 0,
-          "values": {"radius": 224, "speed": 0.5, "starting_rotation_degrees": 0}
+          "values": {"rotations": 0}
         },
-        {
-          "name": "limbospikeplatformlarge",
-          "id": 13,
-          "_eid": "73863928",
-          "x": 112,
-          "y": 98,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 200, "velocity_y": 0}
-        },
-        {
-          "name": "limbospikeplatformlarge",
-          "id": 14,
-          "_eid": "73863928",
-          "x": 224,
-          "y": 98,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 200, "velocity_y": 0}
-        },
-        {
-          "name": "limbospikeplatformlarge",
-          "id": 15,
-          "_eid": "73863928",
-          "x": 336,
-          "y": 98,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 200, "velocity_y": 0}
-        },
-        {
-          "name": "limbospikeplatformlarge",
-          "id": 16,
-          "_eid": "73863928",
-          "x": 448,
-          "y": 98,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 200, "velocity_y": 0}
-        },
-        {
-          "name": "limbospikeplatformlarge",
-          "id": 17,
-          "_eid": "73863928",
-          "x": -112,
-          "y": 98,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 200, "velocity_y": 0}
-        },
+        {"name": "limbospikeplatformlarge", "id": 13, "_eid": "73863928", "x": 112, "y": 98, "originX": 0, "originY": 0},
+        {"name": "limbospikeplatformlarge", "id": 14, "_eid": "73863928", "x": 224, "y": 98, "originX": 0, "originY": 0},
+        {"name": "limbospikeplatformlarge", "id": 15, "_eid": "73863928", "x": 336, "y": 98, "originX": 0, "originY": 0},
+        {"name": "limbospikeplatformlarge", "id": 16, "_eid": "73863928", "x": 448, "y": 98, "originX": 0, "originY": 0},
+        {"name": "limbospikeplatformlarge", "id": 17, "_eid": "73863928", "x": -112, "y": 98, "originX": 0, "originY": 0},
         {"name": "playerspawn", "id": 18, "_eid": "67213102", "x": 210, "y": 28, "originX": -3, "originY": -7}
       ]
     },

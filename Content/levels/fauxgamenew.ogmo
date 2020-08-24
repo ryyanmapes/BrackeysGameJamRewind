@@ -121,10 +121,7 @@
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["limbo"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000}
-      ],
+      "values": [],
       "texture": "ogmo images/limboplatformup0.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAFMSURBVEhLxZS7bsIwFIadPAqPwNIlUpkqmLq1zwFrVxgLz8HYCalTB5Y+VeC3ciLH9rk4JO0nJTIJ8ZdzS7Vev7XOSPPy5JrXVffLzvXrx12/f/262h8/7cIRMoKkNU5k18BDYyFH7c93rOIx0vCZXkhYxKXScL9ECC6Xc/Wx3fmju5Rglcb/S4SQdUsVizTO1kAYyw6no9rBkhT34j17YUlkMZyUShLuXbUtH8Rm895i2DmQrvB+OKd4iVwPsELI4qhxrVsmkJikz4tlNmPZLs3JgJZ2P1L3yKS6ZoWPoI1TVohIcunjUop0IjotA0BsGmksrIIYNqVzyMDkNdRIhKgTDqnwqBlXT41BDbEJl6opGgb0EUoywN2DrCTi/6shIpDecqqUJnNIqf3TsZhLBgZCrXGmgP20zRWl+C0NyTVNacMA01hI3VuGczeWz+wDOfU+pQAAAABJRU5ErkJggg=="
     },
@@ -195,15 +192,12 @@
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
+      "hasNodes": true,
+      "nodeLimit": 1,
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["limbo"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
-      ],
+      "values": [],
       "texture": "ogmo images/2spikeplatform.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAOCAYAAAA8E3wEAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAFISURBVDhPjZSxbgIxEETv7qdoKFIhqNKRj0gVmiDRgkQKSJWPSJkKKRUFTb7K8CzmmFvsiJFWXo93d3atOzcppYGt97vLcttPp/O8dx5OpjP5WmvWNQXMZi/p6g4AH882n/t0+v1rDofvlv14Msp8rUaLqoNAklREBQUVBM4TG3PhxQH4O0HgIiogP8JFPRa4kBpouXMFelesYPn1ntft60dfYPz8lNfTzzHn1XhBdUHHRkkIuZgjFgXu10AeN4ZRu7/SKCQBnwBfEwtM45M5SlN2CKGuoiWQqGSuVigJuIjgV5on9OkQLiVFPjZYygEuBvJ/GElHbXIXkO+x+BjD+ED9j48oAUr2JvDhORevWBd2rN4WfY6E4e9eGgqqqIs6vDF8ITbFijAmbiBY6lYcCfh8YF5AYB+5IvhoHrX4MPujLfv/8U7NGaX1mdcmsSSoAAAAAElFTkSuQmCC"
     },
@@ -236,15 +230,12 @@
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
+      "hasNodes": true,
+      "nodeLimit": 1,
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["limbo"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
-      ],
+      "values": [],
       "texture": "ogmo images/4spikeplatform.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAOCAYAAAB6pd+uAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAJUSURBVEhLhZYxbhUxFEVn/qZoUqSKkipdWAQVSREkKIlECkKVRUBHlShVkGhoWAJbGThmztedN56fI1ljP3vue9f2/GR4iWmaho93n6fT04tpDi1gngasyXGSc9mEHL2445p/q57Kbn6uSIH3by/Ho5NXXdGzs9f7GGvEoiww5/Id54H4OI6tb0x8v6d3iE2DVeDn068Wo+g06rpqnmKrhsYeHr6ON1/uJsc8U58YYMQ1wBwbUGOa7rVmkOvRVheqIEWIwsA8xeV8kgWJhnpzxIy7GWqT11z0mW8TM9SbbUeRXEG/M8Y8LSB5d3/dWlJNWZhFOK56FJbvont0frzSh14tCTnYBBq1z+HG3n3ujOR4Zez78/9nKRI+vbndv2th9tlMxrkRGKugAZ6Q6yupD6sT1RhksWAcahHVYN0AC9zSBucOGRT1ydvTyo3InGN+R60TsNDkCGeflzNpLdJTBNZWo4ferdTckkbVB+OY3vkxMrC12X+kADRjkSBZJJ77FNXanJx+PWmomr0cxGhqSjuE2Dza4+O3kUZscV8hv0WfoAj0YmAc2Kgff363W2FhSb3ClVyfho3XKwzk5LCSlUF+TdNAFi3sjr9WFljN1Su/9Y0mvU2EXg6wvrx1otHFH3rMfbi8asfryx51xThraBaRybLgNESfdbUwtdRznrFYG7jOzyybLAxibu4uSNE0bJ85Nwbx/CVLuGqYSw1N9NajtbURrEeHvFv/qMDmv2qIZCEIIVr/kGpuHjaI5a5DaiVuhvlovfc1BazJ+a2DGYZh+Ave4Fdnt2ee/gAAAABJRU5ErkJggg=="
     },
@@ -277,15 +268,13 @@
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
+      "hasNodes": true,
+      "nodeLimit": 1,
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["limbo"],
       "values": [
-        {"name": "radius", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000},
-        {"name": "speed", "definition": "Float", "defaults": 0, "bounded": false, "min": -1000, "max": 1000},
-        {"name": "starting_rotation_degrees", "definition": "Integer", "defaults": 0, "bounded": false, "min": 0, "max": 360}
+        {"name": "rotations", "definition": "Float", "defaults": 0, "bounded": false, "min": -1000, "max": 1000}
       ],
       "texture": "ogmo images/chainball.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeEAAAnhAepRYnIAAAEkSURBVDhPvZQ9DsIwDIUDV+EIDCwdOqFubFyCDQYYOAAcgEuwsVVMHbowcATOUvQiO9hWkkZI8ElVEjd+9Z/qfsGE1izd6znQ1tWz+ajPlNYoTbMe8NAxwPbYO6C+aiOCU7VckOVDf3/49XDZ+xXIDJKi/a2jnXPVqqZd2i5FQ/oyFemYI3VP1fS0ORcLMrhvmxcOHGmshmNwjdv26vVCpDB8Iwisn1fmBiEV2xREIbuMEkHE3uMzSpGdU06L6xxWsqfIikpYsATVKFmbsWiAvH/c7oKWirREKAb85Jyr7vNIWHxj6ClBRYop4C5aAdltwO9hl9MBoo2ywuGcsAOZpUpX/lAwjyCWMmoIEftXo60WZWTRrTN/LFV/kHwhSUX0R5x7A7SimGq/4hWDAAAAAElFTkSuQmCC"
@@ -319,15 +308,12 @@
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
+      "hasNodes": true,
+      "nodeLimit": 1,
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["limbo"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
-      ],
+      "values": [],
       "texture": "ogmo images/limboplatformlongup0.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAcCAYAAAA0u3w+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAGmSURBVFhH5ZaxTsMwEIaTPgqPwMJSCSbUTmzwHLB2LSPlORiZKjExdOGpgv4qf3Sx70wcu60TPilqE8f2fTr7nHq1emwqwfL+plo+3LV3p+fw+V0dvn7au7j53b4a9Xb31hc8oxxBoCR2ftkXuMILPJAP3Q5TQsvmov09NvKFS0mmZE+TA50goSg6n0OUc6TIbZ5f6vavh1dkwH7/0XV4fd8d20+1NxFoLrn1+slz8TIo5SQYVA6cg5xyQIu9J+i+wOxJcovGjBWSI65DJ2hlziJVVPYdMs4QOSJd6qbxktSBNY2D1wLFiO1jlxqDxWqxxoiRczEFIedmVdvEJEYUAWuBapIpckAV1OSIJQnBoRm9vbo2A5WSqXLAq6KpIBBcCE4GSLRnEq3vWDmQZYkye1rW5TmKoIcGy34pciBYZDiJhiVkkSvgWEzBnHKXJPseLA1PEPsMV2gpYc9Z+7E0ektUKyxkTIEpgS6DITlgtfHsKzWj/2cPIkOhLEx1iXrHBJfqrI+JuciBnuBfhWaKzP5LJvgtKtGKTOkFBgw6JkLVtWyq6heXVFhzm5lTFwAAAABJRU5ErkJggg=="
     },
@@ -474,15 +460,12 @@
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
+      "hasNodes": true,
+      "nodeLimit": 1,
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["cottonwood"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
-      ],
+      "values": [],
       "texture": "ogmo images/jumppoofgreen (1).png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAASCAMAAABcgh8DAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAASUExURQAAALHTbnybWDhCVJCAkwAAAKz3utYAAAAGdFJOU///////ALO/pL8AAAAJcEhZcwAACeIAAAniAUfoQx8AAABYSURBVChTTY5BDgAhDAJrtf//8jItxuUCI0klCq1c2QEUIB6EAwh0RCl8pepwGGXopjMK/nDuNv+sU4/78o97Bow0i5HTpkY1srPhYu0zbjx7/LZjRlPVBzAOArm1/4W9AAAAAElFTkSuQmCC"
     },
@@ -515,15 +498,12 @@
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
+      "hasNodes": true,
+      "nodeLimit": 1,
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["cottonwood"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
-      ],
+      "values": [],
       "texture": "ogmo images/jumppoofpink (1).png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAASCAMAAABcgh8DAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURQAAANix0ZCAkzhCVAAAAPKTXPIAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAJ4gAACeIBR+hDHwAAAFdJREFUKFNNj0ESACAIAo38/5tj1aa4yMaMUiRaWioDGhAPxgYEjkUyvtBxjGkpvHM8Cm6Mr1Q/e9Xj2vxx1YCRa1GyU7lUIT0LLubuD13U7nnTHoNDmQcKrgJTJXuykwAAAABJRU5ErkJggg=="
     },
@@ -556,15 +536,12 @@
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
+      "hasNodes": true,
+      "nodeLimit": 1,
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["cottonwood"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
-      ],
+      "values": [],
       "texture": "ogmo images/cottonwoodplatformdown.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURQAAANix0ZCAkzhCVAAAAPKTXPIAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAJ4gAACeIBR+hDHwAAAH1JREFUOE/tjwEOgDAIAwf2/2+2LWzT7AUmNgbGDjoZQGTyy5CYXUjAIPN1ywW5Ikahi1J+NcZQSKJzPrImheQ1e+zCSfCyLG1er7mHbwJiNSB7niuG/la0mUbTTLlhblstOJkhqTfjrZdX2FBqVEXnBanFpp7w0A+pL0HgBjsQCebA71bYAAAAAElFTkSuQmCC"
     },
@@ -597,15 +574,12 @@
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
+      "hasNodes": true,
+      "nodeLimit": 1,
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["cottonwood"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
-      ],
+      "values": [],
       "texture": "ogmo images/cottonwoodplatformdownlong.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAcCAMAAAADZYwMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAPUExURQAAANix0ZCAkzhCVAAAAPKTXPIAAAAFdFJOU/////8A+7YOUwAAAAlwSFlzAAAJ4gAACeIBR+hDHwAAANJJREFUOE/tkVkOwjAMRBPj+5+Z2WKBKirx3ymKsTMvdtrVvavwq00hKsHCZ1KKu/bs6l7ghETeSk1uh2FS7GXLC2J0Npo0R6m9C0srsC/k7GpNxMJ4pnFHYqwcXt0pp9L0YijcEYDH1MCyVnisSv0/IO5Xmy+nycWoq2bVw2L8dcbAK4UAggzHliWOMU5UeQJSdKLEGTyH2S+yCmVXORKL5S/nhgJh0VgyiFBAXVVdBqLzYAGpYE5OjFFDDGINCA131XXnE/xLD3ijB7zRA/5U9xvVoBOUqVvKnwAAAABJRU5ErkJggg=="
     },
@@ -638,15 +612,12 @@
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
+      "hasNodes": true,
+      "nodeLimit": 1,
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["eternal"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
-      ],
+      "values": [],
       "texture": "ogmo images/terrariumplatformup.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExURQAAAOrh5C0TD6WQl0lJKXybWGtQWbHTbgAAAO0ejEAAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAACeIAAAniAUfoQx8AAABrSURBVDhP7c5LDsAgCEVRBLTsf8V9UPwktem4Se9EwolRsvKYUQ7bXtG23ZA5B1SKkCyoVaeKAL0WaT1U+ZpjvSAMmBpr8uuhbhUYGkujfCGN8Sw0lx3xGVhrruNTE5GfjGKBBu76EX0JzU4F2RQQE210MwAAAABJRU5ErkJggg=="
     },
@@ -679,15 +650,12 @@
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
+      "hasNodes": true,
+      "nodeLimit": 1,
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["eternal"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
-      ],
+      "values": [],
       "texture": "ogmo images/terrariumplatformuplong.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAcCAMAAAADZYwMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExURQAAAOrh5C0TD6WQl0lJKXybWGtQWbHTbgAAAO0ejEAAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAACeIAAAniAUfoQx8AAACSSURBVDhP7ZDBFoQgCEUV0OH/v3geQrOQbE619W4EerewovURWqK4zSsR2+o9QjT3DKIoErVy4aUoTVYmM0Tm6Bzm7kj7iFA0KZREtB6FB/Ewc8pEw5+PxKjNaxDdnBPgRMQbwyNcE6Z/IgI/0WZGjLuvBLFJ72b6D5o9LWOcsCXtJDAGiYX4ny1esMULtrhE9QsA1iimCBfENAAAAABJRU5ErkJggg=="
     },
@@ -720,14 +688,12 @@
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
+      "hasNodes": true,
+      "nodeLimit": 1,
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["eternal"],
       "values": [
-        {"name": "radius", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 1000},
-        {"name": "starting_rotation_degrees", "definition": "Integer", "defaults": 0, "bounded": false, "min": 0, "max": 360},
         {"name": "rotations", "definition": "Integer", "defaults": 0, "bounded": false, "min": 0, "max": 100}
       ],
       "texture": "ogmo images/terrariumchainball.png",
@@ -952,15 +918,12 @@
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
+      "hasNodes": true,
+      "nodeLimit": 1,
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["eternal"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
-      ],
+      "values": [],
       "texture": "ogmo images/terrariumspikeplatform.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAOCAYAAAA8E3wEAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAACwSURBVDhPY2TAApZOmP7fNdAXzN69fjMDjA0CpPDF5GUwzEcRePXwyX8ok6oA2WI4A+QrEA1yHciVMEAtfnRBJtguJhCBbBkyoCYfZgfYQhCgpuEggIvPSKt4wwUYYSmSGvEEA/j4TCAOMqA1Hx6HIEBtw7HxwUmVXvEIyo8oFlIrnkAAGx9kIThI0YsgkCQyoAYfZgc8DmEC1DAcGYD4yB5C8RkMUCtO0UOOgYGBAQCMDY0BY3xPiQAAAABJRU5ErkJggg=="
     },
@@ -993,15 +956,12 @@
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
+      "hasNodes": true,
+      "nodeLimit": 1,
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["eternal"],
-      "values": [
-        {"name": "velocity_x", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100},
-        {"name": "velocity_y", "definition": "Float", "defaults": 0, "bounded": false, "min": 0, "max": 100}
-      ],
+      "values": [],
       "texture": "ogmo images/terrariumspikeplatformlong.png",
       "textureImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAOCAYAAAB6pd+uAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACeIAAAniAUfoQx8AAAC4SURBVEhLY2TAApZOmP7fNdAXzN69fjMDjA0Cg5kvJi+D4R8UgVcPn/yHMoc0QPYonAGKNRANCg1QqMDAUOVHF2SC/cYEIpA9hwyGMh/mJ7AHQYCahoPAYOEzDpd8hwswwkpMaqR7GBhMfCYQBxkMNz48D4IAtQ0fDHxwUTpc8yGoPkTxILXSPQgMBj7Ig+Akit7EAUkig6HIh/kJngdhAtQwHBkMBB85wlBiDgaGap5ET4kMDAwMAMTWBk4aNQTLAAAAAElFTkSuQmCC"
     },
@@ -1034,8 +994,8 @@
       "canFlipX": false,
       "canFlipY": false,
       "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
+      "hasNodes": true,
+      "nodeLimit": 1,
       "nodeDisplay": 0,
       "nodeGhost": true,
       "tags": ["limbo"],

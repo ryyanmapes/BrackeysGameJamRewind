@@ -201,7 +201,7 @@ namespace RewindGame
             time_bound = timebounds;
         }
 
-        public int getTimeN()
+        public int getTimeSign()
         {
             return time_data.time_status == TimeState.backward ? -1 : time_data.time_status == TimeState.still ? 0 : 1;
         }
@@ -220,7 +220,7 @@ namespace RewindGame
 
         public float getTimeDependentDeltaTime()
         {
-            return (float)getDeltaTime() * getTimeN();
+            return (float)getDeltaTime() * getTimeSign();
         }
 
         public float getTimeLen()

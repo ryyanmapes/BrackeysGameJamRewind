@@ -16,56 +16,11 @@
       "gridCellsX": 29,
       "gridCellsY": 19,
       "entities": [
-        {
-          "name": "limbospikeplatformlarge",
-          "id": 0,
-          "_eid": "73863928",
-          "x": 14,
-          "y": 140,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 0, "velocity_y": -300}
-        },
-        {
-          "name": "limboplatform",
-          "id": 2,
-          "_eid": "69830920",
-          "x": 56,
-          "y": 56,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 100, "velocity_y": 0}
-        },
-        {
-          "name": "limboplatform",
-          "id": 3,
-          "_eid": "69830920",
-          "x": 210,
-          "y": 84,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": -100, "velocity_y": 0}
-        },
-        {
-          "name": "limboplatform",
-          "id": 5,
-          "_eid": "69830920",
-          "x": 294,
-          "y": 98,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": 0, "velocity_y": -50}
-        },
-        {
-          "name": "limboplatform",
-          "id": 6,
-          "_eid": "69830920",
-          "x": 378,
-          "y": 196,
-          "originX": 0,
-          "originY": 0,
-          "values": {"velocity_x": -500, "velocity_y": 0}
-        },
+        {"name": "limbospikeplatformlarge", "id": 0, "_eid": "73863928", "x": 14, "y": 140, "originX": 0, "originY": 0},
+        {"name": "limboplatform", "id": 2, "_eid": "69830920", "x": 56, "y": 56, "originX": 0, "originY": 0},
+        {"name": "limboplatform", "id": 3, "_eid": "69830920", "x": 210, "y": 84, "originX": 0, "originY": 0},
+        {"name": "limboplatform", "id": 5, "_eid": "69830920", "x": 294, "y": 98, "originX": 0, "originY": 0},
+        {"name": "limboplatform", "id": 6, "_eid": "69830920", "x": 378, "y": 196, "originX": 0, "originY": 0},
         {"name": "playerspawn", "id": 7, "_eid": "67213102", "x": 14, "y": 28, "originX": -3, "originY": -7}
       ]
     },

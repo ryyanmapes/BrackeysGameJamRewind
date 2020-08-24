@@ -47,11 +47,11 @@ namespace RewindGame.Game.Solids
 
         public override void Update(StateData state)
         {
-            float speed = (float)(2 * Math.PI * radius) / (float)state.getTimeLen();
+            float speed = (float)(360) / (float)state.time_bound.max;
             speed *= rotations;
             if (state.getTimeDependentDeltaTime() > 0)
             {
-                current_rotation_degrees += speed * .1f;
+                current_rotation_degrees += speed;
                 current_rotation_radians = (float)(((current_rotation_degrees + 90) * Math.PI / 180));
                 // currentPosition += new Vector2((int)(Math.Cos(current_rotation_degrees)), (int)(Math.Sin(current_rotation_degrees)));
                 position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees - 90)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees - 90)));
@@ -59,7 +59,7 @@ namespace RewindGame.Game.Solids
             }
             else if (state.getTimeDependentDeltaTime() < 0)
             {
-                current_rotation_degrees -= speed * .1f;
+                current_rotation_degrees -= speed;
                 current_rotation_radians = (float)(((current_rotation_degrees + 90) * Math.PI / 180));
                 //currentPosition += new Vector2((int)(radius * Math.Cos(current_rotation_degrees)), (int)(radius * Math.Sin(current_rotation_degrees)));
                 position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees - 90)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees - 90)));
@@ -74,7 +74,7 @@ namespace RewindGame.Game.Solids
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
             base.Draw(state, sprite_batch);
-            ((AnimationPlayer)renderer).UpdateAnimation(state, state.getTimeN());
+            ((AnimationPlayer)renderer).UpdateAnimation(state, state.getTimeSign());
         }
         public override void Reset() 
         {

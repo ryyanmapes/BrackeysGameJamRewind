@@ -89,7 +89,7 @@ namespace RewindGame.Game.Graphics
             sprite_batch.Draw(texture, destination_rect, source_rect, Color.White, 0.0f, Vector2.Zero, effect, 0);
 
             // if you aren't using timeN, the animation just goes forward no matter what
-            UpdateAnimation(state, useTimeN ? state.getTimeN() : 1);
+            UpdateAnimation(state, useTimeN ? state.getTimeSign() : 1);
         }
 
         public void UpdateAnimation(StateData state, int time_n)

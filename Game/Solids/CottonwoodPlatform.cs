@@ -33,12 +33,12 @@ namespace RewindGame.Game.Solids
 
         public override void Draw(StateData state, SpriteBatch sprite_batch)
         {
-            if (velocity.X < 0) spriteEffects = SpriteEffects.FlipHorizontally;
+            if (targetDisplacement.X < 0) spriteEffects = SpriteEffects.FlipHorizontally;
             else spriteEffects = SpriteEffects.None;
 
             base.Draw(state, sprite_batch);
 
-            ((AnimationPlayer)renderer).UpdateAnimation(state, state.getTimeN());
+            ((AnimationPlayer)renderer).UpdateAnimation(state, state.getTimeSign());
         }
     }
 }

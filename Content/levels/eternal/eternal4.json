@@ -24,7 +24,7 @@
           "y": 140,
           "originX": 0,
           "originY": 0,
-          "values": {"radius": 1, "starting_rotation_degrees": 0, "rotations": 2}
+          "values": {"rotations": 2}
         },
         {
           "name": "eternalspikyball",
@@ -34,7 +34,7 @@
           "y": 126,
           "originX": 0,
           "originY": 0,
-          "values": {"radius": 2, "starting_rotation_degrees": 0, "rotations": 2}
+          "values": {"rotations": 2}
         },
         {
           "name": "eternalspikyball",
@@ -44,7 +44,7 @@
           "y": 112,
           "originX": 0,
           "originY": 0,
-          "values": {"radius": 3, "starting_rotation_degrees": 0, "rotations": 2}
+          "values": {"rotations": 2}
         },
         {
           "name": "eternalspikyball",
@@ -54,7 +54,7 @@
           "y": 98,
           "originX": 0,
           "originY": 0,
-          "values": {"radius": 4, "starting_rotation_degrees": 0, "rotations": 2}
+          "values": {"rotations": 2}
         },
         {
           "name": "eternalspikyball",
@@ -64,7 +64,7 @@
           "y": 84,
           "originX": 0,
           "originY": 0,
-          "values": {"radius": 5, "starting_rotation_degrees": 0, "rotations": 2}
+          "values": {"rotations": 2}
         },
         {
           "name": "eternalspikyball",
@@ -74,7 +74,7 @@
           "y": 70,
           "originX": 0,
           "originY": 0,
-          "values": {"radius": 6, "starting_rotation_degrees": 0, "rotations": 2}
+          "values": {"rotations": 2}
         }
       ]
     },
