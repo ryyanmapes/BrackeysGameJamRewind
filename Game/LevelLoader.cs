@@ -393,21 +393,21 @@ namespace RewindGame.Game
 
         public static Vector2 getDisplacementFromNode(int x, int y, List<NodeInfo> nodes)
         {
-            if (nodes.Count == 0) return Vector2.Zero;
+            if (nodes == null) return Vector2.Zero;
             var node = nodes[0];
             return new Vector2(node.x-x, node.y-y) * 4;
         }
 
         public static float getRadiusFromNode(int x, int y, List<NodeInfo> nodes)
         {
-            if (nodes.Count == 0) return 0;
+            if (nodes == null) return 0;
             var node = nodes[0];
             return (new Vector2(node.x - x, node.y - y).Length() + 7) * 4;
         }
 
         public static int getAngleFromNode(int x, int y, List<NodeInfo> nodes)
         {
-            if (nodes.Count == 0) return 0;
+            if (nodes == null) return 0;
             var node = nodes[0];
             return (int)Math.Atan2(node.x - x, node.y - y);
         }
