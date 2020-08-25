@@ -8,6 +8,7 @@ using RewindGame.Game.Tiles;
 using RewindGame.Game.Solids;
 using RewindGame.Game.Special;
 using RewindGame.Game.Physics.Temporal;
+using RewindGame.Game.Interactables;
 
 namespace RewindGame.Game
 {
@@ -332,6 +333,12 @@ namespace RewindGame.Game
                     return;
                 case "limbospikeplatformlarge":
                     level.AddSolid(LimboSpikePlatform.Make(level, position, getDisplacementFromNode(x, y, node_infos), true));
+                    return;
+                case "limbospikeplatformvert":
+                    level.AddSolid(LimboSpikePlatformR.Make(level, position, getDisplacementFromNode(x, y, node_infos), false));
+                    return;
+                case "limbospikeplatformlargevert":
+                    level.AddSolid(LimboSpikePlatformR.Make(level, position, getDisplacementFromNode(x, y, node_infos), true));
                     return;
                 case "limbospikyball":
                     level.AddSolid(LimboSpikyBall.Make(level, position, getRadiusFromNode(x, y, node_infos), ent_info.rotations, getAngleFromNode(x, y, node_infos)));

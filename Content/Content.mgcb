@@ -1208,6 +1208,18 @@
 /processorParam:TextureFormat=Color
 /build:limbo/2spikeplatform.png
 
+#begin limbo/2spikeplatformR.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:limbo/2spikeplatformR.png
+
 #begin limbo/4spikeplatform.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1219,6 +1231,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:limbo/4spikeplatform.png
+
+#begin limbo/4spikeplatformR.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:limbo/4spikeplatformR.png
 
 #begin limbo/chainball.png
 /importer:TextureImporter
