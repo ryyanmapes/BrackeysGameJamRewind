@@ -44,7 +44,7 @@ namespace RewindGame.Game.ExternalUtills
             using (StreamReader sr = new StreamReader(path))
             {
                 var data = JsonConvert.DeserializeObject<ProgressData>(sr.ReadToEnd());
-                if (data.Level == "")
+                if (data == null || data.Level == "")
                     return false;
                 else
                     return true;

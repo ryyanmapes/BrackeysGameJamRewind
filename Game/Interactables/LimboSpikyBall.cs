@@ -10,74 +10,54 @@ namespace RewindGame.Game.Solids
 {
     class LimboSpikyBall : CollisionObject
     {
-        // todo what's with the unused variables here
         public float radius;
         public float rotations;
-        public int starting_rotation_degrees;
-        private float current_rotation_degrees;
-        private float current_rotation_radians;
-        private Vector2 startingPosition;
-        private Vector2 currentPosition;
+        // BOTH OF THESE ONLY USE RADIANS!
+        public float starting_rotation;
+        private float current_rotation;
+        private Vector2 pivotPos;
 
-        public static LimboSpikyBall Make(Level level, Vector2 starting_pos, float radius, float rotations, int starting_rotation)
+        //StartingRotation is given is radians
+        public static LimboSpikyBall Make(Level level, Vector2 starting_pos, float radius, float rotations, float starting_rotation)
         {
             var tile = new LimboSpikyBall();
             tile.Initialize(level, starting_pos, radius, rotations, starting_rotation);
             return tile;
         }
 
-        public void Initialize(Level level, Vector2 starting_pos, float radius_, float rotations_, int startingrotation)
+        public void Initialize(Level level, Vector2 starting_pos, float radius_, float rotations_, float startingrotation)
         {
             radius = radius_;
             rotations = rotations_;
-            current_rotation_degrees = startingrotation;
-            startingPosition = starting_pos - new Vector2(GameUtils.TILE_WORLD_SIZE/2, GameUtils.TILE_WORLD_SIZE/2);
-            currentPosition = startingPosition;
+            current_rotation = startingrotation;
+            starting_rotation = startingrotation;
+            pivotPos = starting_pos - new Vector2(GameUtils.TILE_WORLD_SIZE/2, GameUtils.TILE_WORLD_SIZE/2);
 
             renderer = new BasicSprite("limbo/chainball");
 
             collisionSize = new Vector2(84, 84);
             collisionType = CollisionType.death;
-            starting_rotation_degrees = startingrotation;
-            base.Initialize(level, startingPosition);
+            base.Initialize(level, pivotPos);
             Reset();
 
         }
 
         public override void Update(StateData state)
         {
-            float speed = (float)360 / state.time_bound.max;
-            speed *= rotations;
+            float speed = (float)Math.PI * 2 / state.time_bound.max;
+            current_rotation += speed * rotations * state.getTimeSign();
 
-            if (state.getTimeDependentDeltaTime() > 0)
-            {
-                current_rotation_degrees += speed;
-                current_rotation_radians = (float)(((current_rotation_degrees + 90) * Math.PI / 180));
-                // currentPosition += new Vector2((int)(Math.Cos(current_rotation_degrees)), (int)(Math.Sin(current_rotation_degrees)));
-                position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees - 90)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees - 90)));
-                //Move(new Vector2((int)(radius * Math.Cos(current_rotation_radians)), (int)(radius * Math.Sin(current_rotation_radians))));
-            }
-            else if (state.getTimeDependentDeltaTime() < 0)
-            {
-                current_rotation_degrees -= speed;
-                current_rotation_radians = (float)(((current_rotation_degrees + 90) * Math.PI / 180));
-                //currentPosition += new Vector2((int)(radius * Math.Cos(current_rotation_degrees)), (int)(radius * Math.Sin(current_rotation_degrees)));
-                position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees - 90)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees - 90)));
-                //Move(new Vector2((int)(radius * -Math.Cos(current_rotation_radians)), (int)(radius * -Math.Sin(current_rotation_radians))));
-            }
-            // todo what is the point of this?
-            // to keep the number from overflowing, just as a saftey point not really needed unless the speed is really high or for some godforsaken reason someone spends way to long in a level
-            if (current_rotation_degrees == 0)
-            {
-                current_rotation_degrees = 360;
-            }
+            position = new Vector2((float)(pivotPos.X + radius * Math.Cos(current_rotation)), 
+                (float)(pivotPos.Y + radius * Math.Sin(current_rotation)));
+
         }
 
         public override void Reset() 
         {
-            currentPosition = startingPosition;
-            current_rotation_degrees = 0;
-            position = new Vector2((int)(startingPosition.X + radius * Math.Cos(current_rotation_degrees)), (int)(startingPosition.Y + radius * Math.Sin(current_rotation_degrees)));
+            position = pivotPos;
+            current_rotation = starting_rotation;
+            position = new Vector2((float)(pivotPos.X + radius * Math.Cos(current_rotation)),
+                (float)(pivotPos.Y + radius * Math.Sin(current_rotation)));
             base.Reset();
         }
 

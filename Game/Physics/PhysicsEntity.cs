@@ -74,7 +74,7 @@ namespace RewindGame.Game
             if (velocity.X > 0 || hangDirection == HangDirection.Right)
             {
                 var box = getCollisionBox();
-                box.X += 1;
+                box.X += 4;
                 var collision = localLevel.getSolidCollisionAt(box, MoveDirection.right, linkedSolid);
                 if (collision.type == CollisionType.normal)
                 {
@@ -86,7 +86,7 @@ namespace RewindGame.Game
             else if (velocity.X < 0 || hangDirection == HangDirection.Left)
             {
                 var box = getCollisionBox();
-                box.X -= 1;
+                box.X -= 4;
                 var collision = localLevel.getSolidCollisionAt(box, MoveDirection.left, linkedSolid);
                 if (collision.type == CollisionType.normal)
                 {

@@ -38,8 +38,8 @@ namespace RewindGame.Game
 
             velocity = new Vector2(PhysicsEntity.minMagnitude(velocity.X, terminalVelocity.X), PhysicsEntity.minMagnitude(velocity.Y, terminalVelocity.Y));
 
-            moveX(velocity.X * elapsed_signed);
-            moveY(velocity.Y * elapsed_signed);
+            MoveX(velocity.X * elapsed_signed);
+            MoveY(velocity.Y * elapsed_signed);
 
             if (linkedSolid != null) linkedSolid.MoveTo(position);
 

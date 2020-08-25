@@ -267,7 +267,7 @@ namespace RewindGame.Game
         // or if they are wall riding the solid
         public override bool isRiding(Solid solid)
         {
-            bool foundWallRiding = false;
+            if (solid == linkedSolid || isAlreadyBeingCarriedThisFrame) return false;
 
             /*
             var box = getCollisionBox();
@@ -279,7 +279,12 @@ namespace RewindGame.Game
             */
 
             //(CollisionObject)solid == hungObject
-            return base.isRiding(solid) || foundWallRiding || (CollisionObject)solid == hungObject;
+            if ((CollisionObject)solid == hungObject)
+            {
+                isAlreadyBeingCarriedThisFrame = true;
+                return true;
+            }
+            return base.isRiding(solid);
 
         }
 

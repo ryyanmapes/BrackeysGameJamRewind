@@ -60,8 +60,11 @@ namespace RewindGame.Game
 
         public Vector2 startingPosition;
         public Vector2 velocity;
+        
 
         protected Solid linkedSolid;
+
+        public bool isAlreadyBeingCarriedThisFrame = false;
 
         public override void Initialize(Level level, Vector2 starting_pos)
         {
@@ -72,16 +75,19 @@ namespace RewindGame.Game
         public override void Update(StateData state)
         {
             float elapsed = (float)state.getDeltaTime();
+            isAlreadyBeingCarriedThisFrame = false;
 
-            moveX(velocity.X * elapsed);
-            moveY(velocity.Y * elapsed);
+            MoveX(velocity.X * elapsed);
+            MoveY(velocity.Y * elapsed);
+
+            Collide();
 
             if (linkedSolid != null) linkedSolid.MoveTo(position);
         }
 
             // Code inspired by https://medium.com/@MattThorson/celeste-and-towerfall-physics-d24bd2ae0fc5
-        public void moveX(float amount) { moveX(amount, null); }
-        public void moveX(float amount, Solid pusher)
+        public void MoveX(float amount) { MoveX(amount, null); }
+        public void MoveX(float amount, Solid pusher)
         {
             float real_amount = amount + moveRemainder.X;
             int move = (int)Math.Floor(real_amount);
@@ -121,9 +127,9 @@ namespace RewindGame.Game
 
         }
 
-        public void moveY(float amount) { moveY(amount, null); }
+        public void MoveY(float amount) { MoveY(amount, null); }
 
-        public void moveY(float amount, Solid pusher )
+        public void MoveY(float amount, Solid pusher )
         {
             float real_amount = amount + moveRemainder.Y;
             int move = (int)Math.Floor(real_amount);
@@ -166,6 +172,21 @@ namespace RewindGame.Game
 
         }
 
+        public void Collide()
+        {
+            CollisionReturn collision = localLevel.getSolidCollisionAt(this.getCollisionBoxAt(position), MoveDirection.none, linkedSolid);
+
+            switch (collision.type)
+            {
+                case CollisionType.normal:
+                    Die();
+                    return;
+                case CollisionType.death:
+                    Die();
+                    break;
+            }
+        }
+
 
         public virtual void Die() { }
 
@@ -174,11 +195,15 @@ namespace RewindGame.Game
 
         public virtual bool isRiding(Solid solid)
         {
-            if (solid == linkedSolid) return false;
+            if (solid == linkedSolid || isAlreadyBeingCarriedThisFrame) return false;
 
             var box = getCollisionBox();
             box.Y += 1;
-            if (solid.getCollision(box, MoveDirection.down).type == CollisionType.normal) return true;
+            if (solid.getCollision(box, MoveDirection.down).type == CollisionType.normal)
+            {
+                isAlreadyBeingCarriedThisFrame = true;
+                return true;
+            }
 
             return false;
         }

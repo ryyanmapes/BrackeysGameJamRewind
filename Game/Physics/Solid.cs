@@ -42,13 +42,13 @@ namespace RewindGame.Game
                     if (overlap.X != 0)
                     {
                         if (doRightCollision && move_components.X > 0)
-                            entity.moveX(this.getCollisionBox().getRight() - entity.getCollisionBox().getLeft(), this);
+                            entity.MoveX(this.getCollisionBox().getRight() - entity.getCollisionBox().getLeft(), this);
                         else if (doLeftCollision)
-                            entity.moveX(this.getCollisionBox().getLeft() - entity.getCollisionBox().getRight(), this);
+                            entity.MoveX(this.getCollisionBox().getLeft() - entity.getCollisionBox().getRight(), this);
                     }
                     else if (riding_entities.Contains(entity))
                     {
-                        entity.moveX(move_components.X, null);
+                        entity.MoveX(move_components.X, null);
                     }
                 }
             }
@@ -66,13 +66,13 @@ namespace RewindGame.Game
                     if (overlap.Y != 0)
                     {
                         if (doDownCollision && move_components.Y > 0)
-                            entity.moveY(this.getCollisionBox().getBottom() - entity.getCollisionBox().getTop(), this);
+                            entity.MoveY(this.getCollisionBox().getBottom() - entity.getCollisionBox().getTop(), this);
                         else if (doUpCollision)
-                            entity.moveY(this.getCollisionBox().getTop() - entity.getCollisionBox().getBottom(), this);
+                            entity.MoveY(this.getCollisionBox().getTop() - entity.getCollisionBox().getBottom(), this);
                     }
                     else if (riding_entities.Contains(entity))
                     {
-                        entity.moveY(move_components.Y, null);
+                        entity.MoveY(move_components.Y, null);
                     }
                 }
             }

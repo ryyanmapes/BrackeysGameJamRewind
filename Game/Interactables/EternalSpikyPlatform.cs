@@ -27,7 +27,7 @@ namespace RewindGame.Game.Solids
         {
             int sign = state.time_data.time_moment < 0 ? -1 : 1;
 
-            position = position += new Vector2(velocity.X * state.getTimeDependentDeltaTime() * sign, velocity.Y * state.getTimeDependentDeltaTime() * sign);
+            position = position += new Vector2(targetDisplacement.X * state.getTimeDependentDeltaTime() * sign, targetDisplacement.Y * state.getTimeDependentDeltaTime() * sign);
         }
 
     }

@@ -86,7 +86,7 @@ namespace RewindGame.Game
     
     public class EntityInfo
     {
-        public int rotations=1;
+        public float rotations=1;
     }
 
     public class NodeInfo
@@ -363,7 +363,7 @@ namespace RewindGame.Game
                     level.AddSolid(EternalPlatform.Make(level, position, getDisplacementFromNode(x, y, node_infos), true));
                     return;
                 case "eternalspikyball":
-                    level.AddSolid(EternalSpikyBall.Make(level, position, getRadiusFromNode(x,y,node_infos), ent_info.rotations, getAngleFromNode(x,y,node_infos)));
+                    level.AddSolid(EternalSpikyBall.Make(level, position, getRadiusFromNode(x,y,node_infos), (int)ent_info.rotations, (int)getAngleFromNode(x,y,node_infos)));
                     return;
                 case "eternalspikyplatform":
                     level.AddSolid(EternalSpikePlatform.Make(level, position, getDisplacementFromNode(x, y, node_infos), false));
@@ -405,11 +405,11 @@ namespace RewindGame.Game
             return (new Vector2(node.x - x, node.y - y).Length() + 7) * 4;
         }
 
-        public static int getAngleFromNode(int x, int y, List<NodeInfo> nodes)
+        public static float getAngleFromNode(int x, int y, List<NodeInfo> nodes)
         {
             if (nodes == null) return 0;
             var node = nodes[0];
-            return (int)Math.Atan2(node.x - x, node.y - y);
+            return (float)Math.Atan2(node.y - y, node.x - x);
         }
 
 
