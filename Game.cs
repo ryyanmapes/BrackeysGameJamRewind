@@ -474,7 +474,7 @@ namespace RewindGame
 
             var is_level_reload_down = keyboard_state.IsKeyDown(Keys.Back);
 
-            if ((!previous_input_data.is_level_reload || previous_input_data.is_devkey_down[11]) && is_level_reload_down)
+            if (!(previous_input_data.is_level_reload || previous_input_data.is_devkey_down[11]) && is_level_reload_down)
                 input_data.is_level_reload = true;
             else if (is_level_reload_down)
                 input_data.is_devkey_down[11] = true;
@@ -838,7 +838,7 @@ namespace RewindGame
             }
             else if(inputs.is_level_reload)
             {
-                Console.WriteLine(ProgressStore.readSavedLevel());
+                //Console.WriteLine(ProgressStore.readSavedLevel());
                 loadLevelAndConnections(activeLevel.name);
                 isPlayerDeathQued = true;
             }
