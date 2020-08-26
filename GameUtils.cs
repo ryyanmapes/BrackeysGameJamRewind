@@ -69,7 +69,7 @@ namespace RewindGame
 
         public const float SEMISOLID_THICKNESS = 4f;
         public const float SEMISOLID_THICKNESS_WINDOW = 20f;
-        public const float WALLSPIKE_THICKNESS = 16f;
+        public const float WALLSPIKE_THICKNESS = 28f;
 
         // GUI
 
