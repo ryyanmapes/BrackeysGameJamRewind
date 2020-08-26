@@ -7,6 +7,7 @@ using RewindGame.Game.Solids;
 using System.Collections.Generic;
 using System.Text;
 using FMOD;
+using RewindGame.Game.Effects;
 
 namespace RewindGame.Game
 {
@@ -180,7 +181,7 @@ namespace RewindGame.Game
             //    || (noOppositeTravelDirection == HangDirection.Right && input_data.horizontal_axis_value > 0)) 
             //    can_move = false;
 
-            if (Math.Abs(input_data.horizontal_axis_value) > 0.4f && Math.Abs(velocity.X) < playerMaxMove && can_move)
+            if ((Math.Abs(input_data.horizontal_axis_value) > 0.4f && Math.Abs(velocity.X) < playerMaxMove && can_move))
             {
                 velocity.X += input_data.horizontal_axis_value * moveVelocity * elapsed;
             }
