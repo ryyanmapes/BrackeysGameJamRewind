@@ -219,7 +219,7 @@ namespace RewindGame.Game.Effects
             }
             if (showCube)
             {
-              //  sprite_batch.Draw(deathSquare, CameraPosReal, new Rectangle((int)CameraPosReal.X, (int)CameraPosReal.Y, (int)GameUtils.LEVEL_SIZE_X, (int)GameUtils.LEVEL_SIZE_Y), new Color(cubeColor, fadeValue), 0f, Vector2.Zero, new Vector2(GameUtils.LEVEL_SIZE_X, GameUtils.LEVEL_SIZE_Y), SpriteEffects.None, 0f);
+                sprite_batch.Draw(deathSquare, CameraPosReal, new Rectangle((int)CameraPosReal.X, (int)CameraPosReal.Y, (int)GameUtils.LEVEL_SIZE_X, (int)GameUtils.LEVEL_SIZE_Y), new Color(cubeColor, fadeValue), 0f, Vector2.Zero, new Vector2(GameUtils.LEVEL_SIZE_X, GameUtils.LEVEL_SIZE_Y), SpriteEffects.None, 0f);
             }
             
         }
