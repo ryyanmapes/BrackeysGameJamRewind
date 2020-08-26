@@ -17,6 +17,7 @@ namespace RewindGame.Game.Effects
         private Texture2D deathSquare;
         private float fadeValue = 0f;
         private bool showCube = false;
+        public static bool _showCube = false;
         private Color cubeColor = Color.Black;
         private float stall = 1.75f;
         private bool fadeOut = false;
@@ -147,12 +148,14 @@ namespace RewindGame.Game.Effects
                     fadeValue += .1f;
                     stall = 1.75f;
                      showCube = true;
+                    _showCube = true;
                     forceFadeout = false;
                 }
                 if (forceFadeout)
                 {
                     stall = 8f;
                     showCube = true;
+                    _showCube = true;
                     forceFadeout = false;
                 }
             }
@@ -161,19 +164,23 @@ namespace RewindGame.Game.Effects
                 if (fadeValue < stall && fadeOut == false)
                 {
                     fadeValue += .1f;
+                    _showCube = true;
                 }
                 else if (fadeValue >= stall && fadeOut == false)
                 {
                     fadeValue -= .05f;
+                    _showCube = true;
                     fadeOut = true;
                 }
                 else if (fadeOut == true)
                 {
                     fadeValue -= .05f;
+                    _showCube = true;
                 }
                 if (fadeValue <= 0.01f)
                 {
                     showCube = false;
+                    _showCube = false;
                     fadeValue = 0.00f;
                     fadeOut = false;
                 }

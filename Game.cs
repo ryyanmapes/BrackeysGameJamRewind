@@ -375,29 +375,31 @@ namespace RewindGame
             var keyboard_state = Keyboard.GetState();
             var gamepad_state = GamePad.GetState(PlayerIndex.One);
 
-            var is_any_left_button_down = gamepad_state.IsButtonDown(Buttons.DPadLeft) || keyboard_state.IsKeyDown(Keys.A) || keyboard_state.IsKeyDown(Keys.Left);
+            if (!GlobalEffects._showCube)
+            {
+                var is_any_left_button_down = gamepad_state.IsButtonDown(Buttons.DPadLeft) || keyboard_state.IsKeyDown(Keys.A) || keyboard_state.IsKeyDown(Keys.Left);
 
-            var is_any_right_button_down = gamepad_state.IsButtonDown(Buttons.DPadRight) || keyboard_state.IsKeyDown(Keys.D) || keyboard_state.IsKeyDown(Keys.Right);
+                var is_any_right_button_down = gamepad_state.IsButtonDown(Buttons.DPadRight) || keyboard_state.IsKeyDown(Keys.D) || keyboard_state.IsKeyDown(Keys.Right);
 
-            if (is_any_left_button_down && is_any_right_button_down)
-                input_data.horizontal_axis_value = 0;
-            else if (is_any_left_button_down)
-                input_data.horizontal_axis_value = -GameUtils.MOVE_STICK_MAX;
-            else if (is_any_right_button_down)
-                input_data.horizontal_axis_value = GameUtils.MOVE_STICK_MAX;
-            else
-                input_data.horizontal_axis_value = gamepad_state.ThumbSticks.Left.X * GameUtils.MOVE_STICK_SCALE;
-
-
-
-            var is_any_jump_button_down = gamepad_state.Buttons.A == ButtonState.Pressed || keyboard_state.IsKeyDown(Keys.Z) || keyboard_state.IsKeyDown(Keys.Space);
-
-            if (!(previous_input_data.is_jump_pressed || previous_input_data.is_jump_held) && is_any_jump_button_down)
-                input_data.is_jump_pressed = true;
-            else if (is_any_jump_button_down)
-                input_data.is_jump_held = true;
+                if (is_any_left_button_down && is_any_right_button_down)
+                    input_data.horizontal_axis_value = 0;
+                else if (is_any_left_button_down)
+                    input_data.horizontal_axis_value = -GameUtils.MOVE_STICK_MAX;
+                else if (is_any_right_button_down)
+                    input_data.horizontal_axis_value = GameUtils.MOVE_STICK_MAX;
+                else
+                    input_data.horizontal_axis_value = gamepad_state.ThumbSticks.Left.X * GameUtils.MOVE_STICK_SCALE;
 
 
+
+                var is_any_jump_button_down = gamepad_state.Buttons.A == ButtonState.Pressed || keyboard_state.IsKeyDown(Keys.Z) || keyboard_state.IsKeyDown(Keys.Space);
+
+                if (!(previous_input_data.is_jump_pressed || previous_input_data.is_jump_held) && is_any_jump_button_down)
+                    input_data.is_jump_pressed = true;
+                else if (is_any_jump_button_down)
+                    input_data.is_jump_held = true;
+
+            }
             var is_level_left_down = keyboard_state.IsKeyDown(Keys.NumPad4);
             var is_level_right_down = keyboard_state.IsKeyDown(Keys.NumPad6);
             var is_level_up_down = keyboard_state.IsKeyDown(Keys.NumPad8);
