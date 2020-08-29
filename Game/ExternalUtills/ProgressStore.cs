@@ -13,6 +13,7 @@ namespace RewindGame.Game.ExternalUtills
         public class ProgressData
         {
             public string Level;
+            public AreaState Zone;
             //Add properties here
         }
         static public string path  = "Progress.json";
@@ -25,7 +26,7 @@ namespace RewindGame.Game.ExternalUtills
                 return data.Level;
             }
         }
-        public static void StoreLevel(ProgressData data)
+        public static void StoreData(ProgressData data)
         {
             File.Create(path).Close();
             using (StreamWriter sw = new StreamWriter(path))
@@ -48,6 +49,14 @@ namespace RewindGame.Game.ExternalUtills
                     return false;
                 else
                     return true;
+            }
+        }
+        public static ProgressData readFull()
+        {
+            using (StreamReader sr = new StreamReader(path))
+            {
+                var data = JsonConvert.DeserializeObject<ProgressData>(sr.ReadToEnd());
+                return data;
             }
         }
     }

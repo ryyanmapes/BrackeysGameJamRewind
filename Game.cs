@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Data.Common;
+using static RewindGame.Game.ExternalUtills.ProgressStore;
 
 namespace RewindGame
 {
@@ -131,20 +132,19 @@ namespace RewindGame
             {
                 if (new FileInfo(ProgressStore.path).Exists && ProgressStore.DoesFileContainLevel())
                 {
-                    string current = ProgressStore.readSavedLevel();
-                    if (current.Contains("limbo"))
+                    ProgressData progress = ProgressStore.readFull();
+                    if (progress.Zone == AreaState.limbo)
                         LoadArea(AreaState.limbo);
-                    else if (current.Contains("cotton"))
+                    else if (progress.Zone == AreaState.cotton)
                         LoadArea(AreaState.cotton);
-                    else if (current.Contains("eternal"))
+                    else if (progress.Zone == AreaState.eternal)
                         LoadArea(AreaState.eternal);
                     else
                     {
                         //current = "limbo1";
                         LoadArea(AreaState.limbo);
                     }
-                        
-                    loadLevelAndConnections(current);
+                    loadLevelAndConnections(progress.Level);
                 }
                 else
                     LoadArea(AreaState.limbo);
@@ -265,11 +265,12 @@ namespace RewindGame
             center_level.SetActive();
             if (!GameUtils.OVERRIDE_LEVEL_SAVE)
             {
-                var data = new ProgressStore.ProgressData 
-                { 
+                var data = new ProgressStore.ProgressData
+                {
                     Level = activeLevel.name,
+                    Zone = area,
                 };
-                ProgressStore.StoreLevel(data);
+                ProgressStore.StoreData(data);
             }
 
         }
