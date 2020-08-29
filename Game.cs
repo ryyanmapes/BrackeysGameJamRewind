@@ -140,7 +140,7 @@ namespace RewindGame
                         LoadArea(AreaState.eternal);
                     else
                     {
-                        current = "limbo1";
+                        //current = "limbo1";
                         LoadArea(AreaState.limbo);
                     }
                         
@@ -194,7 +194,7 @@ namespace RewindGame
                     soundManager.BeginLimboMusic1();
                     areaEffect = new LimboEffects(this);
                     timeData.time_kind = TimeKind.limbo;
-                    loadLevelAndConnections("limbo1");
+                    loadLevelAndConnections("start");
 
                     timelineGUI.SetBar(timelineGUI.limboBar1);
                     timelineGUI.currentBarSize = GameUtils.TIMELINE_BAR_SIZE_FULL;
@@ -207,7 +207,7 @@ namespace RewindGame
                     soundManager.BeginCottonwoodMusic1();
                     areaEffect = new CottonwoodEffects(this);
                     timeData.time_kind = TimeKind.cottonwood;
-                    loadLevelAndConnections("cotton1");
+                    loadLevelAndConnections("start");
 
                     setBarSizeLarge(AreaState.cotton);
 
@@ -217,7 +217,7 @@ namespace RewindGame
                     soundManager.BeginEternalMusic1();
                     areaEffect = new EternalEffects(this);
                     timeData.time_kind = TimeKind.eternal;
-                    loadLevelAndConnections("eternal1");
+                    loadLevelAndConnections("start");
 
                     setBarSizeLarge(AreaState.eternal);
 
@@ -636,6 +636,10 @@ namespace RewindGame
             {
                 timeData.time_status = TimeState.still;
                 timeData.time_moment = 0;
+            }
+            else if (player.justChangedRewinding)
+            {
+                timeData.time_status = TimeState.still;
             }
             else if (player.isRewinding)
             {

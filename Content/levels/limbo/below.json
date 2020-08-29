@@ -4,7 +4,7 @@
   "height": 238,
   "offsetX": 0,
   "offsetY": 0,
-  "values": {"exit_right": "limbo4/B/", "exit_left": "limbo2", "exit_up": "limboS1", "exit_down": "", "triggers": ""},
+  "values": {"exit_right": "platform_intro/B/", "exit_left": "walljump_intro", "exit_up": "", "exit_down": "", "triggers": ""},
   "layers": [
     {
       "name": "entities",

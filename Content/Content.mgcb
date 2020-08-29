@@ -1004,18 +1004,6 @@
 /processorParam:TextureFormat=Color
 /build:gui/deathindicator.png
 
-#begin gui/negativebar.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:gui/negativebar.png
-
 #begin levels/cotton/cotton1.json
 /copy:levels/cotton/cotton1.json
 
@@ -1106,20 +1094,35 @@
 #begin levels/eternal/eternalsecret2.json
 /copy:levels/eternal/eternalsecret2.json
 
-#begin levels/limbo/limbo1.json
-/copy:levels/limbo/limbo1.json
+#begin levels/limbo/around.json
+/copy:levels/limbo/around.json
+
+#begin levels/limbo/artifact.json
+/copy:levels/limbo/artifact.json
+
+#begin levels/limbo/below.json
+/copy:levels/limbo/below.json
+
+#begin levels/limbo/clock.json
+/copy:levels/limbo/clock.json
+
+#begin levels/limbo/difficult_around_2.json
+/copy:levels/limbo/difficult_around_2.json
+
+#begin levels/limbo/difficult_horizontal_bounds.json
+/copy:levels/limbo/difficult_horizontal_bounds.json
+
+#begin levels/limbo/difficult_spinners.json
+/copy:levels/limbo/difficult_spinners.json
+
+#begin levels/limbo/elevator_old.json
+/copy:levels/limbo/elevator_old.json
 
 #begin levels/limbo/limbo10.json
 /copy:levels/limbo/limbo10.json
 
 #begin levels/limbo/limbo11.json
 /copy:levels/limbo/limbo11.json
-
-#begin levels/limbo/limbo12.json
-/copy:levels/limbo/limbo12.json
-
-#begin levels/limbo/limbo13.json
-/copy:levels/limbo/limbo13.json
 
 #begin levels/limbo/limbo14.json
 /copy:levels/limbo/limbo14.json
@@ -1139,20 +1142,14 @@
 #begin levels/limbo/limbo19.json
 /copy:levels/limbo/limbo19.json
 
-#begin levels/limbo/limbo2.json
-/copy:levels/limbo/limbo2.json
-
 #begin levels/limbo/limbo20.json
 /copy:levels/limbo/limbo20.json
 
-#begin levels/limbo/limbo3.json
-/copy:levels/limbo/limbo3.json
+#begin levels/limbo/limbo2-old.json
+/copy:levels/limbo/limbo2-old.json
 
-#begin levels/limbo/limbo4.json
-/copy:levels/limbo/limbo4.json
-
-#begin levels/limbo/limbo5.json
-/copy:levels/limbo/limbo5.json
+#begin levels/limbo/limbo5-old.json
+/copy:levels/limbo/limbo5-old.json
 
 #begin levels/limbo/limbo6.json
 /copy:levels/limbo/limbo6.json
@@ -1163,11 +1160,8 @@
 #begin levels/limbo/limbo8.json
 /copy:levels/limbo/limbo8.json
 
-#begin levels/limbo/limbo9.json
-/copy:levels/limbo/limbo9.json
-
-#begin levels/limbo/limbofinal.json
-/copy:levels/limbo/limbofinal.json
+#begin levels/limbo/limboidea1.json
+/copy:levels/limbo/limboidea1.json
 
 #begin levels/limbo/limboS1.json
 /copy:levels/limbo/limboS1.json
@@ -1181,8 +1175,44 @@
 #begin levels/limbo/limbosecret3.json
 /copy:levels/limbo/limbosecret3.json
 
-#begin levels/limbo/limbosecretfinal.json
-/copy:levels/limbo/limbosecretfinal.json
+#begin levels/limbo/platform_intro.json
+/copy:levels/limbo/platform_intro.json
+
+#begin levels/limbo/platform_intro_old.json
+/copy:levels/limbo/platform_intro_old.json
+
+#begin levels/limbo/platform_jump.json
+/copy:levels/limbo/platform_jump.json
+
+#begin levels/limbo/puzzle_timeback.json
+/copy:levels/limbo/puzzle_timeback.json
+
+#begin levels/limbo/rewind_intro.json
+/copy:levels/limbo/rewind_intro.json
+
+#begin levels/limbo/shortbar_2.json
+/copy:levels/limbo/shortbar_2.json
+
+#begin levels/limbo/shortbar_intro.json
+/copy:levels/limbo/shortbar_intro.json
+
+#begin levels/limbo/solid_intro.json
+/copy:levels/limbo/solid_intro.json
+
+#begin levels/limbo/solid_rising.json
+/copy:levels/limbo/solid_rising.json
+
+#begin levels/limbo/start.json
+/copy:levels/limbo/start.json
+
+#begin levels/limbo/troll.json
+/copy:levels/limbo/troll.json
+
+#begin levels/limbo/vertical_bounds.json
+/copy:levels/limbo/vertical_bounds.json
+
+#begin levels/limbo/walljump_intro.json
+/copy:levels/limbo/walljump_intro.json
 
 #begin levels/test1.json
 /copy:levels/test1.json

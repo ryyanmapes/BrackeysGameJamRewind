@@ -57,6 +57,7 @@ namespace RewindGame.Game
 
         protected float jumpHeldTime = -1f;
         public bool isRewinding = false;
+        public bool justChangedRewinding = false;
         public bool temporaryAllowJump = false;
         protected float noOppositeTravelTime = -1f;
         protected HangDirection noOppositeTravelDirection = HangDirection.None;
@@ -83,7 +84,7 @@ namespace RewindGame.Game
 
         public override void Update(StateData state)
         {
-
+            justChangedRewinding = false;
             localLevel = parentGame.activeLevel;
 
             float elapsed = (float)state.getDeltaTime();
@@ -99,7 +100,7 @@ namespace RewindGame.Game
             {
                 //noOppositeTravelDirection = HangDirection.None;
                 noOppositeTravelTime = -1f;
-                isRewinding = false;
+                SetRewinding(false);
 
                 if (!wasGroundedLastFrame)
                 {
@@ -133,7 +134,7 @@ namespace RewindGame.Game
 
                 noOppositeTravelDirection = HangDirection.None;
                 velocity.Y = Math.Min(velocity.Y, wallHangMaxY);
-                isRewinding = false;
+                SetRewinding(false);
                 if (hangDirection == HangDirection.Right)
                 {
                     velocity.X = Math.Max(velocity.X, wallHangStickX);
@@ -151,7 +152,7 @@ namespace RewindGame.Game
 
                     noOppositeTravelDirection = hangDirection;
                     noOppositeTravelTime = 0;
-                    isRewinding = true;
+                    SetRewinding(true);
                 }
 
             }
@@ -208,7 +209,16 @@ namespace RewindGame.Game
             //todo poof sfx
             if (isFloof) parentGame.soundManager.TriggerPlayerJump();
             else parentGame.soundManager.TriggerPlayerJump();
-            isRewinding = is_forwards;
+            SetRewinding(is_forwards);
+        }
+
+        public void SetRewinding(bool is_rewinding)
+        {
+            if (is_rewinding != isRewinding)
+            {
+                isRewinding = is_rewinding;
+                justChangedRewinding = true;
+            }
         }
 
         public override void Die()
