@@ -85,7 +85,7 @@ namespace RewindGame.Game.Effects
             {
                 if (speedFactor <= 2)
                 {
-                    speedFactor += .0225f;
+                    speedFactor += .0225f * speedFactor;
                 }
             }
             if (whiteOut == true)
