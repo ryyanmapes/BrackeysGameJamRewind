@@ -42,7 +42,7 @@ namespace RewindGame.Game
 
         public bool facingRight = true;
 
-        protected float jumpLaunchVelocity = -470f;
+        protected float jumpLaunchVelocity = -500f;
         protected float moveVelocity = 2700f;
         protected float heldJumpVelocity = -1500f;
         protected float heldJumpVelocityModifier = 0f;
