@@ -1184,6 +1184,9 @@
 #begin levels/limbo/platform_jump.json
 /copy:levels/limbo/platform_jump.json
 
+#begin levels/limbo/platform_jump_advanced.json
+/copy:levels/limbo/platform_jump_advanced.json
+
 #begin levels/limbo/puzzle_timeback.json
 /copy:levels/limbo/puzzle_timeback.json
 
@@ -1204,6 +1207,9 @@
 
 #begin levels/limbo/start.json
 /copy:levels/limbo/start.json
+
+#begin levels/limbo/transition.json
+/copy:levels/limbo/transition.json
 
 #begin levels/limbo/troll.json
 /copy:levels/limbo/troll.json
